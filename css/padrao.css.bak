@@ -1,0 +1,76 @@
+* {
+	margin: 0px;
+	padding:0px;
+}
+
+div {
+	margin:0 auto;
+	text-align: center;
+}
+
+#css #header {
+	width: 960px;
+	font-family: Verdana;
+	font-size: 14px;
+	color: #666666;
+	text-align: left;
+	font-weight: bold;
+}
+
+#header .barraLogo {
+	clear: both;
+}
+
+#header .logo {
+	float: left;
+	width: 100%;
+}
+
+#header .menuPesquisa { background: url('../images/menuPesquisaBg.gif') top center repeat-x; clear:both;}
+#header .menuPesquisaEsq { background: url('../images/menuPesquisaBgEsq.gif') top left no-repeat; }
+#header .menuPesquisaDir { background: url('../images/menuPesquisaBgDir.gif') top right no-repeat; height: 41px; }
+
+#header .menuItens { background: url('../images/menuItensBg.gif') bottom center repeat-x;}
+#header .menuItensEsq {	background: url('../images/menuItensEsq.gif') bottom left no-repeat; }
+#header .menuItensDir { background: url('../images/menuItensDir.gif') bottom right no-repeat; height: 28px;}
+
+#header .menuItensDir ul li {
+	list-style-type: none;
+	float: left;
+	padding: 5px 15px 0px 10px;
+	background: url('../images/divisoria.gif') bottom right no-repeat; 
+}
+
+#header .menuItensDir ul li.novo {
+	list-style-type: none;
+	float: left;
+	padding: 5px 35px 0px 10px;
+	background: url('../images/novo.gif') top right no-repeat;
+	height: 28px;
+}
+
+#header .menuItensDir ul li a {
+	color: #666666;
+	text-decoration: none;
+}
+
+#header .menuItensDir ul li a:hover {
+	text-decoration: underline;
+}
+
+#header .menuItensDir ul li font {
+	float: left;
+}
+
+#departamentos { 
+	position: absolute;
+	border: 1px solid #000000;
+	background: #666666;
+	color: #000;
+}
+
+.vermelho { color: #FA0204;}
+.azul { color: #0000FE;}
+.azulClaro {color: #269EFF; }
+.amarelo { color: #FFFD08;}
+.amareloEscuro {color: #BF9406; }
