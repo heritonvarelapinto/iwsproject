@@ -1,3 +1,4 @@
 <?
+	/*Editado pelo fernando*/
 	phpinfo();
 ?>
