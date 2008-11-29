@@ -168,12 +168,7 @@ class BannerDAO extends PDOConnectionFactory {
 			
 			array_push($searchResults, $temp);
 		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		return $searchResults;
 	}
 	
 	public function ListaBannerPorDepartamento($id) {
