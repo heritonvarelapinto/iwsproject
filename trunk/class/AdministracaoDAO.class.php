@@ -100,13 +100,14 @@ class AdministracaoDAO extends PDOConnectionFactory {
 		}
 	}
 	
-	function listaUsuarios($sql=null) {
-		if($sql == null) {
-			$sql = "SELECT * FROM administracao";
-			$stmt = $this->conexao->prepare($sql);
-		}else{
-			$stmt = $this->conexao->prepare($sql);
-		}
+	/**
+	 * Lista usuarios Administrativo
+	 *
+	 * @return array
+	 */
+	function listaUsuarios() {
+		$sql = "SELECT * FROM administracao";
+		$stmt = $this->conexao->prepare($sql);
 		
 		$stmt->execute();
 		
@@ -126,12 +127,7 @@ class AdministracaoDAO extends PDOConnectionFactory {
 			$temp->setStatus($rs->status);
 			array_push($searchResults, $temp);
 		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		return $searchResults;
 	}
 	
 	//realiza um Update
