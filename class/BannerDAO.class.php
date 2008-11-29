@@ -140,6 +140,42 @@ class BannerDAO extends PDOConnectionFactory {
 		}
 	}
 	
+	public function ListaBannerPorDepartamentoPosicaoAdmin($id, $posicao) {
+		$sql = "SELECT * FROM banners WHERE iddepartamento = ? and lado = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		$stmt->bindValue(2,$posicao);		
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Banner();
+			
+			$temp->setIdbanner($rs->idbanner);
+			$temp->setIdDepartamento($rs->iddepartamento);
+			$temp->setLado($rs->lado);
+			$temp->setNumero($rs->numero);
+			$temp->setBanner($rs->banner);
+			$temp->setDescricao($rs->descricao);
+			$temp->setWidth($rs->width);
+			$temp->setHeight($rs->height);
+			$temp->setUrl($rs->url);
+			$temp->setTarget($rs->target);
+			$temp->setClick($rs->click);
+			$temp->setData($rs->data);
+			
+			array_push($searchResults, $temp);
+		} 
+		
+		if(count($searchResults) > 1) {
+			return $searchResults;
+		} else {
+			return $temp;
+		}
+	}
+	
 	public function ListaBannerPorDepartamento($id) {
 		$sql = "SELECT * FROM banners WHERE iddepartamento = ?";
 		$stmt = $this->conexao->prepare($sql);
