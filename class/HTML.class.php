@@ -401,6 +401,20 @@
 			';
 		}
 		
+		function selectDepartamentosAdmin($departamentos) {
+			$totDepartamentos = count($departamentos);
+			
+			echo "<select name=\"iddepartamento\" class=\"FORMBox\">";
+			echo "<option value=\"\">--Selecione--</option>";
+			echo "<option value=\"0\">Pagina Inicial</option>";
+			
+			for($i = 0; $i < $totDepartamentos; $i++) {
+				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>"><?=$departamentos[$i]->getDepartamento(); ?></option><?
+			}
+			echo "</select>";
+		}
+		
+			
 		function selectDepartamentos($departamentos) {
 			$totDepartamentos = count($departamentos);
 			
