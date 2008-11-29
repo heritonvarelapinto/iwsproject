@@ -25,11 +25,12 @@
 			$setDdd = $_POST["ddd"];	
 			$setTelefone = $_POST["telefone"];
 			$senha = $administracao->geraSenha();
-			$setSenha = $senha;
+			$setSenha = md5($senha);
 			$setStatus = 1;
 			
 			session_register("pass");
 			$_SESSION["pass"] = $senha;
+			$_SESSION["md5"] = $setSenha;
 			
 			/*$setIdcliente = 1;
 			$setNome = "Erinthon C.";
@@ -46,7 +47,7 @@
     		$administracao->setEmail($setEmail);
     		$administracao->setDdd($setDdd);
     		$administracao->setTelefone($setTelefone);
-    		$administracao->setSenha(md5($senha));
+    		$administracao->setSenha($setSenha);
     		$administracao->setStatus($setStatus);
     		
     		$administracaoDAO->InsereUsuarios($administracao);
