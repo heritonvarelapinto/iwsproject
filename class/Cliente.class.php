@@ -9,6 +9,7 @@ class Cliente {
 	public $nome;
 	public $versao;	
 	public $logo;	
+	public $email;	
 	
 	
 	public function setIdCliente( $idcliente ) {
@@ -26,6 +27,10 @@ class Cliente {
 		$this->logo = $logo;
 	}
 	
+	public function setEmail( $email ) {
+		$this->email = $email;
+	}
+	
 	public function getIdCliente() {
 		return $this->idcliente;
 	}
@@ -40,6 +45,10 @@ class Cliente {
 	
 	public function getLogo() {
 		return $this->logo;
+	}
+	
+	public function getEmail() {
+		return $this->email;
 	}
 }
 ?>

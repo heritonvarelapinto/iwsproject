@@ -95,7 +95,7 @@ class DepartamentoDAO extends PDOConnectionFactory {
 	
 	//mostra os registros
 	public function Lista() {
-		$sql = "SELECT * FROM departamentos Limit 36";
+		$sql = "SELECT * FROM departamentos";
 		$stmt = $this->conexao->prepare($sql);	
 		$stmt->execute();
 		

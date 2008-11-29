@@ -6,10 +6,11 @@
 			$clienteDAO = new ClienteDAO();
 			$usuario = $_SESSION['usuario'];
 			$menu = $_GET["menu"];
+			$acao = $_GET["act"];
 			
 			$cliente = $clienteDAO->getUsuarioPorNome("Oiter Busca");
 			
-			$this->Painel($cliente,$usuario,$menu);
+			$this->Painel($cliente,$usuario,$menu,$acao);
 		}
 		
 		public function EstruturaLogin() {
