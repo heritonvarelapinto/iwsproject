@@ -253,9 +253,19 @@
 				                    				$this->CorpoIndex($usuario);
 				                    			}else{
 				                    				switch ($menu) {
+				                    					//Administracao
 				                    					case 1:
 				                    						$layoutAdministracao = new LayoutAdministracao();
 				                    						$layoutAdministracao->EstruturaAdministracao($acao);
+				                    					break;
+				                    					//Departamento
+				                    					case 2:
+				                    						
+				                    					break;
+				                    					//Banner
+				                    					case 3:
+				                    						$layoutBanner = new LayoutBanner();
+				                    						$layoutBanner->EstruturaBanner($acao);
 				                    					break;
 				                    				}
 				                    			}
