@@ -100,6 +100,32 @@ class AdministracaoDAO extends PDOConnectionFactory {
 		}
 	}
 	
+	function autenticaUsuario($usuario,$senha) {
+		//é esse o nome da tabela ?
+		$sql = "SELECT * FROM administracao WHERE usuario = ? AND senha = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$usuario);
+		$stmt->bindValue(2,$senha);
+		
+		$stmt->execute();
+		
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		
+		$temp = new Administracao();
+
+		$temp->setIdadministracao($rs->idadministracao); 
+		$temp->setIdcliente($rs->idcliente); 
+		$temp->setNome($rs->nome);
+		$temp->setEmail($rs->email);
+		$temp->setDdd($rs->ddd);
+		$temp->setTelefone($rs->telefone);
+		$temp->setUsuario($rs->usuario);
+		$temp->setSenha($rs->senha);
+		$temp->setStatus($rs->status);
+		 
+		return $temp;
+	}
+	
 	/**
 	 * Lista usuarios Administrativo
 	 *
