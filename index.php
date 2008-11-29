@@ -10,7 +10,7 @@
 	
 	$banners = new Banner();
 	$bannerDAO = new BannerDAO();
-	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao(1000,"lateral",10);
+	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateral",10);
 ?>
 <html>
 <head>
@@ -68,8 +68,8 @@
 			<table class="logo">
 				<tr>
 					<td align="left"><img src="images/logos/logo.jpg" alt="OiterBusca um site "/></td>
-					<td align="right" style="padding-right: 10px;"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao(1000,"topo",1));?></td>
-					<td align="right" width="186"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao(1000,"topopeq",1));?></td>
+					<td align="right" style="padding-right: 10px;"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topo",1));?></td>
+					<td align="right" width="186"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1));?></td>
 				</tr>
 			</table>
 		</div>
@@ -118,7 +118,7 @@
 			<div id="corpo">
 				<div class="menu">
 						<?=$layout->menuDepartamentos($departamentos);?>
-						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao(1000,"topopeq",1));?>
+						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1));?>
 				</div>
 				<div class="menu">
 						
