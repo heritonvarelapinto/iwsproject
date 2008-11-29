@@ -27,10 +27,10 @@
 			$user = new Administracao();
 			$user = $administracao->listaUsuarios("SELECT * FROM administracao WHERE usuario ='$usuario' AND senha ='$senha'");
 			
-			if($user->status == 1) {
-				if($user->idcliente == $idCliente->getIdcliente()) {
+			if($user[0]->status == 1) {
+				if($user[0]->idcliente == $idCliente->getIdcliente()) {
 					session_register("usuario");
-					$_SESSION["usuario"] = $user;
+					$_SESSION["usuario"] = $user[0];
 					header("location: ../principal.php");
 				}else{
 					header("location: ../index.php");
