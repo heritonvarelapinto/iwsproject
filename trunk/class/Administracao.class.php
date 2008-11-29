@@ -82,7 +82,7 @@ class Administracao {
 					        <p><font face="Arial" color="#ff0000">por favor troque a sua senha logo após logar no site.</font></p>
 					        <p><strong><font face="Arial">Usuário: </font></strong><font face="Arial">'.$usuarios->getUsuario().'</font><strong><font face="Arial"><br />
 					        </font></strong></p>
-					        <p><strong><font face="Arial">Senha: </font></strong><font face="Arial">'.$senha.'</font><strong><font face="Arial"><br />
+					        <p><strong><font face="Arial">Senha: </font></strong><font face="Arial">'.trim($senha).'</font><strong><font face="Arial"><br />
 					        </font></strong></p>
 					        <p><font face="Arial"><strong><font color="#ff0000">Link para acesso ao site:</font></strong> <a href="http://www.'.$cliente->getEmail().'/otr">www.'.$cliente->getEmail().'</a></font></p>
 					        <p> </p>
