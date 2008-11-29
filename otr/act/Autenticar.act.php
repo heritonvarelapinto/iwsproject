@@ -3,8 +3,8 @@
     {
         require_once "../../class/".$classe.".class.php";
     }
-
-	if(isset($_GET['acao'])) {
+    
+    if(isset($_POST["acao"])) {		
 		$administracao = new Administracao();
 		$administracaoDAO = new AdministracaoDAO();
 		
@@ -20,8 +20,8 @@
 		
 		$administracaoDAO->UpdateSenha($administracao,$administracao->getIdadministracao());
 		
-		$administracao->EnviaDadosEmailAdministracao($cliente,$administracao,$senha);
-			header("location: ../index.php");
+		$administracao->EnviaDadosEmailAdministracao($cliente,$administracao,$senha);		
+			header("location: ../index.php?msg=3");
 	}else{				
 	    session_start();
 	    header("Cache-control: private");
