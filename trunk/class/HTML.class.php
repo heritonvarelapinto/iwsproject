@@ -26,6 +26,11 @@
 			?></table><?
 		}
 		
+		/**
+		 * HTML do layout do Login ao painel Adm.
+		 *
+		 * @param objeto $cliente
+		 */
 		public function Login($cliente) {
 			?>
 			<HTML>
@@ -136,6 +141,14 @@
 			<?
 		}
 		
+		/**
+		 * HTML do layout do painel
+		 *
+		 * @param $objeto $cliente
+		 * @param $objeto $usuario
+		 * @param $objeto $menu
+		 * @param $objeto $acao
+		 */
 		public function Painel($cliente, $usuario, $menu, $acao) {			
 			?>
 			<HTML>
@@ -239,6 +252,11 @@
 			<?
 		}
 		
+		/**
+		 * Tabela que controla o corpo index do painel adm.
+		 *
+		 * @param objeto $usuario
+		 */
 		function CorpoIndex($usuario) {
 			?>
 			<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#f9f9f9">
@@ -278,6 +296,15 @@
 			<?
 		}
 		
+		/**
+		 * Tabela de criação de novos usuários administrativos.
+		 *
+		 * @param string $titulo
+		 * @param string $onsubmit
+		 * @param string $action
+		 * @param string $name
+		 * @param string $method
+		 */
 		public function AdministracaoADD($titulo ,$onsubmit, $action, $name, $method) {
 			?>
 			<span class="TituloPage">• <?=$titulo;?></span>
@@ -311,9 +338,17 @@
 	        </table>
 	        </form>
 			<?
-
 		}
 		
+		/**
+		 * Tabela de alteração de dados do usuario administrativo
+		 *
+		 * @param string $titulo
+		 * @param string $onsubmit
+		 * @param string $action
+		 * @param string $name
+		 * @param string $method
+		 */
 		public function AdministracaoALT($titulo ,$onsubmit, $action, $name, $method) {
 			$id = $_GET["id"];
 			
@@ -448,6 +483,11 @@
 
 		}
 		
+		/**
+		 * Mostra os usuarios administrativos cadastrados
+		 *
+		 * @param objeto $titulo
+		 */
 		public function AdministracaoMostra($titulo) {
 			$administracaoDAO = new AdministracaoDAO();			
 			$usuarios = $administracaoDAO->listaUsuarios();
@@ -512,7 +552,11 @@
 			<?
 
 		}
-
+		
+		/**
+		 * Lista menus do painel Administrativo
+		 *
+		 */
 		function Menu() {
 			?>
 			<table width="180" cellspacing="0" cellpadding="2" border="0">	
@@ -556,6 +600,11 @@
 			<?
 		}
 		
+		/**
+		 * Mostra msg de ações nas tabelas
+		 *
+		 * @param string $msg
+		 */
 		function mostraMSG($msg) {
 			print '
 				<tr class="Linha3Tabela">
