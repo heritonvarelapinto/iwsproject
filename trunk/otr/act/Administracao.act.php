@@ -24,8 +24,8 @@
 			$setEmail = $_POST["email"];
 			$setDdd = $_POST["ddd"];	
 			$setTelefone = $_POST["telefone"];
-			$senha = md5($administracao->geraSenha());
-			$setSenha = $senha;
+			$senha = $administracao->geraSenha();
+			$setSenha = md5($senha);
 			$setStatus = 1;
 			
 			/*$setIdcliente = 1;
