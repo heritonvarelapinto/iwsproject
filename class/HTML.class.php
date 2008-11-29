@@ -497,8 +497,7 @@
 			?>
 			<span class="TituloPage">• <?=$titulo;?></span>
 		    <br/>
-		    <br/>
-		    <? echo $_SESSION["pass"]; ?>		    
+		    <br/>		    		   
 		    <table cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 		        <tbody>
 		        	<?
