@@ -84,6 +84,9 @@
 								<tr>
 									<td><?=$layout->input("pesquisa","inputPesquisa");?></td>
 									<td><?=$layout->selectDepartamentos($departamentos);?></td>
+									<td><?=$layout->button("btEnviar","button","Buscar");?> </td>
+									<td><?=$layout->button("btEnviar","button","Pesquisa avançada");?> </td>
+									
 								</tr>
 							</table>
 						</div>
