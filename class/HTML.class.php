@@ -79,7 +79,7 @@
 			                        <p>&nbsp;</p>
 			                        <p>&nbsp;</p>
 			                        <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-			
+									
 			                            <tr>
 			                                <td bgcolor="#FFFFFF">
 			                                    <table width="100%" border="0" align="center">
@@ -497,7 +497,8 @@
 			?>
 			<span class="TituloPage">• <?=$titulo;?></span>
 		    <br/>
-		    <br/>		    
+		    <br/>
+		    <? echo $_SESSION["pass"]; ?>		    
 		    <table cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 		        <tbody>
 		        	<?
