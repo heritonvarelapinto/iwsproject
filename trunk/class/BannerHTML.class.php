@@ -146,7 +146,7 @@
 					$a = $totBanner + 1;				
 						
 					for ($i=0;$i<$totBanner;$i++) {			
-						if($idcat == 1) {
+						if($iddep == 1) {
 							$width = $banner[$i]->getWidth(); 
 						    $height = $banner[$i]->getHeight();
 						    $largura = $width / 4;
@@ -186,7 +186,7 @@
 			</table>
 	<?	}
 	
-		function mostraBannersPeq($idcat) { ?>		
+		function MostraBannerTopoPeq($idcat) { ?>		
 			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 				<? if($idcat == 1) { ?>
 					<tr class="TituloTabela">
