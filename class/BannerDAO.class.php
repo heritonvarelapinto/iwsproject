@@ -1,4 +1,13 @@
 <?
+/**
+ * Classe DAO para Banners
+ * 
+ * Criação 
+ * 29/11/2008 - Fernando Colnaghi
+ * 
+ * Alterações
+ *
+ */
 class BannerDAO extends PDOConnectionFactory {
 	//irá receber a conexão
 	public $conex = null;
@@ -62,6 +71,12 @@ class BannerDAO extends PDOConnectionFactory {
 		}catch ( PDOException $ex ) { echo "Erro:".$ex->getMessage(); }
 	}
 	
+	/**
+	 * Retorna um banner, apartir de seu ID
+	 *
+	 * @param Id $id
+	 * @return Banner Object
+	 */
 	public function getBannerPorId($id) {
 		$sql = "SELECT * FROM banners WHERE idbanner = ?";
 		$stmt = $this->conexao->prepare($sql);
@@ -69,31 +84,23 @@ class BannerDAO extends PDOConnectionFactory {
 		
 		$stmt->execute();
 		
-		$searchResults = array();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
 		
-		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			$temp = new Banner();
-			$temp->setIdbanner($rs->idbanner);
-			$temp->setIdDepartamento($rs->iddepartamento);
-			$temp->setLado($rs->lado);
-			$temp->setNumero($rs->numero);
-			$temp->setBanner($rs->banner);
-			$temp->setDescricao($rs->descricao);
-			$temp->setWidth($rs->width);
-			$temp->setHeight($rs->height);
-			$temp->setUrl($rs->url);
-			$temp->setTarget($rs->target);
-			$temp->setClick($rs->click);
-			$temp->setData($rs->data);
-			
-			array_push($searchResults, $temp);
-		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		$temp = new Banner();
+		$temp->setIdbanner($rs->idbanner);
+		$temp->setIdDepartamento($rs->iddepartamento);
+		$temp->setLado($rs->lado);
+		$temp->setNumero($rs->numero);
+		$temp->setBanner($rs->banner);
+		$temp->setDescricao($rs->descricao);
+		$temp->setWidth($rs->width);
+		$temp->setHeight($rs->height);
+		$temp->setUrl($rs->url);
+		$temp->setTarget($rs->target);
+		$temp->setClick($rs->click);
+		$temp->setData($rs->data);
+	
+		return $temp;
 	}	
 	
 	public function ListaBannerPorDepartamentoPosicao($id, $posicao, $qtd) {
