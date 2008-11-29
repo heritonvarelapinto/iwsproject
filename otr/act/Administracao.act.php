@@ -150,20 +150,6 @@
     		$administracao->EnviaDadosEmailAdministracao($cliente,$administracao,$senha);
     			header("location: ../principal.php?menu=$idmenu&act=$act&id=$iduser&msg=5");
     		
-    	break;
-    	//reenvia senha perdida de acesso ao painel
-    	case "senha":
-    		$iduser =$_GET["user"];
-			$administracao = $administracaoDAO->getUsuarioPorUsuario($iduser);
-			$senha = $administracao->geraSenha();
-			$setSenha = md5($senha);
-			
-			$administracao->setSenha($setSenha);		
-    		
-			$administracaoDAO->UpdateSenha($administracao,$iduser);
-			
-    		$administracao->EnviaDadosEmailAdministracao($cliente,$administracao,$senha);
-    			header("location: ../index.php");
-    	break;
+    	break;    	
     }
 ?>
