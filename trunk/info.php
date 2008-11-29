@@ -1,5 +1,5 @@
 <?
 	/*Editado pelo thon*/
-	/*Editado pelo fernando*/
+	/*Editado pelo fernando denovo*/
 	phpinfo();
 ?>
