@@ -594,16 +594,16 @@ function perfil_usuarioadm(nome) {
 
 //###################################################################################
 function ativa_trocasenha() {
-    Form = document.usuario;
+    Form = document.altusuario;
     if (Form.ativasenha.checked == true) {
         Form.senha_atual.disabled = false;
         Form.nova_senha.disabled = false;
-        Form.confima_nova_senha.disabled = false;
+        Form.confirma_nova_senha.disabled = false;
         document.getElementById("linhasenha").disabled = false;
     } else {
         Form.senha_atual.disabled = true;
         Form.nova_senha.disabled = true;
-        Form.confima_nova_senha.disabled = true;
+        Form.confirma_nova_senha.disabled = true;
         document.getElementById("linhasenha").disabled = true;
     }
 }
@@ -680,146 +680,18 @@ function autoTab(input, len, e) {
 }
 
 //###################################################################################
-function valida_revenda() {
-    Form = document.revenda;
-    if (Form.nomeRevenda.value.length == 0) {
-        alert("O nome da Revenda \xE9 um campo obrigat\xF3rio !");
-        Form.nomeRevenda.focus();
-        return false;
-    }
-    if (Form.cnpj.value.length == 0) {
-        alert("O CNPJ \xE9 um campo obrigat\xF3rio !");
-        Form.cnpj.focus();
-        return false;
-    }
-    if (Form.responsavel.value.length == 0) {
-        alert("O Responsável \xE9 um campo obrigat\xF3rio !");
-        Form.responsavel.focus();
-        return false;
-    }
-    if (Form.email.value.length == 0) {
-        alert("O e-mail do usu\xE1rio \xE9 um campo obrigat\xF3rio !");
-        Form.email.focus();
-        return false;
-    }
-    if (Form.email.value.indexOf("@", 0) == -1 ||
-        Form.email.value.indexOf(".", 0) == -1) {
-        alert("Por favor, preencha corretamente o campo e-mail.");
-        Form.email.focus();
-        return false;
-    }
-    if (Form.estado_idestado.value.length == "") {
-        alert("O Estado \xE9 um campo obrigat\xF3rio !");
-        Form.estado_idestado.focus();
-        return false;
-    }
-    if (Form.cidade_idcidade.value.length == "") {
-        alert("A Cidade \xE9 um campo obrigat\xF3rio !");
-        Form.cidade_idcidade.focus();
-        return false;
-    }
-    if (Form.bairro_idbairro.value.length == "") {
-        alert("O Bairro \xE9 um campo obrigat\xF3rio !");
-        Form.bairro_idbairro.focus();
-        return false;
-    }
-    if (Form.endereco.value.length == 0) {
-        alert("O Endereço \xE9 um campo obrigat\xF3rio !");
-        Form.endereco.focus();
-        return false;
-    }
-    if (Form.dddTelefone.value.length == 0) {
-        alert("O DDD do Telefone 1 \xE9 um campo obrigat\xF3rio !");
-        Form.dddTelefone.focus();
-        return false;
-    }
-    if (Form.telefone.value.length == 0) {
-        alert("O Telefone 1 \xE9 um campo obrigat\xF3rio !");
-        Form.telefone.focus();
-        return false;
-    } 
-    if (Form.destaque.value.length == 0) {
-        alert("O Destaque \xE9 um campo obrigat\xF3rio !");
-        Form.destaque.focus();
-        return false;
-    }   
-    if (Form.valormensal.value.length == 0) {
-        alert("O Valor Mensal \xE9 um campo obrigat\xF3rio !");
-        Form.valormensal.focus();
-        return false;
-    }
-    if (Form.numcarros.value.length == "") {
-        alert("O Número de Carros \xE9 um campo obrigat\xF3rio !");
-        Form.numcarros.focus();
-        return false;
-    }
-    if (Form.fotocarros.value.length == "") {
-        alert("O Número de Fotos por Carro \xE9 um campo obrigat\xF3rio !");
-        Form.fotocarros.focus();
-        return false;
-    }
-    if (Form.mesInicio.value.length == "") {
-        alert("O Mês de inicio do Contrato \xE9 um campo obrigat\xF3rio !");
-        Form.mesInicio.focus();
-        return false;
-    }
-    if (Form.anoInicio.value.length == "") {
-        alert("O Ano de inicio do Contrato \xE9 um campo obrigat\xF3rio !");
-        Form.anoInicio.focus();
-        return false;
-    }
-    if (Form.mesFinal.value.length == "") {
-        alert("O Mês de termino do Contrato \xE9 um campo obrigat\xF3rio !");
-        Form.mesFinal.focus();
-        return false;
-    }
-    if (Form.anoFinal.value.length == "") {
-        alert("O Ano de termino do Contrato \xE9 um campo obrigat\xF3rio !");
-        Form.anoFinal.focus();
-        return false;
-    }
-    if (Form.usuario.value.length == 0) {
-        alert("O usu\xE1rio \xE9 um campo obrigat\xF3rio !");
-        Form.usuario.focus();
-        return false;
-    }
-    padrao = /^[a-zA-Z0-9]+$/;
-    campoValue = Form.usuario.value;
-    var campoVerify = campoValue.indexOf(" ");
-    if (campoVerify >= 0) {
-        var campoArray = campoValue.split(" ");
-        for (part_num = 0; part_num < campoArray.length; part_num++) {
-            OK = padrao.exec(campoArray[part_num]);
-            if (!OK) {
-                window.alert("Por favor, preencha corretamente o nome do Administrador. N\xE3o s\xE3o aceito caracteres especiais.");
-                return false;
-                break;
-            }
-        }
-    } else {
-        OK = padrao.exec(campoValue);
-        if (!OK) {
-            window.alert("Por favor, preencha corretamente o nome do Administrador. N\xE3o s\xE3o aceito caracteres especiais.");
-            return false;
-        }
-    }
-    if (Form.senha.value.length == 0) {
-        alert("A Senha \xE9 um campo obrigat\xF3rio !");
-        Form.senha.focus();
-        return false;
-    }
-    
-}
-
-//###################################################################################
 function valida_usuario() {
     Form = document.usuario;
     if (Form.nome.value.length == 0) {
         alert("O nome do usu\xE1rio \xE9 um campo obrigat\xF3rio !");
-        Form.nomeCompleto.focus();
+        Form.nome.focus();
         return false;
     }
-   
+   	if (Form.usuario.value.length == 0) {
+        alert("O usu\xE1rio \xE9 um campo obrigat\xF3rio !");
+        Form.usuario.focus();
+        return false;
+    }
     if (Form.email.value.length == 0) {
         alert("O e-mail do usu\xE1rio \xE9 um campo obrigat\xF3rio !");
         Form.email.focus();
@@ -831,11 +703,7 @@ function valida_usuario() {
         Form.email.focus();
         return false;
     }
-    if (Form.usuario.value.length == 0) {
-        alert("O usu\xE1rio \xE9 um campo obrigat\xF3rio !");
-        Form.usuario.focus();
-        return false;
-    }
+    
     padrao = /^[a-zA-Z0-9]+$/;
     campoValue = Form.usuario.value;
     var campoVerify = campoValue.indexOf(" ");
@@ -877,65 +745,24 @@ function valida_altusuario() {
         Form.email.focus();
         return false;
     }
-    if (valida_campo("ativasenha", Form)) {
-        if (Form.ativasenha.checked == true) {
-            var i;
-            var num = 0, carac = 0;
-            if (Form.senha_atual.value.length == 0 ||
-                Form.nova_senha.value.length == 0 ||
-                Form.confima_nova_senha.value.length == 0) {
-                alert("As senhas administrativas s\xE3o obrigat\xF3rias !");
-                return false;
-            }
-            for (i = 0; i < Form.nova_senha.value.length; i++) {
-                var c = Form.nova_senha.value.charAt(i);
-                if (c >= "0" && c <= "9") {
-                    num++;
-                }
-                if (c >= "a" && c <= "z" || c >= "A" && c <= "Z") {
-                    carac++;
-                }
-                if (c == "'" ||
-                    c == "`" || c == "~" || c == "\"" || c == "^") {
-                    alert("Campo com caracteres inv\xE1lido!!");
-                    Form.nova_senha.focus();
-                    return false;
-                }
-            }
-            if (num < 2 || carac == 0) {
-                alert("Senha deve conter letras e n\xFAmeros ( m\xEDnimo 2 n\xFAmeros ) !!");
-                Form.nova_senha.focus();
-                return false;
-            }
-            if (Form.nova_senha.value.length < 6) {
-                alert("A senha administrativa deve ter no m\xEDnimo 6 caracteres !");
-                Form.nova_senha.focus();
-                return false;
-            }
-            if (Form.nova_senha.value.length > 14) {
-                alert("A senha administrativa deve ter no m\xE1ximo 14 caracteres !");
-                Form.nova_senha.focus();
-                return false;
-            }
-            if (Form.nova_senha.value != Form.confima_nova_senha.value) {
-                alert("As senhas administrativas n\xE3o s\xE3o iguais !");
-                Form.nova_senha.focus();
-                return false;
-            }
-            var s;
-            s = Form.nova_senha.value;
-            hoje = new Date;
-            ano = hoje.getYear();
-            for (f = -2; f <= 2; f++) {
-                n = s.indexOf(ano + f, 0);
-                if (n > -1) {
-                    alert("N\xE3o \xE9 permitido colocar o ano como senha.");
-                    Form.nova_senha.focus();
-                    return false;
-                }
-            }
-        }
+    if(Form.ativasenha.checked == true) {
+    	if (Form.senha_atual.value.length == 0) {
+	        alert("A senha atual \xE9 um campo obrigat\xF3rio !");
+	        Form.senha_atual.focus();
+	        return false;
+	    }
+	    if (Form.nova_senha.value.length == 0) {
+	        alert("A nova senha \xE9 um campo obrigat\xF3rio !");
+	        Form.nova_senha.focus();
+	        return false;
+	    }
+	    if (Form.confirma_nova_senha.value.length == 0) {
+	        alert("Confirma nova senha \xE9 um campo obrigat\xF3rio !");
+	        Form.confirma_nova_senha.focus();
+	        return false;
+	    }
     }
+    
 }
 
 //###################################################################################

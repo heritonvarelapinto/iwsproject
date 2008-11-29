@@ -27,6 +27,7 @@ class ClienteDAO extends PDOConnectionFactory {
 			$temp->setNome($rs->nome); 
 			$temp->setVersao($rs->versao); 
 			$temp->setLogo($rs->logo); 
+			$temp->setEmail($rs->email); 
 			
 			array_push($searchResults, $temp);
 		} 
@@ -52,6 +53,7 @@ class ClienteDAO extends PDOConnectionFactory {
 			$temp->setNome($rs->nome); 
 			$temp->setVersao($rs->versao); 
 			$temp->setLogo($rs->logo);
+			$temp->setEmail($rs->email); 
 			
 			array_push($searchResults, $temp);
 		} 
@@ -80,6 +82,7 @@ class ClienteDAO extends PDOConnectionFactory {
 			$temp->setNome($rs->nome); 
 			$temp->setVersao($rs->versao); 
 			$temp->setLogo($rs->logo);
+			$temp->setEmail($rs->email); 
 			
 			array_push($searchResults, $temp);
 		} 
