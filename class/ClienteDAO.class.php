@@ -44,17 +44,15 @@ class ClienteDAO extends PDOConnectionFactory {
 		
 		$stmt->execute();
 		
-		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			$temp = new Cliente();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		$temp = new Cliente();
 
-			$temp->setIdCliente($rs->idcliente); 
-			$temp->setNome($rs->nome); 
-			$temp->setVersao($rs->versao); 
-			$temp->setLogo($rs->logo);
-			$temp->setEmail($rs->email); 
+		$temp->setIdCliente($rs->idcliente); 
+		$temp->setNome($rs->nome); 
+		$temp->setVersao($rs->versao); 
+		$temp->setLogo($rs->logo);
+		$temp->setEmail($rs->email); 
 			
-			array_push($searchResults, $temp);
-		} 
 		return $temp;
 	}
 	
@@ -66,17 +64,17 @@ class ClienteDAO extends PDOConnectionFactory {
 		
 		$stmt->execute();
 		
-		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			$temp = new Cliente();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		
+		$temp = new Cliente();
 
-			$temp->setIdCliente($rs->idcliente); 
-			$temp->setNome($rs->nome); 
-			$temp->setVersao($rs->versao); 
-			$temp->setLogo($rs->logo);
-			$temp->setEmail($rs->email); 
+		$temp->setIdCliente($rs->idcliente); 
+		$temp->setNome($rs->nome); 
+		$temp->setVersao($rs->versao); 
+		$temp->setLogo($rs->logo);
+		$temp->setEmail($rs->email); 
 			
-			array_push($searchResults, $temp);
-		} 
+		 
 		return $temp;
 	}
 	
