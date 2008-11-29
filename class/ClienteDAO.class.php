@@ -9,12 +9,8 @@ class ClienteDAO extends PDOConnectionFactory {
 	}
 
 	public function ListaClientes($sql=null) {
-		if($sql == null) {
-			$sql = "SELECT * FROM cliente";
-			$stmt = $this->conexao->prepare($sql);
-		}else{
-			$stmt = $this->conexao->prepare($sql);
-		}
+		$sql = "SELECT * FROM cliente";
+		$stmt = $this->conexao->prepare($sql);
 		
 		$stmt->execute();
 		
@@ -32,7 +28,11 @@ class ClienteDAO extends PDOConnectionFactory {
 			array_push($searchResults, $temp);
 		} 
 		
-		return $searchResults;
+		if(count($rs) > 1) {
+			return $searchResults;
+		} else {
+			return $temp;
+		}
 		
 	}
 	
@@ -44,8 +44,6 @@ class ClienteDAO extends PDOConnectionFactory {
 		
 		$stmt->execute();
 		
-		$searchResults = array();
-		
 		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
 			$temp = new Cliente();
 
@@ -57,12 +55,7 @@ class ClienteDAO extends PDOConnectionFactory {
 			
 			array_push($searchResults, $temp);
 		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		return $temp;
 	}
 	
 	function getUsuarioPorNome($nome) {
@@ -73,8 +66,6 @@ class ClienteDAO extends PDOConnectionFactory {
 		
 		$stmt->execute();
 		
-		$searchResults = array();
-		
 		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
 			$temp = new Cliente();
 
@@ -86,12 +77,7 @@ class ClienteDAO extends PDOConnectionFactory {
 			
 			array_push($searchResults, $temp);
 		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		return $temp;
 	}
 	
 	
