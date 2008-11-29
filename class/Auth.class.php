@@ -33,10 +33,10 @@
 					$_SESSION["usuario"] = $user;
 					header("location: ../principal.php");
 				}else{
-					header("location: ../index.php");
+					header("location: ../index.php?msg=1");
 				}
 			}else{
-				header("location: ../index.php");
+				header("location: ../index.php?msg=1");
 			}		
 		}
 	}
