@@ -10,8 +10,8 @@
 	$clienteDAO = new ClienteDAO();
 	$cliente = $clienteDAO->getUsuarioPorNome("Oiter Busca");
 		
-	//$acao = $_GET["acao"];
-	$acao = "senha";
+	$acao = $_GET["acao"];
+	//$acao = "senha";
 	
 	$idmenu = 1;
 	
