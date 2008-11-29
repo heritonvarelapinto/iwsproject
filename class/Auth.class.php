@@ -21,16 +21,16 @@
 			$cliente = new Cliente();
 			$clienteDAO = new ClienteDAO();
 			
-			$idCliente = $clienteDAO->getUsuarioPorNome("Oiter Busca");
+			$cliente = $clienteDAO->getUsuarioPorNome("Oiter Busca");
 						
 			$administracao = new AdministracaoDAO();
 			$user = new Administracao();
-			$user = $administracao->listaUsuarios("SELECT * FROM administracao WHERE usuario ='$usuario' AND senha ='$senha'");
+			$user = $administracao->autenticaUsuario($usuario,$senha);
 			
-			if($user[0]->status == 1) {
-				if($user[0]->idcliente == $idCliente->getIdcliente()) {
+			if($user->status == 1) {
+				if($user->idcliente == $cliente->getIdcliente()) {
 					session_register("usuario");
-					$_SESSION["usuario"] = $user[0];
+					$_SESSION["usuario"] = $user;
 					header("location: ../principal.php");
 				}else{
 					header("location: ../index.php");
