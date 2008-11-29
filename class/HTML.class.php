@@ -517,24 +517,14 @@
 			            <td width="5%"><b>STATUS</b></td>
 			        </tr>
 			        <?
-			        	if($totUsuarios > 1) {
-				        	for ($i=0;$i<$totUsuarios;$i++) { ?>
-					        <tr onclick="javascript: window.location='?menu=1&act=altera&id=<?=$usuarios[$i]->getIdadministracao();?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">  
-					            <td><b><?=$usuarios[$i]->getNome();?></b></td>
-					            <td><?=$usuarios[$i]->getUsuario();?></td>
-					            <td><?=$usuarios[$i]->getEmail();?></td>
-					            <td align="center"><?=$usuarios[$i]->getStatus() == 1 ? '<img src="img/unlock.gif"/>' : '<img src="img/lock.gif"/>'; ?></td>
-					        </tr>
-			        <? 
-			       			}
-			        	}else{ ?>
-			        		<tr onclick="javascript: window.location='?menu=1&act=altera&id=<?=$usuarios->getIdadministracao();?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">  
-					            <td><b><?=$usuarios->getNome();?></b></td>
-					            <td><?=$usuarios->getUsuario();?></td>
-					            <td><?=$usuarios->getEmail();?></td>
-					            <td align="center"><?=$usuarios->getStatus() == 1 ? '<img src="img/unlock.gif"/>' : '<img src="img/lock.gif"/>'; ?></td>
-					        </tr>
-					<?	} ?>
+			        	for ($i=0;$i<$totUsuarios;$i++) { ?>
+				        <tr onclick="javascript: window.location='?menu=1&act=altera&id=<?=$usuarios[$i]->getIdadministracao();?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">  
+				            <td><b><?=$usuarios[$i]->getNome();?></b></td>
+				            <td><?=$usuarios[$i]->getUsuario();?></td>
+				            <td><?=$usuarios[$i]->getEmail();?></td>
+				            <td align="center"><?=$usuarios[$i]->getStatus() == 1 ? '<img src="img/unlock.gif"/>' : '<img src="img/lock.gif"/>'; ?></td>
+				        </tr>
+		        	<?	} ?>
 			    </tbody>
 		    </table>
 		    <br/>
