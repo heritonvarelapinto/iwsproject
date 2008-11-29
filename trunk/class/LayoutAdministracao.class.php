@@ -1,5 +1,5 @@
 <?php
-	class LayoutAdministracao extends HTML {
+	class LayoutAdministracao extends AdministracaoHTML  {
 		public function EstruturaAdministracao($acao) {
 			switch ($acao) {
 				case "mostra":
