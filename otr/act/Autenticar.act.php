@@ -4,8 +4,6 @@
         require_once "../../class/".$classe.".class.php";
     }
 
-	//$acao =  "senha";	
-
 	if(isset($_GET['acao'])) {
 		$administracao = new Administracao();
 		$administracaoDAO = new AdministracaoDAO();
