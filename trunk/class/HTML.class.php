@@ -413,5 +413,18 @@
 			echo "<input type=\"text\" id=\"".$nome."\" name=\"".$nome."\" class=\"".$classe."\">";
 		}
 		
+		/**
+		 * Gera um botao 
+		 *
+		 * @param $nome
+		 * @param $classe
+		 */
+		function button($nome,$classe,$texto) {
+			echo "<button type=\"submit\" name=\"".$nome."\" class=\"".$classe."\"><a>";
+			echo "<div class=\"botao\"><div><div>".$texto."</div></div></div>";
+			echo "</a></button>";
+			/*echo "<input type=\"submit\" value=\"".$texto."\" id=\"".$nome."\" name=\"".$nome."\" class=\"".$classe."\">";*/
+		}
+		
 	}
 ?>
