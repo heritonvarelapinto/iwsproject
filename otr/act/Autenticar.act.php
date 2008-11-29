@@ -4,16 +4,16 @@
         require_once "../../class/".$classe.".class.php";
     }
 
-	$acao =  "senha";	
+	//$acao =  "senha";	
 
-	if(isset($acao)) {
+	if(isset($_GET['acao'])) {
 		$administracao = new Administracao();
 		$administracaoDAO = new AdministracaoDAO();
 		
 		$clienteDAO = new ClienteDAO();
 		$cliente = $clienteDAO->getUsuarioPorNome("Oiter Busca");
 		
-		$usuario = "admin";//$_POST["usuario"];		
+		$usuario = $_POST["usuario"];		
 		$administracao = $administracaoDAO->getUsuarioPorUsuario($usuario);
 		$senha = $administracao->geraSenha();
 		$setSenha = md5($senha);
