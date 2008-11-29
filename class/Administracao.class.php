@@ -41,6 +41,11 @@ class Administracao {
      * so these might require some manual additions.
      */
 
+    /**
+     * Gera uma senha automatica com 8 caracteres
+     *
+     * @return string
+     */
     function geraSenha() {
 		$CaracteresAceitos = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -56,6 +61,14 @@ class Administracao {
 		return $password;
 	}
     
+	/**
+	 * Envia um email
+	 *
+	 * @param objeto $cliente
+	 * @param objeto $usuarios
+	 * @param objeto $senha
+	 * @return unknown
+	 */
 	function EnviaDadosEmailAdministracao($cliente,$usuarios,$senha) {		
 		$headers = "Content-type: text/html; charset=iso-8859-1\n";
 		$headers .= "From: Painel Administrativo - ".$cliente->getNome()." <administracao@".$cliente->getEmail().">";
