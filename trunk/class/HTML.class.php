@@ -108,10 +108,37 @@
 			                                        </tr>
 			                                        <tr class="Linha3Tabela">
 			                                            <td align="center" colspan="2"><input type="checkbox" name="acao" value="esquecisenha">Esqueci a senha e desejo receb&ecirc;-la<br> por e-mail.(Informe seu Usu&aacute;rio).<input type="HIDDEN" name="url_redirect" value=""></td>
-			                                        </tr>			                                                                              		                                       
+			                                        </tr>
+			                                        <?
+			                                        	switch ($_GET["msg"]) {
+			                                        		case 1:
+			                                        			print '
+			                                        			<tr class="TituloTabela"> 
+			                                            			<td height="20" align="center" colspan="2"><font color="red">Dados Inválidos.</font></td>
+			                                        			</tr>';
+			                                        		break;
+			                                        		case 2:
+			                                        			print '
+			                                        			<tr class="TituloTabela"> 
+						                                            <td height="20" align="center" colspan="2"><font color="red">USUÁRIO NÃO CADASTRADO.</font></td>
+						                                        </tr>';
+			                                        		break;
+			                                        		case 3:
+			                                        			print '
+			                                        			<tr class="TituloTabela"> 
+						                                            <td height="20" align="center" colspan="2"><font color="red">Dados de acesso enviados para o seu e-mail!</font></td>
+						                                        </tr>';
+			                                        		break;
+			                                        		case 4:
+			                                        			print '
+			                                        			<tr class="TituloTabela"> 
+						                                            <td height="20" align="center" colspan="2"><font color="red">Usuário Bloqueado.</font></td>
+						                                        </tr>';
+			                                        		break;
+			                                        	}
+			                                        ?>				                                       		                                                                              		                                 
 			                                        <tr class="Linha3Tabela">
-			                                            <td height="35" colspan="2" align="center"><input type="SUBMIT" name="submit" value="Entrar" class="bttn1"></td>
-			
+			                                            <td height="35" colspan="2" align="center"><input type="SUBMIT" name="submit" value="Entrar" class="bttn1"></td>														
 			                                        </tr>
 			                                    </form>
 			                                    </table>
