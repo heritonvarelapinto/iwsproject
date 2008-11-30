@@ -8,17 +8,18 @@ div {
 	text-align: center;
 }
 
-.direita {
+li.direita {
 	text-align: right;
 	float:right;
-	background-color: #999999;
+	background-color: #efefef;
+	color: #000;
 }
 
-.direita li:hover {
+li.direita a {
 	text-align: right;
 	float:right;
-	background-color: #666666;
-	color: #FF0000;
+	color: #000000 !important;
+	font-size: 9px !important;
 }
 #main {
 	width: 970px;
@@ -46,7 +47,7 @@ div {
 }
 
 .bordaDestaque {
-	border: 1px solid #279DFF;
+	border: 1px solid #efefef;
 	border-top: none;
 }
 
@@ -58,16 +59,74 @@ div {
 
 #main #lateralDireita ul li {
 	text-align: center;
-	margin: 2px 2px 0px 2px;
+	margin: 0px 2px 0px 2px;
 	border-bottom: 1px solid #DFDFDF;
 }
 
 #main #footer {
 	float: left;
 	width: 100%;
-	border: 1px solid #444444;
-	height: 100px;
+	margin: 20px 0px;
+	padding-bottom: 5px;
 }
+
+#main #footer p.copyright {
+	text-align: left;
+	font-size: 9px;
+	color: #666;
+	font-family: verdana;
+	border-top: 1px solid #dddddd;
+	padding-top: 5px;
+	clear:both;
+}
+
+#main #footer p.copyright a{
+	color: #666;
+	text-decoration: underline;
+}
+
+#main #footer ul {
+	float: left;
+	text-align: left;
+	list-style-type: none;
+	display: inline;
+	width: 100%;
+}
+
+#main #footer ul li{
+	float: left;
+	text-align: left;
+	list-style-type: none;
+	display: inline;
+	height: 25px;
+}
+
+#main #footer ul li.primeiro a {
+	border: none;
+	padding: 0px 15px 0px 0px;
+}
+
+#main #footer ul li a{
+	color: #666;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #666;
+	font-family: verdana;
+	border-left: 1px solid #999;
+	padding: 0px 15px;
+}
+
+#main #footer ul li a:hover {
+	text-decoration: underline;
+}
+
+#main #footer ul li.primeiro a:hover { color: #FA0204;}
+#main #footer ul li.azul a:hover { color: #0000FE;}
+#main #footer ul li.azulClaro a:hover {color: #269EFF; }
+#main #footer ul li.amarelo a:hover { color: #FFFD08;}
+#main #footer ul li.vermelho a:hover {color: #BF9406; }
+
 #barraLogo {
 	clear: both;
 }
@@ -151,16 +210,20 @@ div {
 	background-color: #C1E4FF;
 }
 
-#corpo .menu{
+#corpo .menu {
 	clear: both;
 	text-align: left;
-	border: 1px solid #efefef;
 	width: 220px;
 	float: left;
-	margin-top: 10px;
+	margin-top: 5px;
+}
+#corpo .menu ul {
+	border: 1px solid #efefef;
+	border-top: none;
+	width: 220px;
+	display: block;
 }
 
-#corpo .menu ul,
 #corpo .menu ul li {
 	width: 100%;
 	list-style-type: none;
@@ -185,13 +248,6 @@ div {
 	margin-top: 10px;
 	float: right;
 }
-
-
-.vermelho { color: #FA0204;}
-.azul { color: #0000FE;}
-.azulClaro {color: #269EFF; }
-.amarelo { color: #FFFD08;}
-.amareloEscuro {color: #BF9406; }
 
 /* Fix IE. Hide from IE Mac \*/
 * html ul li { float: left; height: 1%; }

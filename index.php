@@ -103,7 +103,7 @@
 						<div class="menuItensDir">
 							<ul>
 								<li>
-									<a href="#" class="showAll">Departamentos</a>
+									<a href="#" class="showAll">Departamentos <img border="0" src="images/seta.gif"></a>
 									<div id="departamentos" style="display: none;">
 										<ul>
 											<?=$layout->menuSuperiorDepartamentos($departamentos);?>
@@ -121,23 +121,28 @@
 			<div id="corpo">
 				<div class="menu">
 						<?=$layout->menuDepartamentos($departamentos);?>
-						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
 				<div class="menu">
-						
+						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
-				
 				<div class="miolo">
-					
+					PRA FINALIZAR O LAYOUT SO FALTA AKIIIII.
 				</div>
 			</div>
 		</div>
 		<div id="lateralDireita">
 			<?=$layout->bannersLaterais($banners);?>
 		</div>
-		<div id="footer">
-			Modulo Rodapé
+		<div id="lateralDireita">
+			<?=$layout->enquete();?>
 		</div>
+		<div id="lateralDireita">
+			<?=$layout->boletim();?>
+		</div>
+		
+					
+			
+		<?=$layout->rodape();?>
 	</div>
 </div>
 </body>
