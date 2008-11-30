@@ -10,7 +10,7 @@
  */
 class BannerDAO extends PDOConnectionFactory {
 	//irá receber a conexão
-	public $conex = null;
+	public $conexao = null;
 	
 	//construtor
 	public function BannerDAO() {
@@ -78,10 +78,9 @@ class BannerDAO extends PDOConnectionFactory {
 	 * @return Banner Object
 	 */
 	public function getBannerPorId($id) {
-		$sql = "SELECT * FROM banners WHERE idbanner = ?";
+		$sql = "SELECT * FROM banners WHERE idbanner = ".$id;
 		$stmt = $this->conexao->prepare($sql);
-		$stmt->bindValues(1,$id);
-		
+		//$stmt->bindValues(1,$id);
 		$stmt->execute();
 		
 		$rs = $stmt->fetch(PDO::FETCH_OBJ);
