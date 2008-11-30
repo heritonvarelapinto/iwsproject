@@ -65,6 +65,7 @@
 <div>
 	<div id="main">
 		<div id="barraLogo">
+			
 			<table class="logo">
 				<tr>
 					<td align="left"><img src="images/logos/logo.jpg" alt="OiterBusca um site "/></td>
@@ -72,6 +73,7 @@
 					<td align="right" width="186"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1));?></td>
 				</tr>
 			</table>
+			
 		</div>
 		<div id="content">
 			<!-- Inicio Header -->
@@ -80,15 +82,16 @@
 				<div class="menuPesquisa">
 					<div class="menuPesquisaEsq">
 						<div class="menuPesquisaDir">
+							<form method="POST" action="pesquisa.php">
 							<table border="0" cellpadding="2" cellspacing="2" class="tablePesquisa">
 								<tr>
 									<td><?=$layout->input("pesquisa","inputPesquisa");?></td>
 									<td><?=$layout->selectDepartamentos($departamentos);?></td>
 									<td><?=$layout->button("btEnviar","button","Buscar");?> </td>
-									<td><?=$layout->button("btEnviar","button","Pesquisa avançada");?> </td>
-									
+									<!--<td><?=$layout->button("btEnviar","button","Pesquisa avançada");?> </td>-->
 								</tr>
 							</table>
+							</form>
 						</div>
 					</div>
 				</div>
