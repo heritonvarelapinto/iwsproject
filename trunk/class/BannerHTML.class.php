@@ -1,7 +1,6 @@
 <?php
 	class BannerHTML extends HTML {
 		function BannerMostra($titulo) { 
-			
 			$departamento = new Departamento();
 		    $departamentoDAO = new DepartamentoDAO();
 			
@@ -10,7 +9,6 @@
 			}elseif($_GET["iddep"]) {
 				$iddep = $_GET["iddep"];
 			}
-						
 		?>				
 			<span class="TituloPage">• <?=$titulo;?></span>
 	        <br/>
@@ -24,9 +22,7 @@
 	                <td height="20" align="right">Pagina:</td>
 	                <td>
 		            <?
-		            	
 		            	$departamento = $departamentoDAO->Lista();
-		            	
 		            	$this->selectDepartamentosAdmin($departamento);
 					?>			            
 					</td>
@@ -328,16 +324,32 @@
 			</table>
 	<?	}
 	
-		function addBanner() { ?>
-			<? 			
-				$idcat = $_GET["idcat"];
-				$lado = $_GET["lado"];
-				$numero = $_GET["numero"];
-				$largura = $_GET["w"];
-				$altura = $_GET["h"];
+		function ADDALTBanner() {
+			
+			$idbanner = $_GET["idbanner"];
+			$banner = new Banner();
+			$bannerDAO = new BannerDAO();
+			$banner = $bannerDAO->getBannerPorId($idbanner);
 				
-				$idbanner = $_GET["idbanner"];
-				if($idbanner != "" && $banners = classAdmSQL::get("banners","idbanner",$idbanner)) { $acao = "Alterar"; }else{ $acao = "Adicionar"; }
+			$iddep = $_GET["iddep"];
+			$lado = $_GET["lado"];
+			$numero = $_GET["numero"];
+			$largura = $_GET["w"];
+			$altura = $_GET["h"];
+							
+			if(isset($idbanner)) {
+				$width = $banner->getWidth(); 
+			    $height = $banner->getHeight();
+			    $width = $width / 2;
+			    $height = $height / 2;
+				$acao = "Alterar";
+				$classBotao = "bttn4";
+			}else{
+				$acao = "Adicionar";
+				$classBotao = "bttn2";
+			}
+			
+			//print_r($banner);
 			?>
 			<span class="TituloPage">• <?=$acao;?> Banner</span>
 	        <br/>
@@ -358,11 +370,11 @@
 							</tr>
 							<tr class="Linha1Tabela">
 								<td class="label">URL</td>
-								<td><input class="FORMbox" type="text" name="url" size="50" value="<?=$banners->url;?>"></td>
+								<td><input class="FORMbox" type="text" name="url" size="50" value="<?=$banner->getUrl();?>"></td>
 							</tr>						
 							<tr class="Linha1Tabela">
 								<td class="label">Ao clicar, Pagina designada:</td>
-								<td valign="bottom"><select class="FORMbox" name='target'><option value='_self' <? if($banners->target == "_self") { echo "selected"; } ?>>Abra em Pagina Atual</option><option value='_blank' <? if($banners->target == "_blank") { echo "selected"; } ?>>Abra em uma Nova Pagina</option></select></td>
+								<td valign="bottom"><select class="FORMbox" name='target'><option value='_self' <? if($banner->getTarget() == "_self") { echo "selected"; } ?>>Abra em Pagina Atual</option><option value='_blank' <? if($banner->getTarget() == "_blank") { echo "selected"; } ?>>Abra em uma Nova Pagina</option></select></td>
 							</tr>
 							<tr>
 								<td>Por quanto tempo<br>este banner será exibido:</td>
@@ -388,25 +400,32 @@
 								<td colspan="2"><br></td>
 							</tr>
 							<tr class="Linha1Tabela">
-								<td colspan="2"><input type="submit" class="bttn2" name="botao" value="<?=$acao;?>"><input type="button" class="bttn1" value="Voltar" onclick="javascript:history.back();"><? if($acao == "Alterar") {?><input type="button" value="Excluir Banner" class="bttn3" onclick="delBanner('<?=$banners->idcat;?>','<?=$banners->idbanner;?>');"><? } ?></td>
+								<td colspan="2"><input type="submit" class="<?=$classBotao;?>" name="botao" value="<?=$acao;?>"><input type="button" class="bttn1" value="Voltar" onclick="javascript:history.back();"><? if($acao == "Alterar") {?><input type="button" value="Excluir Banner" class="bttn3" onclick="delBanner('<?=$banner->getIddepartamento();?>','<?=$banner->getIdbanner();?>');"><? } ?></td>
 							</tr>							
 						</table>
 					</td>
 				</tr>			
 				<tr class="Linha1Tabela">
 					<td align="center" colspan="2">
+					<? if($this->pegaExt($banner->getBanner()) == "swf") { ?>													
+						<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$width;?>" height="<?=$height;?>" id="promocao" align="middle">
+						<param name="movie" value="../images/banners/<?=$banner->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$width;?>" height="<?=$height;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+						</object>
+					<? }else{ ?>
+						<img src="../images/banners/<?=$banner->getBanner();?>" width="<?=$width;?>" height="<?=$height;?>" border="0">
+					<? } ?>
 					<? if(!$idbanner) { ?>																	
-					<input type="hidden" name="idcat" value="<?=$idcat;?>">				
+					<input type="hidden" name="iddep" value="<?=$iddep;?>">				
 					<input type="hidden" name="lado" value="<?=$lado;?>">				
 					<input type="hidden" name="numero" value="<?=$numero;?>">				
 					<input type="hidden" name="largura" value="<?=$largura;?>">				
 					<input type="hidden" name="altura" value="<?=$altura;?>">				
 					<? }else{ ?>
-					<input type="hidden" name="idbanner" value="<?=$banners->idbanner;?>">
-					<input type="hidden" name="banner" value="<?=$banners->banner;?>">																	
-					<input type="hidden" name="idcat" value="<?=$banners->idcat;?>">																	
-					<input type="hidden" name="lado" value="<?=$banners->lado;?>">				
-					<input type="hidden" name="numero" value="<?=$banners->numero;?>">
+					<input type="hidden" name="idbanner" value="<?=$banner->getIdbanner();?>">
+					<input type="hidden" name="banner" value="<?=$banner->getBanner();?>">																	
+					<input type="hidden" name="iddep" value="<?=$banner->getIddepartamento();?>">																	
+					<input type="hidden" name="lado" value="<?=$banner->getLado();?>">				
+					<input type="hidden" name="numero" value="<?=$banner->getNumero();?>">
 					<input type="hidden" name="largura" value="<?=$largura;?>">				
 					<input type="hidden" name="altura" value="<?=$altura;?>">	
 					<? } ?>
