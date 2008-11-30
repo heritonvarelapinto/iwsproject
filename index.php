@@ -118,7 +118,7 @@
 			<div id="corpo">
 				<div class="menu">
 						<?=$layout->menuDepartamentos($departamentos);?>
-						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1));?>
+						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
 				<div class="menu">
 						
