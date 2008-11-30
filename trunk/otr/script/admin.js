@@ -91,12 +91,12 @@ function servicos(idcategoria) {
 	document.location="principal.php?menu=3&act=addgold&idcategoria="+idcategoria;
 }
 
-function addBanner(idcat,lado,numero,largura,altura) {
-	document.location="principal.php?menu=6&act=add&idcat="+idcat+"&lado="+lado+"&numero="+numero+"&w="+largura+"&h="+altura;
+function addBanner(iddep,lado,numero,largura,altura) {
+	document.location="principal.php?menu=3&act=add&iddep="+iddep+"&lado="+lado+"&numero="+numero+"&w="+largura+"&h="+altura;
 }
 
 function altBanner(idbanner,largura,altura) {
-	document.location="principal.php?menu=6&act=add&idbanner="+idbanner+"&w="+largura+"&h="+altura;
+	document.location="principal.php?menu=3&act=add&idbanner="+idbanner+"&w="+largura+"&h="+altura;
 }
 
 function delBanner(idcat,idbanner) {
