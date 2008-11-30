@@ -38,17 +38,22 @@
 			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 				<tr class="Linha1Tabela">
 					<td colspan="3">
-						<? $this->BannerMostraTopo($iddep,$departamentoDAO); ?>
+						<? $this->BannerMostraTopo($iddep); ?>
 					</td>
 				</tr>
 				<tr class="Linha1Tabela">
 					<td colspan="3">
-						<? //AdmBanners::mostraBannersPeq($iddep); ?>
+						<? $this->BannerMostraTopoPeq($iddep); ?>
 					</td>
 				</tr>
 				<tr class="Linha1Tabela">
 					<td colspan="3">
-						<? //AdmBanners::mostraBannersLat($iddep); ?>
+						<? $this->BannerLateralDireita($iddep); ?>
+					</td>
+				</tr>
+				<tr class="Linha1Tabela">
+					<td colspan="3">
+						<? $this->BannerLateralEsquerda($iddep); ?>
 					</td>
 				</tr>			
 			</table>
@@ -142,21 +147,13 @@
 					$banner = $bannerDAO->ListaBannerPorDepartamentoPosicaoAdmin($iddep,"topo");
 
 					$totBanner = count($banner);
-					
 					$a = $totBanner + 1;				
 						
 					for ($i=0;$i<$totBanner;$i++) {			
-						if($iddep == 1) {
-							$width = $banner[$i]->getWidth(); 
-						    $height = $banner[$i]->getHeight();
-						    $largura = $width / 4;
-						    $altura = $height / 4;
-						}else{
-							$width = $banner[$i]->getWidth(); 
-						    $height = $banner[$i]->getHeight();
-						    $largura = $width / 2;
-						    $altura = $height / 2;
-						}
+						$width = $banner[$i]->getWidth(); 
+					    $height = $banner[$i]->getHeight();
+					    $largura = $width / 2;
+					    $altura = $height / 2;
 					
 				?>
 						<tr class="Linha1Tabela">
@@ -164,10 +161,10 @@
 							<td align="center">
 								<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
 									<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
-									<param name="movie" value="../img/banners/<?=$banner->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+									<param name="movie" value="../images/banners/<?=$banner->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 									</object>
 								<? }else{ ?>
-									<img src="../images/banners/<?=$banner[$i]->getBanner();?>" width="300" height="50" border="0">
+									<img src="../images/banners/<?=$banner[$i]->getBanner();?>" width="<?=$largura;?>" height="<?=$altura;?>" border="0">
 								<? } ?>
 							</td>							
 						</tr>						
@@ -186,107 +183,146 @@
 			</table>
 	<?	}
 	
-		function MostraBannerTopoPeq($idcat) { ?>		
+		function BannerMostraTopoPeq($iddep) { ?>		
 			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-				<? if($idcat == 1) { ?>
-					<tr class="TituloTabela">
-						<td  colspan="3" class="label2">Página [<? if($idcat == "1000") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
-					</tr>
-				<? } ?>
+				<tr class="TituloTabela">
+					<td  colspan="3" class="label2">Página [<? if($iddep == "inicial") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
+				</tr>
 				<tr>
 					<td class="TituloTabela" colspan="3">Banners Pequeno Topo (140x80)</td>
 				</tr>
-				<? $rs = AdmBanners::getBannerRS("topopeq",$idcat);											
-						$i=1;
-						while ($banners = classAdmGeral::resultado($rs)) { ?>
-						<?
-							if($idcat == 1) {
-								$width = $banners->width; 
-							    $height = $banners->height;
-							    $largura = $width / 2;
-							    $altura = $height / 2;
-							}else{
-								$width = $banners->width; 
-							    $height = $banners->height;
-							    $largura = $width / 1;
-							    $altura = $height / 1;
-							}
-						?>
-							<tr class="Linha1Tabela">
-								<td width="25%" align="center">Banner <?=$i;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banners->idbanner;?>','140','80');"><br><?AdmBanners::data($banners->idbanner);?></td>							
-								<td align="center">
-									<? if(AdmBanners::pegaExt($banners->banner) == "swf") { ?>													
-										<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
-										<param name="movie" value="../img/banners/<?=$banners->banner;?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../img/banners/<?=$banners->banner;?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-										</object>
-									<? }else{ ?>
-										<img src="../act/geraBan.php?imagem=<?=$banners->banner;?>&w=<?=$largura;?>&h=<?=$altura;?>" border="0">
-									<? } ?>
-								</td>							
-							</tr>						
-						<? $i++; ?>		
-					<?	}				
+				<? 
+					$banner = new Banner();
+					$bannerDAO = new BannerDAO();
+					$banner = $bannerDAO->ListaBannerPorDepartamentoPosicaoAdmin($iddep,"topopeq");
+
+					$totBanner = count($banner);									
+					$a = $totBanner + 1;
+						
+					for ($i=0;$i<$totBanner;$i++) {	
+						$width = $banner[$i]->getWidth(); 
+					    $height = $banner[$i]->getHeight();
+					    $largura = $width / 2;
+					    $altura = $height / 2;
 				?>
-				<? if($idcat == 1000) { ?>
+						<tr class="Linha1Tabela">
+							<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','140','80');"><br><? $this->data($banner[$i]->getData()); ?></td>							
+							<td align="center">
+								<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
+									<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
+									<param name="movie" value="../images/banners/<?=$banner[$i]->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+									</object>
+								<? }else{ ?>
+									<img src="../images/banners/<?=$banner[$i]->getBanner();?>" width="<?=$largura;?>" height="<?=$altura;?>" border="0">
+								<? } ?>
+							</td>							
+						</tr>
+				<?	} ?>						
+				<? if($iddep == "inicial") { ?>
 				<tr class="Linha1Tabela">
-					<td colspan="2" align="center">Tamanho Máximo<br>140x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$idcat;?>','topopeq','<?=$i;?>','140','80')"></td>
+					<td colspan="2" align="center">Tamanho Máximo<br>140x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','topopeq','<?=$a;?>','140','80')"></td>
 				</tr>
 				<? }else{ ?>
 					<tr class="Linha1Tabela">
-						<td colspan="2" align="center">Tamanho Máximo<br>140x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$idcat;?>','topopeq','<?=$i;?>','140','80')"></td>
+						<td colspan="2" align="center">Tamanho Máximo<br>140x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','topopeq','<?=$a;?>','140','80')"></td>
 					</tr>
 				<? } ?>										
 			</table>
 	<?	}
 	
-		function mostraBannersLat($idcat) { ?>		
+		function BannerLateralDireita($iddep) { ?>		
 			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-				<? if($idcat == 1) { ?>
-					<tr class="TituloTabela">
-						<td  colspan="3" class="label2">Página [<? if($idcat == "1000") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
-					</tr>
-				<? } ?>
-				<tr>
-					<td class="TituloTabela" colspan="3">Banners Lateral (150x***)</td>
+				<tr class="TituloTabela">
+					<td  colspan="3" class="label2">Página [<? if($iddep == "inicial") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
 				</tr>
-				<? $rs = AdmBanners::getBannerRS("lateral",$idcat);											
-						$i=1;
-						while ($banners = classAdmGeral::resultado($rs)) { ?>
-						<?
-							if($idcat == 1) {
-								$width = $banners->width; 
-							    $height = $banners->height;
-							    $largura = $width / 2;
-							    $altura = $height / 2;
-							}else{
-								$width = $banners->width; 
-							    $height = $banners->height;
-							    $largura = $width / 1;
-							    $altura = $height / 1;
-							}
-						?>
+				<tr>
+					<td class="TituloTabela" colspan="3">Banners Lateral Direita(150x***)</td>
+				</tr>
+				<? 
+					$banner = new Banner();
+					$bannerDAO = new BannerDAO();
+					$banner = $bannerDAO->ListaBannerPorDepartamentoPosicaoAdmin($iddep,"lateral");
+
+					$totBanner = count($banner);									
+					$a = $totBanner + 1;
+						
+					for ($i=0;$i<$totBanner;$i++) {	
+						$width = $banner[$i]->getWidth(); 
+					    $height = $banner[$i]->getHeight();
+					    $largura = $width / 2;
+					    $altura = $height / 2;
+				?>
 							<tr class="Linha1Tabela">
-								<td width="25%" align="center">Banner <?=$i;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banners->idbanner;?>','150','5000');"><br><?AdmBanners::data($banners->idbanner);?></td>							
+								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','150','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
 								<td align="center">
-									<? if(AdmBanners::pegaExt($banners->banner) == "swf") { ?>													
+									<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
 										<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
-										<param name="movie" value="../img/banners/<?=$banners->banner;?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../img/banners/<?=$banners->banner;?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+										<param name="movie" value="../images/banners/<?=$banner[$i]->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 										</object>
 									<? }else{ ?>
-										<img src="../act/geraBan.php?imagem=<?=$banners->banner;?>&w=<?=$largura;?>&h=<?=$altura;?>" border="0">
+										<img src="../images/banners/<?=$banner[$i]->getBanner();?>" width="<?=$largura;?>" height="<?=$altura;?>" border="0">
 									<? } ?>
 								</td>							
 							</tr>						
-						<? $i++; ?>		
-					<?	}				
+							
+				<?	}				
 				?>
-				<? if($idcat == 1000) { ?>
+				<? if($iddep == "inicial") { ?>
 				<tr class="Linha1Tabela">
-					<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$idcat;?>','lateral','<?=$i;?>','150','5000')"></td>
+					<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateral','<?=$a;?>','150','5000')"></td>
 				</tr>
 				<? }else{ ?>
 					<tr class="Linha1Tabela">
-						<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$idcat;?>','lateral','<?=$i;?>','150','5000')"></td>
+						<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateral','<?=$a;?>','150','5000')"></td>
+					</tr>
+				<? } ?>										
+			</table>
+	<?	}
+	
+		function BannerLateralEsquerda($iddep) { ?>		
+			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+				<tr class="TituloTabela">
+					<td  colspan="3" class="label2">Página [<? if($iddep == "inicial") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
+				</tr>
+				<tr>
+					<td class="TituloTabela" colspan="3">Banners Lateral Esquerda(150x***)</td>
+				</tr>
+				<? 
+					$banner = new Banner();
+					$bannerDAO = new BannerDAO();
+					$banner = $bannerDAO->ListaBannerPorDepartamentoPosicaoAdmin($iddep,"lateralesq");
+
+					$totBanner = count($banner);									
+					$a = $totBanner + 1;
+						
+					for ($i=0;$i<$totBanner;$i++) {	
+						$width = $banner[$i]->getWidth(); 
+					    $height = $banner[$i]->getHeight();
+					    $largura = $width / 2;
+					    $altura = $height / 2;
+				?>
+							<tr class="Linha1Tabela">
+								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','150','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
+								<td align="center">
+									<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
+										<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
+										<param name="movie" value="../images/banners/<?=$banner[$i]->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+										</object>
+									<? }else{ ?>
+										<img src="../images/banners/<?=$banner[$i]->getBanner();?>" width="<?=$largura;?>" height="<?=$altura;?>" border="0">
+									<? } ?>
+								</td>							
+							</tr>						
+							
+				<?	}				
+				?>
+				<? if($iddep == "inicial") { ?>
+				<tr class="Linha1Tabela">
+					<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateral','<?=$a;?>','150','5000')"></td>
+				</tr>
+				<? }else{ ?>
+					<tr class="Linha1Tabela">
+						<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateral','<?=$a;?>','150','5000')"></td>
 					</tr>
 				<? } ?>										
 			</table>
