@@ -139,9 +139,6 @@
 		<div id="lateralDireita">
 			<?=$layout->boletim();?>
 		</div>
-		
-					
-			
 		<?=$layout->rodape();?>
 	</div>
 </div>
