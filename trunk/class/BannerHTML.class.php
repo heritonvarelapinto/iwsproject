@@ -185,7 +185,7 @@
 					<td  colspan="3" class="label2">Página [<? if($iddep == "inicial") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
 				</tr>
 				<tr>
-					<td class="TituloTabela" colspan="3">Banners Pequeno Topo (140x80)</td>
+					<td class="TituloTabela" colspan="3">Banners Pequeno Topo (185x80)</td>
 				</tr>
 				<? 
 					$banner = new Banner();
@@ -202,7 +202,7 @@
 					    $altura = $height / 2;
 				?>
 						<tr class="Linha1Tabela">
-							<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','140','80');"><br><? $this->data($banner[$i]->getData()); ?></td>							
+							<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','185','80');"><br><? $this->data($banner[$i]->getData()); ?></td>							
 							<td align="center">
 								<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
 									<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
@@ -216,11 +216,11 @@
 				<?	} ?>						
 				<? if($iddep == "inicial") { ?>
 				<tr class="Linha1Tabela">
-					<td colspan="2" align="center">Tamanho Máximo<br>140x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','topopeq','<?=$a;?>','140','80')"></td>
+					<td colspan="2" align="center">Tamanho Máximo<br>185x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','topopeq','<?=$a;?>','185','80')"></td>
 				</tr>
 				<? }else{ ?>
 					<tr class="Linha1Tabela">
-						<td colspan="2" align="center">Tamanho Máximo<br>140x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','topopeq','<?=$a;?>','140','80')"></td>
+						<td colspan="2" align="center">Tamanho Máximo<br>185x80<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','topopeq','<?=$a;?>','185','80')"></td>
 					</tr>
 				<? } ?>										
 			</table>
@@ -246,7 +246,7 @@
 						$width = $banner[$i]->getWidth(); 
 					    $height = $banner[$i]->getHeight();
 					    $largura = $width / 2;
-					    $altura = $height / 2;
+					    $altura = $height / 100;
 				?>
 							<tr class="Linha1Tabela">
 								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','150','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
@@ -281,7 +281,7 @@
 					<td  colspan="3" class="label2">Página [<? if($iddep == "inicial") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
 				</tr>
 				<tr>
-					<td class="TituloTabela" colspan="3">Banners Lateral Esquerda(150x***)</td>
+					<td class="TituloTabela" colspan="3">Banners Lateral Esquerda(200x***)</td>
 				</tr>
 				<? 
 					$banner = new Banner();
@@ -295,10 +295,10 @@
 						$width = $banner[$i]->getWidth(); 
 					    $height = $banner[$i]->getHeight();
 					    $largura = $width / 2;
-					    $altura = $height / 2;
+					    $altura = $height / 100;
 				?>
 							<tr class="Linha1Tabela">
-								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','150','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
+								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','200','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
 								<td align="center">
 									<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
 										<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
@@ -314,11 +314,11 @@
 				?>
 				<? if($iddep == "inicial") { ?>
 				<tr class="Linha1Tabela">
-					<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateral','<?=$a;?>','150','5000')"></td>
+					<td colspan="2" align="center">Tamanho Máximo<br>200x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateralesq','<?=$a;?>','200','5000')"></td>
 				</tr>
 				<? }else{ ?>
 					<tr class="Linha1Tabela">
-						<td colspan="2" align="center">Tamanho Máximo<br>150x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateral','<?=$a;?>','150','5000')"></td>
+						<td colspan="2" align="center">Tamanho Máximo<br>200x***<br><br><input type="button" class="bttn2" value="Adicionar Banner" onclick="addBanner('<?=$iddep;?>','lateralesq','<?=$a;?>','200','5000')"></td>
 					</tr>
 				<? } ?>										
 			</table>
@@ -400,7 +400,7 @@
 								<td colspan="2"><br></td>
 							</tr>
 							<tr class="Linha1Tabela">
-								<td colspan="2"><input type="submit" class="<?=$classBotao;?>" name="botao" value="<?=$acao;?>"><input type="button" class="bttn1" value="Voltar" onclick="javascript:history.back();"><? if($acao == "Alterar") {?><input type="button" value="Excluir Banner" class="bttn3" onclick="delBanner('<?=$banner->getIddepartamento();?>','<?=$banner->getIdbanner();?>');"><? } ?></td>
+								<td colspan="2"><input type="submit" class="<?=$classBotao;?>" name="botao" value="<?=$acao;?>"><input type="button" class="bttn1" value="Voltar" onclick="javascript:history.back();"><? if($acao == "Alterar") {?><input type="submit" class="bttn3" onclick="return confirma_apagar();" value="Excluir Banner" name="remover"/><? } ?></td>
 							</tr>							
 						</table>
 					</td>
@@ -412,22 +412,22 @@
 						<param name="movie" value="../images/banners/<?=$banner->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$width;?>" height="<?=$height;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 						</object>
 					<? }else{ ?>
-						<img src="../images/banners/<?=$banner->getBanner();?>" width="<?=$width;?>" height="<?=$height;?>" border="0">
+						<img src="../images/banners/<?=$banner->getBanner();?>" border="0">
 					<? } ?>
 					<? if(!$idbanner) { ?>																	
-					<input type="hidden" name="iddep" value="<?=$iddep;?>">				
-					<input type="hidden" name="lado" value="<?=$lado;?>">				
-					<input type="hidden" name="numero" value="<?=$numero;?>">				
-					<input type="hidden" name="largura" value="<?=$largura;?>">				
-					<input type="hidden" name="altura" value="<?=$altura;?>">				
+						<input type="hidden" name="iddep" value="<?=$iddep;?>">				
+						<input type="hidden" name="lado" value="<?=$lado;?>">				
+						<input type="hidden" name="numero" value="<?=$numero;?>">				
+						<input type="hidden" name="largura" value="<?=$largura;?>">				
+						<input type="hidden" name="altura" value="<?=$altura;?>">				
 					<? }else{ ?>
-					<input type="hidden" name="idbanner" value="<?=$banner->getIdbanner();?>">
-					<input type="hidden" name="banner" value="<?=$banner->getBanner();?>">																	
-					<input type="hidden" name="iddep" value="<?=$banner->getIddepartamento();?>">																	
-					<input type="hidden" name="lado" value="<?=$banner->getLado();?>">				
-					<input type="hidden" name="numero" value="<?=$banner->getNumero();?>">
-					<input type="hidden" name="largura" value="<?=$largura;?>">				
-					<input type="hidden" name="altura" value="<?=$altura;?>">	
+						<input type="hidden" name="idbanner" value="<?=$banner->getIdbanner();?>">
+						<input type="hidden" name="banner" value="<?=$banner->getBanner();?>">																	
+						<input type="hidden" name="iddep" value="<?=$banner->getIddepartamento();?>">																	
+						<input type="hidden" name="lado" value="<?=$banner->getLado();?>">				
+						<input type="hidden" name="numero" value="<?=$banner->getNumero();?>">
+						<input type="hidden" name="largura" value="<?=$largura;?>">				
+						<input type="hidden" name="altura" value="<?=$altura;?>">	
 					<? } ?>
 					</td>
 				</tr>
