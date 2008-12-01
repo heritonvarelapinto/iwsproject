@@ -354,7 +354,7 @@
 			<span class="TituloPage">• <?=$acao;?> Banner</span>
 	        <br/>
 	        <br/>
-			<form method="POST" action="act/actBanners.php?acao=<?=$acao;?>" enctype="multipart/form-data">			
+			<form method="POST" action="act/Banner.act.php?acao=<?=$acao;?>" enctype="multipart/form-data">			
 			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 				<tr class="TituloTabela">
 					<td colspan="3">
