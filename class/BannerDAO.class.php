@@ -46,38 +46,60 @@ class BannerDAO extends PDOConnectionFactory {
 	}
 	
 	//realiza um Update
-	public function Update( $departamento, $condicao ) {
-		try {
-				// preparo a query de update - Prepare Statement
-				$stmt = $this->conexao->prepare("UPDATE bairros SET idbanner=? WHERE iddepartamento=?");
-				$this->conexao->beginTransaction();
+	public function Update( $banner, $condicao ) {
+		// preparo a query de update - Prepare Statement
+		$stmt = $this->conexao->prepare("UPDATE banners SET lado=?, iddepartamento=?, numero=?, banner=?, width=?, height=?, url=?, target=?, data=? WHERE idbanner=?");
+		$this->conexao->beginTransaction();
+		
+		$stmt->bindValue(1, $banner->getLado());
+		$stmt->bindValue(2, $banner->getIddepartamento());
+		$stmt->bindValue(3, $banner->getNumero());
+		$stmt->bindValue(4, $banner->getBanner());
+		$stmt->bindValue(5, $banner->getWidth());
+		$stmt->bindValue(6, $banner->getHeight());
+		$stmt->bindValue(7, $banner->getUrl());
+		$stmt->bindValue(8, $banner->getTarget());
+		$stmt->bindValue(9, $banner->getData());
+						
+		$stmt->bindValue(10, $condicao);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+		
+		$this->conexao->commit();
+		
+		//fecho a conexão
+		$this->conexao = null;
 				
-				$stmt->bindValue(1, $departamento->getDepartamento());				
-				$stmt->bindValue(2, $condicao);
-				
-				// executo a query preparada
-				$stmt->execute();
-				
-				$this->conexao->commit();
-				
-				//fecho a conexão
-				$this->conexao = null;
-				
-		//caso ocorra um erro, retorna o erro
-		}catch ( PDOException $ex ) { echo "Erro:".$ex->getMessage(); }
 	}
 	
-	//remove um registro
-	public function Deleta( $idbanner ) {
-		try {
-				// executo a query
-				$num = $this->conexao->exec("DELETE FROM banners WHERE idbanner=$idbanner");
-				// caso seja execuado ele retorna o número de rows que foram afetadas.
-				if($num >= 1) { return $num; } else { return 0; }
-				
-				
-		//caso ocorra um erro, retorna o erro
-		}catch ( PDOException $ex ) { echo "Erro:".$ex->getMessage(); }
+	//remove um banner
+	public function Deleta( $id ) {
+		$sql = "DELETE FROM banners WHERE idbanner = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
 	}
 	
 	/**
