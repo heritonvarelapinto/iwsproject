@@ -238,6 +238,13 @@ li.direita a {
 	text-decoration: none;
 }
 
+#corpo .menu ul li a.bannerEsq {
+	padding: 0px !important;
+	margin: 0px !important;
+	display:block;
+	text-decoration: none;
+}
+
 #corpo .menu ul li a:hover {
 	text-decoration: underline;
 	color: #FF0000;
