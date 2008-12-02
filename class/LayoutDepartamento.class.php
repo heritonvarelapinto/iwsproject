@@ -8,8 +8,8 @@
 				case "adddep":
 					$this->DepartamentoADD();
 				break;
-				case "altera":
-					//$this->AdministracaoALT("Alterar Usuário","return valida_altusuario();","act/Administracao.act.php?acao=alt","altusuario","post");
+				case "altdep":
+					$this->DepartamentoALT();
 				break;
 			}
 		}

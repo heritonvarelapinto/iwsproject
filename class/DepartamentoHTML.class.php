@@ -1,7 +1,6 @@
 <?php
 	class DepartamentoHTML extends HTML  {
-		function DepartamentoMostra($titulo) { ?>
-		<?
+		function DepartamentoMostra($titulo) {
 			$departamento = new Departamento();
 			$departamentoDAO = new DepartamentoDAO();
 			
@@ -95,7 +94,7 @@
 		    </table>
 	<?	}
 	
-	function DepartamentoADD() { ?>
+		function DepartamentoADD() { ?>
 			<span class="TituloPage" >• Adicionar Departamento</span>
 	        <br/>
 	        <br/>                         
@@ -127,5 +126,80 @@
 				document.getElementById('departamento').focus();
 			</script>         	              
 	<?	}
-	}
+	
+		function DepartamentoALT() {
+			$departamento = new Departamento();
+			$departamentoDAO = new DepartamentoDAO();
+			
+			$iddepartamento = $_GET["iddepartamento"];
+			
+			$departamento = $departamentoDAO->getDepartamentosPorId($iddepartamento);
+		?>
+	        <span class="TituloPage">• Alterar Departamento</span>
+	        <div align="right"><a class="TextoPageLink" href="?menu=2&act=mostra">Retornar para relação de Departamentos</a></div>
+	        <br/>
+	        <br/>                         
+	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	        <form action="act/Departamento.act.php?acao=altdep" name="departamento" method="post">              
+	         <input type="hidden" value="<?=$departamento->getIdDepartamento();?>" name="iddepartamento"/>
+		        <tbody>
+			        <?
+				        switch ($_GET["msg"]) {
+							case 1:
+								$this->mostraMSG("Subdepartamento cadastrado com sucesso.");
+							break;
+							case 2:
+								$this->mostraMSG("Subdepartamento alterado com sucesso..");
+							break;	
+							case 3:
+								$this->mostraMSG("Subdepartamento removido com sucesso.");
+							break;										
+						}
+					?>				
+		        	<tr class="Linha2Tabela">
+	                    <td colspan="2">                            
+	                        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	                            <tbody>                            	                            	
+	                                <tr class="Linha1Tabela">
+	                                    <td align="right"><b> NOME DO SEGMENTO</b></td>
+	                                    <td><input type="text" value="<?=$departamento->getDepartamento();?>" class="FORMbox" size="75" name="departamento"/></td>
+	                                </tr> 
+	                            </tbody>
+	                       	</table>                                
+	                    </td>
+	                </tr>
+		            <tr class="Linha3Tabela">
+		                <td align="right" colspan="2"><input type="submit" class="bttn4" value="Alterar Departamento" name="alterar"/>  <input type="submit" class="bttn3" onclick="return confirma_apagar();" value="Apagar Departamento" name="remover"/></td>
+		            </tr>
+	        	</tbody>
+	        </table>
+	        </form>
+	        <?
+
+	        ?>
+	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	            <tbody>
+		            <tr class="TituloTabela"> 
+		                <td colspan="3"><div align="center"><b>SERVIÇOS RELACIONADOS</b></div></td>
+		            </tr>	            
+		            <tr class="TituloTabela"> 
+		                <td><div align="center"><b>SERVIÇOS</b></div></td>	                	    
+		            </tr>
+				           <tr onclick="javascript: window.location='?menu=2&act=altservico&idservico=<?=$servicos->idservico;?>&idcategoria=<?=$servicos->idcategoria;?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">
+				              <td><b><?=$servicos->servico;?></b></td>
+				          </tr>
+						<tr class="Linha3Tabela"> 
+	                        <td align="center" colspan="3"><b>Nenhum serviço relacionado a este segmento.</b></td>
+	                    </tr>
+		            <tr class="Linha3Tabela">
+		                <form action="?menu=2&act=addservico" method="post"/>
+		                <td align="right" colspan="3">                    
+		                  <input type="hidden" value="<?=$idcategoria;?>" name="idcategoria"/>	                  
+		                  <input type="submit" class="bttn2" value="Cadastrar Serviço" name="criar"/>
+		                </td>
+		            </tr>
+		        </tbody>
+	        </table>
+	<?	}
+}
 ?>
