@@ -6,6 +6,185 @@
 	 */
 	class HTML {
 		
+		function mostraPaginacao($paginas,$pagina,$menu) {
+			if($paginas > 1) { ?>
+			<tr class="Linha3Tabela">
+	            <td align="right" colspan="5">
+		<?	//Monta as paginas em baixo
+				for($i=0; $i < $paginas; $i++) {
+		  			if($i == $pagina) {	?>
+						<b><?=$i+1;?></b>&nbsp;<b>.</b>
+			 	 	<? } else {	?>
+			 			<a href="?<?=$menu;?>&pag=<?=$i;?>"><b><?=$i+1;?></b></a>&nbsp;<b>.</b> 
+					<?
+					}
+				}
+			}	?>
+				</td>
+	        </tr>
+	<?	}
+	
+		function mostraPaginacaoLetras($menu,$letra) { ?>
+			<tr class="Linha3Tabela">
+	    		<td align="right" colspan="2">
+	    			<? if($letra != 'a') { ?>
+	    				<a href="?<?=$menu;?>&letra=a"><b>A</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>A</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'b') { ?>
+	    				<a href="?<?=$menu;?>&letra=b"><b>B</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>B</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'c') { ?>
+	    				<a href="?<?=$menu;?>&letra=c"><b>C</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>C</b>&nbsp;<b>.</b> 
+	    			<? } ?> 
+	    			
+	    			<? if($letra != 'd') { ?>
+	    				<a href="?<?=$menu;?>&letra=d"><b>D</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>D</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'e') { ?>
+	    				<a href="?<?=$menu;?>&letra=e"><b>E</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>E</b>&nbsp;<b>.</b> 
+	    			<? } ?>  
+	    			
+	    			<? if($letra != 'f') { ?>
+	    				<a href="?<?=$menu;?>&letra=f"><b>F</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>F</b>&nbsp;<b>.</b> 
+	    			<? } ?>	
+	    			
+	    			<? if($letra != 'g') { ?>
+	    				<a href="?<?=$menu;?>&letra=g"><b>G</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>G</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'h') { ?>
+	    				<a href="?<?=$menu;?>&letra=h"><b>H</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>H</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'i') { ?>
+	    				<a href="?<?=$menu;?>&letra=i"><b>I</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>I</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'j') { ?>
+	    				<a href="?<?=$menu;?>&letra=j"><b>J</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>J</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'k') { ?>
+	    				<a href="?<?=$menu;?>&letra=k"><b>K</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>K</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'l') { ?>
+	    				<a href="?<?=$menu;?>&letra=l"><b>L</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>L</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'm') { ?>
+	    				<a href="?<?=$menu;?>&letra=m"><b>M</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>M</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'n') { ?>
+	    				<a href="?<?=$menu;?>&letra=n"><b>N</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>N</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'o') { ?>
+	    				<a href="?<?=$menu;?>&letra=o"><b>O</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>O</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'p') { ?>
+	    				<a href="?<?=$menu;?>&letra=p"><b>P</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>P</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'q') { ?>
+	    				<a href="?<?=$menu;?>&letra=q"><b>Q</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>Q</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'r') { ?>
+	    				<a href="?<?=$menu;?>&letra=r"><b>R</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>R</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 's') { ?>
+	    				<a href="?<?=$menu;?>&letra=s"><b>S</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>S</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 't') { ?>
+	    				<a href="?<?=$menu;?>&letra=t"><b>T</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>T</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'u') { ?>
+	    				<a href="?<?=$menu;?>&letra=u"><b>U</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>U</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'v') { ?>
+	    				<a href="?<?=$menu;?>&letra=v"><b>V</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>V</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'w') { ?>
+	    				<a href="?<?=$menu;?>&letra=w"><b>W</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>W</b>&nbsp;<b>.</b> 
+	    			<? } ?>
+	    			
+	    			<? if($letra != 'x') { ?>
+	    				<a href="?<?=$menu;?>&letra=x"><b>X</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>X</b>&nbsp;<b>.</b> 
+	    			<? } ?>	
+	    			
+	    			<? if($letra != 'y') { ?>
+	    				<a href="?<?=$menu;?>&letra=y"><b>Y</b></a>&nbsp;<b>.</b>
+	    			<? }else{ ?> 
+	    				<b>Y</b>&nbsp;<b>.</b> 
+	    			<? } ?>	
+	    			
+	    			<? if($letra != 'z') { ?>
+	    				<a href="?<?=$menu;?>&letra=z"><b>Z</b></a>&nbsp;
+	    			<? }else{ ?> 
+	    				<b>Z</b>&nbsp; 
+	    			<? } ?>		
+	    	</tr>
+	<?	}
+		
 		/**
 		 * Retorna uma tabela com os itens do objeto
 		 *

@@ -2,9 +2,6 @@
 	class DepartamentoHTML extends HTML  {
 		function DepartamentoMostra($titulo) { ?>
 		<?
-			$paginacao = new Paginacao();
-			$paginacaoDAO = new PaginacaoDAO();
-			
 			$departamento = new Departamento();
 			$departamentoDAO = new DepartamentoDAO();
 			
@@ -21,7 +18,9 @@
 			}else{
 				$order = "ORDER BY departamento";
 			}
-		
+			
+			$totalPorPagina = 10;
+			$inicio = $pagina * $totalPorPagina;
 			/*$totalPorPagina = 1;
 			$paginas = 10;
 			$pagina = $_GET['pag'];		
@@ -42,25 +41,47 @@
 							$this->mostraMSG("Departamento alterado com sucesso.");
 						break;
 						case 3:
-							$this->mostraMSG("Segmento removido com sucesso.");
+							$this->mostraMSG("Departamento removido com sucesso.");
 						break;							
 					}
 				?>
 	            <tr class="TituloTabela">
 	                <td width="10%" align="center">COD</td>
-	                <td align="center">SEGMENTO</td>                                              
+	                <td align="center">DEPARTAMENTO</td>                                              
 	            </tr>
 	            <?
-					$departamento = $departamentoDAO->Paginacao($order,10);
-					print_r($departamento);
+	            	
+					$departamento = $departamentoDAO->Paginacao($order,$inicio,$totalPorPagina);
+					$registros = $departamentoDAO->Registros($order);
+					
+					$paginas = ceil($registros / 10);
+					
+					$totDepartamentos = count($departamento);
+
+					for ($i=0;$i<$totDepartamentos;$i++) {
 	            ?>
-				<tr class="Linha1Tabela" onMouseOver="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='';" onclick="javascript: window.location='?menu=2&act=altseg&idcategoria=<?//=$segmentos->idcategoria;?>';"> 
-		            <td align="center"><?//=$segmentos->idcategoria;?></td>					            
-		            <td><?//=$segmentos->categoria;?></td>					            					           
+					<tr class="Linha1Tabela" onMouseOver="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='';" onclick="javascript: window.location='?menu=2&act=altdep&iddepartamento=<?=$departamento[$i]->getIdDepartamento();?>';"> 
+			            <td align="center"><?=$departamento[$i]->getIdDepartamento();?></td>					            
+			            <td><?=$departamento[$i]->getDepartamento();?></td>					            					           
+			        </tr>
+		        <?
+					}
+		        ?>
+		        <? if($totDepartamentos < 1) { ?>
+ 				<tr class="Linha1Tabela"> 
+		            <td align="center" colspan="4"><b>Não há nenhum departamento cadastrado.</b></td>
 		        </tr>
-				<tr class="Linha1Tabela"> 
-		            <td align="center" colspan="4"><b>Não há nenhum segmento cadastrado.</b></td>
-		        </tr>
+		        <? } ?>
+		        <? 
+		        	if(isset($_GET["letra"])) {
+		        		$this->mostraPaginacao($paginas,$pagina,"menu=2&act=mostra&letra=$letra");
+		        	}else{
+		        		$this->mostraPaginacao($paginas,$pagina,"menu=2&act=mostra");
+		        	}
+		        	if(isset($pagina)) {
+		        		$this->mostraPaginacaoLetras("menu=2&act=mostra",$letra);
+		        	}
+		        ?>
 		    </table>
 		    <br>
 		    <table width="400" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
@@ -70,15 +91,15 @@
 			        </tr>
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros por Página:</b></td>
-			            <td width="40%" height="20"><?//=$paginacao->getRegistrosPorPagina();?></td>
+			            <td width="40%" height="20"><?=$totDepartamentos;?></td>
 			        </tr>
 			        <tr class="Linha2Tabela">
 			            <td height="20"><b>Total de Páginas:</b></td>
-			            <td height="20"><?//=$paginacao->getPaginas();?></td>
+			            <td height="20"><?=$paginas;?></td>
 			        </tr>
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros:</b></td>
-			            <td width="40%" height="20"><?//=$paginacao->getRegistros();?></td>
+			            <td width="40%" height="20"><?=$registros;?></td>
 			        </tr>		        
 		    	</tbody>
 		    </table>

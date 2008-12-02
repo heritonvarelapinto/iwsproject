@@ -149,34 +149,35 @@ class DepartamentoDAO extends PDOConnectionFactory {
 	}*/
 	
 	//mostra os registros
-	public function Paginacao($order,$limit) {
-		$temp = new Departamento();
-		$sql = "SELECT * FROM departamentos $order LIMIT 0,$limit";
+	public function Paginacao($order,$inicio,$fim) {
+		$sql = "SELECT * FROM departamentos $order LIMIT $inicio,$fim";
 		$stmt = $this->conexao->prepare($sql);	
 		
-		//$stmt->bindValue(':order', $order, PDO::PARAM_STR);;	
-		//$stmt->bindValue(':limitfim', $limit, PDO::PARAM_INT);	
-		
 		$stmt->execute();
-		
-		$registrosPorPagina = $stmt->rowCount(PDO::FETCH_OBJ);
-		
 		$searchResults = array();
 		
 		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			
+			$temp = new Departamento();
 			$temp->setIdDepartamento($rs->iddepartamento);
 			$temp->setDepartamento($rs->departamento);
-			$temp->setRegistrosPorPagina($registrosPorPagina);
 			
 			array_push($searchResults, $temp);
 		} 
 		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		return $searchResults;
+	}
+	
+	//mostra os registros
+	public function Registros($order) {
+		$sql = "SELECT * FROM departamentos $order";
+		$stmt = $this->conexao->prepare($sql);	
+		
+		$stmt->execute();
+		$searchResults = array();
+		
+		$registros = $stmt->rowCount(PDO::FETCH_OBJ);
+		
+		return $registros;
 	}
 	
 }
