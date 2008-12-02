@@ -116,9 +116,9 @@
 		            <tr class="Linha3Tabela">
 		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Departamento" name="alterar"/></td>
 		            </tr>
-		            <tr>
+		            <!--<tr>
 		            	<td class="Linha1Tabela"><b>Ultimo departamento cadastrado:</b> </td>
-		            </tr>
+		            </tr>-->
 	        	</tbody>
 	        </table>
 	        </form>
@@ -180,10 +180,10 @@
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 	            <tbody>
 		            <tr class="TituloTabela"> 
-		                <td colspan="3"><div align="center"><b>SERVIÇOS RELACIONADOS</b></div></td>
+		                <td colspan="3"><div align="center"><b>SUBDEPARTAMENTOS RELACIONADOS</b></div></td>
 		            </tr>	            
 		            <tr class="TituloTabela"> 
-		                <td><div align="center"><b>SERVIÇOS</b></div></td>	                	    
+		                <td><div align="center"><b>SUBDEPARTAMENTOS</b></div></td>	                	    
 		            </tr>
 				           <tr onclick="javascript: window.location='?menu=2&act=altservico&idservico=<?=$servicos->idservico;?>&idcategoria=<?=$servicos->idcategoria;?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">
 				              <td><b><?=$servicos->servico;?></b></td>
