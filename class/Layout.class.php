@@ -66,15 +66,16 @@ function bannersEsquerda($banners) {
 		echo "<img src=\"images/destaques.gif\">";
 		echo "</td></tr>";
 		echo "</table>";*/
-		echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" bgcolor=\"#CCC\">";
+		echo "<br>";
+		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr><td>";
 		echo "<ul>";
 		if($totBanners > 1) {
 			for($i = 0; $i < $totBanners; $i++) {
 			?>
 				<li>
-					<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
+					<a class="bannerEsq" href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
+						<img src="images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="3">
 					</a>
 				</li>
 			<?
@@ -82,7 +83,7 @@ function bannersEsquerda($banners) {
 		} else {
 			?>
 				<li>
-					<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
+					<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
 						<img src="images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
 					</a>
 				</li>
@@ -134,6 +135,14 @@ function bannersEsquerda($banners) {
 		echo "</table>";
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
 		echo "<tr><td>";
+		echo "<ul id=\"boletim\">";
+		echo "<li class=\"textoDestaque\">Cadastre-se e participe todas as semanas de nossas promoções.</li>";
+		echo "<li> Insira seu nome:</li>";
+		echo "<li><input type=\"text\" id=\"nome\" name=\"nome\"/></li>";
+		echo "<li> Qual é o seu e-mail ?</li>";
+		echo "<li><input type=\"text\" id=\"email\" name=\"email\"/></li>";
+		echo "<li><center><input type=\"button\" onclick=\"insereBoletim();\" value=\"Cadastrar\" class=\"botao_boletim\"/></center></li>";		
+		echo "</ul>";
 /*		echo "<ul>";
 		if($totBanners > 1) {
 			for($i = 0; $i < $totBanners; $i++) {
