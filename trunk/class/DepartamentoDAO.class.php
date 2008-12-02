@@ -37,37 +37,44 @@ class DepartamentoDAO extends PDOConnectionFactory {
 	
 	//realiza um Update
 	public function Update( $departamento, $condicao ) {
-		try {
-				// preparo a query de update - Prepare Statement
-				$stmt = $this->conexao->prepare("UPDATE departamentos SET departamento=? WHERE iddepartamento=?");
-				$this->conexao->beginTransaction();
-				
-				$stmt->bindValue(1, $departamento->getDepartamento());				
-				$stmt->bindValue(2, $condicao);
-				
-				// executo a query preparada
-				$stmt->execute();
-				
-				$this->conexao->commit();
-				
-				//fecho a conexão
-				$this->conexao = null;
-				
-		//caso ocorra um erro, retorna o erro
-		}catch ( PDOException $ex ) { echo "Erro:".$ex->getMessage(); }
+		// preparo a query de update - Prepare Statement
+		$stmt = $this->conexao->prepare("UPDATE departamentos SET departamento='$departamento' WHERE iddepartamento=?");
+		$this->conexao->beginTransaction();
+		
+						
+		$stmt->bindValue(1, $condicao);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
 	}
 	
 	//remove um registro
-	public function Deleta( $iddepartamento ) {
-		try {
-				// executo a query
-				$num = $this->conexao->exec("DELETE FROM departamentos WHERE iddepartamento=$iddepartamento");
-				// caso seja execuado ele retorna o número de rows que foram afetadas.
-				if($num >= 1) { return $num; } else { return 0; }
-				
-				
-		//caso ocorra um erro, retorna o erro
-		}catch ( PDOException $ex ) { echo "Erro:".$ex->getMessage(); }
+	public function Deleta( $id ) {
+		$sql = "DELETE FROM departamentos WHERE iddepartamento = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
 	}
 	
 	public function getDepartamentosPorId($id) {
@@ -94,21 +101,6 @@ class DepartamentoDAO extends PDOConnectionFactory {
 		}
 	}
 
-	function Pag() {
-		$sql = "SELECT * FROM departamentos LIMIT 0,10";
-		$stmt = $this->conexao->prepare($sql);
-		
-		$stmt->execute();
-		
-		
-		$registros = $stmt->rowCount(PDO::FETCH_OBJ);
-		$temp = new Paginacao();
-		
-		$temp->setRegistrosPorPagina($registros);
-			
-		return $temp;
-	}
-	
 	//mostra os registros
 	public function Lista() {
 		$sql = "SELECT * FROM departamentos";
@@ -131,23 +123,6 @@ class DepartamentoDAO extends PDOConnectionFactory {
 			return $temp;
 		}
 	}
-	
-	/*function pegarPaginas($qtd) {
-		//é esse o nome da tabela ?
-		$sql = "SELECT * FROM departamentos";
-		$stmt = $this->conexao->prepare($sql);
-		
-		$stmt->execute();
-		
-		$rs = $stmt->fetch(PDO::FETCH_OBJ);
-		print_r($rs);
-		
-		//echo $registros;
-		
-		//$paginas = ceil($registros / $qtd);
-		
-		//return $searchResults;
-	}*/
 	
 	//mostra os registros
 	public function Paginacao($order,$inicio,$fim) {

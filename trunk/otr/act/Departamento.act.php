@@ -8,8 +8,8 @@
 	$departamento = new Departamento();
 	$departamentoDAO = new DepartamentoDAO();
 		
-	$acao = $_GET["acao"];
-	//$acao = "adddep";
+	//$acao = $_GET["acao"];
+	$acao = "altdep";
 	
 	$idmenu = 2;
 	
@@ -22,7 +22,25 @@
     		$departamento->setDepartamento($setDepartamento);
     		
     		$departamentoDAO->InsereDepartamento($departamento);
-    			header("location: ../principal.php?menu=$idmenu&act=$act");
-    	break;    	
+    			header("location: ../principal.php?menu=$idmenu&act=$act&msg=1");
+    	break; 
+    	case "altdep":
+    		if($_POST["remover"]) {
+    			$act = "mostra";
+    			$iddepartamento = $_POST["iddepartamento"];
+    			
+    			$departamentoDAO->Deleta($iddepartamento);
+    				header("location: ../principal.php?menu=$idmenu&act=$act&msg=3");
+    		}else{
+    			print_r($_POST);
+    			//exit;
+    			$act = "mostra";
+	    		$iddep = $_POST["iddepartamento"];
+	    		$setDepartamento = $_POST["departamento"];
+	    			    		
+	    		$departamentoDAO->Update($setDepartamento,$iddep);
+	    			//header("location: ../principal.php?menu=$idmenu&act=$act&msg=2");
+    		}
+    	break;     	
     }
 ?>
