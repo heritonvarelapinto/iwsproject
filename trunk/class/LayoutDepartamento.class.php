@@ -5,8 +5,8 @@
 				case "mostra":
 					$this->DepartamentoMostra("Verificar Departamentos");
 				break;
-				case "add":
-					//$this->ADDALTBanner();
+				case "adddep":
+					$this->DepartamentoADD();
 				break;
 				case "altera":
 					//$this->AdministracaoALT("Alterar Usuário","return valida_altusuario();","act/Administracao.act.php?acao=alt","altusuario","post");
