@@ -6,8 +6,8 @@ function __autoload($classe)
 
     $departamentos = new Departamento();
     $departamentosDAO = new DepartamentoDAO();
-    $departamentos = $departamentosDAO->Paginacao("ORDER BY departamento",10);
+    $departamentos = $departamentosDAO->Paginacao("ORDER BY departamento",5,10);
     print_r($departamentos);
-    echo $registros = count($departamentos);
+    
 
 ?>
