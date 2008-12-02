@@ -32,14 +32,14 @@
     			$departamentoDAO->Deleta($iddepartamento);
     				header("location: ../principal.php?menu=$idmenu&act=$act&msg=3");
     		}else{
-    			print_r($_POST);
+    			//print_r($_POST);
     			//exit;
     			$act = "mostra";
 	    		$iddep = $_POST["iddepartamento"];
 	    		$setDepartamento = $_POST["departamento"];
 	    			    		
-	    		$departamentoDAO->Update($setDepartamento,$iddep);
-	    			//header("location: ../principal.php?menu=$idmenu&act=$act&msg=2");
+	    		$departamentoDAO->UpdateDepartamento($setDepartamento,$iddep);
+	    			header("location: ../principal.php?menu=$idmenu&act=$act&msg=2");
     		}
     	break;     	
     }
