@@ -121,8 +121,6 @@
 			<div id="corpo">
 				<div class="menu">
 						<?=$layout->menuDepartamentos($departamentos);?>
-				</div>
-				<div class="menu">
 						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
 				<div class="miolo">
