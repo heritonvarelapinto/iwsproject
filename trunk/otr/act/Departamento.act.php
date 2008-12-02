@@ -8,8 +8,8 @@
 	$departamento = new Departamento();
 	$departamentoDAO = new DepartamentoDAO();
 		
-	//$acao = $_GET["acao"];
-	$acao = "altdep";
+	$acao = $_GET["acao"];
+	//$acao = "altdep";
 	
 	$idmenu = 2;
 	
@@ -32,8 +32,6 @@
     			$departamentoDAO->Deleta($iddepartamento);
     				header("location: ../principal.php?menu=$idmenu&act=$act&msg=3");
     		}else{
-    			//print_r($_POST);
-    			//exit;
     			$act = "mostra";
 	    		$iddep = $_POST["iddepartamento"];
 	    		$setDepartamento = $_POST["departamento"];
