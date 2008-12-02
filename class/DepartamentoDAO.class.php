@@ -14,24 +14,25 @@ class DepartamentoDAO extends PDOConnectionFactory {
 		$this->conexao = PDOConnectionFactory::getConnection();
 	}
 	
-	//realiza uma inserção
-	public function Insere( $departamento ) {
-		try {
-				// preparo a query de inserçao - Prepare Statement				
-				$stmt = $this->conexao->prepare("INSERT INTO departamentos (iddepartamento, departamento) VALUES (?, ?)");
-				// valores encapsulados nas variáveis da classe AdmDepartamentos.
-				// sequencia de índices que representa cada valor de minha query
-				$stmt->bindValue(1, $departamento->getIdDepartamento());
-				$stmt->bindValue(2, $departamento->getDepartamento());				
-				
-				// executo a query preparada
-				$stmt->execute();
-				
-				//fecho a conexão
-				$this->conexao = null;
-				
-		//caso ocorra um erro, retorna o erro
-		}catch ( PDOException $ex ) { echo "Erro:".$ex->getMessage(); }
+	public function InsereDepartamento( $departamento ){
+		$sql = "INSERT INTO departamentos (departamento) VALUES (?)";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// sequencia de índices que representa cada valor de minha query
+		$stmt->bindValue(1, $departamento->getDepartamento()); 
+					
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
 	}
 	
 	//realiza um Update

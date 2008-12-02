@@ -5,14 +5,10 @@
 			$departamento = new Departamento();
 			$departamentoDAO = new DepartamentoDAO();
 			
-			//$paginacao = $paginacaoDAO->Paginas(5);
-			
 			$pagina = $_GET["pag"];
-			
 			if(!isset($pagina)) { $pagina = 0;}
 			
 			$letra = $_GET["letra"];
-			
 			if(isset($_GET["letra"])) {
 				$order = "WHERE departamento LIKE '$letra%' ORDER BY departamento";
 			}else{
@@ -21,11 +17,6 @@
 			
 			$totalPorPagina = 10;
 			$inicio = $pagina * $totalPorPagina;
-			/*$totalPorPagina = 1;
-			$paginas = 10;
-			$pagina = $_GET['pag'];		
-			if(!isset($pagina)) { $pagina = 0;}
-			$inicio = $pagina * $totalPorPagina;*/
 		?>
 			<span class="TituloPage">• <?=$titulo;?></span>
 	        <br>
@@ -78,9 +69,8 @@
 		        	}else{
 		        		$this->mostraPaginacao($paginas,$pagina,"menu=2&act=mostra");
 		        	}
-		        	if(isset($pagina)) {
-		        		$this->mostraPaginacaoLetras("menu=2&act=mostra",$letra);
-		        	}
+		        	$this->mostraPaginacaoLetras("menu=2&act=mostra",$letra);
+		        	
 		        ?>
 		    </table>
 		    <br>
@@ -103,6 +93,39 @@
 			        </tr>		        
 		    	</tbody>
 		    </table>
+	<?	}
+	
+	function DepartamentoADD() { ?>
+			<span class="TituloPage" >• Adicionar Departamento</span>
+	        <br/>
+	        <br/>                         
+	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	        <form action="act/Departamento.act.php?acao=adddep" name="departamento" method="post">                       
+		        <tbody>		       		
+		        	<tr class="Linha2Tabela">
+	                    <td colspan="2">                            
+	                        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	                            <tbody>                            	                            	
+	                                <tr class="Linha1Tabela">
+	                                    <td align="right"><b> NOME DO DEPARTAMENTO</b></td>
+	                                    <td><input type="text" value="" class="FORMbox" size="75" name="departamento" id="departamento"/></td>
+	                                </tr> 
+	                            </tbody>
+	                       	</table>                                
+	                    </td>
+	                </tr>
+		            <tr class="Linha3Tabela">
+		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Departamento" name="alterar"/></td>
+		            </tr>
+		            <tr>
+		            	<td class="Linha1Tabela"><b>Ultimo departamento cadastrado:</b> </td>
+		            </tr>
+	        	</tbody>
+	        </table>
+	        </form>
+	        <script language="javascript">
+				document.getElementById('departamento').focus();
+			</script>         	              
 	<?	}
 	}
 ?>
