@@ -36,12 +36,10 @@ class DepartamentoDAO extends PDOConnectionFactory {
 	}
 	
 	//realiza um Update
-	public function Update( $departamento, $condicao ) {
-		// preparo a query de update - Prepare Statement
-		$stmt = $this->conexao->prepare("UPDATE departamentos SET departamento='$departamento' WHERE iddepartamento=?");
-		$this->conexao->beginTransaction();
+	public function UpdateDepartamento( $departamento, $condicao ) {
+		$sql = "UPDATE departamentos SET departamento='$departamento' WHERE iddepartamento=?";
+		$stmt = $this->conexao->prepare($sql);
 		
-						
 		$stmt->bindValue(1, $condicao);
 		
 		// executo a query preparada
