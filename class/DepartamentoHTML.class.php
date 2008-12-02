@@ -14,7 +14,7 @@
 				$order = "ORDER BY departamento";
 			}
 			
-			$totalPorPagina = 10;
+			$totalPorPagina = 20;
 			$inicio = $pagina * $totalPorPagina;
 		?>
 			<span class="TituloPage">• <?=$titulo;?></span>
@@ -44,7 +44,7 @@
 					$departamento = $departamentoDAO->Paginacao($order,$inicio,$totalPorPagina);
 					$registros = $departamentoDAO->Registros($order);
 					
-					$paginas = ceil($registros / 10);
+					$paginas = ceil($registros / $totalPorPagina);
 					
 					$totDepartamentos = count($departamento);
 
