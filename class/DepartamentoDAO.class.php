@@ -91,7 +91,22 @@ class DepartamentoDAO extends PDOConnectionFactory {
 		} else {
 			return $temp;
 		}
-	}	
+	}
+
+	function Pag() {
+		$sql = "SELECT * FROM departamentos LIMIT 0,10";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->execute();
+		
+		
+		$registros = $stmt->rowCount(PDO::FETCH_OBJ);
+		$temp = new Paginacao();
+		
+		$temp->setRegistrosPorPagina($registros);
+			
+		return $temp;
+	}
 	
 	//mostra os registros
 	public function Lista() {
@@ -115,6 +130,55 @@ class DepartamentoDAO extends PDOConnectionFactory {
 			return $temp;
 		}
 	}
+	
+	/*function pegarPaginas($qtd) {
+		//é esse o nome da tabela ?
+		$sql = "SELECT * FROM departamentos";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->execute();
+		
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		print_r($rs);
+		
+		//echo $registros;
+		
+		//$paginas = ceil($registros / $qtd);
+		
+		//return $searchResults;
+	}*/
+	
+	//mostra os registros
+	public function Paginacao($order,$limit) {
+		$temp = new Departamento();
+		$sql = "SELECT * FROM departamentos $order LIMIT 0,$limit";
+		$stmt = $this->conexao->prepare($sql);	
+		
+		//$stmt->bindValue(':order', $order, PDO::PARAM_STR);;	
+		//$stmt->bindValue(':limitfim', $limit, PDO::PARAM_INT);	
+		
+		$stmt->execute();
+		
+		$registrosPorPagina = $stmt->rowCount(PDO::FETCH_OBJ);
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			
+			$temp->setIdDepartamento($rs->iddepartamento);
+			$temp->setDepartamento($rs->departamento);
+			$temp->setRegistrosPorPagina($registrosPorPagina);
+			
+			array_push($searchResults, $temp);
+		} 
+		
+		if(count($searchResults) > 1) {
+			return $searchResults;
+		} else {
+			return $temp;
+		}
+	}
+	
 }
 
 ?>
