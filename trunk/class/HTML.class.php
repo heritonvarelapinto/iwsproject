@@ -260,7 +260,8 @@
 				                    					break;
 				                    					//Departamento
 				                    					case 2:
-				                    						
+				                    						$layoutDepartamento = new LayoutDepartamento();
+				                    						$layoutDepartamento->EstruturaDepartamento($acao);
 				                    					break;
 				                    					//Banner
 				                    					case 3:

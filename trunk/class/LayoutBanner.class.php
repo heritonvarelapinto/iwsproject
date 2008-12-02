@@ -8,9 +8,6 @@
 				case "add":
 					$this->ADDALTBanner();
 				break;
-				case "altera":
-					//$this->AdministracaoALT("Alterar Usuário","return valida_altusuario();","act/Administracao.act.php?acao=alt","altusuario","post");
-				break;
 			}
 		}
 	}
