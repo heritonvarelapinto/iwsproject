@@ -1,15 +1,36 @@
 <?
 class UrlManage {
-	public static function getUrlNoticia($idcategoria, $Categoria, $Titulo){
+	public $path = "/iwsprojecthhh/";
+	
+	public static function getUrlCategoria($idcategoria, $Categoria, $Titulo){
 		if( UrlManage::HabilitadoModRewrite() ){
 			return "categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
-			return "categoria.php?id=$idcategoria";
+			return "categoria.php?id=$idcategoria&titulo=$Titulo";
 		}
 	}
-	private static function convertStringByUrlString($String){
+	
+	public static function getUrlSubCategoria($idcategoria, $categoria,$idsubcategoria, $subcategoria){
+		$path = "/iwsproject/";
+		if( UrlManage::HabilitadoModRewrite() ){
+			//return UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
+			return $path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
+		}else{
+			return $path."categoria.php?id=$idcategoria&sub=$idsubcategoria";
+		}
+	}
+	
+	public static function getUrlCliente($idcategoria, $Categoria, $Titulo){
+		if( UrlManage::HabilitadoModRewrite() ){
+			return "categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
+		}else{
+			return "categoria.php?id=$idcategoria&titulo=$Titulo";
+		}
+	}
+	
+	public static function convertStringByUrlString($String){
 		
-		$Separador = "-";
+		$Separador = "_";
 		
 		$String = trim($String); //Removendo espaços do inicio e do fim da string
 		$String = strtolower($String); //Convertendo a string para minúsculas

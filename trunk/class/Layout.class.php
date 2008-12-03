@@ -12,9 +12,10 @@ class Layout extends HTML {
 				$fecha = "";
 			}
 			echo $fecha;
+			$link = UrlManage::getUrlCategoria($departamentos[$i]->getIdDepartamento(),"",$departamentos[$i]->getDepartamento());
 			?>
 				<li>
-					<a href="categoria.php?id=<?=$departamentos[$i]->getIdDepartamento();?>&titulo=<?=$departamentos[$i]->getDepartamento();?>" title="<?=$departamentos[$i]->getDepartamento();?>">
+					<a href="<?=$link;?>" title="<?=$departamentos[$i]->getDepartamento();?>">
 						<?=$departamentos[$i]->getDepartamento();?>
 					</a>
 				</li>
@@ -31,9 +32,10 @@ class Layout extends HTML {
 		$totDepartamentos = count($departamentos);
 		echo "<ul>";
 		for($i = 0; $i < $totDepartamentos; $i++) {
+			$link = UrlManage::getUrlCategoria($departamentos[$i]->getIdDepartamento(),"",$departamentos[$i]->getDepartamento());
 		?>
 			<li>
-				<a href="categoria.php?id=<?=$departamentos[$i]->getIdDepartamento();?>&titulo=<?=$departamentos[$i]->getDepartamento();?>">
+				<a href="<?=$link;?>">
 					<?=$departamentos[$i]->getDepartamento();?>
 				</a>
 			</li>
