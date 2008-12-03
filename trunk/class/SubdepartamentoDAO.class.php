@@ -97,6 +97,25 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 		}
 	}	
 	
+	//remove um registro
+	public function DeletaALL( $id ) {
+		$sql = "DELETE FROM subdepartamentos WHERE iddepartamento = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}	
+	
 	public function getSubdepartamentosPorId($id) {
 		$sql = "SELECT * FROM subdepartamentos WHERE idsubdepartamento = ".$id;
 		$stmt = $this->conexao->prepare($sql);
