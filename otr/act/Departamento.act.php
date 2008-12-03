@@ -8,6 +8,8 @@
 	$departamento = new Departamento();
 	$departamentoDAO = new DepartamentoDAO();
 		
+	$subdepartamentoDAO = new SubdepartamentoDAO();
+		
 	$acao = $_GET["acao"];
 	//$acao = "altdep";
 	
@@ -26,10 +28,13 @@
     	break; 
     	case "altdep":
     		if($_POST["remover"]) {
+    			
+    			
     			$act = "mostra";
     			$iddepartamento = $_POST["iddepartamento"];
     			
     			$departamentoDAO->Deleta($iddepartamento);
+    			$subdepartamentoDAO->DeletaALL($iddepartamento);
     				header("location: ../principal.php?menu=$idmenu&act=$act&msg=3");
     		}else{
     			$act = "mostra";
