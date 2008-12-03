@@ -33,6 +33,95 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 		return $searchResults;
 	}
 	
+	public function InsereSubdepartamento( $subdepartamento ){
+		$sql = "INSERT INTO subdepartamentos (iddepartamento,subdepartamento) VALUES (?,?)";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// sequencia de índices que representa cada valor de minha query
+		$stmt->bindValue(1, $subdepartamento->getIddepartamento()); 
+		$stmt->bindValue(2, $subdepartamento->getSubdepartamento()); 
+					
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
+	}
+	
+	//realiza um Update
+	public function UpdateSubdepartamento( $subdepartamento, $condicao ) {
+		$sql = "UPDATE subdepartamentos SET iddepartamento=? ,subdepartamentos=? WHERE idsubdepartamento=?";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->bindValue(1, $subdepartamento->getIddepartamento()); 
+		$stmt->bindValue(2, $subdepartamento->getSubdepartamento()); 
+		$stmt->bindValue(3, $condicao);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}
+	
+	//remove um registro
+	public function Deleta( $id ) {
+		$sql = "DELETE FROM subdepartamentos WHERE idsubdepartamento = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}	
+	
+	public function getSubdepartamentosPorId($id) {
+		$sql = "SELECT * FROM subdepartamentos WHERE idsubdepartamento = ".$id;
+		$stmt = $this->conexao->prepare($sql);
+		//$stmt->bindValues(1,$id);
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Subdepartamento();
+						
+			$temp->setIdsubdepartamento($rs->idsubdepartamento); 
+			$temp->setIddepartamento($rs->iddepartamento); 
+			$temp->setSubdepartamento($rs->subdepartamento);
+			
+			array_push($searchResults, $temp);
+		} 
+		
+		if(count($rs) > 1) {
+			return $searchResults;
+		} else {
+			return $temp;
+		}
+	}
 	
 	//mostra os registros
 	public function Paginacao($order,$inicio,$fim,$id) {
