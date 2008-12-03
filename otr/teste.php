@@ -4,10 +4,10 @@ function __autoload($classe)
         require_once "../class/".$classe.".class.php";
     }
 	
-    $acao = "altdep&iddepartamento=4";
+    $acao = "uso";
     
-    $layoutDepartamento = new LayoutDepartamento();
-	$layoutDepartamento->EstruturaDepartamento($acao);
+    $layoutRodape = new LayoutRodape();
+	$layoutRodape->EstruturaRodape($acao);
 	
 
 ?>
