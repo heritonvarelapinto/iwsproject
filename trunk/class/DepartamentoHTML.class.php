@@ -14,7 +14,7 @@
 				$order = "ORDER BY departamento";
 			}
 			
-			$totalPorPagina = 20;
+			$totalPorPagina = 5;
 			$inicio = $pagina * $totalPorPagina;
 		?>
 			<span class="TituloPage">• <?=$titulo;?></span>

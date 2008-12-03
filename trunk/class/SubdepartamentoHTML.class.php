@@ -14,7 +14,7 @@
 				$order = "ORDER BY subdepartamento";
 			}
 			
-			$totalPorPagina = 5;
+			$totalPorPagina = 1;
 			$inicio = $pagina * $totalPorPagina;
 			
 			$subdepartamento = $subdepartamentoDAO->Paginacao($order,$inicio,$totalPorPagina,$departamento->getIdDepartamento());
