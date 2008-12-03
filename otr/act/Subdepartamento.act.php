@@ -9,7 +9,7 @@
 	$subdepartamentoDAO = new SubdepartamentoDAO();
 		
 	$acao = $_GET["acao"];
-	//$acao = "altdep";
+	//$acao = "altsub";
 	
 	$idmenu = 2;
 	
@@ -37,15 +37,24 @@
     			$subdepartamentoDAO->Deleta($idsubdepartamento);
     				header("location: ../principal.php?menu=$idmenu&act=$act&iddepartamento=$iddepartamento&msg=3");
     		}else{
+    			/*print_r($_POST);
+    			exit;*/
     			$act = "altdep";
-	    		$idsub = $_POST["idsubdepartamento"];
+	    		
+    			$setIdsubdepartamento = $_POST["idsubdepartamento"];
 	    		$setIddepartamento = $_POST["iddepartamento"];
     			$setSubdepartamento = $_POST["subdepartamento"];
+    			
+    			/*$setIdsubdepartamento = 8;
+	    		$setIddepartamento = 1;
+    			$setSubdepartamento = "tetetee";*/
 	    		
-	    		$setDepartamento = $_POST["departamento"];
+	    		$subdepartamento->setIdsubdepartamento($setIdsubdepartamento);
+	    		$subdepartamento->setIddepartamento($setIddepartamento);
+    			$subdepartamento->setSubdepartamento($setSubdepartamento);
 	    			    		
-	    		$departamentoDAO->UpdateDepartamento($setDepartamento,$iddep);
-	    			header("location: ../principal.php?menu=$idmenu&act=$act&msg=2");
+	    		$subdepartamentoDAO->UpdateSubdepartamento($subdepartamento,$setIdsubdepartamento);
+	    			header("location: ../principal.php?menu=$idmenu&act=$act&iddepartamento=$setIddepartamento&msg=2");
     		}
     	break;     	
     }

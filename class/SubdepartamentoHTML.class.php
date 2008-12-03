@@ -36,7 +36,7 @@
 		     <?
 				for ($i=0;$i<$totSubdepartamentos;$i++) {
 		     ?>
-					<tr onclick="javascript: window.location='?menu=2&act=altsub&idsubdepartamento=<?=$subdepartamento[$i]->idsubdepartamento;?>&iddepartamento=<?=$subdepartamento[$i]->iddepartamento;?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">
+					<tr onclick="javascript: window.location='?menu=2&act=altsub&idsubdepartamento=<?=$subdepartamento[$i]->idsubdepartamento;?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">
 					  <td><b><?=$subdepartamento[$i]->subdepartamento;?></b></td>
 					</tr>
 			<?
@@ -59,7 +59,7 @@
 			        ?>
 		            <tr class="Linha3Tabela">		                
 		                <td align="right" colspan="3">                    
-		                  <input type="text" value="<?=$departamento->getIdDepartamento();?>" name="iddepartamento"/>	                  
+		                  <input type="hidden" value="<?=$departamento->getIdDepartamento();?>" name="iddepartamento"/>	                  
 		                  <input type="submit" class="bttn2" value="Criar Subdepartamento" name="criar"/>
 		                </td>
 		            </tr>
@@ -96,6 +96,53 @@
 	        <script language="javascript">
 				document.getElementById('subdepartamento').focus();
 			</script>         	              
+	<?	}
+	
+		function SubdepartamentoALT() { ?>
+		<?
+			if($_POST["idsubdepartamento"]) {
+				$idsubdepartamento = $_POST["idsubdepartamento"];
+			}elseif($_GET["idsubdepartamento"]) {
+				$idsubdepartamento = $_GET["idsubdepartamento"];
+			}
+			$subdepartamento = new Subdepartamento();
+			$subdepartamentoDAO = new SubdepartamentoDAO();
+			
+			$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($idsubdepartamento);
+		?> 
+	        <span class="TituloPage">• Altera Subdepartamento</span>
+	        <div align="right"><a class="TextoPageLink" href="?menu=2&act=altdep&idsubdepartamento=">Retornar para Subdepartamentos</a></div>
+	        <br/>
+	        <br/>
+	        <form action="act/Subdepartamento.act.php?acao=altsub" name="subdepartamento" method="post">
+	        <input type="hidden" name="idsubdepartamento" value="<?=$subdepartamento->getIdsubdepartamento();?>">
+	        <input type="hidden" name="iddepartamento" value="<?=$subdepartamento->getIddepartamento();?>">
+	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	            <tbody>        		        
+		        	<tr class="Linha2Tabela">
+			            <td colspan="2">
+			                <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+			                    <tbody>
+				                    <tr class="Linha1Tabela">
+				                        <td align="right"><b> SUBDEPARTAMENTO</b></td>
+				                        <td><input type="text" class="FORMbox" size="70" name="subdepartamento" value="<?=$subdepartamento->getSubdepartamento();?>"/></td>
+				                    </tr> 			                    
+				                </tbody>
+				            </table>
+				        </td>
+			    	</tr>
+		            <tr class="Linha3Tabela">
+		                <td valign="middle">
+		                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+		                        <tbody><tr> 
+		                            <td align="right"><input type="submit" class="bttn4" value="Alterar Subdepartamento" name="inserir"/>  <input type="submit" class="bttn3" onclick="return confirma_apagar();" value="Apagar Subdepartamento" name="remover"/></td>
+		                        </tr><tr> 
+		                    </tr></tbody></table>                                
+		                </td>
+		            </tr>
+		        </tbody>
+	        </table>
+	        </form>
 	<?	}
 	}
 ?>
