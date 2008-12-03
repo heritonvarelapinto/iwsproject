@@ -24,6 +24,7 @@
 			
 			$totSubdepartamentos = count($subdepartamento);
         ?>
+        	<form action="?menu=2&act=addsub" name="subdepartamento" method="post"/>
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 	            <tbody>
 		            <tr class="TituloTabela"> 
@@ -43,7 +44,7 @@
 			?>
 					<? if($totSubdepartamentos < 1) { ?>
 	 				<tr class="Linha1Tabela"> 
-			            <td align="center" colspan="4"><b>Não há nenhum departamento cadastrado.</b></td>
+			            <td align="center" colspan="4"><b>Não há nenhum subdepartamento cadastrado.</b></td>
 			        </tr>
 			        <? } ?>
 			        <? 
@@ -56,15 +57,45 @@
 			        	$this->mostraPaginacaoLetras("menu=2&act=altdep&iddepartamento=$iddep",$letra);
 			        	
 			        ?>
-		            <tr class="Linha3Tabela">
-		                <form action="?menu=2&act=addservico" method="post"/>
+		            <tr class="Linha3Tabela">		                
 		                <td align="right" colspan="3">                    
-		                  <input type="hidden" value="<?=$subdepartamento[$i]->iddepartamento;?>" name="iddepartamento"/>	                  
+		                  <input type="text" value="<?=$departamento->getIdDepartamento();?>" name="iddepartamento"/>	                  
 		                  <input type="submit" class="bttn2" value="Criar Subdepartamento" name="criar"/>
 		                </td>
 		            </tr>
 		        </tbody>
 	        </table>
+	<?	}
+	
+		function SubdepartamentoADD($iddepartamento) { ?>
+			<span class="TituloPage" >• Adicionar Subdepartamento</span>
+	        <br/>
+	        <br/>                         
+	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	        <form action="act/Subdepartamento.act.php?acao=addsub" name="subdepartamento" method="post">
+	        <input type="text" name="iddepartamento" value="<?=$iddepartamento;?>">                       
+		        <tbody>		       		
+		        	<tr class="Linha2Tabela">
+	                    <td colspan="2">                            
+	                        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	                            <tbody>                            	                            	
+	                                <tr class="Linha1Tabela">
+	                                    <td align="right"><b> NOME DO SUBDEPARTAMENTO</b></td>
+	                                    <td><input type="text" value="" class="FORMbox" size="75" name="subdepartamento" id="subdepartamento"/></td>
+	                                </tr> 
+	                            </tbody>
+	                       	</table>                                
+	                    </td>
+	                </tr>
+		            <tr class="Linha3Tabela">
+		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Subdepartamento" name="alterar"/></td>
+		            </tr>
+	        	</tbody>
+	        </table>
+	        </form>
+	        <script language="javascript">
+				document.getElementById('subdepartamento').focus();
+			</script>         	              
 	<?	}
 	}
 ?>

@@ -14,10 +14,13 @@
 				break;
 				//subdepartamentos
 				case "addsub":
-					$this->SubdepartamentoADD();
+					$subdepartamentoHTML = new SubdepartamentoHTML();
+					$iddepartamento = $_POST["iddepartamento"];
+					$subdepartamentoHTML->SubdepartamentoADD($iddepartamento);
 				break;
 				case "altsub":
-					$this->SubdepartamentoALT();
+					$subdepartamentoHTML = new SubdepartamentoHTML();
+					$subdepartamentoHTML->SubdepartamentoALT();
 				break;
 			}
 		}
