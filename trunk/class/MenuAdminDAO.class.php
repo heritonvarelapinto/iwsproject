@@ -61,29 +61,28 @@ class MenuAdminDAO extends PDOConnectionFactory {
 		}
 	}
 	
-	function checkErrors($err,$errno) {
+	function getMenuPorTitulo($titulo) {
+		//é esse o nome da tabela ?
+		$sql = "SELECT * FROM menu where titulo = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$titulo);
+		
+		$stmt->execute();
+		
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		
+		$temp = new TituloLinks();
 
-        //global $systemLog;
-        // Only thing that we need todo is define some variables
-        // And ask from RDBMS, if there was some sort of errors.
-
-        if($errno) {
-                // SQL Error occurred. This is FATAL error. Error message and 
-                // SQL command will be logged and aplication will teminate immediately.
-                $message = "The following SQL command ".$sql." caused Database error: ".$err.".";
-
-                //$message = addslashes("SQL-command: ".$sql." error-message: ".$message);
-                //$systemLog->writeSystemSqlError ("SQL Error occurred", $errno, $message);
-
-                print "Unrecowerable error has occurred. All data will be logged.";
-                print "Please contact System Administrator for help! \n";
-                print "<!-- ".$message." -->\n";
-                exit;
-
-        } else {
-                // Since there was no error, we can safely return to main program.
-                return;
-        }
+		$temp->setIdmenu($rs->idmenu);
+		$temp->setTitulo($rs->titulo);
+		
+		$temp->setIdtitulo($rs->idtitulo);
+		$temp->setTituloLink($rs->titulolink);
+		$temp->setAcao($rs->acao);
+			
+		 
+		return $temp;
 	}
+	
 }
 ?>

@@ -11,7 +11,10 @@
 	$acao = $_GET["acao"];
 	//$acao = "Alterar";
 	
-	$idmenu = 3;
+	$menuDAO = new MenuAdminDAO();
+	$menu = $menuDAO->getMenuPorTitulo("banners");
+	
+	$idmenu = $menu->getIdmenu();
 	
     switch ($acao) {
     	//adiciona um banner
