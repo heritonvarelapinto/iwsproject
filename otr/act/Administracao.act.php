@@ -14,7 +14,10 @@
 	$acao = $_GET["acao"];
 	//$acao = "senha";
 	
-	$idmenu = 1;
+	$menuDAO = new MenuAdminDAO();
+	$menu = $menuDAO->getMenuPorTitulo("administrar usuários");
+	
+	$idmenu = $menu->getIdmenu();
 	
     switch ($acao) {
     	//cria um usuario

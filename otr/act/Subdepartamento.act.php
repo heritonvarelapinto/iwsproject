@@ -11,7 +11,10 @@
 	$acao = $_GET["acao"];
 	//$acao = "altsub";
 	
-	$idmenu = 2;
+	$menuDAO = new MenuAdminDAO();
+	$menu = $menuDAO->getMenuPorTitulo("departamentos");
+	
+	$idmenu = $menu->getIdmenu();
 	
     switch ($acao) {
     	//cria um departamento

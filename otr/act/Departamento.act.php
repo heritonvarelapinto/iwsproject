@@ -13,7 +13,10 @@
 	$acao = $_GET["acao"];
 	//$acao = "altdep";
 	
-	$idmenu = 2;
+	$menuDAO = new MenuAdminDAO();
+	$menu = $menuDAO->getMenuPorTitulo("departamentos");
+	
+	$idmenu = $menu->getIdmenu();
 	
     switch ($acao) {
     	//cria um departamento
