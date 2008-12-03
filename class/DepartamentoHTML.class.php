@@ -161,7 +161,7 @@
 	                        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 	                            <tbody>                            	                            	
 	                                <tr class="Linha1Tabela">
-	                                    <td align="right"><b> NOME DO SEGMENTO</b></td>
+	                                    <td align="right"><b> NOME DO DEPARTAMENTO</b></td>
 	                                    <td><input type="text" value="<?=$departamento->getDepartamento();?>" class="FORMbox" size="75" name="departamento"/></td>
 	                                </tr> 
 	                            </tbody>
@@ -175,31 +175,9 @@
 	        </table>
 	        </form>
 	        <?
-
+	        	$subdepartamentosHTML = new SubdepartamentoHTML();
+	        	$subdepartamentosHTML->SubdepartamentoMostra($departamento);
 	        ?>
-	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-	            <tbody>
-		            <tr class="TituloTabela"> 
-		                <td colspan="3"><div align="center"><b>SUBDEPARTAMENTOS RELACIONADOS</b></div></td>
-		            </tr>	            
-		            <tr class="TituloTabela"> 
-		                <td><div align="center"><b>SUBDEPARTAMENTOS</b></div></td>	                	    
-		            </tr>
-				           <tr onclick="javascript: window.location='?menu=2&act=altservico&idservico=<?=$servicos->idservico;?>&idcategoria=<?=$servicos->idcategoria;?>';" onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" class="Linha1Tabela">
-				              <td><b><?=$servicos->servico;?></b></td>
-				          </tr>
-						<tr class="Linha3Tabela"> 
-	                        <td align="center" colspan="3"><b>Nenhum serviço relacionado a este segmento.</b></td>
-	                    </tr>
-		            <tr class="Linha3Tabela">
-		                <form action="?menu=2&act=addservico" method="post"/>
-		                <td align="right" colspan="3">                    
-		                  <input type="hidden" value="<?=$idcategoria;?>" name="idcategoria"/>	                  
-		                  <input type="submit" class="bttn2" value="Cadastrar Serviço" name="criar"/>
-		                </td>
-		            </tr>
-		        </tbody>
-	        </table>
 	<?	}
 }
 ?>
