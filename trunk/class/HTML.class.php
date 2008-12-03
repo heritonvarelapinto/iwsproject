@@ -447,6 +447,23 @@
 				                    						$layoutBanner = new LayoutBanner();
 				                    						$layoutBanner->EstruturaBanner($acao);
 				                    					break;
+				                    					//Iformativo
+				                    					case 4:
+				                    						
+				                    					break;
+				                    					//Enquete
+				                    					case 5:
+				                    						
+				                    					break;
+				                    					//Rodape
+				                    					case 6:
+				                    						$layoutRodape = new LayoutRodape();
+				                    						$layoutRodape->EstruturaRodape($acao);
+				                    					break;
+				                    					//Anuncio
+				                    					case 7:
+				                    						
+				                    					break;
 				                    				}
 				                    			}
 				                    		?>
