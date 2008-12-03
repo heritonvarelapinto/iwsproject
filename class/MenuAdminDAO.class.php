@@ -30,7 +30,7 @@ class MenuAdminDAO extends PDOConnectionFactory {
 		} 
 		return $searchResults;
 	}	
-	
+		
 	function getMenuPorID($id) {
 		//é esse o nome da tabela ?
 		$sql = "SELECT menu.idmenu, menu.titulo, idtitulo, titulolink, acao FROM menu LEFT JOIN tituloslinks ON menu.idmenu = tituloslinks.idMenu WHERE menu.idmenu = ?";
@@ -63,7 +63,7 @@ class MenuAdminDAO extends PDOConnectionFactory {
 	
 	function getMenuPorTitulo($titulo) {
 		//é esse o nome da tabela ?
-		$sql = "SELECT * FROM menu where titulo = ?";
+		$sql = "SELECT menu.idmenu, menu.titulo, idtitulo, titulolink, acao FROM menu LEFT JOIN tituloslinks ON menu.idmenu = tituloslinks.idMenu WHERE menu.titulo = ?";
 		$stmt = $this->conexao->prepare($sql);
 		$stmt->bindValue(1,$titulo);
 		
@@ -80,9 +80,70 @@ class MenuAdminDAO extends PDOConnectionFactory {
 		$temp->setTituloLink($rs->titulolink);
 		$temp->setAcao($rs->acao);
 			
-		 
 		return $temp;
 	}
 	
+	public function InsereTituloLink( $tituloLink ){
+		$sql = "INSERT INTO tituloslinks (idMenu,titulolink,acao) VALUES (?,?,?)";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// sequencia de índices que representa cada valor de minha query
+		$stmt->bindValue(1, $tituloLink->getIdmenu()); 
+		$stmt->bindValue(2, $tituloLink->getTituloLink()); 
+		$stmt->bindValue(3, $tituloLink->getAcao()); 
+					
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
+	}
+	
+	public function UpdateLinkTituloRodape( $tituloLink, $condicao ) {
+		$sql = "UPDATE tituloslinks SET titulolink=? WHERE idMenu='6' AND acao =?";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->bindValue(1, $tituloLink->getTituloLink()); 
+		$stmt->bindValue(2, $condicao);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}
+	
+	//remove um registro
+	public function DeletaLinksRodape( $id ) {
+		$sql = "DELETE FROM tituloslinks WHERE idMenu = 6 AND acao = ?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}	
 }
 ?>
