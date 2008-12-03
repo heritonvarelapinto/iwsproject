@@ -57,7 +57,7 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 	
 	//realiza um Update
 	public function UpdateSubdepartamento( $subdepartamento, $condicao ) {
-		$sql = "UPDATE subdepartamentos SET iddepartamento=? ,subdepartamentos=? WHERE idsubdepartamento=?";
+		$sql = "UPDATE subdepartamentos SET iddepartamento=? ,subdepartamento=? WHERE idsubdepartamento=?";
 		$stmt = $this->conexao->prepare($sql);
 		
 		$stmt->bindValue(1, $subdepartamento->getIddepartamento()); 
