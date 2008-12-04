@@ -38,7 +38,7 @@
     		$menu->setAcao($lastID->idrodape);
 			
 			$menuDAO->InsereTituloLink($menu);
-				header("location: ../principal.php?menu=$idmenu&act=$act");
+				header("location: ../principal.php?menu=$idmenu&act=$act&msg=1");
     	break;  
     	//cria um departamento
     	case "alt":
@@ -51,7 +51,7 @@
     			
     			$rodapeDAO->Deleta($idrodape);
     			$menuDAO->DeletaLinksRodape($idrodape);
-    				header("location: ../principal.php?menu=$idmenu&act=$act");
+    				header("location: ../principal.php?menu=$idmenu&act=$act&msg=2");
     		}else{
     			$act = $_POST["idrodape"];
 			
@@ -65,7 +65,7 @@
 	    		
 				$rodapeDAO->UpdateRodape($rodape,$act);
 				$menuDAO->UpdateLinkTituloRodape($menu,$act);
-					header("location: ../principal.php?menu=$idmenu&act=$act");
+					header("location: ../principal.php?menu=$idmenu&act=$act&msg=1");
     		}
     	break; 
     	case "uso":
@@ -76,7 +76,7 @@
     		$rodape->setTexto($setTexto);
 		 
 			$rodapeDAO->UpdateRodapeUsoEPrivacidade($rodape,$act);
-				header("location: ../principal.php?menu=$idmenu&act=uso");
+				header("location: ../principal.php?menu=$idmenu&act=uso&msg=1");
     	break;
     	case "privacidade":
     		$act = $_POST["idrodape"];
@@ -86,7 +86,7 @@
     		$rodape->setTexto($setTexto);
 		 
 			$rodapeDAO->UpdateRodapeUsoEPrivacidade($rodape,$act);
-				header("location: ../principal.php?menu=$idmenu&act=privacidade");
+				header("location: ../principal.php?menu=$idmenu&act=privacidade&msg=1");
     	break;     	
     }
 ?>

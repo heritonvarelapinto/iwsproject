@@ -8,6 +8,16 @@
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" align="center" valign="middle" class="BordaTabela">
 	        <form name="rodape" action="act/Rodape.act.php?acao=add" method="post"/>
 	        	<tbody>
+	        		<?
+						switch ($_GET["msg"]) {
+							case 1:
+								$this->mostraMSG("Adicionado com sucesso !");
+							break;
+							case 2:
+								$this->mostraMSG("Removido com sucesso !");
+							break;
+						}
+	        		?> 
 	    			<tr class="Linha2Tabela">
                         <td align="right"><b>TÍTULO:</b></td>
                         <td align="left"><input type="text" class="FORMbox" name="titulo" size="95"/></td>
@@ -39,7 +49,14 @@
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" align="center" valign="middle" class="BordaTabela">
 	        <form name="rodape" action="act/Rodape.act.php?acao=uso" method="post"/>              
 	        <input type="hidden" name="idrodape" value="<?=$rodape->getIdrodape();?>">              
-	        	<tbody>	    			
+	        	<tbody>
+	        		<?
+						switch ($_GET["msg"]) {
+							case 1:
+								$this->mostraMSG("Alterado com sucesso !");
+							break;
+						}
+	        		?>
                     <tr align="center" class="Linha1Tabela">
                         <td colspan="3"><b>CONTEÚDO DO TEXTO</b></td>
                     </tr>
@@ -67,7 +84,14 @@
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" align="center" valign="middle" class="BordaTabela">
 	        <form name="rodape" action="act/Rodape.act.php?acao=privacidade" method="post"/>              
 	        <input type="hidden" name="idrodape" value="<?=$rodape->getIdrodape();?>">              
-	        	<tbody>	    			
+	        	<tbody>	  
+	        		<?
+						switch ($_GET["msg"]) {
+							case 1:
+								$this->mostraMSG("Alterado com sucesso !");
+							break;
+						}
+	        		?>  			
                     <tr align="center" class="Linha1Tabela">
                         <td colspan="3"><b>CONTEÚDO DO TEXTO</b></td>
                     </tr>
@@ -95,7 +119,14 @@
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" align="center" valign="middle" class="BordaTabela">
 	        <form name="rodape" action="act/Rodape.act.php?acao=alt" method="post"/>              
 	        <input type="hidden" name="idrodape" value="<?=$rodape->getIdrodape();?>">              
-	        	<tbody>	    		
+	        	<tbody>	 
+	        		<?
+						switch ($_GET["msg"]) {
+							case 1:
+								$this->mostraMSG("Alterado com sucesso !");
+							break;
+						}
+	        		?>   		
 	        		<tr class="Linha2Tabela">
                         <td align="right"><b>TÍTULO:</b></td>
                         <td><input type="text" class="FORMbox" name="titulo" value="<?=$rodape->getTitulo();?>" size="95"/></td>
