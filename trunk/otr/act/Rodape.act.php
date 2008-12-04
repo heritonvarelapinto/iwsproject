@@ -67,6 +67,26 @@
 				$menuDAO->UpdateLinkTituloRodape($menu,$act);
 					header("location: ../principal.php?menu=$idmenu&act=$act");
     		}
-    	break;   	
+    	break; 
+    	case "uso":
+    		$act = $_POST["idrodape"];
+		
+    		$setTexto = $_POST["texto"];
+    		
+    		$rodape->setTexto($setTexto);
+		 
+			$rodapeDAO->UpdateRodapeUsoEPrivacidade($rodape,$act);
+				header("location: ../principal.php?menu=$idmenu&act=uso");
+    	break;
+    	case "privacidade":
+    		$act = $_POST["idrodape"];
+		
+    		$setTexto = $_POST["texto"];
+    		
+    		$rodape->setTexto($setTexto);
+		 
+			$rodapeDAO->UpdateRodapeUsoEPrivacidade($rodape,$act);
+				header("location: ../principal.php?menu=$idmenu&act=privacidade");
+    	break;     	
     }
 ?>

@@ -100,6 +100,33 @@ class RodapeDAO extends PDOConnectionFactory {
 		}
 	}
 	
+	/**
+	 * Altera um link do rodape
+	 *
+	 * @param Objeto $subdepartamento
+	 * @param string $condicao
+	 * @return true
+	 */
+	public function UpdateRodapeUsoEPrivacidade( $rodape, $id ) {
+		$sql = "UPDATE rodape SET texto=? WHERE idrodape='$id'";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->bindValue(1, $rodape->getTexto()); 
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}
+	
 	//remove um registro
 	public function Deleta( $id ) {
 		$sql = "DELETE FROM rodape WHERE idrodape = ?";

@@ -37,7 +37,7 @@
 	        <br/>
 	        <br/>        
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" align="center" valign="middle" class="BordaTabela">
-	        <form name="rodape" action="act/Rodape.act.php?acao=alt" method="post"/>              
+	        <form name="rodape" action="act/Rodape.act.php?acao=uso" method="post"/>              
 	        <input type="hidden" name="idrodape" value="<?=$rodape->getIdrodape();?>">              
 	        	<tbody>	    			
                     <tr align="center" class="Linha1Tabela">
@@ -65,7 +65,7 @@
 	        <br/>
 	        <br/>        
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" align="center" valign="middle" class="BordaTabela">
-	        <form name="rodape" action="act/Rodape.act.php?acao=alt" method="post"/>              
+	        <form name="rodape" action="act/Rodape.act.php?acao=privacidade" method="post"/>              
 	        <input type="hidden" name="idrodape" value="<?=$rodape->getIdrodape();?>">              
 	        	<tbody>	    			
                     <tr align="center" class="Linha1Tabela">
