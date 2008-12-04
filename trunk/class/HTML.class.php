@@ -453,7 +453,8 @@
 				                    					break;
 				                    					//Enquete
 				                    					case 5:
-				                    						
+				                    						$layoutEnquete = new LayoutEnquete();
+				                    						$layoutEnquete->EstruturaEnquete($acao);
 				                    					break;
 				                    					//Rodape
 				                    					case 6:
