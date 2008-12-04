@@ -240,10 +240,10 @@
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros:</b></td>
 			            <td width="40%" height="20"><?=$totUsuarios;?></td>
-			        </tr>
+			        </tr>			       
 			    </tbody>
 		    </table>
-			<?
+		    <?
 
 		}
 	}
