@@ -14,7 +14,7 @@
 				$order = "ORDER BY departamento";
 			}
 			
-			$totalPorPagina = 5;
+			$totalPorPagina = 20;
 			$inicio = $pagina * $totalPorPagina;
 		?>
 			<span class="TituloPage">• <?=$titulo;?></span>
@@ -89,9 +89,11 @@
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros:</b></td>
 			            <td width="40%" height="20"><?=$registros;?></td>
-			        </tr>		        
+			        </tr>
+			        <?$execucao = new pageExecutionTimer();?>		        
 		    	</tbody>
 		    </table>
+		    
 	<?	}
 	
 		function DepartamentoADD() { ?>
