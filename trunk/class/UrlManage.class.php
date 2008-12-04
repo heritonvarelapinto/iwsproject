@@ -4,9 +4,9 @@ class UrlManage {
 	
 	public static function getUrlCategoria($idcategoria, $Categoria, $Titulo){
 		if( UrlManage::HabilitadoModRewrite() ){
-			return "categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
+			return "$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
-			return "categoria.php?id=$idcategoria&titulo=$Titulo";
+			return "categorias.php?id=$idcategoria&titulo=$Titulo";
 		}
 	}
 	
@@ -16,7 +16,7 @@ class UrlManage {
 			//return UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
 			return $path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
 		}else{
-			return $path."categoria.php?id=$idcategoria&sub=$idsubcategoria";
+			return $path."categorias.php?id=$idcategoria&sub=$idsubcategoria";
 		}
 	}
 	
