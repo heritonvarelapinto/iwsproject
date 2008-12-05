@@ -41,6 +41,24 @@ class EnqueteDAO extends PDOConnectionFactory {
 	 *
 	 * @return array
 	 */
+	function listaStatus() {
+		$sql = "SELECT * FROM perguntas WHERE status = '1'";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		$regs = $stmt->rowCount(PDO::FETCH_OBJ);
+			
+		return $regs;
+	}
+	
+	/**
+	 * Lista perguntas das enquete
+	 *
+	 * @return array
+	 */
 	function listaEnquete() {
 		$sql = "SELECT * FROM perguntas INNER JOIN respostas ON perguntas.idpergunta = respostas.idpergunta";
 		$stmt = $this->conexao->prepare($sql);
@@ -80,6 +98,44 @@ class EnqueteDAO extends PDOConnectionFactory {
 		$temp->setVoto($rs->voto);; 
 			
 		return $temp;
+	}
+	
+	function getStatusPorID($id) {
+		//é esse o nome da tabela ?
+		$sql = "SELECT * FROM perguntas WHERE idpergunta =?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		$temp = new Enquete();
+
+		$temp->setStatus($rs->status);; 
+			
+		return $temp;
+	}
+
+	//realiza um Update
+	public function UpdateStatus( $enquete, $condicao ) {
+		$sql = "UPDATE perguntas SET status=? WHERE idpergunta=?";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->bindValue(1, $enquete->getStatus());
+		$stmt->bindValue(2, $condicao);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
 	}
 	
 	//remove um registro

@@ -26,9 +26,9 @@
 	
 		public function statusEnquete($stat,$id) {
 			if($stat == 0) {
-				echo "<b><a href='act/actEnquetes.php?acao=5&id=$id'><font color='red'>Inativo</font></a></b>";
+				echo "<b><a href='act/Enquete.act.php?acao=status&id=$id'><font color='red'>Inativo</font></a></b>";
 			}elseif($stat == 1){
-				echo "<b><a href='act/actEnquetes.php?acao=5&id=$id'><font color='green'>Ativo</font></a></b>";
+				echo "<b><a href='act/Enquete.act.php?acao=status&id=$id'><font color='green'>Ativo</font></a></b>";
 			}
 		}
 	
