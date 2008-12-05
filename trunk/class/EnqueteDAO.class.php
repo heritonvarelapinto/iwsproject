@@ -8,6 +8,61 @@ class EnqueteDAO extends PDOConnectionFactory {
 		$this->conexao = PDOConnectionFactory::getConnection();
 	}
 	
+	public function InserePergunta( $enquete ){
+		$sql = "INSERT INTO perguntas (pergunta,status) VALUES (?,?)";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// sequencia de índices que representa cada valor de minha query
+		$stmt->bindValue(1, $enquete->getPergunta()); 
+		$stmt->bindValue(2, $enquete->getStatus()); 
+					
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
+	}
+	
+	public function InsereResposta( $enquete ){
+		$sql = "INSERT INTO respostas (idpergunta,resposta) VALUES (?,?)";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// sequencia de índices que representa cada valor de minha query
+		$stmt->bindValue(1, $enquete->getIdpergunta()); 
+		$stmt->bindValue(2, $enquete->getResposta()); 
+					
+		// executo a query preparada
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
+	}
+	
+	public function getUltimoID(){
+		$sql = "SELECT max(idpergunta) as idpergunta FROM perguntas";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$id = $stmt->fetch(PDO::FETCH_OBJ);
+		return $id;
+	}	
+	
 	/**
 	 * Lista perguntas das enquete
 	 *
@@ -100,6 +155,30 @@ class EnqueteDAO extends PDOConnectionFactory {
 		return $temp;
 	}
 	
+	function getPerguntaPorID($id) {
+		//é esse o nome da tabela ?
+		$sql = "SELECT perguntas.idpergunta,pergunta,idresposta,resposta,voto FROM perguntas LEFT JOIN respostas ON perguntas.idpergunta = respostas.idpergunta WHERE perguntas.idpergunta =?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Enquete();
+
+			$temp->setIdpergunta($rs->idpergunta);
+			$temp->setPergunta($rs->pergunta);
+			$temp->setIdresposta($rs->idresposta);
+			$temp->setResposta($rs->resposta);
+			$temp->setVoto($rs->voto);
+						
+			array_push($searchResults, $temp);
+		} 
+		return $searchResults;
+	}
+	
 	function getStatusPorID($id) {
 		//é esse o nome da tabela ?
 		$sql = "SELECT * FROM perguntas WHERE idpergunta =?";
@@ -139,8 +218,27 @@ class EnqueteDAO extends PDOConnectionFactory {
 	}
 	
 	//remove um registro
-	public function Deleta( $id ) {
-		$sql = "DELETE FROM administracao WHERE idadministracao = ?";
+	public function DeletaPerguntas( $id ) {
+		$sql = "DELETE FROM perguntas WHERE idpergunta =?";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO: ".$error[2];
+			return false;
+		}
+	}
+	
+	//remove um registro
+	public function DeletaRespostas( $id ) {
+		$sql = "DELETE FROM respostas WHERE idpergunta =?";
 		$stmt = $this->conexao->prepare($sql);
 		$stmt->bindValue(1,$id);
 		
