@@ -4,7 +4,7 @@
 			switch ($acao) {
 				//departamentos
 				case "mostra":
-					$this->DepartamentoMostra("Verificar Departamentos");
+					$this->DepartamentoMostra("Verificar Departamentos",20);
 				break;
 				case "adddep":
 					$this->DepartamentoADD();
