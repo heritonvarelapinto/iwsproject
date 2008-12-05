@@ -24,9 +24,17 @@
 	        </tr>
 	<?	}
 	
+		public function statusEnquete($stat,$id) {
+			if($stat == 0) {
+				echo "<b><a href='act/actEnquetes.php?acao=5&id=$id'><font color='red'>Inativo</font></a></b>";
+			}elseif($stat == 1){
+				echo "<b><a href='act/actEnquetes.php?acao=5&id=$id'><font color='green'>Ativo</font></a></b>";
+			}
+		}
+	
 		function mostraPaginacaoLetras($menu,$letra) { ?>
 			<tr class="Linha3Tabela">
-	    		<td align="right" colspan="2">
+	    		<td align="right" colspan="5">
 	    			<? if($letra != 'a') { ?>
 	    				<a href="?<?=$menu;?>&letra=a"><b>A</b></a>&nbsp;<b>.</b>
 	    			<? }else{ ?> 
