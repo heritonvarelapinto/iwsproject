@@ -103,18 +103,10 @@
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 	        <form action="act/Departamento.act.php?acao=adddep" name="departamento" method="post">                       
 		        <tbody>		       		
-		        	<tr class="Linha2Tabela">
-	                    <td colspan="2">                            
-	                        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-	                            <tbody>                            	                            	
-	                                <tr class="Linha1Tabela">
-	                                    <td align="right"><b> NOME DO DEPARTAMENTO</b></td>
-	                                    <td><input type="text" value="" class="FORMbox" size="75" name="departamento" id="departamento"/></td>
-	                                </tr> 
-	                            </tbody>
-	                       	</table>                                
-	                    </td>
-	                </tr>
+		        	<tr class="Linha1Tabela">
+                        <td align="right"><b> NOME DO DEPARTAMENTO</b></td>
+                        <td><input type="text" value="" class="FORMbox" size="75" name="departamento" id="departamento"/></td>
+                    </tr>
 		            <tr class="Linha3Tabela">
 		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Departamento" name="alterar"/></td>
 		            </tr>

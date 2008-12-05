@@ -5,6 +5,12 @@
 				case "mostra":
 					$this->EnquetesMostra(10);
 				break;
+				case "add":
+					$this->EnqueteADDPerg();
+				break;
+				case "addresp":
+					$this->EnqueteADDResp();
+				break;
 			}
 		}
 	}
