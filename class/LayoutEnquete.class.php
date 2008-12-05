@@ -3,7 +3,7 @@
 		public function EstruturaEnquete($acao) {
 			switch ($acao) {
 				case "mostra":
-					$this->EnquetesMostra();
+					$this->EnquetesMostra(10);
 				break;
 			}
 		}

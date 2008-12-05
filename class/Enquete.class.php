@@ -3,11 +3,8 @@
 	    public $idpergunta;
 	    public $pergunta;
 	    public $status;
-	    public $pergdata;
 	    public $idresposta;
-	    public $idresppergunta;
 	    public $resposta;
-	    public $respdata;
 	    public $voto;
 	    public $id;
 	    public $ip;
@@ -33,13 +30,6 @@
 	          $this->status = $statusIn;
 	    }
 	
-	    function getPergdata() {
-	          return $this->pergdata;
-	    }
-	    function setPergdata($pergdataIn) {
-	          $this->pergdata = $pergdataIn;
-	    }
-	
 	    function getIdresposta() {
 	          return $this->idresposta;
 	    }
@@ -47,25 +37,11 @@
 	          $this->idresposta = $idrespostaIn;
 	    }
 	
-	    function getIdresppergunta() {
-	          return $this->idresppergunta;
-	    }
-	    function setIdresppergunta($idrespperguntaIn) {
-	          $this->idresppergunta = $idrespperguntaIn;
-	    }
-	
 	    function getResposta() {
 	          return $this->resposta;
 	    }
 	    function setResposta($respostaIn) {
 	          $this->resposta = $respostaIn;
-	    }
-	
-	    function getRespdata() {
-	          return $this->respdata;
-	    }
-	    function setRespdata($respdataIn) {
-	          $this->respdata = $respdataIn;
 	    }
 	
 	    function getVoto() {

@@ -1,6 +1,17 @@
 <?php
 	class EnqueteHTML extends HTML {
-		public function EnquetesMostra() { 
+		public function EnquetesMostra($totRegistrosPorPagina) {
+			$enquete = new Enquete();
+			$enqueteDAO = new EnqueteDAO();
+			
+			$pagina = $_GET["pag"];
+			if(!isset($pagina)) { $pagina = 0;}
+					
+			$order = "ORDER BY pergunta";
+			
+			$totalPorPagina = $totRegistrosPorPagina;
+			$inicio = $pagina * $totalPorPagina;
+			
 			?>
 			<span class="TituloPage">• Enquetes</span>
 	        <br>
@@ -21,14 +32,33 @@
 	                <td align="center">TOTAL VOTOS</td>                                              
 	                <td align="center">STATUS</td>                                              
 	            </tr>
-				<tr class="Linha1Tabela" onMouseOver="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='';" onclick="javascript: window.location='?menu=4&act=alt&idpergunta=<?//=$enquetes->idpergunta;?>';"> 
-		            <td><?//=$enquetes->pergunta;?></td>					            
-		            <td align="center"><? //$votos = AdmEnquetes::totalVotos($enquetes->idpergunta); echo $total = classAdmGeral::resultado($votos)->votos;?></td>					            					           
-		            <td align="center"><?//=AdmEnquetes::status($enquetes->status,$enquetes->idpergunta);?></td>					            					           
+	            <?
+	            	$enquete = $enqueteDAO->Paginacao($order,$inicio,$totalPorPagina);
+					$registros = $enqueteDAO->Registros($order);
+					
+					$paginas = ceil($registros / $totalPorPagina);
+					
+					$totEnquete = count($enquete);
+					
+	            	for ($i=0;$i<$totEnquete;$i++) {
+	            		$voto = $enqueteDAO->getVotosPorID($enquete[$i]->getIdpergunta());
+	            ?>
+					<tr class="Linha1Tabela" onMouseOver="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='';" onclick="javascript: window.location='?menu=5&act=alt&idpergunta=<?=$enquete[$i]->getIdpergunta();?>';"> 
+			            <td><?=$enquete[$i]->getPergunta();?></td>					            
+			            <td align="center"><?if($voto->getVoto() == "") { echo "0"; }else{ echo $voto->getVoto(); }?></td>					            					           
+			            <td align="center"><? $this->statusEnquete($enquete[$i]->getStatus(),$enquete[$i]->getIdpergunta());?></td>					            					           
+			        </tr>
+		        <?
+	            	}
+		        ?>
+				<? if($totEnquete < 1) { ?>
+ 				<tr class="Linha1Tabela"> 
+		            <td align="center" colspan="4"><b>Não há nenhuma enquete cadastrada.</b></td>
 		        </tr>
-				<tr class="Linha1Tabela"> 
-		            <td align="center" colspan="4"><b>Não há nenhuma enquete cadastrado.</b></td>
-		        </tr>
+		        <? } ?>
+		        <? 
+	        		$this->mostraPaginacao($paginas,$pagina,"menu=5&act=mostra");
+		        ?>
 		    </table>
 		    <br>
 		    <table width="400" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
@@ -38,15 +68,15 @@
 			        </tr>
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros por Página:</b></td>
-			            <td width="40%" height="20"></td>
+			            <td width="40%" height="20"><?=$totEnquete;?></td>
 			        </tr>
 			        <tr class="Linha2Tabela">
 			            <td height="20"><b>Total de Páginas:</b></td>
-			            <td height="20"></td>
+			            <td height="20"><?=$paginas;?></td>
 			        </tr>
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros:</b></td>
-			            <td width="40%" height="20"></td>
+			            <td width="40%" height="20"><?=$registros;?></td>
 			        </tr>
 			        <? $execucao = new pageExecutionTimer(); ?>		        
 		    	</tbody>
