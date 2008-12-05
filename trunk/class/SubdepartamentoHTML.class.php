@@ -1,6 +1,6 @@
 <?
 	class SubdepartamentoHTML extends HTML {
-		function SubdepartamentoMostra($departamento) {
+		function SubdepartamentoMostra($departamento,$totRegistrosPorPagina) {
         	$subdepartamento = new Subdepartamento();
 			$subdepartamentoDAO = new SubdepartamentoDAO();
         
@@ -14,7 +14,7 @@
 				$order = "ORDER BY subdepartamento";
 			}
 			
-			$totalPorPagina = 10;
+			$totalPorPagina = $totRegistrosPorPagina;
 			$inicio = $pagina * $totalPorPagina;
 			
 			$subdepartamento = $subdepartamentoDAO->Paginacao($order,$inicio,$totalPorPagina,$departamento->getIdDepartamento());

@@ -1,6 +1,6 @@
 <?php
 	class DepartamentoHTML extends HTML  {
-		function DepartamentoMostra($titulo) {
+		function DepartamentoMostra($titulo,$totRegistrosPorPagina) {
 			$departamento = new Departamento();
 			$departamentoDAO = new DepartamentoDAO();
 			
@@ -14,7 +14,7 @@
 				$order = "ORDER BY departamento";
 			}
 			
-			$totalPorPagina = 20;
+			$totalPorPagina = $totRegistrosPorPagina;
 			$inicio = $pagina * $totalPorPagina;
 		?>
 			<span class="TituloPage">• <?=$titulo;?></span>
@@ -178,7 +178,7 @@
 	        </form>
 	        <?
 	        	$subdepartamentosHTML = new SubdepartamentoHTML();
-	        	$subdepartamentosHTML->SubdepartamentoMostra($departamento);
+	        	$subdepartamentosHTML->SubdepartamentoMostra($departamento,10);
 	        ?>
 	<?	}
 }
