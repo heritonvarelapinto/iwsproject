@@ -457,7 +457,8 @@
 				                    					break;
 				                    					//Iformativo
 				                    					case 4:
-				                    						
+				                    						$layoutInformativo = new LayoutInformativo();
+				                    						$layoutInformativo->EstruturaInformativo($acao);
 				                    					break;
 				                    					//Enquete
 				                    					case 5:
