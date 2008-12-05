@@ -68,6 +68,8 @@
     			$iddep = $banner->getIddepartamento();
     			$bannerDAO->Insere($banner);
     			header("location: ../principal.php?menu=$idmenu&act=$act&iddep=$iddep");
+    		}else{
+    			header("location: ../principal.php?menu=$idmenu&act=$act");
     		}
     	break;
     	//altera banner
