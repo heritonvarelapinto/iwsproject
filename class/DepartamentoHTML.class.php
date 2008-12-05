@@ -101,7 +101,7 @@
 	        <br/>
 	        <br/>                         
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-	        <form action="act/Departamento.act.php?acao=adddep" name="departamento" method="post">                       
+	        <form action="act/Departamento.act.php?acao=adddep" name="departamento" method="post" onsubmit="return valida_departamento();">                       
 		        <tbody>		       		
 		        	<tr class="Linha1Tabela">
                         <td align="right"><b> NOME DO DEPARTAMENTO</b></td>

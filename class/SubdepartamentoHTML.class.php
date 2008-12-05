@@ -72,7 +72,7 @@
 	        <br/>
 	        <br/>                         
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-	        <form action="act/Subdepartamento.act.php?acao=addsub" name="subdepartamento" method="post">
+	        <form action="act/Subdepartamento.act.php?acao=addsub" name="subdepartamento" method="post" onsubmit="return valida_subdepartamento();">
 	        <input type="hidden" name="iddepartamento" value="<?=$iddepartamento;?>">                       
 		        <tbody>		       		
 		        	<tr class="Linha2Tabela">

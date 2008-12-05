@@ -237,6 +237,28 @@ function valida_enquete_perg() {
 }
 
 //###################################################################################
+function valida_departamento() {
+    Form = document.departamento;
+    if (Form.departamento.value.length == "") {
+        alert("O nome do departamento \xE9 um campo obrigat\xF3rio !");
+        Form.departamento.focus();
+        return false;
+    }
+    return true;
+}
+
+//###################################################################################
+function valida_subdepartamento() {
+    Form = document.subdepartamento;
+    if (Form.subdepartamento.value.length == "") {
+        alert("O nome do subdepartamento \xE9 um campo obrigat\xF3rio !");
+        Form.subdepartamento.focus();
+        return false;
+    }
+    return true;
+}
+
+//###################################################################################
 function VerImagem(campo, img) {
     img.src = campo.value;
 }
