@@ -135,11 +135,29 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 			array_push($searchResults, $temp);
 		} 
 		
-		if(count($rs) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
+		return $searchResults;
+	}
+	
+	public function getSubdepartamentosPorIddepartamento($id) {
+		$sql = "SELECT * FROM subdepartamentos WHERE iddepartamento = ".$id;
+		$stmt = $this->conexao->prepare($sql);
+		//$stmt->bindValues(1,$id);
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Subdepartamento();
+						
+			$temp->setIdsubdepartamento($rs->idsubdepartamento); 
+			$temp->setIddepartamento($rs->iddepartamento); 
+			$temp->setSubdepartamento($rs->subdepartamento);
+			
+			array_push($searchResults, $temp);
+		} 
+		
+		return $searchResults;
 	}
 	
 	//mostra os registros
