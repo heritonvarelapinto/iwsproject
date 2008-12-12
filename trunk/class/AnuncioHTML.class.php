@@ -47,25 +47,15 @@
 	                <td>SERVIÇO</td>                                              
 	                <td>ANÚNCIO</td>                                              
 	            </tr>
-	        <?
-	        	if($rs = classAdmGeral::paginacao("anuncios",$inicio,$totalPorPagina,"WHERE tipo = 'Gold' AND idbairro = '$idbairro' ORDER BY nome")) {
-		        	if(mysql_num_rows($rs) > 0) {	
-		        		while($anuncios = classAdmGeral::resultado($rs)) {?>
-		        				<tr class="Linha1Tabela" onMouseOver="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='';" onclick="javascript: window.location='?menu=3&act=altgold&idanuncio=<?=$anuncios->idanuncio;?>';"> 
-						            <td align="center"><?=$anuncios->idanuncio;?></td>					            
-						            <td><?=$anuncios->nome;?></td>					            					           
-						            <td><?=classAdmSQL::get("servicos","idservico",$anuncios->idservico)->servico;?></td>					            					           
-							        <td><?=$anuncios->tipo;?></td>    
-						        </tr>
-		        			<?
-		        		}
-		        	classAdmGeral::mostraPaginacao($paginas,$pagina,"menu=3&act=gold");
-		        	}else{ ?>            		           
-						<tr class="Linha1Tabela"> 
-				            <td align="center" colspan="4"><b>Não há nenhum anúncio cadastrado.</b></td>
-				        </tr>
-				<? }
-	        	} ?>
+				<tr class="Linha1Tabela" onMouseOver="this.style.backgroundColor='#FFECEC'; this.style.cursor='hand';" onMouseOut="this.style.backgroundColor='';" onclick="javascript: window.location='?menu=3&act=altgold&idanuncio=<?=$anuncios->idanuncio;?>';"> 
+		            <td align="center"><?=$anuncios->idanuncio;?></td>					            
+		            <td><?=$anuncios->nome;?></td>					            					           
+		            <td><?//=classAdmSQL::get("servicos","idservico",$anuncios->idservico)->servico;?></td>					            					           
+			        <td><?=$anuncios->tipo;?></td>    
+		        </tr>
+				<tr class="Linha1Tabela"> 
+		            <td align="center" colspan="4"><b>Não há nenhum anúncio cadastrado.</b></td>
+		        </tr>
 		    </table>
 		    <br>
 		    <table width="400" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
@@ -75,7 +65,7 @@
 			        </tr>
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros por Página:</b></td>
-			            <td width="40%" height="20"><?=mysql_num_rows($rs);?></td>
+			            <td width="40%" height="20"><?//=mysql_num_rows($rs);?></td>
 			        </tr>
 			        <tr class="Linha2Tabela">
 			            <td height="20"><b>Total de Páginas:</b></td>
@@ -83,17 +73,188 @@
 			        </tr>
 			        <tr class="Linha1Tabela">
 			            <td height="20"><b>Total de Registros:</b></td>
-			            <td width="40%" height="20"><?=mysql_num_rows(classAdmSQL::lst("anuncios","WHERE tipo = 'Gold' AND idbairro = '$idbairro'"));?></td>
+			            <td width="40%" height="20"><?//=mysql_num_rows(classAdmSQL::lst("anuncios","WHERE tipo = 'Gold' AND idbairro = '$idbairro'"));?></td>
 			        </tr>		        
 		    	</tbody>
 		    </table>
 		    <br>
 		    <table>
 		    	<tr>
-		    		<td><input type="button" value="Cadastrar Anuncio" onclick="document.location='principal.php?menu=3&act=addgold';" class="bttn2"></td>
+		    		<td><input type="button" value="Cadastrar Anuncio" onclick="document.location='principal.php?menu=7&act=add';" class="bttn2"></td>
 		    	</tr>
 		    </table>
 		    
+	<?	}
+	
+		function AnuncioADD() { ?>
+		<? $iddepartamento = $_GET["iddepartamento"]; ?>		
+	        <span class="TituloPage">• Adicionar Anúncio</span>
+	        <br/>
+	        <br/>                         
+	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
+	        <form action="act/Anuncio.act.php?acao=add" name="anuncios" method="post" enctype="multipart/form-data">                       
+	        <input type="hidden" name="iddepartamento" value="<?=$iddepartamento;?>">
+		        <tbody>
+		        	<tr class="Linha2Tabela">
+	                    <td align="right"><b> DEPARTAMENTO:</b></td>
+	                    <td>
+	                    	<?
+	                    		$departamento = new Departamento();
+	                    		$departamentoDAO = new DepartamentoDAO();
+	                    		$departamento = $departamentoDAO->Lista();
+	                    		if(isset($iddepartamento)) {
+	                    			$this->selectDepartamentosAdminAnuncios($departamento);
+	                    		}else{
+	                    			$this->selectDepartamentosAdminAnuncios($departamento);
+	                    		}
+	                    	?>
+	                    </td>
+	                </tr>
+	                <? if(isset($iddepartamento)) { ?>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
+	                    <td>
+							<table border="0" cellpadding="0" cellspacing="0" width="100%">
+								<tr>
+								<?
+		                    		$subdepartamento = new Subdepartamento();
+		                    		$subdepartamentoDAO = new SubdepartamentoDAO();
+		                    		$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($iddepartamento);
+		                    		
+		                    		$this->selectSubdepartamentosAdminAnuncios($subdepartamento);
+		                    	?>
+								</tr>
+							</table>
+	                    </td>                    
+	                </tr>
+	                <? }else{ ?>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
+	                    <td>
+	                    	<select class="FORMbox" name="idsubdepartamento" id="idsubdepartamento" style="z-index:0" disabled>		                	
+	                    		<option value="">--Selecione o departamento--</option>                    		
+			                </select>
+	                    </td>
+	                </tr>
+	                <? } ?>		        	                            	   	
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> NOME DO ANÚNCIANTE</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="75" name="nome"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> CEP</b></td>
+	                    <td><input type="text" onblur="javascript:buscaCep(this.value);" mascara="#####-###" tipo="numerico" size="11" value="" id="cep" name="cep" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
+	                </tr> 
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> ENDEREÇO</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> NÚMERO</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="15" name="numero"/></td>
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> COMPLEMENTO</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="15" name="complemento"/></td>
+	                </tr>  
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> BAIRRO</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="15" id="bairro" name="bairro"/></td>
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> CIDADE</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="15" id="cidade" name="cidade"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> ESTADO</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="15" id="estado" name="estado"/></td>
+	                </tr>              
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> TELEFONES</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="75" name="telefones"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> E-MAIL</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="75" name="email"/></td>
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> SITE</b></td>
+	                    <td><input type="text" value="" class="FORMbox" size="75" name="site"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> LOGO</b></td>
+	                    <td><input type="file" value="" class="FORMbox" size="45" name="logo"/></td>
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> LOGO DESTAQUE</b></td>
+	                    <td><input type="file" value="" class="FORMbox" size="45" name="logo_destaque"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> IMAGEM 1</b></td>
+	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem1"/></td>
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> IMAGEM 2</b></td>
+	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem2"/></td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
+	                    <td>                                    	
+	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
+	                    </td>
+	            	</tr>
+	            	<tr class="Linha2Tabela">
+	                    <td align="center"><b>TAGS RELACIONADAS</b></td>
+	                    <td>                                    	
+	                    	<textarea name="tags" rows="5" cols="70" class="FORMBox"></textarea>  		                                                                                                     
+	                    </td>
+	            	</tr>	            	            
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> DESTAQUE</b></td>
+	                    <td>
+		                    <select name="destaque" class="FORMBox" onchange="dest(this.value);">
+		                    	<option value="">--Selecione--</option>
+		                    	<option value="1">Sim</option>
+		                    	<option value="2">Não</option>
+		                    </select>
+		                     <select id="pagina" name="pagina" class="FORMBox" style="display:none;">
+		                    	<option value="">--Selecione--</option>
+		                    	<option value="1">Inicial</option>
+		                    	<option value="2">Bairros</option>
+		                    </select>
+	                    </td>                    
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> PAGAMENTO</b></td>
+	                    <td>
+	                    	<select name="pagamento" class="FORMBox">
+		                    	<option value="">--Selecione--</option>
+		                    	<option value="1">1 Mês</option>	              
+		                    	<option value="3">3 Meses</option>
+		                    	<option value="6">6 Meses</option>
+		                    	<option value="12">12 Meses</option>
+		                    </select>
+	                    </td>
+	                </tr>
+	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> ENVIAR CONTRATO</b></td>
+	                    <td><input type="checkbox" value="sim" name="contrato" class="FORMBox"></td>
+	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> STATUS</b></td>
+	                    <td>
+	                    	<select name="status" class="FORMBox">
+		                    	<option value="0">Ativo</option>
+		                    	<option value="1">Inativo</option>	              	                    	
+		                    </select>
+	                    </td>
+	                </tr>
+	                <tr class="Linha3Tabela">
+		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Anuncio" name="alterar"/></td>
+		            </tr>
+	        	</tbody>
+	        </table>
+	        </form>                
 	<?	}
 	}
 ?>

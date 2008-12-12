@@ -87,8 +87,8 @@ function servicosDisponiveis(idcategoria,div) {
 	}
 }
 
-function servicos(idcategoria) {
-	document.location="principal.php?menu=3&act=addgold&idcategoria="+idcategoria;
+function departamentos(iddepartamento) {
+	document.location="principal.php?menu=7&act=add&iddepartamento="+iddepartamento;
 }
 
 function addBanner(iddep,lado,numero,largura,altura) {
