@@ -472,7 +472,8 @@
 				                    					break;
 				                    					//Anuncio
 				                    					case 7:
-				                    						
+				                    						$layoutAnuncio = new LayoutAnuncio();
+				                    						$layoutAnuncio->EstruturaAnuncio($acao);
 				                    					break;
 				                    				}
 				                    			}
