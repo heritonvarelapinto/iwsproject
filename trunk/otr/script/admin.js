@@ -1,5 +1,4 @@
 function buscaCep(cep_dst) {
-		
 		if(cep_dst != '') {
 			ajax = ajaxInit();
 			if(ajax) {
@@ -1041,4 +1040,8 @@ function dest(opcao) {
 	if(opcao == 2){
  		document.getElementById("pagina").style.display = "none";
 	}	
+}
+
+function cep(iddep,ce) {	
+	document.location = '?menu=7&act=add&iddepartamento='+iddep+'&cep='+ce;
 }
