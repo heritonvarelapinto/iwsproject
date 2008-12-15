@@ -86,8 +86,25 @@
 		    
 	<?	}
 	
+		function busca_cep($cep){  
+		     $resultado = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');  
+		     if(!$resultado){  
+		         $resultado = "&resultado=0&resultado_txt=erro+ao+buscar+cep";  
+		     }  
+		     parse_str($resultado, $retorno);   
+		     return $retorno;  
+		 }
+	
 		function AnuncioADD() { ?>
-		<? $iddepartamento = $_GET["iddepartamento"]; ?>		
+		<?
+			$cep = $_GET["cep"];
+			
+			if(isset($cep)) {
+				$resultado_busca = $this->busca_cep($cep);
+			}
+			
+			$iddepartamento = $_GET["iddepartamento"]; 
+		?>		
 	        <span class="TituloPage">• Adicionar Anúncio</span>
 	        <br/>
 	        <br/>                         
@@ -143,11 +160,12 @@
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> CEP</b></td>
-	                    <td><input type="text" onblur="javascript:buscaCep(this.value);" mascara="#####-###" tipo="numerico" size="11" value="" id="cep" name="cep" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
-	                </tr> 
+	                    <td><input type="text" onblur="javascript:cep('<?=$iddepartamento?>',this.value);" mascara="#####-###" tipo="numerico" size="11" value="<?=$cep;?>" id="campoCEP" name="campoCEP" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
+	                </tr>
+	                <div id="resultado">
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> ENDEREÇO</b></td>
-	                    <td><input type="text" value="" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
+	                    <td><input type="text" value="<?=$resultado_busca['logradouro'];?>" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> NÚMERO</b></td>
@@ -159,16 +177,17 @@
 	                </tr>  
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> BAIRRO</b></td>
-	                    <td><input type="text" value="" class="FORMbox" size="15" id="bairro" name="bairro"/></td>
+	                    <td><input type="text" value="<?=$resultado_busca['bairro'];?>" class="FORMbox" size="15" id="bairro" name="bairro"/></td>
 	                </tr>
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> CIDADE</b></td>
-	                    <td><input type="text" value="" class="FORMbox" size="15" id="cidade" name="cidade"/></td>
+	                    <td><input type="text" value="<?=$resultado_busca['cidade'];?>" class="FORMbox" size="15" id="cidade" name="cidade"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> ESTADO</b></td>
-	                    <td><input type="text" value="" class="FORMbox" size="15" id="estado" name="estado"/></td>
-	                </tr>              
+	                    <td><input type="text" value="<?=$resultado_busca['uf'];?>" class="FORMbox" size="15" id="estado" name="estado"/></td>
+	                </tr>
+	                </div>               
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> TELEFONES</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" name="telefones"/></td>
@@ -203,12 +222,6 @@
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
 	                    </td>
 	            	</tr>
-	            	<tr class="Linha2Tabela">
-	                    <td align="center"><b>TAGS RELACIONADAS</b></td>
-	                    <td>                                    	
-	                    	<textarea name="tags" rows="5" cols="70" class="FORMBox"></textarea>  		                                                                                                     
-	                    </td>
-	            	</tr>	            	            
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> DESTAQUE</b></td>
 	                    <td>
