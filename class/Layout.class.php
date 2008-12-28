@@ -207,21 +207,41 @@ function bannersEsquerda($banners) {
 	}
 	
 	function rodape() {
+		
+		$pagina = new Rodape();
+		$paginaDAO = new RodapeDAO();
+		
+		$pagina = $paginaDAO->listaRodape();
+		$total = count($pagina);
+		
+		$cores = array("primeiro","vermelho","azul", "azulClaro","amarelo","amareloEscuro");
+		$totCor = count($cores);
+		
 		echo "<div id=\"footer\">";
 		echo "<ul>";
-		echo "<li class=\"primeiro\"><a href=\"sobre.php\">Sobre a Oiter Brasil</a></li>";
-		echo "<li class=\"vermelho\"><a href=\"publicidade.php\">Publicidade</a></li>";
+		for($i = 2; $i < $total; $i++) {
+			if($i > $totCor) {
+				$class = $cores[($i-2) - $totCor];
+			} else {
+				$class = $cores[$i-2];
+			}
+			
+			
+			echo "<li class=\"".$class."\"><a href=\"".UrlManage::getUrlPagina($pagina[$i]->getIdrodape(),$pagina[$i]->getTitulo())."\" title=\"".$pagina[$i]->getTitulo()."\">".$pagina[$i]->getTitulo()."</a></li>";	
+		}
+		
+/*		echo "<li class=\"vermelho\"><a href=\"publicidade.php\">Publicidade</a></li>";
 		echo "<li class=\"azul\"><a href=\"parcerias.php\">Seja um parceiro</a></li>";
 		echo "<li class=\"azulClaro\"><a href=\"contato.php\">Fale com a OITER</a></li>";
 		echo "<li class=\"amarelo\"><a href=\"imprensa.php\">Oiter na mídia</a></li>";
-		echo "<li class=\"amareloEscuro\"><a href=\"imprensa.php\">Nossa Missão</a></li>";
+		echo "<li class=\"amareloEscuro\"><a href=\"imprensa.php\">Nossa Missão</a></li>";*/
 		echo "</ul>";
 		$this->copyright();
 		echo "</div>";
 	}
 	
 	function copyright() {
-		echo "<p class=\"copyright\">Copyright © 2007-".date("Y")." - OITERBUSCA.com | Todos os direitos reservados. Marcas comerciais e as Logos são de propriedade de seus respectivos proprietários. O uso deste site implica a aceitação do acordo OiterBusca <a href=\"uso.php\">Política de Uso</a> e a <a href=\"privacidade.php\">Política de Privacidade</a>.</p>";
+		echo "<p class=\"copyright\">Copyright © 2005-".date("Y")." - OITERBUSCA.com | Todos os direitos reservados. Marcas comerciais e as Logos são de propriedade de seus respectivos proprietários. O uso deste site implica a aceitação do acordo OiterBusca <a href=\"uso.php\">Política de Uso</a> e a <a href=\"privacidade.php\">Política de Privacidade</a>.</p>";
 	}
 	
 	function getTheme($cor = "") {
