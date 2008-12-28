@@ -21,7 +21,7 @@
 ?>
 <html>
 <head>
-	<title>OiterBusca</title>
+	<title>OiterBusca - <?=$pagina->titulo;?></title>
 	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
 	<?=$layout->getTheme("");?>
 	<link rel="shortcut icon" href="icones/favicon.ico" >
