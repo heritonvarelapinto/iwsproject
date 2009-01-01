@@ -524,7 +524,7 @@
 		            </tr>
 		            <tr>
 		                <td width="6%"><img src="img/locked.gif"/></td>
-		                <td valign="bottom" colspan="2"><span class="TituloLoja"><font color="#333333">Prezado <?=$usuario->getNome();?>, seja bem vindo!</font></span></td>
+		                <td valign="bottom" colspan="2"><span class="TituloLoja"><font color="#333333">Prezado <?=$usuario->getNome();?>, seja bem vindo!</font></td>
 		            </tr>
 		        </tbody>
 		    </table>										    
@@ -682,5 +682,27 @@
 			/*echo "<input type=\"submit\" value=\"".$texto."\" id=\"".$nome."\" name=\"".$nome."\" class=\"".$classe."\">";*/
 		}
 		
+		function formContato() {
+			?>
+			<div id="form">
+				<ul>
+					<li>Nome:</li>
+					<li><input type="text" name="formNome" id="formNome"></li>
+				</ul>
+				<ul>
+					<li>E-mail:</li>
+					<li><input type="text" name="formNome" id="formNome"></li>
+				</ul>
+				<ul>
+					<li>Assunto:</li>
+					<li><input type="text" name="formNome" id="formNome"></li>
+				</ul>
+				<ul>
+					<li>Mensagem:</li>
+					<li><input type="text" name="formNome" id="formNome"></li>
+				</ul>
+    		</div>
+			<?
+		}
 	}
 ?>
