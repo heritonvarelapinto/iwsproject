@@ -87,10 +87,12 @@
 	<?	}
 	
 		function busca_cep($cep){  
-		     $resultado = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');  
+			 
+			 $url = 'http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string';
+		     $resultado = @file_get_contents($url);  
 		     if(!$resultado){  
 		         $resultado = "&resultado=0&resultado_txt=erro+ao+buscar+cep";  
-		     }  
+		     } 
 		     parse_str($resultado, $retorno);   
 		     return $retorno;  
 		 }
@@ -160,12 +162,12 @@
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> CEP</b></td>
-	                    <td><input type="text" onblur="javascript:cep('<?=$iddepartamento?>',this.value);" mascara="#####-###" tipo="numerico" size="11" value="<?=$cep;?>" id="campoCEP" name="campoCEP" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
+	                    <td><input type="text" onblur="javascript:buscaCep(this.value)" id="campoCEP" name="campoCEP" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
 	                </tr>
 	                <div id="resultado">
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> ENDEREÇO</b></td>
-	                    <td><input type="text" value="<?=$resultado_busca['logradouro'];?>" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
+	                    <td><input type="text" value="" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> NÚMERO</b></td>
