@@ -134,6 +134,11 @@
 					<h3><?=$pagina->titulo;?></h3>
 					<p>
 						<?=nl2br($pagina->texto);?>
+						<? $pos = strpos(strtoupper($pagina->titulo), "FALE"); 
+							if((string)$pos === (string)0) {
+								echo $layout->formContato();
+							}
+						?>
 					</p>
 				</div>
 			</div>
