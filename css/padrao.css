@@ -256,6 +256,20 @@ li.direita a {
 	float: right;
 }
 
+
+#corpo .miolo p {
+	text-align: left;
+	font-weight: normal;
+	margin: 0 10px 10px 10px;
+}
+
+#corpo .miolo h3 {
+	text-align: left;
+	font-weight: bold;
+	margin: 10px;
+	
+}
+
 /* Fix IE. Hide from IE Mac \*/
 * html ul li { float: left; height: 1%; }
 * html ul li a { height: 1%; }
