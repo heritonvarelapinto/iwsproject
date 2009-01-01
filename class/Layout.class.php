@@ -241,7 +241,7 @@ function bannersEsquerda($banners) {
 	}
 	
 	function copyright() {
-		echo "<p class=\"copyright\">Copyright © 2005-".date("Y")." - OITERBUSCA.com | Todos os direitos reservados. Marcas comerciais e as Logos são de propriedade de seus respectivos proprietários. O uso deste site implica a aceitação do acordo OiterBusca <a href=\"uso.php\">Política de Uso</a> e a <a href=\"privacidade.php\">Política de Privacidade</a>.</p>";
+		echo "<p class=\"copyright\">Copyright © 2005-".date("Y")." - OITERBUSCA.com | Todos os direitos reservados. Marcas comerciais e as Logos são de propriedade de seus respectivos proprietários. O uso deste site implica a aceitação do acordo OiterBusca <a href=\"".UrlManage::getUrlPagina('1','Política de Uso')."\" title=\"Política de Uso\">Política de Uso</a> e a <a href=\"".UrlManage::getUrlPagina('2','Política de Privacidade')."\" title=\"Política de Privacidade\">Política de Privacidade</a>.</p>";
 	}
 	
 	function getTheme($cor = "") {
