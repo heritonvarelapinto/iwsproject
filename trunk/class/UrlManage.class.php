@@ -4,9 +4,17 @@ class UrlManage {
 	
 	public static function getUrlCategoria($idcategoria, $Categoria, $Titulo){
 		if( UrlManage::HabilitadoModRewrite() ){
-			return "$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
+			return "categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
 			return "categorias.php?id=$idcategoria&titulo=$Titulo";
+		}
+	}
+	
+	public static function getUrlPagina($idpagina, $Titulo){
+		if( UrlManage::HabilitadoModRewrite() ){
+			return "pagina/$idpagina/".UrlManage::convertStringByUrlString($Titulo).".html";
+		}else{
+			return "paginas.php?id=$idpagina&titulo=$Titulo";
 		}
 	}
 	
@@ -62,7 +70,7 @@ class UrlManage {
 		return $String;
 	}		
 	private static function HabilitadoModRewrite(){
-		return true;
+		return false;
 	}
 }
 ?>
