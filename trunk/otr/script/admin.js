@@ -34,8 +34,14 @@ function buscaCep(cep_dst) {
 				   }
 			}
 		}else{
+			
+			document.getElementById("endereco").value = "";
+			document.getElementById("bairro").value = "";
+			document.getElementById("cidade").value = "";
+			document.getElementById("estado").value = "";
 			alert("Favor informar o CEP.");
 			document.getElementById("cep").focus();
+			
 		}
 }
 
