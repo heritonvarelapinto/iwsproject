@@ -234,7 +234,7 @@
 			
 							<tr>
 								<td height="45">
-								<script src="script/admin.js" language="JavaScript"/></script>
+								<script src="script/admin.js" charset="utf-8" language="JavaScript"/></script>
 								<link rel="stylesheet" href="css/admin.css" type="text/css">						
 								<TABLE cellspacing="0" cellpadding="0" width="100%" border="0">
 								    <TBODY>
