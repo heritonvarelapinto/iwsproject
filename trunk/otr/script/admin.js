@@ -2,32 +2,33 @@ function buscaCep(cep_dst) {
 		if(cep_dst != '') {
 			ajax = ajaxInit();
 			if(ajax) {
-			    ajax.open("POST", "../buscaCep.php", true );
+			    ajax.open("POST", "buscaCep.php", true );
 			    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");		    
 			    ajax.send("cep="+cep_dst);
-			    
+
 			    document.getElementById("endereco").value = 'Aguarde localizando CEP.';
 			    			    
 			    ajax.onreadystatechange = function() {     
 			       if(ajax.readyState == 4) {
 			       	
 					     if(ajax.status == 200) {
-					     		 var resposta = ajax.responseText;
+					     		 var resposta = ajax.responseText;     		 
               					 var aDados=resposta.split(';');
-              					 if(aDados[4] == '') {
-              					 	document.anuncios.endereco.value = aDados[0];
-              					 	document.anuncios.bairro.value = aDados[1];
-              					 	document.anuncios.cidade.value = aDados[2];
-              					 	document.anuncios.estado.value = aDados[3];
+              					 
+              					 if(aDados[0] == 1) {
+	              					document.getElementById("endereco").value = aDados[5] +" "+ aDados[6];
+              						document.getElementById("bairro").value = aDados[4];
+              						document.getElementById("cidade").value = aDados[3];
+              						document.getElementById("estado").value = aDados[2];
               					 } else {
-              					 	document.anuncios.endereco.value = "";
-              					 	document.anuncios.bairro.value = "";
-              					 	document.anuncios.cidade.value = "";
-              					 	document.anuncios.estado.value = "";
-              					 	alert(aDados[4])
+              					 	document.getElementById("endereco").value = "";
+              						document.getElementById("bairro").value = "";
+              						document.getElementById("cidade").value = "";
+              						document.getElementById("estado").value = "";
+              						alert('CEP Inválido');
               					 }
 						       } else {
-						         alert(ajax.statusText);
+						         alert("Erro: "+ajax.statusText);
 						       }
 					     }
 				   }
@@ -1042,6 +1043,7 @@ function dest(opcao) {
 	}	
 }
 
-function cep(iddep,ce) {	
-	document.location = '?menu=7&act=add&iddepartamento='+iddep+'&cep='+ce;
+function cep(cep) {	
+	//document.location = '?menu=7&act=add&iddepartamento='+iddep+'&cep='+ce;
+	
 }
