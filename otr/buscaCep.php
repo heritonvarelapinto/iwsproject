@@ -10,6 +10,7 @@
 	foreach ($cep as $dados => $valor) {
 		$resultado .= utf8_encode($valor).";";
 	}
+		
 	echo $resultado;
 ?>
 	

@@ -162,7 +162,7 @@
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> CEP</b></td>
-	                    <td><input type="text" onblur="javascript:buscaCep(this.value)" id="campoCEP" name="campoCEP" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
+	                    <td><input type="text" tipo="numerico" mascara="#####-###" onfocus="this.value = ''" onblur="javascript:buscaCep(this.value)" id="campoCEP" name="campoCEP" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
 	                </tr>
 	                <div id="resultado">
 	                <tr class="Linha2Tabela">
