@@ -1,38 +1,39 @@
 <?
 class UrlManage {
-	public $path = "/iwsprojecthhh/";
 	
 	public static function getUrlCategoria($idcategoria, $Categoria, $Titulo){
+		$layout = new Layout();
 		if( UrlManage::HabilitadoModRewrite() ){
-			return "categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
+			return $layout->image_path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
 			return "categorias.php?id=$idcategoria&titulo=$Titulo";
 		}
 	}
 	
 	public static function getUrlPagina($idpagina, $Titulo){
+		$layout = new Layout();
 		if( UrlManage::HabilitadoModRewrite() ){
-			return "pagina/$idpagina/".UrlManage::convertStringByUrlString($Titulo).".html";
+			return $layout->image_path."pagina/$idpagina/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
 			return "paginas.php?id=$idpagina&titulo=$Titulo";
 		}
 	}
 	
 	public static function getUrlSubCategoria($idcategoria, $categoria,$idsubcategoria, $subcategoria){
-		$path = "/iwsproject/";
+		$layout = new Layout();
 		if( UrlManage::HabilitadoModRewrite() ){
 			//return UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
-			return $path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
+			return $layout->image_path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($categoria)."/".$idsubcategoria."/".UrlManage::convertStringByUrlString($subcategoria).".html";
 		}else{
-			return $path."categorias.php?id=$idcategoria&sub=$idsubcategoria";
+			return "categorias.php?id=$idcategoria&sub=$idsubcategoria";
 		}
 	}
 	
 	public static function getUrlCliente($idcategoria, $Categoria, $Titulo){
 		if( UrlManage::HabilitadoModRewrite() ){
-			return "categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
+			return $layout->image_path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
-			return "categoria.php?id=$idcategoria&titulo=$Titulo";
+			return "categorias.php?id=$idcategoria&titulo=$Titulo";
 		}
 	}
 	
@@ -70,7 +71,7 @@ class UrlManage {
 		return $String;
 	}		
 	private static function HabilitadoModRewrite(){
-		return false;
+		return true;
 	}
 }
 ?>

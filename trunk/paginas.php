@@ -24,8 +24,8 @@
 	<title>OiterBusca - <?=$pagina->titulo;?></title>
 	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
 	<?=$layout->getTheme("");?>
-	<link rel="shortcut icon" href="icones/favicon.ico" >
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
+	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
 	<script>
 		varover = 0;
 		$(document).ready(function(){
@@ -75,7 +75,7 @@
 			
 			<table class="logo">
 				<tr>
-					<td align="left"><img src="images/logos/logo.jpg" alt="OiterBusca um site "/></td>
+					<td align="left"><img src="<?=$layout->image_path;?>images/logos/logo.jpg" alt="OiterBusca um site "/></td>
 					<td align="right" style="padding-right: 10px;"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topo",1));?></td>
 					<td align="right" width="186"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1));?></td>
 				</tr>
@@ -110,7 +110,7 @@
 						<div class="menuItensDir">
 							<ul>
 								<li>
-									<a href="#" class="showAll">Departamentos <img border="0" src="images/seta.gif"></a>
+									<a href="#" class="showAll">Departamentos <img border="0" src="<?=$layout->image_path;?>images/seta.gif"></a>
 									<div id="departamentos" style="display: none;">
 										<ul>
 											<?=$layout->menuSuperiorDepartamentos($departamentos);?>
