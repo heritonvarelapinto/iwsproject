@@ -7,6 +7,7 @@ class Anuncio {
     public $endereco;
     public $numero;
     public $complemento;
+    public $bairro;
     public $cidade;
     public $estado;
     public $cep;
@@ -143,6 +144,13 @@ class Anuncio {
     }
     function setStatus($statusIn) {
           $this->status = $statusIn;
+    }
+    
+    function getBairro() {
+          return $this->bairro;
+    }
+    function setBairro($bairroIn) {
+          $this->bairro = $bairroIn;
     }
 }
 ?>

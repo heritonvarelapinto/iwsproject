@@ -243,6 +243,42 @@ class AnuncioDAO extends PDOConnectionFactory {
 		
 	}
 	
+	public function ListaAnunciosPorSubDepartamento($id) {
+		$sql = "SELECT * FROM anuncios WHERE idsubdepartamento = ".$id." and status = '1'";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Anuncio();
+			$temp->setIdanuncio($rs->idanuncio);
+		    $temp->setIddepartamento($rs->iddepartamento);
+		    $temp->setIdsubdepartamento($rs->idsubdepartamento);
+		    $temp->setNome($rs->nome);
+		    $temp->setEndereco($rs->endereco);
+		    $temp->setNumero($rs->numero);
+		    $temp->setComplemento($rs->complemento);
+		    $temp->setBairro($rs->bairro);
+		    $temp->setCidade($rs->cidade);
+		    $temp->setEstado($rs->estado);
+		    $temp->setCep($rs->cep);
+		    $temp->setTelefones($rs->telefones);
+		    $temp->setSite($rs->site);
+		    $temp->setEmail($rs->email);
+		    $temp->setLogo($rs->logo);
+		    $temp->setTexto($rs->texto);
+		    $temp->setDe($rs->de);
+		    $temp->setAte($rs->ate);
+	    	$temp->setStatus($rs->status);
+			
+			array_push($searchResults, $temp);
+		} 
+		
+		return $searchResults;
+		
+	}
+	
 	//mostra os registros
 	public function Lista() {
 		$sql = "SELECT * FROM banners";
