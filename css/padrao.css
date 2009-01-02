@@ -336,3 +336,47 @@ div.botao div div {
 	font-size: 12px;
 	color: #000000;
 }
+
+ul#bread {
+	width: 98%;
+	margin: 0px 5px;
+	border: 0px solid #000;
+	list-style: none;
+	height: 20px;
+	font-size: 12px;
+}
+
+ul#bread li {
+	float: left;
+	padding-left: 5px;
+}
+
+ul#bread li a {
+	color: #000;
+	text-decoration: none;
+}
+
+ul#bread li a:hover {
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+ul#listaDepartamento {
+	float: left;
+	width: 32%;
+	padding: 5px;
+}
+
+ul#listaDepartamento li,
+ul#listaDepartamento li ul li {
+	WHITE-SPACE: nowrap !important;
+	font-size: 11px;
+}
+
+ul#listaDepartamento li ul {
+	margin-left: 15px;
+}
+
+ul#listaDepartamento li ul li {
+	font-weight: normal;
+}

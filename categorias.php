@@ -9,13 +9,6 @@ function __autoload($classe) {
 	$cid = $_GET['cid'];
 	$cliente = $_GET['cliente'];
 	
-	echo "ID = ".$id."<br>";
-	echo "TITULO = ".$titulo."<br>";
-	echo "SUB = ".$sub."<br>";
-	echo "SUBtitulo = ".$subtitulo."<br>";
-	echo "cid = ".$cid."<br>";
-	echo "CLiente = ".$cliente."<br>";
-	
 	$departamentoDAO = new DepartamentoDAO();
 	$subdepartamentos = $departamentoDAO->ListaSubdepartamentos($id);
 	
@@ -23,14 +16,17 @@ function __autoload($classe) {
 	$departamentos = new Departamento();
 	$departamentosDAO = new DepartamentoDAO();
 	$departamentos = $departamentosDAO->Lista();
-	
+	$nomeDepartamento = $departamentosDAO->getDepartamentosPorId($id);
 	$banners = new Banner();
 	$bannerDAO = new BannerDAO();
-	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateral",10);
+	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateral",10);
+	if(count($banners == 0)) {
+		$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateral",10);
+	}
 ?>
 <html>
 <head>
-	<title>OiterBusca - <?=$pagina->titulo;?></title>
+	<title>OiterBusca - <?=$nomeDepartamento->departamento;?></title>
 	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
 	<?=$layout->getTheme("");?>
 	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
@@ -141,13 +137,17 @@ function __autoload($classe) {
 								$subdepartamento = new Subdepartamento();
 								$subdepartamentoDAO = new SubdepartamentoDAO();
 								$subdepartamentos = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($id);
-								
-								$layout->menuSubDepartamentos($subdepartamentos);
+								if(count($subdepartamentos) == 0) {
+									$layout->menuDepartamentos($departamentos, $id);
+								} else {
+									$layout->menuSubDepartamentos($subdepartamentos);
+								}
 							}
 						?>
-						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
+						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateralesq",3));?>
 				</div>
 				<div class="miolo">
+					<?=$layout->breadcrumb($id,$sub);?>
 					<h3><?=$pagina->titulo;?></h3>
 					<p>
 						<?=nl2br($pagina->texto);?>
@@ -162,12 +162,6 @@ function __autoload($classe) {
 		</div>
 		<div id="lateralDireita">
 			<?=$layout->bannersLaterais($banners);?>
-		</div>
-		<div id="lateralDireita">
-			<?=$layout->enquete();?>
-		</div>
-		<div id="lateralDireita">
-			<?=$layout->boletim();?>
 		</div>
 		<?=$layout->rodape();?>
 	</div>
