@@ -24,6 +24,18 @@ function __autoload($classe) {
 	if(count($banners) == 0) {
 		$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateral",10);
 	}
+	
+	$topoPeq = $bannerDAO->ListaBannerPorDepartamentoPosicao($id,"topopeq",1);
+	$topo	 = $bannerDAO->ListaBannerPorDepartamentoPosicao($id,"topo",1);
+	
+	if(count($topoPeq) == 0) {
+		$topoPeq = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1);
+	}
+	
+	if(count($topo) == 0) {
+		$topo = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topo",1);
+	}
+	
 ?>
 <html>
 <head>
@@ -82,8 +94,8 @@ function __autoload($classe) {
 			<table class="logo">
 				<tr>
 					<td align="left"><img src="<?=$layout->image_path;?>images/logos/logo.jpg" alt="OiterBusca um site "/></td>
-					<td align="right" style="padding-right: 10px;"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topo",1));?></td>
-					<td align="right" width="186"><?=$layout->bannersTopo($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","topopeq",1));?></td>
+					<td align="right" style="padding-right: 10px;"><?=$layout->bannersTopo($topo);?></td>
+					<td align="right" width="186"><?=$layout->bannersTopo($topoPeq);?></td>
 				</tr>
 			</table>
 			
