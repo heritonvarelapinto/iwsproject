@@ -162,15 +162,18 @@ function __autoload($classe) {
 				</div>
 				<div class="miolo">
 					<?=$layout->breadcrumb($id,$sub);?>
-					<h3><?=$pagina->titulo;?></h3>
-					<p>
-						<?=nl2br($pagina->texto);?>
-						<? $pos = strpos(strtoupper($pagina->titulo), "FALE"); 
-							if((string)$pos === (string)0) {
-								echo $layout->formContato();
-							}
-						?>
-					</p>
+					<? 
+						$anuncio = new Anuncio();
+						$anuncioDAO = new AnuncioDAO();
+						$anuncio = $anuncioDAO->ListaAnunciosPorDepartamento($id);
+						$totAnuncios = count($anuncio);
+						for($i = 0 ; $i < $totAnuncios;$i++) {
+							echo "<p>";
+							echo $anuncio[$i]->getNome();
+							echo "</p>";
+						}
+						
+					?>
 				</div>
 			</div>
 		</div>
