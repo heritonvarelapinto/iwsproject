@@ -1,6 +1,8 @@
 <?php
 class Layout extends HTML {
 	
+	var $image_path = "http://localhost/oiter/";
+	
 	function menuSuperiorDepartamentos($departamentos) {
 		$j = 0;
 		$totDepartamentos = count($departamentos);
@@ -26,7 +28,7 @@ class Layout extends HTML {
 
 	function menuDepartamentos($departamentos) {
 		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
-		echo "<img src=\"images/departamentos.gif\">";
+		echo "<img src=\"".$this->image_path."images/departamentos.gif\">";
 		echo "</td></tr></table>";
 		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
 		$totDepartamentos = count($departamentos);
@@ -52,10 +54,41 @@ class Layout extends HTML {
 		echo "</td></tr></table>";
 	}
 	
+	function menuSubDepartamentos($departamentos) {
+		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
+		echo "<img src=\"".$this->image_path."images/departamentos.gif\">";
+		echo "</td></tr></table>";
+		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
+		$totDepartamentos = count($departamentos);
+		$departamentoDAO = new DepartamentoDAO();
+		$nomeDepartamento = $departamentoDAO->getDepartamentosPorId($departamentos[$i]->iddepartamento);
+		echo "<ul>";
+		print_r($nomeDepartamento);
+		for($i = 0; $i < $totDepartamentos; $i++) {
+			$link = UrlManage::getUrlSubCategoria($departamentos[$i]->iddepartamento,$_GET['titulo'],$departamentos[$i]->idsubdepartamento,$departamentos[$i]->subdepartamento);
+		?>
+			<li>
+				<a href="<?=$link;?>">
+					<?=$departamentos[$i]->getSubDepartamento();?>
+				</a>
+			</li>
+		<?
+		}
+		?>
+		<li class="direita">
+			<a href="">
+				» Ver todos os departamentos
+			</a>
+		</li>
+		<?
+		echo "</ul>";
+		echo "</td></tr></table>";
+	}
+	
 	function bannersTopo($banners) {
 		?>
 		<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-				<img src="images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
+				<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
 		</a>
 		<?
 	}
@@ -65,7 +98,7 @@ function bannersEsquerda($banners) {
 		$totBanners = count($banners);
 		/*echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr><td>";
-		echo "<img src=\"images/destaques.gif\">";
+		echo "<img src=\"".$this->image_path."images/destaques.gif\">";
 		echo "</td></tr>";
 		echo "</table>";*/
 		echo "<br>";
@@ -77,7 +110,7 @@ function bannersEsquerda($banners) {
 			?>
 				<li>
 					<a class="bannerEsq" href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
+						<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
 					</a>
 				</li>
 			<?
@@ -86,7 +119,7 @@ function bannersEsquerda($banners) {
 			?>
 				<li>
 					<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-						<img src="images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
+						<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
 					</a>
 				</li>
 			<?
@@ -99,7 +132,7 @@ function bannersEsquerda($banners) {
 		function enquete() {
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr><td>";
-		echo "<img src=\"images/enquete.gif\">";
+		echo "<img src=\"".$this->image_path."images/enquete.gif\">";
 		echo "</td></tr>";
 		echo "</table>";
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
@@ -132,7 +165,7 @@ function bannersEsquerda($banners) {
 	function boletim() {
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr><td>";
-		echo "<img src=\"images/boletim.gif\">";
+		echo "<img src=\"".$this->image_path."images/boletim.gif\">";
 		echo "</td></tr>";
 		echo "</table>";
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
@@ -176,7 +209,7 @@ function bannersEsquerda($banners) {
 		$totBanners = count($banners);
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr><td>";
-		echo "<img src=\"images/destaques.gif\">";
+		echo "<img src=\"".$this->image_path."images/destaques.gif\">";
 		echo "</td></tr>";
 		echo "</table>";
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
@@ -187,7 +220,7 @@ function bannersEsquerda($banners) {
 			?>
 				<li>
 					<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
+						<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
 					</a>
 				</li>
 			<?
@@ -246,9 +279,9 @@ function bannersEsquerda($banners) {
 	
 	function getTheme($cor = "") {
 		if($cor!="") {
-			echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"css/padrao_".$cor.".css\"/>";
+			echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"".$this->image_path."css/padrao_".$cor.".css\"/>";
 		} else {
-			echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"css/padrao.css\"/>";
+			echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"".$this->image_path."css/padrao.css\"/>";
 		}
 	}
 }
