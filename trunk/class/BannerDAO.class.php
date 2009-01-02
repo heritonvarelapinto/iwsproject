@@ -129,6 +129,7 @@ class BannerDAO extends PDOConnectionFactory {
 		$temp->setTarget($rs->target);
 		$temp->setClick($rs->click);
 		$temp->setData($rs->data);
+		$temp->setExtensao($rs->banner);
 	
 		return $temp;
 	}	
@@ -159,6 +160,7 @@ class BannerDAO extends PDOConnectionFactory {
 			$temp->setTarget($rs->target);
 			$temp->setClick($rs->click);
 			$temp->setData($rs->data);
+			$temp->setExtensao($rs->banner);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -195,6 +197,7 @@ class BannerDAO extends PDOConnectionFactory {
 			$temp->setTarget($rs->target);
 			$temp->setClick($rs->click);
 			$temp->setData($rs->data);
+			$temp->setExtensao($rs->banner);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -225,6 +228,7 @@ class BannerDAO extends PDOConnectionFactory {
 			$temp->setTarget($rs->target);
 			$temp->setClick($rs->click);
 			$temp->setData($rs->data);
+			$temp->setExtensao($rs->banner);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -259,6 +263,7 @@ class BannerDAO extends PDOConnectionFactory {
 			$temp->setTarget($rs->target);
 			$temp->setClick($rs->click);
 			$temp->setData($rs->data);
+			$temp->setExtensao($rs->banner);
 			
 			array_push($searchResults, $temp);
 		} 

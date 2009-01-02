@@ -42,6 +42,8 @@
     		$size = $_FILES["banner"]["size"];
     		$tamanho = 1000000;
     		
+    		list($largura,$altura) = getimagesize($_FILES["banner"]["tmp_name"]);
+    		
     		$setBanner = $name;
     		$setUrl = $_POST["url"];
     		$setTarget = $_POST["target"];
@@ -49,8 +51,8 @@
     		$setIddepartamento = $_POST["iddep"];
     		$setLado = $_POST["lado"];
     		$setNumero = $_POST["numero"];
-    		$setWidth = $_POST["largura"];
-    		$setHeight = $_POST["altura"];
+    		$setWidth = $largura;
+    		$setHeight = $altura;
     		
     		$banner->setLado($setLado);
     		$banner->setIddepartamento($setIddepartamento);

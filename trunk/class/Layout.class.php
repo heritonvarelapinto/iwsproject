@@ -61,7 +61,7 @@ class Layout extends HTML {
 		echo "</td></tr></table>";
 	}
 	
-	function menuSubDepartamentos($departamentos) {
+	function menuSubDepartamentos($departamentos,$id="") {
 		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
 		echo "<img src=\"".$this->image_path."images/departamentos.gif\">";
 		echo "</td></tr></table>";
@@ -70,13 +70,19 @@ class Layout extends HTML {
 		$departamentoDAO = new DepartamentoDAO();
 		$nomeDepartamento = $departamentoDAO->getDepartamentosPorId($departamentos[$i]->iddepartamento);
 		echo "<ul>";
-		print_r($nomeDepartamento);
+		
 		for($i = 0; $i < $totDepartamentos; $i++) {
 			$link = UrlManage::getUrlSubCategoria($departamentos[$i]->iddepartamento,$_GET['titulo'],$departamentos[$i]->idsubdepartamento,$departamentos[$i]->subdepartamento);
 		?>
 			<li>
 				<a href="<?=$link;?>">
-					<?=$departamentos[$i]->getSubDepartamento();?>
+				<?
+					if($departamentos[$i]->getIdSubdepartamento() == $id) {
+						echo "<b>".$departamentos[$i]->getSubDepartamento()."</b>";
+					} else {
+						echo $departamentos[$i]->getSubDepartamento();
+					}
+					?>
 				</a>
 			</li>
 		<?
@@ -93,21 +99,46 @@ class Layout extends HTML {
 	}
 	
 	function bannersTopo($banners) {
-		?>
-		<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-				<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
-		</a>
-		<?
+		
+			$layout = new Layout();
+			if(count($banners) > 0 ) {
+
+				if($banners->getExtensao() != "swf") {
+				?>
+				<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
+					<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
+				</a>
+				
+				<?
+				} else {
+				?>
+				<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$banners->getWidth();?>" height="<?=$banners->getheight();?>">
+					<param name="movie" value="<?=$layout->image_path;?>images/banners/<?=$banners->getBanner();?>" /><param name="quality" value="high" />
+					<param name="wmode" value="transparent" />
+					<param name="bgcolor" value="#ffffff" />
+					<embed src="<?=$layout->image_path;?>images/banners/<?=$banners->getBanner();?>" 
+									quality="high"
+									wmode="transparent" 
+									bgcolor="#ffffff" 
+									width="<?=$banners->getWidth();?>" 
+									height="<?=$banners->getheight();?>" 
+									name="promocao" 
+									align="middle" 
+									allowScriptAccess="sameDomain" 
+									type="application/x-shockwave-flash" 
+									pluginspage="http://www.macromedia.com/go/getflashplayer"
+					/>
+				</object>
+				<?
+				}
+			}
 	}
+
 	
 function bannersEsquerda($banners) {
-		
+		$layout = new Layout();
 		$totBanners = count($banners);
-		/*echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-		echo "<tr><td>";
-		echo "<img src=\"".$this->image_path."images/destaques.gif\">";
-		echo "</td></tr>";
-		echo "</table>";*/
+
 		if($totBanners > 0) {
 			echo "<br>";
 			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
@@ -117,18 +148,72 @@ function bannersEsquerda($banners) {
 				for($i = 0; $i < $totBanners; $i++) {
 				?>
 					<li>
+				<?
+					if($banners[$i]->getExtensao() != "swf") {
+				?>
 						<a class="bannerEsq" href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
 							<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
 						</a>
-					</li>
+					
 				<?
+					} else {
+				?>
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$banners[$i]->getWidth();?>" height="<?=$banners[$i]->getheight();?>">
+							<param name="movie" value="<?=$layout->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" /><param name="quality" value="high" />
+							<param name="wmode" value="transparent" />
+							<param name="bgcolor" value="#ffffff" />
+							<embed src="<?=$layout->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" 
+											quality="high"
+											wmode="transparent" 
+											bgcolor="#ffffff" 
+											width="<?=$banners[$i]->getWidth();?>" 
+											height="<?=$banners[$i]->getheight();?>" 
+											name="promocao" 
+											align="middle" 
+											allowScriptAccess="sameDomain" 
+											type="application/x-shockwave-flash" 
+											pluginspage="http://www.macromedia.com/go/getflashplayer"
+							/>
+					</object>
+				<?
+					}
+				?>
+					</li>
+				<?php
 				}
 			} else {
 				?>
 					<li>
+				<?
+					if($banners->getExtensao() != "swf") {
+				?>
 						<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
 							<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
 						</a>
+					
+				<?
+					} else {
+				?>
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$banners->getWidth();?>" height="<?=$banners->getheight();?>">
+							<param name="movie" value="<?=$layout->image_path;?>images/banners/<?=$banners->getBanner();?>" /><param name="quality" value="high" />
+							<param name="wmode" value="transparent" />
+							<param name="bgcolor" value="#ffffff" />
+							<embed src="<?=$layout->image_path;?>images/banners/<?=$banners->getBanner();?>" 
+											quality="high"
+											wmode="transparent" 
+											bgcolor="#ffffff" 
+											width="<?=$banners->getWidth();?>" 
+											height="<?=$banners->getheight();?>" 
+											name="promocao" 
+											align="middle" 
+											allowScriptAccess="sameDomain" 
+											type="application/x-shockwave-flash" 
+											pluginspage="http://www.macromedia.com/go/getflashplayer"
+							/>
+					</object>
+				<?
+					}
+				?>
 					</li>
 				<?
 			}
@@ -214,7 +299,7 @@ function bannersEsquerda($banners) {
 	
 
 	function bannersLaterais($banners) {
-		
+		$layout = new Layout();
 		$totBanners = count($banners);
 		if($totBanners > 0) {
 			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
@@ -229,20 +314,74 @@ function bannersEsquerda($banners) {
 				for($i = 0; $i < $totBanners; $i++) {
 				?>
 					<li>
-						<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-							<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
-						</a>
+					<?
+					if($banners[$i]->getExtensao() != "swf") {
+					?>
+					<a class="bannerEsq" href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
+						<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
+					</a>
+					
+					<?
+					} else {
+					?>
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$banners[$i]->getWidth();?>" height="<?=$banners[$i]->getheight();?>">
+						<param name="movie" value="<?=$layout->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" /><param name="quality" value="high" />
+						<param name="wmode" value="transparent" />
+						<param name="bgcolor" value="#ffffff" />
+						<embed src="<?=$layout->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" 
+										quality="high"
+										wmode="transparent" 
+										bgcolor="#ffffff" 
+										width="<?=$banners[$i]->getWidth();?>" 
+										height="<?=$banners[$i]->getheight();?>" 
+										name="promocao" 
+										align="middle" 
+										allowScriptAccess="sameDomain" 
+										type="application/x-shockwave-flash" 
+										pluginspage="http://www.macromedia.com/go/getflashplayer"
+						/>
+					</object>
+					<?
+					}
+					?>
 					</li>
 				<?
 				}
 			} elseif($totBanners == 1) {
 				?>
 					<li>
-						<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-							<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
-						</a>
+					<?
+					if($banners->getExtensao() != "swf") {
+					?>
+					<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
+						<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
+					</a>
+					
+					<?
+					} else {
+					?>
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$banners->getWidth();?>" height="<?=$banners->getheight();?>">
+						<param name="movie" value="<?=$layout->image_path;?>images/banners/<?=$banners->getBanner();?>" /><param name="quality" value="high" />
+						<param name="wmode" value="transparent" />
+						<param name="bgcolor" value="#ffffff" />
+						<embed src="<?=$layout->image_path;?>images/banners/<?=$banners->getBanner();?>" 
+										quality="high"
+										wmode="transparent" 
+										bgcolor="#ffffff" 
+										width="<?=$banners->getWidth();?>" 
+										height="<?=$banners->getheight();?>" 
+										name="promocao" 
+										align="middle" 
+										allowScriptAccess="sameDomain" 
+										type="application/x-shockwave-flash" 
+										pluginspage="http://www.macromedia.com/go/getflashplayer"
+						/>
+					</object>
+					<?
+					}
+					?>
 					</li>
-				<?
+					<?
 			}
 			
 			echo "</ul>";
