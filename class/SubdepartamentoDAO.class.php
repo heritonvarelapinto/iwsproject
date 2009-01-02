@@ -135,7 +135,7 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 			array_push($searchResults, $temp);
 		} 
 		
-		return $searchResults;
+		return $temp;
 	}
 	
 	public function getSubdepartamentosPorIddepartamento($id) {

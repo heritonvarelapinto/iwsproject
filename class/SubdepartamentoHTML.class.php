@@ -109,6 +109,7 @@
 			$subdepartamentoDAO = new SubdepartamentoDAO();
 			
 			$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($idsubdepartamento);
+			print_r($subdepartamento);
 		?> 
 	        <span class="TituloPage">• Altera Subdepartamento</span>
 	        <div align="right"><a class="TextoPageLink" href="?menu=2&act=altdep&idsubdepartamento=">Retornar para Subdepartamentos</a></div>
