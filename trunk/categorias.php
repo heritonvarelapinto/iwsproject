@@ -20,7 +20,8 @@ function __autoload($classe) {
 	$banners = new Banner();
 	$bannerDAO = new BannerDAO();
 	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateral",10);
-	if(count($banners == 0)) {
+
+	if(count($banners) == 0) {
 		$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateral",10);
 	}
 ?>
@@ -122,7 +123,7 @@ function __autoload($classe) {
 										</ul>
 									</div>
 								</li>
-								<li class="novo"><a href="#" class="motors">Motors</a></li>
+								<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
 							</ul>
 						</div>
 					</div>
@@ -140,11 +141,12 @@ function __autoload($classe) {
 								if(count($subdepartamentos) == 0) {
 									$layout->menuDepartamentos($departamentos, $id);
 								} else {
-									$layout->menuSubDepartamentos($subdepartamentos);
+									$layout->menuSubDepartamentos($subdepartamentos, $sub);
 								}
 							}
 						?>
-						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateralesq",3));?>
+						<?
+						echo $layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateralesq",3));?>
 				</div>
 				<div class="miolo">
 					<?=$layout->breadcrumb($id,$sub);?>

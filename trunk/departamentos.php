@@ -26,7 +26,7 @@ function __autoload($classe) {
 ?>
 <html>
 <head>
-	<title>OiterBusca - <?=$nomeDepartamento->departamento;?></title>
+	<title>OiterBusca - Todos os departamentos</title>
 	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
 	<?=$layout->getTheme("");?>
 	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
@@ -122,7 +122,7 @@ function __autoload($classe) {
 										</ul>
 									</div>
 								</li>
-								<li class="novo"><a href="#" class="motors">Motors</a></li>
+								<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
 							</ul>
 						</div>
 					</div>
@@ -140,14 +140,15 @@ function __autoload($classe) {
 						echo "<ul id=\"listaDepartamento\">";
 						$subdepartamentos = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($departamentos[$i]->getIddepartamento());
 						$totSubdepartamento = count($subdepartamentos);
-						echo "<li class=\"categoria\">".$departamentos[$i]->getDepartamento();
+						echo "<li class=\"categoria\"><a href=\"".UrlManage::getUrlCategoria($departamentos[$i]->getIddepartamento(),"",$departamentos[$i]->getDepartamento())."\" title=\"".$departamentos[$i]->getDepartamento()."\">".$departamentos[$i]->getDepartamento()."</a>";
 						if($totSubdepartamento > 0) {
 							echo "(".$totSubdepartamento.")";
 							echo "<ul>";
 							for($y = 0; $y < $totSubdepartamento; $y++) {
-								echo "<li class=\"subcategoria\">".$subdepartamentos[$y]->getSubdepartamento()."</li>";		
+								echo "<li class=\"subcategoria\"><a href=\"".UrlManage::getUrlSubCategoria($departamentos[$i]->getIddepartamento(),$departamentos[$i]->getDepartamento(),$subdepartamentos[$y]->getIdSubdepartamento(),$subdepartamentos[$y]->getSubdepartamento())."\" title=\"".$subdepartamentos[$y]->getSubdepartamento()."\">".$subdepartamentos[$y]->getSubdepartamento()."</a></li>";
 							}
 							echo "</ul></li>";
+							
 						} else {
 							echo "</li>";
 						}
