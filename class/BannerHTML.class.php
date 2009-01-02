@@ -150,14 +150,15 @@
 					    $height = $banner[$i]->getHeight();
 					    $largura = $width / 2;
 					    $altura = $height / 2;
-					
+					    $source = "../images/banners/".$banner[$i]->getBanner();
+						list($width, $height) = getimagesize($source);
 				?>
 						<tr class="Linha1Tabela">
 							<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','468','80');"><br><? $this->data($banner[$i]->getData()); ?></td>							
 							<td align="center">
 								<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
 									<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
-									<param name="movie" value="../images/banners/<?=$banner->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+									<param name="movie" value="../images/banners/<?=$banner[$i]->getBanner();?>" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><embed src="../images/banners/<?=$banner[$i]->getBanner();?>" quality="high" wmode="transparent" bgcolor="#ffffff" width="<?=$largura;?>" height="<?=$altura;?>" name="promocao" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 									</object>
 								<? }else{ ?>
 									<img src="../images/banners/<?=$banner[$i]->getBanner();?>" width="<?=$largura;?>" height="<?=$altura;?>" border="0">
@@ -226,7 +227,9 @@
 			</table>
 	<?	}
 	
-		function BannerLateralDireita($iddep) { ?>		
+		function BannerLateralDireita($iddep) {
+			$layout = new Layout();
+			?>		
 			<table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
 				<tr class="TituloTabela">
 					<td  colspan="3" class="label2">Página [<? if($iddep == "inicial") { echo "Página Inicial"; }else{ echo "Sub-páginas"; } ?>]</td>
@@ -242,11 +245,13 @@
 					$totBanner = count($banner);									
 					$a = $totBanner + 1;
 						
-					for ($i=0;$i<$totBanner;$i++) {	
+					for ($i=0;$i<$totBanner;$i++) {						
 						$width = $banner[$i]->getWidth(); 
 					    $height = $banner[$i]->getHeight();
 					    $largura = $width / 2;
-					    $altura = $height / 100;
+					    $altura = $height / 2;
+					    
+					    
 				?>
 							<tr class="Linha1Tabela">
 								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','150','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
@@ -293,12 +298,13 @@
 						
 					for ($i=0;$i<$totBanner;$i++) {	
 						$width = $banner[$i]->getWidth(); 
+						
 					    $height = $banner[$i]->getHeight();
 					    $largura = $width / 2;
-					    $altura = $height / 100;
+					    $altura = $height / 2;
 				?>
 							<tr class="Linha1Tabela">
-								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>','200','5000');"><br><? $this->data($banner[$i]->getData()); ?></td>							
+								<td width="25%" align="center">Banner <?=$i+1;?><br><input type="button" class="bttn4" value="Alterar" onclick="altBanner('<?=$banner[$i]->getIdbanner();?>');"><br><? $this->data($banner[$i]->getData()); ?></td>							
 								<td align="center">
 									<? if($this->pegaExt($banner[$i]->getBanner()) == "swf") { ?>													
 										<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$largura;?>" height="<?=$altura;?>" id="promocao" align="middle">
@@ -334,8 +340,6 @@
 			$iddep = $_GET["iddep"];
 			$lado = $_GET["lado"];
 			$numero = $_GET["numero"];
-			$largura = $_GET["w"];
-			$altura = $_GET["h"];
 							
 			if(isset($idbanner)) {
 				$width = $banner->getWidth(); 

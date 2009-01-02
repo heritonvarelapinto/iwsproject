@@ -11,6 +11,7 @@ class Banner {
 	public $target;
 	public $click;
 	public $data;
+	public $extensao;
 	
 	function upload_banners($name,$type,$tmp_name,$size,$tamanho,$largura,$altura) {	
 		$erro = $config = array();
@@ -200,5 +201,14 @@ class Banner {
           $this->data = $dataIn;
     }
 
+    function getExtensao() {
+          return $this->extensao;
+    }
+    function setExtensao($extensaoIn) {
+    	preg_match("/\.(gif|png|jpg|jpeg|swf){1}$/i", $extensaoIn, $ext);
+        $this->extensao = $ext[1];
+    }
+    
+    
 }
 ?>

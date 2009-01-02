@@ -361,22 +361,43 @@ ul#bread li a:hover {
 	text-decoration: underline;
 }
 
+#corpo .lista {
+	width: 98%;
+	text-align: left;
+	float: right;
+}
+
 ul#listaDepartamento {
 	float: left;
 	width: 32%;
 	padding: 5px;
+	list-style-type: none;
 }
 
 ul#listaDepartamento li,
-ul#listaDepartamento li ul li {
+ul#listaDepartamento li ul li,
+ul#listaDepartamento li a,
+ul#listaDepartamento li ul li a {
 	WHITE-SPACE: nowrap !important;
 	font-size: 11px;
+	text-decoration: none;
+	color: #333;
+}
+
+ul#listaDepartamento li ul li a:hover {
+	color: #FF0000;
+}
+
+ul#listaDepartamento li a:hover {
+	color: #0000FF;
 }
 
 ul#listaDepartamento li ul {
 	margin-left: 15px;
+	list-style-type: none;
 }
 
 ul#listaDepartamento li ul li {
 	font-weight: normal;
+	clear: both;
 }
