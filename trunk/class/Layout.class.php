@@ -26,7 +26,7 @@ class Layout extends HTML {
 		}
 	}
 
-	function menuDepartamentos($departamentos) {
+	function menuDepartamentos($departamentos, $id ="") {
 		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
 		echo "<img src=\"".$this->image_path."images/departamentos.gif\">";
 		echo "</td></tr></table>";
@@ -38,14 +38,21 @@ class Layout extends HTML {
 		?>
 			<li>
 				<a href="<?=$link;?>">
-					<?=$departamentos[$i]->getDepartamento();?>
+					
+					<?
+					if($departamentos[$i]->idDepartamento == $id) {
+						echo "<b>".$departamentos[$i]->getDepartamento()."</b>";
+					} else {
+						echo $departamentos[$i]->getDepartamento();
+					}
+					?>
 				</a>
 			</li>
 		<?
 		}
 		?>
 		<li class="direita">
-			<a href="">
+			<a href="<?=$this->image_path;?>departamentos.php">
 				» Ver todos os departamentos
 			</a>
 		</li>
@@ -76,7 +83,7 @@ class Layout extends HTML {
 		}
 		?>
 		<li class="direita">
-			<a href="">
+			<a href="<?=$this->image_path;?>departamentos.php">
 				» Ver todos os departamentos
 			</a>
 		</li>
@@ -101,32 +108,34 @@ function bannersEsquerda($banners) {
 		echo "<img src=\"".$this->image_path."images/destaques.gif\">";
 		echo "</td></tr>";
 		echo "</table>";*/
-		echo "<br>";
-		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-		echo "<tr><td>";
-		echo "<ul>";
-		if($totBanners > 1) {
-			for($i = 0; $i < $totBanners; $i++) {
-			?>
-				<li>
-					<a class="bannerEsq" href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
+		if($totBanners > 0) {
+			echo "<br>";
+			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
+			echo "<tr><td>";
+			echo "<ul>";
+			if($totBanners > 1) {
+				for($i = 0; $i < $totBanners; $i++) {
+				?>
+					<li>
+						<a class="bannerEsq" href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
+							<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
+						</a>
+					</li>
+				<?
+				}
+			} else {
+				?>
+					<li>
+						<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
+							<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
+						</a>
+					</li>
+				<?
 			}
-		} else {
-			?>
-				<li>
-					<a class="bannerEsq" href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-						<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
+			echo "</ul>";
+			echo "</td></tr>";
+			echo "</table>";
 		}
-		echo "</ul>";
-		echo "</td></tr>";
-		echo "</table>";
 	}
 	
 		function enquete() {
@@ -207,36 +216,39 @@ function bannersEsquerda($banners) {
 	function bannersLaterais($banners) {
 		
 		$totBanners = count($banners);
-		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-		echo "<tr><td>";
-		echo "<img src=\"".$this->image_path."images/destaques.gif\">";
-		echo "</td></tr>";
-		echo "</table>";
-		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
-		echo "<tr><td>";
-		echo "<ul>";
-		if($totBanners > 1) {
-			for($i = 0; $i < $totBanners; $i++) {
-			?>
-				<li>
-					<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
+		if($totBanners > 0) {
+			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
+			echo "<tr><td>";
+			echo "<img src=\"".$this->image_path."images/destaques.gif\">";
+			echo "</td></tr>";
+			echo "</table>";
+			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
+			echo "<tr><td>";
+			echo "<ul>";
+			if($totBanners > 1) {
+				for($i = 0; $i < $totBanners; $i++) {
+				?>
+					<li>
+						<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
+							<img src="<?=$this->image_path;?>images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
+						</a>
+					</li>
+				<?
+				}
+			} elseif($totBanners == 1) {
+				?>
+					<li>
+						<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
+							<img src="<?=$this->image_path;?>images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
+						</a>
+					</li>
+				<?
 			}
-		} else {
-			?>
-				<li>
-					<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-						<img src="images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
+			
+			echo "</ul>";
+			echo "</td></tr>";
+			echo "</table>";
 		}
-		echo "</ul>";
-		echo "</td></tr>";
-		echo "</table>";
 	}
 	
 	function rodape() {
@@ -283,6 +295,34 @@ function bannersEsquerda($banners) {
 		} else {
 			echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"".$this->image_path."css/padrao.css\"/>";
 		}
+	}
+	
+	function breadcrumb($id, $idsubcategoria = "") {
+		
+		$departamento = new Departamento();
+		$subdepartamento = new Subdepartamento();
+		
+		$departamentoDAO = new DepartamentoDAO();
+		$subdepartamentoDAO = new SubdepartamentoDAO();
+		
+		$departamento = $departamentoDAO->getDepartamentosPorId($id);
+		$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($idsubcategoria);
+		
+		echo "<ul id=\"bread\">";
+		echo "<li><a href=\"".$this->image_path."\">Página Inicial</a></li>";
+		if($id != "") {
+			if(count($subdepartamentoDAO->getSubdepartamentosPorIddepartamento($id)) > 0 && $idsubcategoria != "") {
+				$link = "<a href=\"".UrlManage::getUrlCategoria($id,"",$departamento->getDepartamento())."\">".$departamento->getDepartamento()."</a>";
+			} else {
+				$link = $departamento->getDepartamento();
+			}
+			echo "<li> » ".$link."</li>";
+		}
+		if($idsubcategoria != "") {
+			echo "<li> » ".$subdepartamento->getSubdepartamento()."</li>";
+			/*echo " » <a href=\"".UrlManage::getUrlSubCategoria($id,$departamento->getDepartamento(),$idsubcategoria,$subdepartamento->getSubdepartamento())."\">".$subdepartamento->getSubdepartamento()."</a>";*/
+		}
+		echo "</ul>";
 	}
 }
 ?>
