@@ -99,6 +99,7 @@
 	
 		function AnuncioADD() { ?>
 		<?
+		
 			$cep = $_GET["cep"];
 			
 			if(isset($cep)) {
@@ -249,6 +250,7 @@
 		                    	<option value="6">6 Meses</option>
 		                    	<option value="12">12 Meses</option>
 		                    </select>
+		                    <input type="text" class="data">
 	                    </td>
 	                </tr>
 	                <tr class="Linha1Tabela">
