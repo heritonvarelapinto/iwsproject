@@ -171,7 +171,7 @@
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> CEP</b></td>
-	                    <td><input type="text" tipo="numerico" mascara="#####-###" onfocus="this.value = ''" onblur="javascript:buscaCep(this.value)" id="campoCEP" name="campoCEP" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
+	                    <td><input type="text" tipo="numerico" mascara="#####-###" onfocus="this.value = ''" onblur="javascript:buscaCep(this.value)" id="cep" name="cep" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
 	                </tr>
 	                <div id="resultado">
 	                <tr class="Linha2Tabela">
@@ -215,7 +215,7 @@
 	                    <td align="right"><b> LOGO</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="logo"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> IMAGEM 1</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem1"/></td>
 	                </tr>
@@ -223,7 +223,7 @@
 	                    <td align="right"><b> IMAGEM 2</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem2"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> IMAGEM 3</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem3"/></td>
 	                </tr>
@@ -231,56 +231,19 @@
 	                    <td align="right"><b> IMAGEM 4</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem4"/></td>
 	                </tr>
+	                <tr class="Linha2Tabela">
+	                    <td align="right"><b> PAGAMENTO</b></td>
+	                    <td>
+	                    	De:<input type="text" name="de" class="data FORMBox">
+	                    	até:<input type="text" name="ate" class="data FORMBox">
+	                    </td>
+	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
 	                    <td>                                    	
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
 	                    </td>
 	            	</tr>
-	                <!--<tr class="Linha1Tabela">
-	                    <td align="right"><b> BANNER</b></td>
-	                    <td>
-		                    <select name="destaque" class="FORMBox" onchange="dest(this.value);">
-		                    	<option value="">--Selecione--</option>
-		                    	<option value="1">Sim</option>
-		                    	<option value="2">Não</option>
-		                    </select>
-		                     <select id="pagina" name="pagina" class="FORMBox" style="display:none;">
-		                    	<option value="">--Selecione--</option>
-		                    	<option value="1">Inicial</option>
-		                    	<option value="2">Bairros</option>
-		                    </select>
-	                    </td>                    
-	                </tr>-->
-	                <tr class="Linha2Tabela">
-	                    <td align="right"><b> PAGAMENTO</b></td>
-	                    <td>
-	                    	<select name="pagamento" class="FORMBox">
-		                    	<option value="">--Selecione--</option>
-		                    	<option value="1">1 Mês</option>	              
-		                    	<option value="2">2 Meses</option>	              
-		                    	<option value="3">3 Meses</option>
-		                    	<option value="4">4 Meses</option>
-		                    	<option value="5">5 Meses</option>
-		                    	<option value="6">6 Meses</option>
-		                    	<option value="12">12 Meses</option>
-		                    </select>
-		                    <input type="text" class="data">
-	                    </td>
-	                </tr>
-	                <!--<tr class="Linha1Tabela">
-	                    <td align="right"><b> ENVIAR CONTRATO</b></td>
-	                    <td><input type="checkbox" value="sim" name="contrato" class="FORMBox"></td>
-	                </tr>
-	                <tr class="Linha2Tabela">
-	                    <td align="right"><b> STATUS</b></td>
-	                    <td>
-	                    	<select name="status" class="FORMBox">
-		                    	<option value="0">Ativo</option>
-		                    	<option value="1">Inativo</option>	              	                    	
-		                    </select>
-	                    </td>
-	                </tr>-->
 	                <tr class="Linha3Tabela">
 		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Anuncio" name="alterar"/></td>
 		            </tr>
