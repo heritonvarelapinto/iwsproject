@@ -224,6 +224,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setEndereco($rs->endereco);
 		    $temp->setNumero($rs->numero);
 		    $temp->setComplemento($rs->complemento);
+		    $temp->setBairro($rs->bairro);
 		    $temp->setCidade($rs->cidade);
 		    $temp->setEstado($rs->estado);
 		    $temp->setCep($rs->cep);

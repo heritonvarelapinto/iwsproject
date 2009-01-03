@@ -270,6 +270,23 @@ li.direita a {
 	
 }
 
+#corpo .miolo #anuncios {
+	margin: 10px 0px;
+}
+
+#corpo .miolo #anuncios h3{
+	font-size: 13px;
+	margin: 0px 10px;
+	text-decoration: underline;
+	color: #000;
+}
+
+#corpo .miolo #anuncios p{
+	font-size: 10px;
+	padding: 5px 0px 15px 0px;
+	border-bottom: 1px solid #EEE;
+}
+
 /* Fix IE. Hide from IE Mac \*/
 * html ul li { float: left; height: 1%; }
 * html ul li a { height: 1%; }

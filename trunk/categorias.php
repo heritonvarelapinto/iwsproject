@@ -162,18 +162,33 @@ function __autoload($classe) {
 				</div>
 				<div class="miolo">
 					<?=$layout->breadcrumb($id,$sub);?>
+					<div id="anuncios">
 					<? 
 						$anuncio = new Anuncio();
 						$anuncioDAO = new AnuncioDAO();
-						$anuncio = $anuncioDAO->ListaAnunciosPorDepartamento($id);
+						if($sub == "") {
+							$anuncio = $anuncioDAO->ListaAnunciosPorDepartamento($id);
+						} else {
+							$anuncio = $anuncioDAO->ListaAnunciosPorSubDepartamento($sub);
+						}
 						$totAnuncios = count($anuncio);
 						for($i = 0 ; $i < $totAnuncios;$i++) {
+							
+							echo "<h3>".$anuncio[$i]->getNome()."</h3>";
 							echo "<p>";
-							echo $anuncio[$i]->getNome();
+							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento();
+							echo "<br>";
+							echo $anuncio[$i]->getBairro()." - ".$anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
+							echo "<br>";
+							echo "E-mail: ".$anuncio[$i]->getEmail();
+							echo "<br>";
+							echo "Site: ".$anuncio[$i]->getSite();
+							echo "<br>";
+							echo $anuncio[$i]->getTelefones();
 							echo "</p>";
 						}
-						
 					?>
+					</div>
 				</div>
 			</div>
 		</div>
