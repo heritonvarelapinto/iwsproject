@@ -176,15 +176,15 @@ function __autoload($classe) {
 							
 							echo "<h3>".$anuncio[$i]->getNome()."</h3>";
 							echo "<p>";
-							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento();
+							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento()." - ".$anuncio[$i]->getBairro();
 							echo "<br>";
-							echo $anuncio[$i]->getBairro()." - ".$anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
+							echo $anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
 							echo "<br>";
-							echo "E-mail: ".$anuncio[$i]->getEmail();
+							echo "<b>E-mail: </b>".$anuncio[$i]->getEmail();
 							echo "<br>";
-							echo "Site: ".$anuncio[$i]->getSite();
+							echo "<b>Site: </b>".$anuncio[$i]->getSite();
 							echo "<br>";
-							echo $anuncio[$i]->getTelefones();
+							echo "<a onclick=\"this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
 							echo "</p>";
 						}
 					?>

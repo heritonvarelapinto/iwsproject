@@ -287,6 +287,18 @@ li.direita a {
 	border-bottom: 1px solid #EEE;
 }
 
+#corpo .miolo #anuncios p a{
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+#corpo .miolo #anuncios p a:hover{
+	text-decoration: underline;
+	color: #FF0000;
+}
+
 /* Fix IE. Hide from IE Mac \*/
 * html ul li { float: left; height: 1%; }
 * html ul li a { height: 1%; }
