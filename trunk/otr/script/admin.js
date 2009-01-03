@@ -93,6 +93,33 @@ function servicosDisponiveis(idcategoria,div) {
 	}
 }
 
+function departamentosDisponiveis(iddepartamento,div) {
+	if(iddepartamento != "") {
+	ajax = ajaxInit();
+	if(ajax) {
+		ajax.open("POST", "servicos.php", true );
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");		    
+		ajax.send("iddepartamento=" + iddepartamento + "&div=" +div);
+		
+		div = "div_"+div;
+		document.getElementById(div).innerHTML = "<select><option>Carregando...</option></select>";			
+		
+		ajax.onreadystatechange = function() {     
+		if(ajax.readyState == 4) {
+		     if(ajax.status == 200) {
+			         document.getElementById(div).innerHTML = ajax.responseText;
+			       } else {
+			         alert(ajax.statusText);
+			       }
+		     }
+		}
+	}
+	} else {
+		alert('Favor selecionar um valor.');
+		return false;
+	}
+}
+
 function departamentos(iddepartamento) {
 	document.location="principal.php?menu=7&act=add&iddepartamento="+iddepartamento;
 }

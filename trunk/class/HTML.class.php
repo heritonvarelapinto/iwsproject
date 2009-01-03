@@ -373,16 +373,14 @@
 			<link rel="stylesheet" href="css/admin.css" type="text/css">
 			<script src="script/admin.js" language="JavaScript"/></script>
 			<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
-	<style type="text/css">@import url(<?=$layout->image_path;?>css/jquery-calendar.css);</style>
-	<script>
-	$(document).ready(function(){
-
-		$(".data").calendar({autoPopUp: 'both', 
-		buttonImageOnly: true, buttonImage: '<?=$layout->image_path;?>images/calendar.gif', 
-		buttonText: 'Calendar'});
-	});
-</script>		
+			<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
+			<style type="text/css">@import url(<?=$layout->image_path;?>css/jquery-calendar.css);</style>
+			<script>
+				$(document).ready(function(){
+			
+					$(".data").calendar();
+				});
+			</script>		
 			</HEAD>
 			<body bgcolor="#EFEFEF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="Mascaras.carregar();">
 			<table width="778" height="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">			
@@ -636,18 +634,20 @@
 		
 		function selectDepartamentosAdminAnuncios($departamentos) {
 			$totDepartamentos = count($departamentos);
-			echo "<select class=\"FORMbox\" name=\"iddepartamento\" id=\"iddepartamento\" onchange=\"javascript: departamentos(this.value);\">";			
+			
+			echo "<select class=\"FORMbox\" name=\"iddepartamento\" id=\"iddepartamento\" onchange=\"javascript:departamentos(this.value);\">";			
 			echo "<option value=\"\">--Selecione--</option>";
 						
 			for($i = 0; $i < $totDepartamentos; $i++) {
 				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>" <?if($_GET["iddepartamento"] == $departamentos[$i]->getIdDepartamento()) { echo "selected"; } ?>><?=$departamentos[$i]->getDepartamento(); ?></option><?
 			}
 			echo "</select>";
+			
 		}
 		
 		function selectSubdepartamentosAdminAnuncios($subdepartamentos) {
 			$totSubdepartamentos = count($subdepartamentos);
-			
+			echo "<div id=\"div_sub\">";
 			echo "<select name=\"idsubdepartamento\" class=\"FORMBox\">";
 			if($totSubdepartamentos < 1) {
 				echo "<option value=\"0\">Sem subdepartamentos</option>";
@@ -657,6 +657,7 @@
 				}
 			}
 			echo "</select>";
+			echo "</div>";
 		}
 			
 		function selectDepartamentos($departamentos) {

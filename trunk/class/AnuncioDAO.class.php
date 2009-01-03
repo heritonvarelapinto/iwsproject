@@ -16,21 +16,34 @@ class AnuncioDAO extends PDOConnectionFactory {
 	public function AnuncioDAO() {
 		$this->conexao = PDOConnectionFactory::getConnection();
 	}
-		//realiza uma inserção
-	public function Insere( $banner ) {
-		$sql = "INSERT INTO banners (lado, iddepartamento, numero, banner, width, height, url, target, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	public function InsereAnuncio( $anuncio ){
+		$sql = "INSERT INTO anuncios (iddepartamento,idsubdepartamento,nome,endereco,numero,complemento,bairro,cidade,estado,cep,telefones,site,email,logo,imagem1,imagem2,imagem3,imagem4,texto,de,ate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$stmt = $this->conexao->prepare($sql);
-
-		$stmt->bindValue(1, $banner->getLado());
-		$stmt->bindValue(2, $banner->getIddepartamento());				
-		$stmt->bindValue(3, $banner->getNumero());				
-		$stmt->bindValue(4, $banner->getBanner());				
-		$stmt->bindValue(5, $banner->getWidth());				
-		$stmt->bindValue(6, $banner->getHeight());				
-		$stmt->bindValue(7, $banner->getUrl());				
-		$stmt->bindValue(8, $banner->getTarget());				
-		$stmt->bindValue(9, $banner->getData());				
 		
+		// sequencia de índices que representa cada valor de minha query
+		$stmt->bindValue(1, $anuncio->getIddepartamento()); 
+		$stmt->bindValue(2, $anuncio->getIdsubdepartamento()); 
+		$stmt->bindValue(3, $anuncio->getNome()); 
+		$stmt->bindValue(4, $anuncio->getEndereco()); 
+		$stmt->bindValue(5, $anuncio->getNumero()); 
+		$stmt->bindValue(6, $anuncio->getComplemento()); 
+		$stmt->bindValue(7, $anuncio->getBairro()); 
+		$stmt->bindValue(8, $anuncio->getCidade()); 
+		$stmt->bindValue(9, $anuncio->getEstado()); 
+		$stmt->bindValue(10, $anuncio->getCep()); 
+		$stmt->bindValue(11, $anuncio->getTelefones()); 
+		$stmt->bindValue(12, $anuncio->getSite()); 
+		$stmt->bindValue(13, $anuncio->getEmail()); 
+		$stmt->bindValue(14, $anuncio->getLogo()); 
+		$stmt->bindValue(15, $anuncio->getImagem1()); 
+		$stmt->bindValue(16, $anuncio->getImagem2()); 
+		$stmt->bindValue(17, $anuncio->getImagem3()); 
+		$stmt->bindValue(18, $anuncio->getImagem4()); 
+		$stmt->bindValue(20, $anuncio->getDe()); 
+		$stmt->bindValue(21, $anuncio->getAte()); 
+		$stmt->bindValue(19, $anuncio->getTexto()); 
+					
 		// executo a query preparada
 		$stmt->execute();
 		
@@ -42,72 +55,9 @@ class AnuncioDAO extends PDOConnectionFactory {
 			//Implementar classe de LOG
 			echo "ERRO".$error[2];
 			return false;
-		}				
-	}
-	
-	//realiza um Update
-	public function Update( $banner, $condicao ) {
-		// preparo a query de update - Prepare Statement
-		$stmt = $this->conexao->prepare("UPDATE banners SET lado=?, iddepartamento=?, numero=?, banner=?, width=?, height=?, url=?, target=?, data=? WHERE idbanner=?");
-		$this->conexao->beginTransaction();
-		
-		$stmt->bindValue(1, $banner->getLado());
-		$stmt->bindValue(2, $banner->getIddepartamento());
-		$stmt->bindValue(3, $banner->getNumero());
-		$stmt->bindValue(4, $banner->getBanner());
-		$stmt->bindValue(5, $banner->getWidth());
-		$stmt->bindValue(6, $banner->getHeight());
-		$stmt->bindValue(7, $banner->getUrl());
-		$stmt->bindValue(8, $banner->getTarget());
-		$stmt->bindValue(9, $banner->getData());
-						
-		$stmt->bindValue(10, $condicao);
-		
-		// executo a query preparada
-		$stmt->execute();
-		
-		$error = $stmt->errorInfo();
-		
-		if($error[0] == 00000) {
-			return true;
-		} else {
-			//Implementar classe de LOG
-			echo "ERRO: ".$error[2];
-			return false;
 		}
-		
-		$this->conexao->commit();
-		
-		//fecho a conexão
-		$this->conexao = null;
-				
-	}
+	}	
 	
-	//remove um banner
-	public function Deleta( $id ) {
-		$sql = "DELETE FROM banners WHERE idbanner = ?";
-		$stmt = $this->conexao->prepare($sql);
-		$stmt->bindValue(1,$id);
-		
-		$stmt->execute();
-		
-		$error = $stmt->errorInfo();
-		
-		if($error[0] == 00000) {
-			return true;
-		} else {
-			//Implementar classe de LOG
-			echo "ERRO: ".$error[2];
-			return false;
-		}
-	}
-	
-	/**
-	 * Retorna um banner, apartir de seu ID
-	 *
-	 * @param Id $id
-	 * @return Banner Object
-	 */
 	public function getAnuncioPorId($id) {
 		$sql = "SELECT * FROM anuncios WHERE idanuncio = ".$id;
 		$stmt = $this->conexao->prepare($sql);
@@ -137,76 +87,6 @@ class AnuncioDAO extends PDOConnectionFactory {
     	$temp->setStatus($rs->status);
 		return $temp;
 	}	
-	
-	public function ListaBannerPorDepartamentoPosicao($id, $posicao, $qtd) {
-		$sql = "SELECT * FROM banners WHERE iddepartamento = ? and lado = ? order by rand() limit ".$qtd;
-		$stmt = $this->conexao->prepare($sql);
-		$stmt->bindValue(1,$id);
-		$stmt->bindValue(2,$posicao);
-		/*$stmt->bindValue(3,$qtd);*/
-		
-		$stmt->execute();
-		
-		$searchResults = array();
-		
-		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			$temp = new Banner();
-			
-			$temp->setIdbanner($rs->idbanner);
-			$temp->setIdDepartamento($rs->iddepartamento);
-			$temp->setLado($rs->lado);
-			$temp->setNumero($rs->numero);
-			$temp->setBanner($rs->banner);
-			$temp->setDescricao($rs->descricao);
-			$temp->setWidth($rs->width);
-			$temp->setHeight($rs->height);
-			$temp->setUrl($rs->url);
-			$temp->setTarget($rs->target);
-			$temp->setClick($rs->click);
-			$temp->setData($rs->data);
-			$temp->setExtensao($rs->banner);
-			
-			array_push($searchResults, $temp);
-		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
-	}
-	
-	public function ListaBannerPorDepartamentoPosicaoAdmin($id, $posicao) {
-		$sql = "SELECT * FROM banners WHERE iddepartamento = ? and lado = ?";
-		$stmt = $this->conexao->prepare($sql);
-		$stmt->bindValue(1,$id);
-		$stmt->bindValue(2,$posicao);		
-		
-		$stmt->execute();
-		
-		$searchResults = array();
-		
-		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			$temp = new Banner();
-			
-			$temp->setIdbanner($rs->idbanner);
-			$temp->setIdDepartamento($rs->iddepartamento);
-			$temp->setLado($rs->lado);
-			$temp->setNumero($rs->numero);
-			$temp->setBanner($rs->banner);
-			$temp->setDescricao($rs->descricao);
-			$temp->setWidth($rs->width);
-			$temp->setHeight($rs->height);
-			$temp->setUrl($rs->url);
-			$temp->setTarget($rs->target);
-			$temp->setClick($rs->click);
-			$temp->setData($rs->data);
-			$temp->setExtensao($rs->banner);
-			
-			array_push($searchResults, $temp);
-		} 
-		return $searchResults;
-	}
 	
 	public function ListaAnunciosPorDepartamento($id) {
 		$sql = "SELECT * FROM anuncios WHERE iddepartamento = ".$id." and status = '1'";
@@ -278,41 +158,6 @@ class AnuncioDAO extends PDOConnectionFactory {
 		
 		return $searchResults;
 		
-	}
-	
-	//mostra os registros
-	public function Lista() {
-		$sql = "SELECT * FROM banners";
-		$stmt = $this->conexao->prepare($sql);	
-		$stmt->execute();
-		
-		$searchResults = array();
-		
-		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-			$temp = new Banner();
-			
-			$temp->setIdbanner($rs->idbanner);
-			$temp->setIdDepartamento($rs->iddepartamento);
-			$temp->setLado($rs->lado);
-			$temp->setNumero($rs->numero);
-			$temp->setBanner($rs->banner);
-			$temp->setDescricao($rs->descricao);
-			$temp->setWidth($rs->width);
-			$temp->setHeight($rs->height);
-			$temp->setUrl($rs->url);
-			$temp->setTarget($rs->target);
-			$temp->setClick($rs->click);
-			$temp->setData($rs->data);
-			$temp->setExtensao($rs->banner);
-			
-			array_push($searchResults, $temp);
-		} 
-		
-		if(count($searchResults) > 1) {
-			return $searchResults;
-		} else {
-			return $temp;
-		}
 	}
 }
 ?>
