@@ -132,13 +132,13 @@
 			</div>
 		</div>
 		<div id="lateralDireita">
+			<?=$layout->bannersLaterais($banners);?>
+		</div>		
+		<div id="lateralDireita">
 			<?=$layout->boletim();?>
 		</div>		
 		<div id="lateralDireita">
 			<?=$layout->enquete();?>
-		</div>
-		<div id="lateralDireita">
-			<?=$layout->bannersLaterais($banners);?>
 		</div>
 		<?=$layout->rodape();?>
 	</div>
