@@ -124,7 +124,7 @@
 						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
 				<div class="miolo">
-					PRA FINALIZAR O LAYOUT SO FALTA AKIIIII.
+					<?=$layout->carregaClimaTempo(); ?>
 				</div>
 			</div>
 		</div>

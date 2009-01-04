@@ -273,13 +273,13 @@ li.direita a {
 #corpo .miolo #anuncios {
 	margin: 0px;
 	padding: 0px;
-	width: 100%;
+	width: 98%;
 	float: right;
 }
 
 #corpo .miolo #anuncios h3{
 	font-size: 13px;
-	margin: 0px 10px;
+	margin: 5px;
 	text-decoration: underline;
 	color: #000;
 }
@@ -299,7 +299,7 @@ li.direita a {
 }
 
 #corpo .miolo #anuncios p.direita img {
-	padding: 5px;
+	padding: 15px 5px;
 }
 
 #corpo .miolo #anuncios p a{

@@ -44,6 +44,7 @@ function __autoload($classe) {
 	<?=$layout->getTheme("");?>
 	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
 	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
+	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
 	<script>
 		varover = 0;
 		$(document).ready(function(){
@@ -162,7 +163,7 @@ function __autoload($classe) {
 				</div>
 				<div class="miolo">
 					<?=$layout->breadcrumb($id,$sub);?>
-					<div id="anuncios">
+					
 					<? 
 						$anuncio = new Anuncio();
 						$anuncioDAO = new AnuncioDAO();
@@ -173,9 +174,14 @@ function __autoload($classe) {
 						}
 						$totAnuncios = count($anuncio);
 						for($i = 0 ; $i < $totAnuncios;$i++) {
-							
+							if($i % 2) {
+								$cor = "#DDDDDD";
+							} else {
+								$cor = "#EEEEEE";
+							}
+							echo "<div id=\"anuncios\" style=\"background-color: ".$cor."\">";
 							echo "<h3>".$anuncio[$i]->getNome()."</h3>";
-							echo "<p>";
+							echo "<p class=\"direita\">";
 							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento()." - ".$anuncio[$i]->getBairro();
 							echo "<br>";
 							echo $anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
@@ -185,10 +191,19 @@ function __autoload($classe) {
 							echo "<b>Site: </b>".$anuncio[$i]->getSite();
 							echo "<br>";
 							echo "<a onclick=\"this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
+							echo "<br>";
+							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\">";
+							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\">";
+							echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\">";
+							echo "<img src=\"".$layout->image_path."images/foto.png\"alt=\"Fotos\">";
 							echo "</p>";
+							echo "<p class=\"esquerda\">";
+							echo "<img src=\"".$layout->image_path."images/banners/bannerOiter.gif\">";
+							echo "</p>";
+							echo "</div>";
 						}
 					?>
-					</div>
+					
 				</div>
 			</div>
 		</div>
