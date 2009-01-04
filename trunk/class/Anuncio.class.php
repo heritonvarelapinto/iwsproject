@@ -22,6 +22,7 @@ class Anuncio {
     public $texto;
     public $de;
     public $ate;
+    public $status;
     
     function FormataData($data) {
 		$data = explode("/",$data);
@@ -266,6 +267,14 @@ class Anuncio {
     }
     function setImagem4($imagem4In) {
           $this->imagem4 = $imagem4In;
+    }
+    
+     function getStatus() {
+          return $this->status;
+    }
+    
+    function setStatus($statusIn) {
+          $this->status = $statusIn;
     }
 }
 ?>
