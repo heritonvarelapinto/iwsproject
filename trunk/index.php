@@ -110,7 +110,7 @@
 										</ul>
 									</div>
 								</li>
-								<li class="novo"><a href="#" class="motors">Motors</a></li>
+								<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
 							</ul>
 						</div>
 					</div>
@@ -123,19 +123,22 @@
 						<?=$layout->menuDepartamentos($departamentos);?>
 						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
-				<div class="miolo">
-					<?=$layout->carregaClimaTempo(); ?>
+				<div class="miolo">					
+					<div id="servicos">
+						<?=$layout->montaClimaTempo(); ?>
+						<?=$layout->montaCotacaoDolar(); ?>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="lateralDireita">
-			<?=$layout->bannersLaterais($banners);?>
-		</div>
+			<?=$layout->boletim();?>
+		</div>		
 		<div id="lateralDireita">
 			<?=$layout->enquete();?>
 		</div>
 		<div id="lateralDireita">
-			<?=$layout->boletim();?>
+			<?=$layout->bannersLaterais($banners);?>
 		</div>
 		<?=$layout->rodape();?>
 	</div>

@@ -157,8 +157,7 @@ function __autoload($classe) {
 									$layout->menuSubDepartamentos($subdepartamentos, $sub);
 								}
 							}
-						?>
-						<?
+						
 						echo $layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateralesq",3));?>
 				</div>
 				<div class="miolo">
@@ -179,26 +178,26 @@ function __autoload($classe) {
 							} else {
 								$cor = "#EEEEEE";
 							}
-							echo "<div id=\"anuncios\" style=\"background-color: ".$cor."\">";
+							echo "<div id=\"anuncios\" style=\"border-bottom: 1px dashed ".$cor."\">";
 							echo "<h3>".$anuncio[$i]->getNome()."</h3>";
 							echo "<p class=\"direita\">";
 							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento()." - ".$anuncio[$i]->getBairro();
 							echo "<br>";
 							echo $anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
 							echo "<br>";
-							echo "<b>E-mail: </b>".$anuncio[$i]->getEmail();
+							if($anuncio[$i]->getEmail() != "") echo "<b>E-mail: </b>".$anuncio[$i]->getEmail();
 							echo "<br>";
-							echo "<b>Site: </b>".$anuncio[$i]->getSite();
+							if($anuncio[$i]->getSite() != "") echo "<b>Site: </b>".$anuncio[$i]->getSite();
 							echo "<br>";
 							echo "<a onclick=\"this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
 							echo "<br>";
 							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\">";
 							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\">";
-							echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\">";
+							if($anuncio[$i]->getEmail() != "") echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\">";
 							echo "<img src=\"".$layout->image_path."images/foto.png\"alt=\"Fotos\">";
 							echo "</p>";
 							echo "<p class=\"esquerda\">";
-							echo "<img src=\"".$layout->image_path."images/banners/bannerOiter.gif\">";
+							echo "<img src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\">";
 							echo "</p>";
 							echo "</div>";
 						}
