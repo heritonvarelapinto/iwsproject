@@ -3,19 +3,112 @@ class Layout extends HTML {
 	
 	var $image_path = "http://localhost/oiter/";
 	
-	function montaClimaTempo() {
-		$clima = $this->carregaClimaTempo();
-
-		echo "<img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[0]['imagem'].".gif\">";
-		echo "<img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[1]['imagem'].".gif\">";
-		echo "<img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[2]['imagem'].".gif\">";
+	function mes($mes) {
+		switch ($mes) {
+			case 1: return "Janeiro";
+			case 2: return "Fevereiro";
+			case 3: return "Março";
+			case 4: return "Abril";
+			case 5: return "Maio";
+			case 6: return "Junho";
+			case 7: return "Julho";
+			case 8: return "Agosto";
+			case 9: return "Setembro";
+			case 10: return "Outubro";
+			case 11: return "Novembro";
+			case 12: return "Dezembro";
+		}
+	}
+	
+	function semana($semana) {
+		switch ($semana) {
+			case 1: return "Segunda";
+			case 2: return "Terça";
+			case 3: return "Quarta";
+			case 4: return "Quinta";
+			case 5: return "Sexta";
+			case 6: return "Sábado";
+			case 7: return "Domingo";
+		}
+	}
+	
+	function montaCotacaoDolar() {
+		$dolar = $this->carregaCotacao();
 		
+		echo "<div id=\"cotacaodolar\">";		
+		echo "<h3>Cotação do Dólar</h3>";
+		echo "<h4>A OITER não assume qualquer responsabilidade pela não simultaneidade das informações prestadas.</h4>";
+		echo "<ul style=\"border-bottom: 1px solid #000;\">";
+		echo "<li>&nbsp;</li>";
+		echo "<li class=\"titulo\">Compra</li>";
+		echo "<li class=\"titulo\">Venda</li>";
+		echo "</ul>";
+		echo "<ul>";
+		echo "<li>Comercial</li>";
+		echo "<li class=\"valor\">".$dolar['comercial']['compra']."</li>";
+		echo "<li class=\"valor\">".$dolar['comercial']['venda']."</li>";
+		echo "</ul>";
+		echo "<ul>";
+		echo "<li>Paralelo</li>";
+		echo "<li class=\"valor\">".$dolar['paralelo']['compra']."</li>";
+		echo "<li class=\"valor\">".$dolar['paralelo']['venda']."</li>";
+		echo "</ul>";
+		echo "</div>";
 		
 	}
 	
+	function montaClimaTempo() {
+		$clima = $this->carregaClimaTempo();
+		echo "<div id=\"climatempo\">";		
+		echo "<h3>Previsão do Tempo</h3>";
+		echo "<h4>Pinhais, ".date("d")." ".$this->mes(date("n"))." ".date("Y")."</h4>";		
+		echo "<ul>";
+		echo "<li>Agora</li>";
+		echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[0]['imagem'].".gif\"></li>";
+		echo "<li>".$clima[0]['tempMax']."°</li>";
+		echo "</ul>";
+		
+		echo "<ul>";
+		echo "<li>".$this->semana(date("N",mktime(0, 0, 0, date("m"), date("d")+1, date("Y"))))."</li>";
+		echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[1]['imagem'].".gif\"></li>";
+		echo "<li>".$clima[1]['tempMin']."° / ".$clima[1]['tempMax']."° </li>";
+		echo "</ul>";
+
+		echo "<ul>";
+		echo "<li>".$this->semana(date("N",mktime(0, 0, 0, date("m"), date("d") + 2, date("Y"))))."</li>";
+		echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[2]['imagem'].".gif\"></li>";
+		echo "<li>".$clima[2]['tempMin']."° / ".$clima[2]['tempMax']."° </li>";
+		echo "</ul>";
+		echo "</div>";
+		
+	}
+	
+	function carregaCotacao() {
+		$f = fopen('http://cotacao.republicavirtual.com.br/web_cotacao.php?formato=xml','r');
+		while($t = fread($f,102465)){ $content .= $t; }
+		fclose($f);
+
+		preg_match('/<dolar_comercial_compra>(.*)<\/dolar_comercial_compra>/Usm',$content,$results);
+		$dolar['comercial']['compra'] = $results[1];
+		
+		preg_match('/<dolar_comercial_venda>(.*)<\/dolar_comercial_venda>/Usm',$content,$results);
+		$dolar['comercial']['venda'] = $results[1];
+		
+		preg_match('/<dolar_paralelo_compra>(.*)<\/dolar_paralelo_compra>/Usm',$content,$results);
+		$dolar['paralelo']['compra'] = $results[1];
+		
+		preg_match('/<dolar_paralelo_venda>(.*)<\/dolar_paralelo_venda>/Usm',$content,$results);
+		$dolar['paralelo']['venda'] = $results[1];
+		
+		return $dolar;		
+	}
 	
 	function carregaClimaTempo() {
-		$f = fopen('http://weather.yahooapis.com/forecastrss?p=BRXX0079&u=c','r');
+		
+		$id = "BRXX3902"; // PINHAIS
+		//$id = "BRXX0079"; // CURITIBA
+		
+		$f = fopen('http://weather.yahooapis.com/forecastrss?p='.$id.'&u=c','r');
 		
 		while($t = fread($f,102465)){ $content .= $t; }
 		fclose($f);
