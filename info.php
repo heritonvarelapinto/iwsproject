@@ -1,4 +1,5 @@
 <?
+	phpinfo();
 	/*Editado pelo thon*/
 	/*Editado pelo fernando denovo*/
 	function __autoload($classe) {
