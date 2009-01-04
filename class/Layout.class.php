@@ -84,9 +84,18 @@ class Layout extends HTML {
 	}
 	
 	function carregaCotacao() {
-		$f = fopen('http://cotacao.republicavirtual.com.br/web_cotacao.php?formato=xml','r');
-		while($t = fread($f,102465)){ $content .= $t; }
-		fclose($f);
+		//$f = fopen('http://cotacao.republicavirtual.com.br/web_cotacao.php?formato=xml','r');
+		$url = 'http://cotacao.republicavirtual.com.br/web_cotacao.php?formato=xml';
+		
+		$ch = curl_init(); 
+	    curl_setopt($ch, CURLOPT_URL, $url); 
+	    curl_setopt($ch, CURLOPT_POST, true);  
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  		curl_setopt($ch, CURLOPT_HEADER, false);
+  		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	    $content = curl_exec($ch); 
 
 		preg_match('/<dolar_comercial_compra>(.*)<\/dolar_comercial_compra>/Usm',$content,$results);
 		$dolar['comercial']['compra'] = $results[1];
@@ -108,10 +117,20 @@ class Layout extends HTML {
 		$id = "BRXX3902"; // PINHAIS
 		//$id = "BRXX0079"; // CURITIBA
 		
-		$f = fopen('http://weather.yahooapis.com/forecastrss?p='.$id.'&u=c','r');
+		$url = 'http://weather.yahooapis.com/forecastrss?p='.$id.'&u=c';
 		
-		while($t = fread($f,102465)){ $content .= $t; }
-		fclose($f);
+		$ch = curl_init(); 
+	    curl_setopt($ch, CURLOPT_URL, $url); 
+	    curl_setopt($ch, CURLOPT_POST, true);  
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  		curl_setopt($ch, CURLOPT_HEADER, false);
+  		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	    $content = curl_exec($ch); 
+		
+		//while($t = fread($f,102465)){ $content .= $t; }
+		//fclose($f);
 			
 			preg_match('/<yweather:condition  text="(.*)"  code="(.*)"  temp="(.*)"  date="(.*)" \/>/Usm',$content,$results);
 			$clima[0]['tempMax'] = $results[3];
