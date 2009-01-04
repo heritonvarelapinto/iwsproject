@@ -3,6 +3,44 @@ class Layout extends HTML {
 	
 	var $image_path = "http://localhost/oiter/";
 	
+	function montaClimaTempo() {
+		$clima = $this->carregaClimaTempo();
+
+		echo "<img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[0]['imagem'].".gif\">";
+		echo "<img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[1]['imagem'].".gif\">";
+		echo "<img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[2]['imagem'].".gif\">";
+		
+		
+	}
+	
+	
+	function carregaClimaTempo() {
+		$f = fopen('http://weather.yahooapis.com/forecastrss?p=BRXX0079&u=c','r');
+		
+		while($t = fread($f,102465)){ $content .= $t; }
+		fclose($f);
+			
+			preg_match('/<yweather:condition  text="(.*)"  code="(.*)"  temp="(.*)"  date="(.*)" \/>/Usm',$content,$results);
+			$clima[0]['tempMax'] = $results[3];
+			$clima[0]['tempSituacao'] = $results[1];
+			$clima[0]['imagem'] = $results[2];
+			
+			preg_match_all('/<yweather:forecast day="(.*)" date="(.*)" low="(.*)" high="(.*)" text="(.*)" code="(.*)" \/>/Usm',$content,$results);
+			unset($content);
+			
+			$clima[1]['tempMax'] = $results[4][0];
+			$clima[1]['tempSituacao'] = $results[5][0];
+			$clima[1]['tempMin'] = $results[3][0];
+			$clima[1]['imagem'] = $results[6][0];
+			
+			$clima[2]['tempMax'] = $results[4][1];
+			$clima[2]['tempSituacao'] = $results[5][1];
+			$clima[2]['tempMin'] = $results[3][1];
+			$clima[2]['imagem'] = $results[6][1];
+		
+			return $clima;
+	}
+	
 	function menuSuperiorDepartamentos($departamentos) {
 		$j = 0;
 		$totDepartamentos = count($departamentos);
