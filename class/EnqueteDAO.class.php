@@ -155,6 +155,30 @@ class EnqueteDAO extends PDOConnectionFactory {
 		return $temp;
 	}
 	
+	function getPergunta() {
+		//é esse o nome da tabela ?
+		$sql = "SELECT perguntas.idpergunta,pergunta,idresposta,resposta,voto FROM perguntas LEFT JOIN respostas ON perguntas.idpergunta = respostas.idpergunta WHERE perguntas.status = '1'";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->bindValue(1,$id);
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Enquete();
+
+			$temp->setIdpergunta($rs->idpergunta);
+			$temp->setPergunta($rs->pergunta);
+			$temp->setIdresposta($rs->idresposta);
+			$temp->setResposta($rs->resposta);
+			$temp->setVoto($rs->voto);
+						
+			array_push($searchResults, $temp);
+		} 
+		return $searchResults;
+	}
+	
 	function getPerguntaPorID($id) {
 		//é esse o nome da tabela ?
 		$sql = "SELECT perguntas.idpergunta,pergunta,idresposta,resposta,voto FROM perguntas LEFT JOIN respostas ON perguntas.idpergunta = respostas.idpergunta WHERE perguntas.idpergunta =?";
