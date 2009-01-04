@@ -37,7 +37,7 @@ class Layout extends HTML {
 		
 		echo "<div id=\"cotacaodolar\">";		
 		echo "<h3>Cotação do Dólar</h3>";
-		echo "<h4>A OITER não assume qualquer responsabilidade pela não simultaneidade das informações prestadas.</h4>";
+		echo "<h4>O Portal OITERBUSCA não assume qualquer responsabilidade pela não simultaneidade ou falta das informações prestadas.</h4>";
 		echo "<ul style=\"border-bottom: 1px solid #000;\">";
 		echo "<li>&nbsp;</li>";
 		echo "<li class=\"titulo\">Compra</li>";
@@ -355,6 +355,11 @@ function bannersEsquerda($banners) {
 	}
 	
 		function enquete() {
+			$enquete = new Enquete();
+			$enqueteDAO = new EnqueteDAO();
+			
+			$enquete = $enqueteDAO->getPergunta();
+			
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr><td>";
 		echo "<img src=\"".$this->image_path."images/enquete.gif\">";
@@ -362,27 +367,24 @@ function bannersEsquerda($banners) {
 		echo "</table>";
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
 		echo "<tr><td>";
-/*		echo "<ul>";
-		if($totBanners > 1) {
-			for($i = 0; $i < $totBanners; $i++) {
-			?>
-				<li>
-					<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
-			}
-		} else {
-			?>
-				<li>
-					<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-						<img src="images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
+		echo "<ul id=\"enquetePergunta\">";
+		echo "<li class=\"pergunta\">".$enquete[0]->getPergunta()."</li>";
+		for($i = 0; $i < count($enquete); $i++ ) {
+			echo 
+			"<li>
+			<table>
+				<tr>
+					<td class=\"radio\"><input type=\"radio\" name=\"resposta\"></td>
+					<td>".$enquete[$i]->getResposta()."</td>
+				</tr>
+			</table>
+			</li>";
 		}
-		echo "</ul>";*/
+		echo "<li><center>";
+		echo "<input class=\"botao_enquete\" type=\"button\" onclick=\"processaVoto();\" value=\"Votar\"/>";
+		echo "<input class=\"botao_enquete\" type=\"button\" onclick=\"abrirResultado('1');\" value=\"Parcial\"/>";
+		echo "<center></li>";
+		echo "</ul>";
 		echo "</td></tr>";
 		echo "</table>";
 	}
@@ -396,10 +398,10 @@ function bannersEsquerda($banners) {
 		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
 		echo "<tr><td>";
 		echo "<ul id=\"boletim\">";
-		echo "<li class=\"textoDestaque\">Cadastre-se e participe todas as semanas de nossas promoções.</li>";
-		echo "<li> Insira seu nome:</li>";
+		echo "<li class=\"textoDestaque\">Cadastre-se e receba nossas novidades!</li>";
+		echo "<li>Insira seu nome:</li>";
 		echo "<li><input type=\"text\" id=\"nome\" name=\"nome\"/></li>";
-		echo "<li> Qual é o seu e-mail ?</li>";
+		echo "<li>Qual é o seu e-mail ?</li>";
 		echo "<li><input type=\"text\" id=\"email\" name=\"email\"/></li>";
 		echo "<li><center><input type=\"button\" onclick=\"insereBoletim();\" value=\"Cadastrar\" class=\"botao_boletim\"/></center></li>";		
 		echo "</ul>";
