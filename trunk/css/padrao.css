@@ -44,6 +44,7 @@ li.direita a {
 #main #lateralDireita {
 	float: right;
 	width: 185px;
+	margin-bottom: 10px;
 }
 
 .bordaDestaque {
@@ -299,11 +300,11 @@ li.direita a {
 }
 
 #corpo .miolo #anuncios p.direita img {
-	padding: 15px 5px;
+	margin: 15px 5px;
 }
 
 #corpo .miolo #anuncios p a{
-	font-size: 12px;
+	font-size: 11px;
 	font-weight: bold;
 	text-decoration: none;
 	cursor:pointer;
@@ -444,4 +445,144 @@ ul#listaDepartamento li ul {
 ul#listaDepartamento li ul li {
 	font-weight: normal;
 	clear: both;
+}
+
+#climatempo {
+	width: 49%;
+	float: left;
+	font-size: 10px;
+	border-right: 1px solid #eee;
+}
+
+#cotacaodolar {
+	width: 45%;
+	float: left;
+	font-size: 10px;
+}
+
+#climatempo h3,
+#cotacaodolar h3 {
+	font-size: 15px;
+	clear: both;
+}
+
+#climatempo h4,
+#cotacaodolar h4 {
+	clear: both;
+	text-align: left;
+	font-size: 11px;
+	margin: 0px 10px;
+}
+
+#cotacaodolar h4 {
+	font-weight: normal;
+	font-size: 9px;
+	margin-bottom: 5px;
+}
+
+#climatempo ul {
+	margin: 10px 0px;
+	list-style: none;
+	width: 33%;
+	float: left;
+	text-align: center !important;
+}
+
+#cotacaodolar ul {
+	margin: 2px 10px;
+	list-style: none;
+	float: left;
+	width: 100%;
+}
+
+#cotacaodolar ul li {
+	list-style: none;
+	float: left;
+	width: 33%;
+	text-align: left;
+	font-size: 11px;
+}
+
+#climatempo ul li {
+	list-style: none;
+	text-align: left;
+	font-size: 11px;
+	clear: both;
+	text-align: center;
+	width: 100%;
+}
+
+#cotacaodolar ul li.titulo {
+	list-style: none;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#cotacaodolar ul li.valor {
+	list-style: none;
+	font-size: 10px;
+	font-weight: normal;
+	text-align: center;
+}
+
+#corpo .miolo #servicos {
+	width: 550px;
+	margin-top: 10px;
+	float: right;
+	border-top: 1px dashed #ddd;
+}
+
+#main #lateralDireita ul#enquetePergunta,
+#main #lateralDireita ul#boletim {
+	padding: 5px;
+	font-family: verdana;
+	font-size: 12px;
+}
+
+#main #lateralDireita ul#enquetePergunta li table {
+	padding: 0px;
+	width: 100%;
+	font-size: 11px;
+}
+
+#main #lateralDireita ul#enquetePergunta li table tr td {
+	padding-left: 5px;
+	float: left;
+	text-align: left;
+	width: 140px;
+}
+
+#main #lateralDireita ul#enquetePergunta li table tr td.radio {
+	width: 10px;
+	float: left;
+	clear: right;
+}
+
+#main #lateralDireita ul#enquetePergunta li,
+#main #lateralDireita ul#boletim li {
+	text-align: left;
+	border: 0px;	
+	float: left;
+	width: 95%;
+}
+
+#main #lateralDireita ul#enquetePergunta li center,
+#main #lateralDireita ul#boletim li center{
+	margin: 5px;	
+}
+
+#main #lateralDireita ul#boletim li.textoDestaque {
+	margin: 0px 0px 5px 0px;
+}
+
+#main #lateralDireita ul#boletim li {
+	margin: 0px;
+}
+
+#main #lateralDireita ul#enquetePergunta li.pergunta,
+#main #lateralDireita ul#boletim li.textoDestaque {
+	text-align: left;
+	float: left;
+	font-weight: bold;
 }
