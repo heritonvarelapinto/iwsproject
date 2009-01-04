@@ -89,13 +89,12 @@ class Layout extends HTML {
 		
 		$ch = curl_init(); 
 	    curl_setopt($ch, CURLOPT_URL, $url); 
-	    curl_setopt($ch, CURLOPT_POST, true);  
-	    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   		curl_setopt($ch, CURLOPT_HEADER, false);
-  		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+  		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 	 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	    $content = curl_exec($ch); 
+	    $content = curl_exec($ch);
+	     
 
 		preg_match('/<dolar_comercial_compra>(.*)<\/dolar_comercial_compra>/Usm',$content,$results);
 		$dolar['comercial']['compra'] = $results[1];
@@ -121,13 +120,11 @@ class Layout extends HTML {
 		
 		$ch = curl_init(); 
 	    curl_setopt($ch, CURLOPT_URL, $url); 
-	    curl_setopt($ch, CURLOPT_POST, true);  
-	    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   		curl_setopt($ch, CURLOPT_HEADER, false);
-  		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+  		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 	 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	    $content = curl_exec($ch); 
+	    $content = curl_exec($ch);
 		
 		//while($t = fread($f,102465)){ $content .= $t; }
 		//fclose($f);
