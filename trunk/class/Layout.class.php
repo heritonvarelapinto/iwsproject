@@ -87,26 +87,27 @@ class Layout extends HTML {
 		//$f = fopen('http://cotacao.republicavirtual.com.br/web_cotacao.php?formato=xml','r');
 		$url = 'http://cotacao.republicavirtual.com.br/web_cotacao.php?formato=xml';
 		
-		$ch = curl_init(); 
+		$xml = simplexml_load_file($url);
+		
+		/*$ch = curl_init(); 
 	    curl_setopt($ch, CURLOPT_URL, $url); 
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   		curl_setopt($ch, CURLOPT_HEADER, false);
   		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 	 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	    $content = curl_exec($ch);
-	     
+	    $content = curl_exec($ch);*/
 
-		preg_match('/<dolar_comercial_compra>(.*)<\/dolar_comercial_compra>/Usm',$content,$results);
-		$dolar['comercial']['compra'] = $results[1];
+/*		preg_match('/<dolar_comercial_compra>(.*)<\/dolar_comercial_compra>/Usm',$content,$results);*/
+		$dolar['comercial']['compra'] = $xml->dolar_comercial_compra;
 		
-		preg_match('/<dolar_comercial_venda>(.*)<\/dolar_comercial_venda>/Usm',$content,$results);
-		$dolar['comercial']['venda'] = $results[1];
+/*		preg_match('/<dolar_comercial_venda>(.*)<\/dolar_comercial_venda>/Usm',$content,$results);*/
+		$dolar['comercial']['venda'] = $xml->dolar_comercial_venda;
 		
-		preg_match('/<dolar_paralelo_compra>(.*)<\/dolar_paralelo_compra>/Usm',$content,$results);
-		$dolar['paralelo']['compra'] = $results[1];
+/*		preg_match('/<dolar_paralelo_compra>(.*)<\/dolar_paralelo_compra>/Usm',$content,$results);*/
+		$dolar['paralelo']['compra'] = $xml->dolar_paralelo_compra;
 		
-		preg_match('/<dolar_paralelo_venda>(.*)<\/dolar_paralelo_venda>/Usm',$content,$results);
-		$dolar['paralelo']['venda'] = $results[1];
+/*		preg_match('/<dolar_paralelo_venda>(.*)<\/dolar_paralelo_venda>/Usm',$content,$results);*/
+		$dolar['paralelo']['venda'] = $xml->dolar_paralelo_venda;
 		
 		return $dolar;		
 	}
@@ -118,6 +119,7 @@ class Layout extends HTML {
 		
 		$url = 'http://weather.yahooapis.com/forecastrss?p='.$id.'&u=c';
 		
+		//$xml = simplexml_load_file($url);
 		$ch = curl_init(); 
 	    curl_setopt($ch, CURLOPT_URL, $url); 
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -441,7 +443,7 @@ function bannersEsquerda($banners) {
 				</li>
 			<?
 		}
-		echo "</ul>";*/
+		echo "</ul>";
 		echo "</td></tr>";
 		echo "</table>";
 	}
