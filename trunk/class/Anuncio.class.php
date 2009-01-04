@@ -22,13 +22,23 @@ class Anuncio {
     public $texto;
     public $de;
     public $ate;
-    public $status;
+    public $destaque;
     
     function FormataData($data) {
 		$data = explode("/",$data);
 		$data = $data[2]."-".$data[1]."-".$data[0];
 		
 		return $data;
+	}
+	
+	function MostraDataSemHora($data) {
+		$data = explode("-",$data);
+		$hora = explode(" ",$data[2]);
+		
+		$data = $hora[0]."/".$data[1]."/".$data[0];
+		
+		return $data;
+		
 	}
     
     function upload_imagem($name,$type,$tmp_name,$size,$tamanho,$largura,$altura,$pasta) {	
@@ -60,7 +70,7 @@ class Anuncio {
 				Envie outro arquivo</span>";
 		        }
 		        
-		        /*// Para verificar as dimensões da imagem
+		       /* // Para verificar as dimensões da imagem
 		        $tamanhos = getimagesize($tmp_name);
 		        
 		        // Verifica largura
@@ -269,12 +279,12 @@ class Anuncio {
           $this->imagem4 = $imagem4In;
     }
     
-     function getStatus() {
-          return $this->status;
+     function getDestaque() {
+          return $this->destaque;
     }
     
-    function setStatus($statusIn) {
-          $this->status = $statusIn;
+    function setDestaque($destaqueIn) {
+          $this->destaque = $destaqueIn;
     }
 }
 ?>
