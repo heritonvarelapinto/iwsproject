@@ -1,7 +1,7 @@
 <?php
 class Layout extends HTML {
 	
-	var $image_path = "http://www.clicknobairro.com.br/oiter/";
+	var $image_path = "http://localhost/oiter/";
 	
 	function mes($mes) {
 		switch ($mes) {
