@@ -19,6 +19,7 @@
 	<?=$layout->getTheme("");?>
 	<link rel="shortcut icon" href="icones/favicon.ico" >
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/funcoes.js"></script>
 	<script>
 		varover = 0;
 		$(document).ready(function(){
@@ -125,18 +126,26 @@
 				</div>
 				<div class="miolo">
 					<div id="destaqueHome">
+						<h2>Destaques</h2>
 						<ul>
 						<?
 							$anuncio = new Anuncio();
 							$anuncioDAO = new AnuncioDAO();
 							
 							$anuncio = $anuncioDAO->ListaAnunciosDestaqueHome();
+							$departamento = new Departamento();
+							$departamentoDAO = new DepartamentoDAO();
 							
 							for($i=0; $i < count($anuncio);$i++) {
-								echo "<li><img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\"></li>";
-							}
-							
-							
+								
+								$departamento = $departamentoDAO->getDepartamentosPorId($anuncio[$i]->getIddepartamento());
+								echo "
+								<li>
+									<img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">
+									<br>
+									<p><a href=\"".UrlManage::getUrlCategoria($anuncio[$i]->getIddepartamento(),"",$departamento->getDepartamento())."\">".$departamento->getDepartamento()."</a></p>
+								</li>";
+							}							
 						?>
 						</ul>
 					</div>
@@ -144,8 +153,8 @@
 						
 					</div>
 					<div id="servicos">
-						<?=$layout->montaClimaTempo(); ?>
-						<?=$layout->montaCotacaoDolar(); ?>
+						<?//=$layout->montaClimaTempo(); ?>
+						<?//=$layout->montaCotacaoDolar(); ?>
 					</div>
 				</div>
 			</div>
