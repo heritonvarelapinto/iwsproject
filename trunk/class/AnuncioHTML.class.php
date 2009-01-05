@@ -183,11 +183,9 @@
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
 	                    <td>	                    	
-	                    	<div id="idsubdepartamento">
-			                	<select name="idsubdepartamento" id="idsubdepartamento" style="z-index:0" class="FORMbox" disabled>
-			                		<option>--Selecione um departamento--</option>
-			                	</select>
-			                </div>
+		                	<select name="idsubdepartamento" id="idsubdepartamento" class="FORMbox">
+		                		<option>--Selecione um departamento--</option>
+		                	</select>
 	                    </td>
 	                </tr>	                		        	                            	   
 	                <tr class="Linha2Tabela">
@@ -399,35 +397,35 @@
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="logo"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/logos/<?=$anuncio->getLogo();?>" border="0"><input type="text" name="logo" value="<?=$anuncio->getLogo();?>"></td>
+	                	<td align="center" colspan="2"><img src="../images/logos/<?=$anuncio->getLogo();?>" border="0"><input type="hidden" name="logo" value="<?=$anuncio->getLogo();?>"></td>
 	                </tr>
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> IMAGEM 1</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem1"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/album/<?=$anuncio->getImagem1();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem1();?>" border="0"></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> IMAGEM 2</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem2"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/album/<?=$anuncio->getImagem2();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem2();?>" border="0"></td>
 	                </tr>
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> IMAGEM 3</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem3"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/album/<?=$anuncio->getImagem3();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem3();?>" border="0"></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> IMAGEM 4</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem4"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/album/<?=$anuncio->getImagem4();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem4();?>" border="0"></td>
 	                </tr>
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> DESTAQUE</b></td>

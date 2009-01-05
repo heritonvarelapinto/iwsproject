@@ -1080,3 +1080,29 @@ function cep(cep) {
 	//document.location = '?menu=7&act=add&iddepartamento='+iddep+'&cep='+ce;
 	
 }
+
+function marcasDisponiveis(iddepartamento) {
+	if(iddepartamento != "") {
+	ajax = ajaxInit();
+	if(ajax) {
+		ajax.open("POST", "../class/Ajax.class.php", true );
+		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");		    
+		ajax.send("iddepartamento=" + iddepartamento );
+
+		document.getElementById('idsubdepartamento').innerHTML = "<option>Carregando...</option>";
+		
+		ajax.onreadystatechange = function() {     
+		if(ajax.readyState == 4) {
+		     if(ajax.status == 200) {
+			         document.getElementById('idsubdepartamento').innerHTML = ajax.responseText;
+			       } else {
+			         alert(ajax.statusText);
+			       }
+		     }
+		}
+	}
+	} else {
+		alert('Favor selecionar um valor.');
+		return false;
+	}
+}
