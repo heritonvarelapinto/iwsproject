@@ -159,7 +159,6 @@
 				$resultado_busca = $this->busca_cep($cep);
 			}
 			
-			$iddepartamento = $_GET["iddepartamento"]; 
 		?>		
 	        <span class="TituloPage">• Adicionar Anúncio</span>
 	        <br/>
@@ -171,45 +170,26 @@
 		        	<tr class="Linha2Tabela">
 	                    <td align="right"><b> DEPARTAMENTO:</b></td>
 	                    <td>
-	                    	<?
-	                    		$departamento = new Departamento();
-	                    		$departamentoDAO = new DepartamentoDAO();
-	                    		$departamento = $departamentoDAO->Lista();
-	                    		if(isset($iddepartamento)) {
+	                    	<div id="departamento">
+		                    	<?
+		                    		$departamento = new Departamento();
+		                    		$departamentoDAO = new DepartamentoDAO();
+		                    		$departamento = $departamentoDAO->Lista();
 	                    			$this->selectDepartamentosAdminAnuncios($departamento);
-	                    		}else{
-	                    			$this->selectDepartamentosAdminAnuncios($departamento);
-	                    		}
-	                    	?>
-	                    </td>
-	                </tr>
-	                <? if(isset($iddepartamento)) { ?>
-	                <tr class="Linha1Tabela">
-	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
-	                    <td>
-							<table border="0" cellpadding="0" cellspacing="0" width="100%">
-								<tr>
-								<?
-		                    		$subdepartamento = new Subdepartamento();
-		                    		$subdepartamentoDAO = new SubdepartamentoDAO();
-		                    		$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($iddepartamento);
-		                    		
-		                    		$this->selectSubdepartamentosAdminAnuncios($subdepartamento);
 		                    	?>
-								</tr>
-							</table>
-	                    </td>                    
-	                </tr>
-	                <? }else{ ?>
+			                </div>
+	                    </td>
+	                </tr>	                
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
-	                    <td>
-	                    	<select class="FORMbox" name="idsubdepartamento" id="idsubdepartamento" style="z-index:0" disabled>		                	
-	                    		<option value="">--Selecione o departamento--</option>                    		
-			                </select>
+	                    <td>	                    	
+	                    	<div id="idsubdepartamento">
+			                	<select name="idsubdepartamento" id="idsubdepartamento" style="z-index:0" class="FORMbox" disabled>
+			                		<option>--Selecione um departamento--</option>
+			                	</select>
+			                </div>
 	                    </td>
-	                </tr>
-	                <? } ?>		        	                            	   	
+	                </tr>	                		        	                            	   
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> NOME DO ANÚNCIANTE</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" name="nome"/></td>
