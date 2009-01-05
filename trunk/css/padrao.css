@@ -278,11 +278,33 @@ li.direita a {
 	float: right;
 }
 
+#corpo .miolo #destaqueHome {
+	margin: 0px;
+	padding: 0px;
+	width: 98%;
+	float: right;
+}
+
+#corpo .miolo #destaqueHome ul{
+	list-style: none;
+	float: left;
+}
+
+#corpo .miolo #destaqueHome ul li {
+	float: left;
+	margin: 2px;
+}
+
 #corpo .miolo #anuncios h3{
 	font-size: 13px;
 	margin: 5px;
 	text-decoration: underline;
 	color: #000;
+}
+
+#corpo .miolo #anuncios img {
+	cursor: pointer;
+	cursor: hand;
 }
 
 #corpo .miolo #anuncios p{
@@ -292,6 +314,7 @@ li.direita a {
 #corpo .miolo #anuncios p.esquerda {
 	width: 40%;
 	float: left;
+	text-align: right;
 }
 
 #corpo .miolo #anuncios p.direita {
