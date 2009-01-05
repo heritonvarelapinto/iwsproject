@@ -10,6 +10,7 @@ function __autoload($classe) {
 	$cliente = $_GET['cliente'];
 	
 	$departamentoDAO = new DepartamentoDAO();
+	$subdepartamentoDAO = new SubdepartamentoDAO();
 	$subdepartamentos = $departamentoDAO->ListaSubdepartamentos($id);
 	
 	$layout = new Layout();
@@ -17,6 +18,11 @@ function __autoload($classe) {
 	$departamentosDAO = new DepartamentoDAO();
 	$departamentos = $departamentosDAO->Lista();
 	$nomeDepartamento = $departamentosDAO->getDepartamentosPorId($id);
+	
+	if($sub != "") {
+		$nomeSubDepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($sub);
+	}
+	
 	$banners = new Banner();
 	$bannerDAO = new BannerDAO();
 	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateral",10);
@@ -39,12 +45,13 @@ function __autoload($classe) {
 ?>
 <html>
 <head>
-	<title>OiterBusca - <?=$nomeDepartamento->departamento;?></title>
+	<title>OiterBusca - <?=$nomeDepartamento->departamento;?> <? if($nomeSubDepartamento) { echo " / "; ?><?=$nomeSubDepartamento->subdepartamento;?><? } ?></title>
 	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
 	<?=$layout->getTheme("");?>
 	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
 	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
 	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
+	<script type="text/javascript" src="<?=$layout->image_path;?>js/funcoes.js"></script>
 	<script>
 		varover = 0;
 		$(document).ready(function(){
@@ -181,9 +188,9 @@ function __autoload($classe) {
 							echo "<div id=\"anuncios\" style=\"border-bottom: 1px dashed ".$cor."\">";
 							echo "<h3>".$anuncio[$i]->getNome()."</h3>";
 							echo "<p class=\"direita\">";
-							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento()." - ".$anuncio[$i]->getBairro();
+							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento();
 							echo "<br>";
-							echo $anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
+							echo $anuncio[$i]->getBairro()." - ".$anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
 							echo "<br>";
 							if($anuncio[$i]->getEmail() != "") echo "<b>E-mail: </b>".$anuncio[$i]->getEmail();
 							echo "<br>";
@@ -191,8 +198,8 @@ function __autoload($classe) {
 							echo "<br>";
 							echo "<a onclick=\"this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
 							echo "<br>";
-							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\">";
-							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\">";
+							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."','".$anuncio[$i]->getNome()."',700,500)\">";
+							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\" onclick=\"abrirDestaque('".$anuncio[$i]->getIdAnuncio()."')\">";
 							if($anuncio[$i]->getEmail() != "") echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\">";
 							echo "<img src=\"".$layout->image_path."images/foto.png\"alt=\"Fotos\">";
 							echo "</p>";
