@@ -39,10 +39,10 @@ class AnuncioDAO extends PDOConnectionFactory {
 		$stmt->bindValue(15, $anuncio->getImagem1()); 
 		$stmt->bindValue(16, $anuncio->getImagem2()); 
 		$stmt->bindValue(17, $anuncio->getImagem3()); 
-		$stmt->bindValue(18, $anuncio->getImagem4()); 
+		$stmt->bindValue(18, $anuncio->getImagem4());
+		$stmt->bindValue(19, $anuncio->getTexto()); 
 		$stmt->bindValue(20, $anuncio->getDe()); 
 		$stmt->bindValue(21, $anuncio->getAte()); 
-		$stmt->bindValue(19, $anuncio->getTexto()); 
 		$stmt->bindValue(22, $anuncio->getDestaque()); 
 					
 		// executo a query preparada
@@ -60,7 +60,29 @@ class AnuncioDAO extends PDOConnectionFactory {
 	}	
 	
 	public function AlteraAnuncio( $anuncio ){
-		$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,de = ?,ate = ?,destaque = ? WHERE idanuncio = ?";
+		//$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,de = ?,ate = ?,destaque = ? WHERE idanuncio = ?";
+		$sql = "UPDATE anuncios SET iddepartamento = '?',
+									idsubdepartamento = '?',
+									nome = '?',
+									endereco = '?',
+									numero = '?',
+									complemento = '?',
+									bairro = '?',
+									cidade = '?',
+									estado = '?',
+									cep = '?',
+									telefones = '?',
+									site = '?',
+									email = '?',
+									logo = '?',
+									imagem1 = '?',
+									imagem2 = '?',
+									imagem3 = '?',
+									imagem4 = '?',
+									texto = '?',
+									de = '?',
+									ate = '?',
+									destaque = '?' WHERE idanuncio = '?'";
 		$stmt = $this->conexao->prepare($sql);
 		
 		// sequencia de índices que representa cada valor de minha query
@@ -81,10 +103,10 @@ class AnuncioDAO extends PDOConnectionFactory {
 		$stmt->bindValue(15, $anuncio->getImagem1()); 
 		$stmt->bindValue(16, $anuncio->getImagem2()); 
 		$stmt->bindValue(17, $anuncio->getImagem3()); 
-		$stmt->bindValue(18, $anuncio->getImagem4()); 
+		$stmt->bindValue(18, $anuncio->getImagem4());
+		$stmt->bindValue(19, $anuncio->getTexto()); 
 		$stmt->bindValue(20, $anuncio->getDe()); 
 		$stmt->bindValue(21, $anuncio->getAte()); 
-		$stmt->bindValue(19, $anuncio->getTexto()); 
 		$stmt->bindValue(22, $anuncio->getDestaque()); 
 		$stmt->bindValue(23, $anuncio->getIdanuncio()); 
 					
