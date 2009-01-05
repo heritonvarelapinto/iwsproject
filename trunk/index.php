@@ -123,7 +123,26 @@
 						<?=$layout->menuDepartamentos($departamentos);?>
 						<?=$layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateralesq",3));?>
 				</div>
-				<div class="miolo">					
+				<div class="miolo">
+					<div id="destaqueHome">
+						<ul>
+						<?
+							$anuncio = new Anuncio();
+							$anuncioDAO = new AnuncioDAO();
+							
+							$anuncio = $anuncioDAO->ListaAnunciosDestaqueHome();
+							
+							for($i=0; $i < count($anuncio);$i++) {
+								echo "<li><img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\"></li>";
+							}
+							
+							
+						?>
+						</ul>
+					</div>
+					<div id="homeMeio">
+						
+					</div>
 					<div id="servicos">
 						<?=$layout->montaClimaTempo(); ?>
 						<?=$layout->montaCotacaoDolar(); ?>
