@@ -198,10 +198,10 @@ function __autoload($classe) {
 							echo "<br>";
 							echo "<a onclick=\"this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
 							echo "<br>";
-							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."','".$anuncio[$i]->getNome()."',700,500)\">";
-							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\" onclick=\"abrirDestaque('".$anuncio[$i]->getIdAnuncio()."')\">";
-							if($anuncio[$i]->getEmail() != "") echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\">";
-							echo "<img src=\"".$layout->image_path."images/foto.png\"alt=\"Fotos\">";
+							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
+							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=mapa','".$anuncio[$i]->getNome()."',700,500)\">";
+							if($anuncio[$i]->getEmail() != "") echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=contato','".$anuncio[$i]->getNome()."',700,500)\">";
+							echo "<img src=\"".$layout->image_path."images/foto.png\"alt=\"Fotos\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=fotos','".$anuncio[$i]->getNome()."',700,500)\">";
 							echo "</p>";
 							echo "<p class=\"esquerda\">";
 							echo "<img src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\">";
