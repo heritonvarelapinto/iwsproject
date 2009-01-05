@@ -17,9 +17,9 @@
 	<title>OiterBusca</title>
 	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
 	<?=$layout->getTheme("");?>
-	<link rel="shortcut icon" href="icones/favicon.ico" >
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/funcoes.js"></script>
+	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
+	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
+	<script type="text/javascript" src="<?=$layout->image_path;?>js/funcoes.js"></script>
 	<script>
 		varover = 0;
 		$(document).ready(function(){
@@ -142,7 +142,6 @@
 								echo "
 								<li>
 									<img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">
-									<br>
 									<p><a href=\"".UrlManage::getUrlCategoria($anuncio[$i]->getIddepartamento(),"",$departamento->getDepartamento())."\">".$departamento->getDepartamento()."</a></p>
 								</li>";
 							}							
@@ -153,8 +152,8 @@
 						
 					</div>
 					<div id="servicos">
-						<?//=$layout->montaClimaTempo(); ?>
-						<?//=$layout->montaCotacaoDolar(); ?>
+						<?=$layout->montaClimaTempo(); ?>
+						<?=$layout->montaCotacaoDolar(); ?>
 					</div>
 				</div>
 			</div>
