@@ -34,90 +34,95 @@ class Layout extends HTML {
 	
 	function montaCotacaoDolar() {
 		$dolar = $this->carregaCotacao();
-		
-		echo "<div id=\"cotacaodolar\">";		
-		echo "<h3>Cotação do Dólar</h3>";
-		echo "<h4>A OITER não assume qualquer responsabilidade pela não simultaneidade das informações prestadas.</h4>";
-		echo "<ul style=\"border-bottom: 1px solid #000;\">";
-		echo "<li>&nbsp;</li>";
-		echo "<li class=\"titulo\">Compra</li>";
-		echo "<li class=\"titulo\">Venda</li>";
-		echo "</ul>";
-		echo "<ul>";
-		echo "<li>Comercial</li>";
-		echo "<li class=\"valor\">".$dolar['comercial']['compra']."</li>";
-		echo "<li class=\"valor\">".$dolar['comercial']['venda']."</li>";
-		echo "</ul>";
-		echo "<ul>";
-		echo "<li>Turismo</li>";
-		echo "<li class=\"valor\">".$dolar['turismo']['compra']."</li>";
-		echo "<li class=\"valor\">".$dolar['turismo']['venda']."</li>";
-		echo "</ul>";
-		echo "<ul>";
-		echo "<li>Ptax</li>";
-		echo "<li class=\"valor\">".$dolar['ptax']['compra']."</li>";
-		echo "<li class=\"valor\">".$dolar['ptax']['venda']."</li>";
-		echo "</ul>";
-		echo "</div>";
-		
+		if($dolar != false) {
+			echo "<div id=\"cotacaodolar\">";		
+			echo "<h3>Cotação do Dólar</h3>";
+			echo "<h4>A OITER não assume qualquer responsabilidade pela não simultaneidade das informações prestadas.</h4>";
+			echo "<ul style=\"border-bottom: 1px solid #000;\">";
+			echo "<li>&nbsp;</li>";
+			echo "<li class=\"titulo\">Compra</li>";
+			echo "<li class=\"titulo\">Venda</li>";
+			echo "</ul>";
+			echo "<ul>";
+			echo "<li>Comercial</li>";
+			echo "<li class=\"valor\">".$dolar['comercial']['compra']."</li>";
+			echo "<li class=\"valor\">".$dolar['comercial']['venda']."</li>";
+			echo "</ul>";
+			echo "<ul>";
+			echo "<li>Turismo</li>";
+			echo "<li class=\"valor\">".$dolar['turismo']['compra']."</li>";
+			echo "<li class=\"valor\">".$dolar['turismo']['venda']."</li>";
+			echo "</ul>";
+			echo "<ul>";
+			echo "<li>Ptax</li>";
+			echo "<li class=\"valor\">".$dolar['ptax']['compra']."</li>";
+			echo "<li class=\"valor\">".$dolar['ptax']['venda']."</li>";
+			echo "</ul>";
+			echo "</div>";
+		}
 	}
 	
 	function montaClimaTempo() {
 		$clima = $this->carregaClimaTempo();
-		echo "<div id=\"climatempo\">";		
-		echo "<h3>Previsão do Tempo</h3>";
-		echo "<h4>Pinhais, ".date("d")." ".$this->mes(date("n"))." ".date("Y")."</h4>";		
-		echo "<ul>";
-		echo "<li>Agora</li>";
-		echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[0]['imagem'].".gif\"></li>";
-		echo "<li>".$clima[0]['tempMax']."°</li>";
-		echo "</ul>";
-		
-		echo "<ul>";
-		echo "<li>".$this->semana(date("N",mktime(0, 0, 0, date("m"), date("d")+1, date("Y"))))."</li>";
-		echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[1]['imagem'].".gif\"></li>";
-		echo "<li>".$clima[1]['tempMin']."° / ".$clima[1]['tempMax']."° </li>";
-		echo "</ul>";
-
-		echo "<ul>";
-		echo "<li>".$this->semana(date("N",mktime(0, 0, 0, date("m"), date("d") + 2, date("Y"))))."</li>";
-		echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[2]['imagem'].".gif\"></li>";
-		echo "<li>".$clima[2]['tempMin']."° / ".$clima[2]['tempMax']."° </li>";
-		echo "</ul>";
-		echo "</div>";
-		
+		if($clima != false) {
+			echo "<div id=\"climatempo\">";		
+			echo "<h3>Previsão do Tempo</h3>";
+			echo "<h4>Pinhais, ".date("d")." ".$this->mes(date("n"))." ".date("Y")."</h4>";		
+			echo "<ul>";
+			echo "<li>Agora</li>";
+			echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[0]['imagem'].".gif\"></li>";
+			echo "<li>".$clima[0]['tempMax']."°</li>";
+			echo "</ul>";
+			
+			echo "<ul>";
+			echo "<li>".$this->semana(date("N",mktime(0, 0, 0, date("m"), date("d")+1, date("Y"))))."</li>";
+			echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[1]['imagem'].".gif\"></li>";
+			echo "<li>".$clima[1]['tempMin']."° / ".$clima[1]['tempMax']."° </li>";
+			echo "</ul>";
+	
+			echo "<ul>";
+			echo "<li>".$this->semana(date("N",mktime(0, 0, 0, date("m"), date("d") + 2, date("Y"))))."</li>";
+			echo "<li><img src=\"http://us.i1.yimg.com/us.yimg.com/i/us/we/52/".$clima[2]['imagem'].".gif\"></li>";
+			echo "<li>".$clima[2]['tempMin']."° / ".$clima[2]['tempMax']."° </li>";
+			echo "</ul>";
+			echo "</div>";
+		}
 	}
 	
 	function carregaCotacao() {
 
-		error_reporting(15);
-		if(!$fp=fopen("http://cotacoes.agronegocios-e.com.br/investimentos/conteudoi.asp?option=dolar&title=%20D%F3lar" ,"r" )) {
+		//error_reporting(15);
+		if(!@$fp=fopen("http://cotacoes.agronegocios-e.com.br/investimentos/conteudoi.asp?option=dolar&title=%20D%F3lar" ,"r" )) {
 			echo "Erro ao abrir a página de cotação" ;
-			exit ;
+		} else {
+			
+			$conteudo = "";
+			
+			while(!feof($fp)) { // leia o conteúdo da página
+				$conteudo .= trim(fgets($fp,1024));
+			}
+			
+			fclose($fp);
 		}
-		$conteudo = "";
-		while(!feof($fp)) { // leia o conteúdo da página
-			$conteudo .= trim(fgets($fp,1024));
+		if($conteudo) {
+			preg_match_all("/<font size='1' face='verdana'>(.*)<\/font>/Usm",$conteudo,$results);
+	        
+			$dolar['comercial']['compra'] = $results[1][1];
+			$dolar['comercial']['venda'] = $results[1][2];
+			$dolar['comercial']['variacao'] = $results[1][3];
+			
+			$dolar['turismo']['compra'] = $results[1][7];
+			$dolar['turismo']['venda'] = $results[1][8];
+			$dolar['turismo']['variacao'] = $results[1][9];
+			
+			$dolar['ptax']['compra'] = $results[1][25];
+			$dolar['ptax']['venda'] = $results[1][26];
+			$dolar['ptax']['variacao'] = $results[1][27];
+			
+			return $dolar;
+		} else {
+			return false;
 		}
-		
-		fclose($fp);
-		
-		//eregi("([0-9],[0-9]{1,}).*([0-9],[0-9]{1,})",$conteudo,$saida);
-		preg_match_all("/<font size='1' face='verdana'>(.*)<\/font>/Usm",$conteudo,$results);
-        
-		$dolar['comercial']['compra'] = $results[1][1];
-		$dolar['comercial']['venda'] = $results[1][2];
-		$dolar['comercial']['variacao'] = $results[1][3];
-		
-		$dolar['turismo']['compra'] = $results[1][7];
-		$dolar['turismo']['venda'] = $results[1][8];
-		$dolar['turismo']['variacao'] = $results[1][9];
-		
-		$dolar['ptax']['compra'] = $results[1][25];
-		$dolar['ptax']['venda'] = $results[1][26];
-		$dolar['ptax']['variacao'] = $results[1][27];
-		
-		return $dolar;		
 	}
 	
 	function carregaClimaTempo() {
@@ -136,7 +141,8 @@ class Layout extends HTML {
 		
 		//while($t = fread($f,102465)){ $content .= $t; }
 		//fclose($f);
-			
+		
+		if($content) {
 			preg_match('/<yweather:condition  text="(.*)"  code="(.*)"  temp="(.*)"  date="(.*)" \/>/Usm',$content,$results);
 			$clima[0]['tempMax'] = $results[3];
 			$clima[0]['tempSituacao'] = $results[1];
@@ -156,6 +162,9 @@ class Layout extends HTML {
 			$clima[2]['imagem'] = $results[6][1];
 		
 			return $clima;
+		} else {
+			return false;
+		}
 	}
 	
 	function menuSuperiorDepartamentos($departamentos) {
