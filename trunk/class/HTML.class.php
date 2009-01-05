@@ -632,6 +632,30 @@
 			echo "</select>";
 		}
 		
+		function selectDepartamentosAdminMostra($departamentos) {
+			$totDepartamentos = count($departamentos);
+			
+			echo "<select name=\"iddepartamento\" id=\"iddepartamento\" class=\"FORMBox\">";
+			echo "<option value=\"\">--Selecione--</option>";
+			
+			for($i = 0; $i < $totDepartamentos; $i++) {
+				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>"><?=$departamentos[$i]->getDepartamento(); ?></option><?
+			}
+			echo "</select>";
+		}
+		
+		function selectDepartamentosAdminAlt($departamentos) {
+			$totDepartamentos = count($departamentos);
+			
+			echo "<select name=\"iddepartamento\" id=\"iddepartamento\" class=\"FORMBox\">";
+			echo "<option value=\"\">--Selecione--</option>";
+			
+			for($i = 0; $i < $totDepartamentos; $i++) {
+				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>" <?if($_SESSION["iddepartamento"] == $departamentos[$i]->getIdDepartamento()) { echo "selected"; } ?>><?=$departamentos[$i]->getDepartamento(); ?></option><?
+			}
+			echo "</select>";
+		}
+		
 		function selectDepartamentosAdminAnuncios($departamentos) {
 			$totDepartamentos = count($departamentos);
 			

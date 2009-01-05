@@ -5,8 +5,11 @@
 				case "add":
 					$this->AnuncioADD();
 				break;
+				case "alt":
+					$this->AnuncioALT();
+				break;
 				case "mostra":
-					$this->AnuncioMostra();
+					$this->AnuncioMostra(20);
 				break;
 			}
 		}
