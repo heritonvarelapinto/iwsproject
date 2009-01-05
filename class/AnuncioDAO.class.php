@@ -239,6 +239,17 @@ class AnuncioDAO extends PDOConnectionFactory {
 		
 	}
 	
+	public function getLastID(){
+		$sql = "SELECT MAX(idanuncio) as idanuncio FROM anuncios";
+		$stmt = $this->conexao->prepare($sql);
+		
+		// executo a query preparada
+		$stmt->execute();
+		
+		$id = $stmt->fetch(PDO::FETCH_OBJ);
+		return $id;
+	}
+	
 	public function ListaAnunciosPorSubDepartamento($id) {
 		$sql = "SELECT * FROM anuncios WHERE idsubdepartamento = ".$id." and status = '1'";
 		$stmt = $this->conexao->prepare($sql);
