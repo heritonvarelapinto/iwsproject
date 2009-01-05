@@ -1085,7 +1085,7 @@ function marcasDisponiveis(iddepartamento) {
 	if(iddepartamento != "") {
 	ajax = ajaxInit();
 	if(ajax) {
-		ajax.open("POST", "../class/Ajax.class.php", true );
+		ajax.open("POST", "../class/Select.class.php", true );
 		ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");		    
 		ajax.send("iddepartamento=" + iddepartamento );
 
