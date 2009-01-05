@@ -659,11 +659,11 @@
 		function selectDepartamentosAdminAnuncios($departamentos) {
 			$totDepartamentos = count($departamentos);
 			
-			echo "<select class=\"FORMbox\" name=\"iddepartamento\" id=\"iddepartamento\" onchange=\"javascript:departamentos(this.value);\">";			
+			echo "<select class=\"FORMbox\" name=\"iddepartamento\" id=\"iddepartamento\" style=\"z-index:0\" onchange=\"javascript: marcasDisponiveis(this.value);\">";			
 			echo "<option value=\"\">--Selecione--</option>";
 						
 			for($i = 0; $i < $totDepartamentos; $i++) {
-				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>" <?if($_GET["iddepartamento"] == $departamentos[$i]->getIdDepartamento()) { echo "selected"; } ?>><?=$departamentos[$i]->getDepartamento(); ?></option><?
+				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>"><?=$departamentos[$i]->getDepartamento(); ?></option><?
 			}
 			echo "</select>";
 			
@@ -671,7 +671,6 @@
 		
 		function selectSubdepartamentosAdminAnuncios($subdepartamentos) {
 			$totSubdepartamentos = count($subdepartamentos);
-			echo "<div id=\"div_sub\">";
 			echo "<select name=\"idsubdepartamento\" class=\"FORMBox\">";
 			if($totSubdepartamentos < 1) {
 				echo "<option value=\"0\">Sem subdepartamentos</option>";
@@ -681,7 +680,6 @@
 				}
 			}
 			echo "</select>";
-			echo "</div>";
 		}
 			
 		function selectDepartamentos($departamentos) {
