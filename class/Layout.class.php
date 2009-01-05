@@ -42,21 +42,25 @@ class Layout extends HTML {
 			echo "<li>&nbsp;</li>";
 			echo "<li class=\"titulo\">Compra</li>";
 			echo "<li class=\"titulo\">Venda</li>";
+			echo "<li class=\"titulo\">%</li>";
 			echo "</ul>";
 			echo "<ul>";
 			echo "<li>Comercial</li>";
 			echo "<li class=\"valor\">".$dolar['comercial']['compra']."</li>";
 			echo "<li class=\"valor\">".$dolar['comercial']['venda']."</li>";
+			echo "<li class=\"valor\">".$dolar['comercial']['variacao']."</li>";
 			echo "</ul>";
 			echo "<ul>";
 			echo "<li>Turismo</li>";
 			echo "<li class=\"valor\">".$dolar['turismo']['compra']."</li>";
 			echo "<li class=\"valor\">".$dolar['turismo']['venda']."</li>";
+			echo "<li class=\"valor\">".$dolar['turismo']['variacao']."</li>";
 			echo "</ul>";
 			echo "<ul>";
 			echo "<li>Ptax</li>";
 			echo "<li class=\"valor\">".$dolar['ptax']['compra']."</li>";
 			echo "<li class=\"valor\">".$dolar['ptax']['venda']."</li>";
+			echo "<li class=\"valor\">".$dolar['ptax']['variacao']."</li>";
 			echo "</ul>";
 			echo "</div>";
 		}
