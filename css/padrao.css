@@ -298,24 +298,24 @@ li.direita a {
 #corpo .miolo #destaqueHome ul{
 	list-style: none;
 	float: left;
+	width: 100%;
 }
 
 #corpo .miolo #destaqueHome ul li {
 	float: left;
-	margin: 2px;
-	width: 175px;
-	height: 110px;
+	margin-right: 2px;
 }
 
 #corpo .miolo #destaqueHome ul li img {
 	cursor: pointer;
 	cursor: hand;
+	clear: both;
 }
 
 #corpo .miolo #destaqueHome ul li p{
-	font-size: 10px;
-	width: 160px;
+	font-size: 9px;
 	text-align: center;
+	
 }
 
 #corpo .miolo #destaqueHome ul li p a{
