@@ -159,6 +159,46 @@ class AnuncioDAO extends PDOConnectionFactory {
 		return $temp;
 	}	
 	
+	public function ListaAnunciosDestaqueHome() {
+		$sql = "SELECT * FROM anuncios WHERE destaque = '1' and status = '1' order by rand() limit 6";
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {			
+			$temp = new Anuncio();
+			$temp->setIdanuncio($rs->idanuncio);
+		    $temp->setIddepartamento($rs->iddepartamento);
+		    $temp->setIdsubdepartamento($rs->idsubdepartamento);
+		    $temp->setNome($rs->nome);
+		    $temp->setEndereco($rs->endereco);
+		    $temp->setNumero($rs->numero);
+		    $temp->setComplemento($rs->complemento);
+		    $temp->setBairro($rs->bairro);
+		    $temp->setCidade($rs->cidade);
+		    $temp->setEstado($rs->estado);
+		    $temp->setCep($rs->cep);
+		    $temp->setTelefones($rs->telefones);
+		    $temp->setSite($rs->site);
+		    $temp->setEmail($rs->email);
+		    $temp->setLogo($rs->logo);
+		    $temp->setImagem1($rs->imagem1);
+		    $temp->setImagem2($rs->imagem2);
+		   	$temp->setImagem3($rs->imagem3);
+		   	$temp->setImagem4($rs->imagem4);
+		    $temp->setTexto($rs->texto);
+		    $temp->setDe($rs->de);
+		    $temp->setAte($rs->ate);
+	    	$temp->setDestaque($rs->destaque);
+			
+			array_push($searchResults, $temp);
+		} 
+		
+		return $searchResults;
+		
+	}
+	
 	public function ListaAnunciosPorDepartamento($id) {
 		$sql = "SELECT * FROM anuncios WHERE iddepartamento = ".$id;
 		$stmt = $this->conexao->prepare($sql);
