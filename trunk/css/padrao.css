@@ -285,6 +285,16 @@ li.direita a {
 	float: right;
 }
 
+#corpo .miolo #destaqueHome h2 {
+	font-size: 14px;
+	float: left;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #eee;
+	width: 100%;
+	text-align: left;
+}
+
 #corpo .miolo #destaqueHome ul{
 	list-style: none;
 	float: left;
@@ -293,6 +303,29 @@ li.direita a {
 #corpo .miolo #destaqueHome ul li {
 	float: left;
 	margin: 2px;
+	width: 175px;
+	height: 110px;
+}
+
+#corpo .miolo #destaqueHome ul li img {
+	cursor: pointer;
+	cursor: hand;
+}
+
+#corpo .miolo #destaqueHome ul li p{
+	font-size: 10px;
+	width: 160px;
+	text-align: center;
+}
+
+#corpo .miolo #destaqueHome ul li p a{
+	color: #333;
+	text-decoration: none;
+}
+
+#corpo .miolo #destaqueHome ul li p a:hover{
+	color: #333;
+	text-decoration: underline;
 }
 
 #corpo .miolo #anuncios h3{
@@ -608,4 +641,71 @@ ul#listaDepartamento li ul li {
 	text-align: left;
 	float: left;
 	font-weight: bold;
+}
+
+#foto {
+	width: 390px;
+	height: 250px;
+	overflow: hidden;
+}
+
+.texto {
+	font-family: verdana;
+	font-size: 12px;
+	color: #000;
+	text-align: justify;
+}
+
+#anunciante {
+	margin: 10px;
+	text-align: left;
+	font-family: verdana;
+	font-size: 12px;
+	color: #000;
+	text-align: justify;
+}
+
+#anunciante h2{
+	font-family: Tahoma;
+	font-size: 15px;
+	width: 100%;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #ccc;
+	text-align: left;
+}
+
+#anunciante .label {
+	width: 100px;
+	height: 25px;
+}
+
+#anunciante #contato input {
+	width: 200px;
+}
+
+#anunciante #contato {
+	width: 100%;
+	text-align: left;
+}
+
+#anunciante .endereco {
+	width: 280px;
+	text-align: left;
+	float: right;
+}
+
+#anunciante .endereco a {
+	color: #333;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#anunciante .endereco a:hover {
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+#quadro {
+	height: 250px;
 }
