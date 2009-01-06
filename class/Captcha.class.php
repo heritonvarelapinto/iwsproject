@@ -33,9 +33,9 @@
 			<td>
 			<table>
 				<tr>
-					<td><img src="<?=$layout->image_path;?>act/captcha.php?rand=<?=rand();?>"></td>
+					<td><input type="text" maxlength="5" id="captcha" style="width: 68px; height: 19px; margin: 0px; padding: 0px" name="captcha"></td>
 					<td>
-						&nbsp;<input type="text" maxlength="5" id="captcha" style="width: 68px; margin: 0px; padding: 0px" name="captcha">
+						<img src="<?=$layout->image_path;?>act/captcha.php?rand=<?=rand();?>">
 					</td>
 				</tr>
     		</table>
