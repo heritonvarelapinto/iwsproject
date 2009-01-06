@@ -186,7 +186,7 @@ function __autoload($classe) {
 								$cor = "#EEEEEE";
 							}
 							echo "<div id=\"anuncios\" style=\"border-bottom: 1px dashed ".$cor."\">";
-							echo "<h3>".$anuncio[$i]->getNome()."</h3>";
+							echo "<h3 onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">".$anuncio[$i]->getNome()."</h3>";
 							echo "<p class=\"direita\">";
 							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento();
 							echo "<br>";
@@ -194,17 +194,16 @@ function __autoload($classe) {
 							echo "<br>";
 							if($anuncio[$i]->getEmail() != "") echo "<b>E-mail: </b>".$anuncio[$i]->getEmail();
 							echo "<br>";
-							if($anuncio[$i]->getSite() != "") echo "<b>Site: </b>".$anuncio[$i]->getSite();
+							if($anuncio[$i]->getSite() != "") echo "<b>Site: </b><a class=\"site\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirSite('".$anuncio[$i]->getSite()."')\">".$anuncio[$i]->getSite()."</a>";
 							echo "<br>";
-							echo "<a onclick=\"this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
 							echo "<br>";
-							echo "<img src=\"".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
-							echo "<img src=\"".$layout->image_path."images/mapa.png\" alt=\"Aonde fica ?\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=mapa','".$anuncio[$i]->getNome()."',700,500)\">";
-							if($anuncio[$i]->getEmail() != "") echo "<img src=\"".$layout->image_path."images/mail.png\" alt=\"Mande sua mensagem\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=contato','".$anuncio[$i]->getNome()."',700,500)\">";
-							echo "<img src=\"".$layout->image_path."images/foto.png\"alt=\"Fotos\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=fotos','".$anuncio[$i]->getNome()."',700,500)\">";
+							echo "<a onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
+							echo "<br>";
+							//echo "<a onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" id=\"mais_info\" title=\"Mais informações\">Saiba um pouco mais sobré nós</a>";
+							//echo "<img src=\"\".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
 							echo "</p>";
-							echo "<p class=\"esquerda\">";
-							echo "<img src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\">";
+							echo "<p onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" class=\"esquerda\">";
+							echo "<img src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" class=\"borda\">";
 							echo "</p>";
 							echo "</div>";
 						}
