@@ -171,7 +171,7 @@ class Anuncio {
 		
 	}
     
-    function upload_imagem($name,$type,$tmp_name,$size,$tamanho,$largura,$altura,$pasta,$id) {	
+    function upload_imagem($name,$type,$tmp_name,$size,$tamanho,$largura,$altura,$pasta) {	
 		$erro = $config = array();
 				
 		// Tamanho máximo do arquivo (em bytes)
@@ -237,7 +237,7 @@ class Anuncio {
 		        preg_match("/\.(gif|bmp|png|jpg|jpeg|swf){1}$/i", $name, $ext);
 		
 		        // Gera um nome único para a imagem
-		        $imagem_nome = date("Ymdhsi").rand()."_".$id.$ext[0];
+		        $imagem_nome = date("Ymdhi").$ext[0];
 		        //$imagem_nome = $name;
 		        
 		        //AdmBanners::addBanners($lado,$idcat,$numero,$imagem_nome,$tamanhos[0],$tamanhos[1],$url,$target,$tempo);	  
@@ -320,7 +320,7 @@ class Anuncio {
 		        preg_match("/\.(gif|bmp|png|jpg|jpeg|swf){1}$/i", $name, $ext);
 		
 		        // Gera um nome único para a imagem
-		        $imagem_nome = date("Ymdhsi").rand()."_".$id.$ext[0];
+		        $imagem_nome = date("Ymdhi")."_".$id.$ext[0];
 		        //$imagem_nome = $name;
 		        //echo $imagem_nome;
 		        //AdmBanners::addBanners($lado,$idcat,$numero,$imagem_nome,$tamanhos[0],$tamanhos[1],$url,$target,$tempo);	  

@@ -33,25 +33,25 @@
     		$imagem1_type = $_FILES["imagem1"]["type"];
     		$imagem1_tmp_name = $_FILES["imagem1"]["tmp_name"];
     		$imagem1_size = $_FILES["imagem1"]["size"];    		
-    		$setImagem1 = $anuncio->upload($imagem1,$imagem1_type,$imagem1_tmp_name,$imagem1_size,1000000,5000,5000,"album",$id);    		
+    		$setImagem1 = $anuncio->upload($imagem1,$imagem1_type,$imagem1_tmp_name,$imagem1_size,1000000,5000,5000,"album",1);    		
     		
     		$imagem2 = $_FILES["imagem2"]["name"];
     		$imagem2_type = $_FILES["imagem2"]["type"];
     		$imagem2_tmp_name = $_FILES["imagem2"]["tmp_name"];
     		$imagem2_size = $_FILES["imagem2"]["size"];
-    		$setImagem2 = $anuncio->upload($imagem2,$imagem2_type,$imagem2_tmp_name,$imagem2_size,1000000,5000,5000,"album",$id);
+    		$setImagem2 = $anuncio->upload($imagem2,$imagem2_type,$imagem2_tmp_name,$imagem2_size,1000000,5000,5000,"album",2);
     		
     		$imagem3 = $_FILES["imagem3"]["name"];
     		$imagem3_type = $_FILES["imagem3"]["type"];
     		$imagem3_tmp_name = $_FILES["imagem3"]["tmp_name"];
     		$imagem3_size = $_FILES["imagem3"]["size"];
-    		$setImagem3 = $anuncio->upload($imagem3,$imagem3_type,$imagem3_tmp_name,$imagem3_size,1000000,5000,5000,"album",$id);
+    		$setImagem3 = $anuncio->upload($imagem3,$imagem3_type,$imagem3_tmp_name,$imagem3_size,1000000,5000,5000,"album",3);
     		
     		$imagem4 = $_FILES["imagem4"]["name"];
     		$imagem4_type = $_FILES["imagem4"]["type"];
     		$imagem4_tmp_name = $_FILES["imagem4"]["tmp_name"];
     		$imagem4_size = $_FILES["imagem4"]["size"];
-    		$setImagem4 = $anuncio->upload($imagem4,$imagem4_type,$imagem4_tmp_name,$imagem4_size,1000000,5000,5000,"album",$id);
+    		$setImagem4 = $anuncio->upload($imagem4,$imagem4_type,$imagem4_tmp_name,$imagem4_size,1000000,5000,5000,"album",4);
     				   	
     		$setIddepartamento = $_POST["iddepartamento"];
     		$setIdsubdepartamento = $_POST["idsubdepartamento"];
