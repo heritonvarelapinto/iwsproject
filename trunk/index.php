@@ -141,7 +141,7 @@
 								$departamento = $departamentoDAO->getDepartamentosPorId($anuncio[$i]->getIddepartamento());
 								echo "
 								<li>
-									<img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">
+									<img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" onclick=\"contaAcesso('".$anuncio[$i]->getIdAnuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">
 									<p><a href=\"".UrlManage::getUrlCategoria($anuncio[$i]->getIddepartamento(),"",$departamento->getDepartamento())."\">".$departamento->getDepartamento()."</a></p>
 								</li>";
 							}							
