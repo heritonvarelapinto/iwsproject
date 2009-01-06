@@ -1,7 +1,7 @@
 <?php
 class Layout extends HTML {
 	
-	var $image_path = "http://localhost/oiter/";
+	var $image_path = "http://www.clicknobairro.com.br/oiter/";
 	
 	function mes($mes) {
 		switch ($mes) {
@@ -48,19 +48,19 @@ class Layout extends HTML {
 			echo "<li>Comercial</li>";
 			echo "<li class=\"valor\">".$dolar['comercial']['compra']."</li>";
 			echo "<li class=\"valor\">".$dolar['comercial']['venda']."</li>";
-			echo "<li class=\"valor\">".$dolar['comercial']['variacao']."</li>";
+/*			echo "<li class=\"valor\">".$dolar['comercial']['variacao']."</li>";*/
 			echo "</ul>";
 			echo "<ul>";
 			echo "<li>Turismo</li>";
 			echo "<li class=\"valor\">".$dolar['turismo']['compra']."</li>";
 			echo "<li class=\"valor\">".$dolar['turismo']['venda']."</li>";
-			echo "<li class=\"valor\">".$dolar['turismo']['variacao']."</li>";
+/*			echo "<li class=\"valor\">".$dolar['turismo']['variacao']."</li>";*/
 			echo "</ul>";
 			echo "<ul>";
 			echo "<li>Ptax</li>";
 			echo "<li class=\"valor\">".$dolar['ptax']['compra']."</li>";
 			echo "<li class=\"valor\">".$dolar['ptax']['venda']."</li>";
-			echo "<li class=\"valor\">".$dolar['ptax']['variacao']."</li>";
+/*			echo "<li class=\"valor\">".$dolar['ptax']['variacao']."</li>";*/
 			echo "</ul>";
 			echo "</div>";
 		}

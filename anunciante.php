@@ -32,7 +32,7 @@
 		$("#foto").hide();				
 	});	
 	</script>
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?=$key['local']; ?>" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?=$key['online']; ?>" type="text/javascript"></script>
     <script>
     //<![CDATA[
     
@@ -147,10 +147,10 @@
 		    	<tr><td colspan="2"><h2>Fotos</h2></td></tr>
 		    	<tr>
 		    		<td colspan="2">
-		    			<? echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem1()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\">"; ?>
-		    			<? echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem2()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\">"; ?>
-		    			<? echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem3()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\">"; ?>
-		    			<? echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem4()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\">"; ?>
+		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem1()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\">"; ?>
+		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem2()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\">"; ?>
+		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem3()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\">"; ?>
+		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem4()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\">"; ?>
 		    		</td>
 		    	</tr>	    	
 		    </table>

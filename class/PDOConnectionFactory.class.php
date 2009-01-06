@@ -7,7 +7,7 @@ class PDOConnectionFactory{
 	
 	//parâmetros de conexão
 	// quando não for necessário deixe em branco apenas com as aspas duplas ""
-	public $host = "localhost";
+/*	public $host = "localhost";
 	public $user = "root";
 	public $senha = "root";
 	public $db = "oiter";
@@ -15,9 +15,9 @@ class PDOConnectionFactory{
 	public $hostConstrutor = "localhost";
 	public $userConstrutor = "root";
 	public $senhaConstrutor = "root";
-	public $dbConstrutor = "construtor";
+	public $dbConstrutor = "construtor";*/
 	
-	/*public $host = "mysql03.clicknobairro.com.br";
+	public $host = "mysql03.clicknobairro.com.br";
 	public $user = "clicknobairro2";
 	public $senha = "dados010101";
 	public $db = "clicknobairro2";
@@ -25,7 +25,7 @@ class PDOConnectionFactory{
 	public $hostConstrutor = "mysql04.clicknobairro.com.br";
 	public $userConstrutor = "clicknobairro3";
 	public $senhaConstrutor = "dados010101";
-	public $dbConstrutor = "clicknobairro3";*/
+	public $dbConstrutor = "clicknobairro3";
 	
 	//seta a persistência da conexão
 	public $persistent = false;
