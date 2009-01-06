@@ -237,7 +237,7 @@ class Anuncio {
 		        preg_match("/\.(gif|bmp|png|jpg|jpeg|swf){1}$/i", $name, $ext);
 		
 		        // Gera um nome único para a imagem
-		        $imagem_nome = date("Ymdhi").$ext[0];
+		        $imagem_nome = date("Ymdhis").$ext[0];
 		        //$imagem_nome = $name;
 		        
 		        //AdmBanners::addBanners($lado,$idcat,$numero,$imagem_nome,$tamanhos[0],$tamanhos[1],$url,$target,$tempo);	  
