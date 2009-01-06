@@ -9,7 +9,7 @@
 	$anuncioDAO = new AnuncioDAO();
 	
 	$acao = $_GET["acao"];
-	//$acao = "add";
+	//$acao = "alt";
 	
 	$menuDAO = new MenuAdminDAO();
 	$menu = $menuDAO->getMenuPorTitulo("anúncios");
@@ -20,14 +20,11 @@
 	
     switch ($acao) {
     	case "add":
-    		$id = $anuncioDAO->getLastID();
-    		$id = $id->idanuncio + 1;
-    		   		
     		$logo = $_FILES["logo"]["name"];
     		$logo_type = $_FILES["logo"]["type"];
     		$logo_tmp_name = $_FILES["logo"]["tmp_name"];
     		$logo_size = $_FILES["logo"]["size"];
-    		$setLogo = $anuncio->upload_imagem($logo,$logo_type,$logo_tmp_name,$logo_size,1000000,220,500,"logos",$id);
+    		$setLogo = $anuncio->upload_imagem($logo,$logo_type,$logo_tmp_name,$logo_size,1000000,220,500,"logos");
     		
     		$imagem1 = $_FILES["imagem1"]["name"];
     		$imagem1_type = $_FILES["imagem1"]["type"];
@@ -97,8 +94,6 @@
     		$anuncio->setTexto($setTexto);
     		$anuncio->setDestaque($setDestaque);
     		
-    		
-    		
     		$anuncioDAO->InsereAnuncio($anuncio);
     			header("location: ../principal.php?menu=7&act=mostra&msg=1");
     	break;  
@@ -110,40 +105,56 @@
     			
     			$anuncioDAO->Deleta($anuncio->getIdanuncio());
     				header("location: ../principal.php?menu=7&act=mostra&msg=3");    			
-    		}else{   
+    		}else{    			
     			if($_FILES["logo"]["name"] == "") {
-    				$logo = $_POST["logo"];
+    				$setLogo = $_POST["logo"];
     			}else{
     				$logo = $_FILES["logo"]["name"];
 		    		$logo_type = $_FILES["logo"]["type"];
 		    		$logo_tmp_name = $_FILES["logo"]["tmp_name"];
 		    		$logo_size = $_FILES["logo"]["size"];
-		    		$anuncio->upload_imagem($logo,$logo_type,$logo_tmp_name,$logo_size,1000000,220,500,"logos");
+		    		$setLogo = $anuncio->upload_imagem($logo,$logo_type,$logo_tmp_name,$logo_size,1000000,500,500,"logos");
     			}
 	    		
-	    		$imagem1 = $_FILES["imagem1"]["name"];
-	    		$imagem1_type = $_FILES["imagem1"]["type"];
-	    		$imagem1_tmp_name = $_FILES["imagem1"]["tmp_name"];
-	    		$imagem1_size = $_FILES["imagem1"]["size"];
-	    		$anuncio->upload_imagem($imagem1,$imagem1_type,$imagem1_tmp_name,$imagem1_size,1000000,5000,5000,"album");
+    			if($_FILES["imagem1"]["name"] == "") {
+	    			$setImagem1 = $_POST["imagem1"];
+	    		}else{
+	    			$imagem1 = $_FILES["imagem1"]["name"];
+		    		$imagem1_type = $_FILES["imagem1"]["type"];
+		    		$imagem1_tmp_name = $_FILES["imagem1"]["tmp_name"];
+		    		$imagem1_size = $_FILES["imagem1"]["size"];
+		    		$setImagem1 = $anuncio->upload($imagem1,$imagem1_type,$imagem1_tmp_name,$imagem1_size,1000000,5000,5000,"album",1);    		
+	    		}
 	    		
-	    		$imagem2 = $_FILES["imagem2"]["name"];
-	    		$imagem2_type = $_FILES["imagem2"]["type"];
-	    		$imagem2_tmp_name = $_FILES["imagem2"]["tmp_name"];
-	    		$imagem2_size = $_FILES["imagem2"]["size"];
-	    		$anuncio->upload_imagem($imagem2,$imagem2_type,$imagem2_tmp_name,$imagem2_size,1000000,500,500,"album");
+	    		if($_FILES["imagem2"]["name"] == "") {
+	    			$setImagem2 = $_POST["imagem2"];
+	    		}else{
+		    		$imagem2 = $_FILES["imagem2"]["name"];
+		    		$imagem2_type = $_FILES["imagem2"]["type"];
+		    		$imagem2_tmp_name = $_FILES["imagem2"]["tmp_name"];
+		    		$imagem2_size = $_FILES["imagem2"]["size"];
+		    		$setImagem2 = $anuncio->upload($imagem2,$imagem2_type,$imagem2_tmp_name,$imagem2_size,1000000,5000,5000,"album",2);
+	    		}
 	    		
-	    		$imagem3 = $_FILES["imagem3"]["name"];
-	    		$imagem3_type = $_FILES["imagem3"]["type"];
-	    		$imagem3_tmp_name = $_FILES["imagem3"]["tmp_name"];
-	    		$imagem3_size = $_FILES["imagem3"]["size"];
-	    		$anuncio->upload_imagem($imagem3,$imagem3_type,$imagem3_tmp_name,$imagem3_size,1000000,500,500,"album");
+	    		if($_FILES["imagem3"]["name"] == "") {
+	    			$setImagem3 = $_POST["imagem3"];
+	    		}else{
+		    		$imagem3 = $_FILES["imagem3"]["name"];
+		    		$imagem3_type = $_FILES["imagem3"]["type"];
+		    		$imagem3_tmp_name = $_FILES["imagem3"]["tmp_name"];
+		    		$imagem3_size = $_FILES["imagem3"]["size"];
+		    		$setImagem3 = $anuncio->upload($imagem3,$imagem3_type,$imagem3_tmp_name,$imagem3_size,1000000,5000,5000,"album",3);
+	    		}
 	    		
-	    		$imagem4 = $_FILES["imagem4"]["name"];
-	    		$imagem4_type = $_FILES["imagem4"]["type"];
-	    		$imagem4_tmp_name = $_FILES["imagem4"]["tmp_name"];
-	    		$imagem4_size = $_FILES["imagem4"]["size"];
-	    		$anuncio->upload_imagem($imagem4,$imagem4_type,$imagem4_tmp_name,$imagem4_size,1000000,500,500,"album");
+	    		if($_FILES["imagem4"]["name"] == "") {
+	    			$setImagem4 = $_POST["imagem4"];
+	    		}else{
+		    		$imagem4 = $_FILES["imagem4"]["name"];
+		    		$imagem4_type = $_FILES["imagem4"]["type"];
+		    		$imagem4_tmp_name = $_FILES["imagem4"]["tmp_name"];
+		    		$imagem4_size = $_FILES["imagem4"]["size"];
+		    		$setImagem4 = $anuncio->upload($imagem4,$imagem4_type,$imagem4_tmp_name,$imagem4_size,1000000,5000,5000,"album",4);
+	    		}
 	    		    		   	
 	    		$setIdanuncio = $_POST["idanuncio"];
 	    		$setIddepartamento = $_POST["iddepartamento"];
@@ -159,12 +170,6 @@
 	    		$setTelefones = $_POST["telefones"];
 	    		$setEmail =$_POST["email"];
 	    		$setSite = $_POST["site"];	    		
-	    		
-	    		$setLogo = $logo;
-	    		$setImagem1 = $imagem1;
-	    		$setImagem2 = $imagem2;
-	    		$setImagem3 = $imagem3;
-	    		$setImagem4 = $imagem4;
 	    		
 	    		$setDe = $anuncio->FormataData($_POST["de"]);
 	    		$setAte = $anuncio->FormataData($_POST["ate"]);
@@ -199,8 +204,7 @@
 	    		
 	    		$anuncioDAO->AlteraAnuncio($anuncio);
 	    		
-	    		print_r($anuncio);
-	    			//header("location: ../principal.php?menu=7&act=mostra&msg=2");
+					header("location: ../principal.php?menu=7&act=mostra&msg=2");
     		}
     	break;  		
     }

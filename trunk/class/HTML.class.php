@@ -374,13 +374,15 @@
 			<script src="script/admin.js" language="JavaScript"/></script>
 			<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
 			<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
+			<script type="text/javascript" src="../js/jquery.validate.js"></script>
 			<style type="text/css">@import url(<?=$layout->image_path;?>css/jquery-calendar.css);</style>
 			<script>
 				$(document).ready(function(){
 			
 					$(".data").calendar();
 				});
-			</script>		
+			</script>
+					
 			</HEAD>
 			<body bgcolor="#EFEFEF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="Mascaras.carregar();">
 			<table width="778" height="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">			

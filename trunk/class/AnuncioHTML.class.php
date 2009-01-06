@@ -159,12 +159,84 @@
 				$resultado_busca = $this->busca_cep($cep);
 			}
 			
-		?>		
+		?>
+		<script>
+				$(function() {
+				    // valida o formulário
+				    $('#anuncios').validate({
+				        // define regras para os campos
+				        rules: {					        			          
+				            nome: {
+				                required: true,
+				                minlength: 2
+				            },
+				            cep: {
+				                required: true,
+				                minlength: 9
+				            },
+				            endereco: {
+				                required: true,
+				                minlength: 2
+				            },
+				            numero: {
+				                required: true,
+				                minlength: 1
+				            },
+				            bairro: {
+				                required: true,
+				                minlength: 2
+				            },
+				            cidade: {
+				                required: true,
+				                minlength: 2
+				            },
+				            estado: {
+				                required: true,
+				                minlength: 2
+				            },
+				            telefones: {
+				                required: true,
+				                minlength: 2
+				            },				            
+				            destaque: {
+				                required: true
+				            },
+				            de: {
+				                required: true,
+				                minlength: 9
+				            },
+				            ate: {
+				                required: true,
+				                minlength: 9
+				            },
+				            texto: {
+				                required: true,
+				                minlength: 2
+				            }
+				        },
+				        // define messages para cada campo
+				        messages: {				            
+				            nome: "<br><b><font color='red'>Preencha o seu nome</font></b>",
+				            cep: "<br><b><font color='red'>Digite um número de Cep</font></b>",
+				            endereco: "<br><b><font color='red'>Se não sabe seu endereço , coloque o cep no campo CEP</font></b>",
+				            numero: "<br><b><font color='red'>Digite o número</font></b>",
+				            bairro: "<br><b><font color='red'>Se não sabe seu bairro , coloque o cep no campo CEP</font></b>",
+				            cidade: "<br><b><font color='red'>Se não sabe sua cidade , coloque o cep no campo CEP</font></b>",
+				            estado: "<br><b><font color='red'>Se não sabe seu estado , coloque o cep no campo CEP</font></b>",
+				            telefones: "<br><b><font color='red'>Nescessário no mínimo um número de telefone</font></b>",
+				            destaque: "<br><b><font color='red'>Selecione uma opção</font></b>",
+				            de: "<b><font color='red'>Coloque uma data</font></b>",
+				            ate: "<b><font color='red'>Coloque uma data</font></b>",
+				            texto: "<br><b><font color='red'>Escreva uma descrição</font></b>",
+				        }
+				    });
+				});				
+			</script>			
 	        <span class="TituloPage">• Adicionar Anúncio</span>
 	        <br/>
 	        <br/>                         
 	        <table width="558" cellspacing="1" cellpadding="4" border="0" class="BordaTabela">
-	        <form action="act/Anuncio.act.php?acao=add" name="anuncios" method="post" enctype="multipart/form-data">                       
+	        <form action="act/Anuncio.act.php?acao=add" name="anuncios" id="anuncios" method="post" enctype="multipart/form-data">                       
 	        <input type="hidden" name="iddepartamento" value="<?=$iddepartamento;?>">
 		        <tbody>
 		        	<tr class="Linha2Tabela">
@@ -328,9 +400,19 @@
 								$subdepartamentoDAO = new SubdepartamentoDAO();
 								$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($anuncio->getIddepartamento());
 	                		?>                    	
-		                	<select name="idsubdepartamento" id="idsubdepartamento" class="FORMbox">
-		                		<option value="<?=$subdepartamento[0]->getIdsubdepartamento;?>"><?=$subdepartamento[0]->getSubdepartamento();?></option>
-		                	</select>
+		                		<select name="idsubdepartamento" id="idsubdepartamento" class="FORMbox">
+								<?
+								if(count($subdepartamento) > 0 && $anuncio->getIdsubdepartamento() != 0) {
+								for($i=0;$i < count($subdepartamento);$i++) { ?>
+								<option <? if($anuncio->getIdsubdepartamento() == $subdepartamento[$i]->getIdsubdepartamento()) echo "selected" ?> value="<?=$subdepartamento[$i]->getIdsubdepartamento();?>"><?=$subdepartamento[$i]->getSubdepartamento();?></option>
+								<? }
+								} else {
+								?>
+								<option value="0">Sem Subdepartamento</option>
+								<?
+								}
+								?>
+								</select>
 	                    </td>
 	                </tr>	        	                            	   	
 	                <tr class="Linha2Tabela">
@@ -391,28 +473,28 @@
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem1"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem1();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem1();?>" border="0"><input type="hidden" name="imagem1" value="<?=$anuncio->getImagem1();?>"></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> IMAGEM 2</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem2"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem2();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem2();?>" border="0"><input type="hidden" name="imagem2" value="<?=$anuncio->getImagem2();?>"></td>
 	                </tr>
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> IMAGEM 3</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem3"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem3();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem3();?>" border="0"><input type="hidden" name="imagem3" value="<?=$anuncio->getImagem3();?>"></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> IMAGEM 4</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem4"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
-	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem4();?>" border="0"></td>
+	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem4();?>" border="0"><input type="hidden" name="imagem4" value="<?=$anuncio->getImagem4();?>"></td>
 	                </tr>
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> DESTAQUE</b></td>
