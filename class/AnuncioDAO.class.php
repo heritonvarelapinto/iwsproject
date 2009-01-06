@@ -104,6 +104,21 @@ class AnuncioDAO extends PDOConnectionFactory {
 		}
 	}
 
+	public function contaAcesso ($id) {
+		
+		$sql = "UPDATE anuncios SET acessos=acessos+1  where idanuncio=".$id;
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
+	}
 	
 	/*public function AlteraAnuncio( $anuncio, $condicao ){
 		try{
