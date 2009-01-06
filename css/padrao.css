@@ -647,7 +647,7 @@ ul#listaDepartamento li ul li {
 
 #foto {
 	width: 390px;
-	height: 250px;
+	height: 300px;
 	overflow: hidden;
 }
 
@@ -710,7 +710,7 @@ ul#listaDepartamento li ul li {
 }
 
 #quadro {
-	height: 250px;
+	height: 300px;
 }
 
 a.site {
@@ -721,4 +721,12 @@ a.site {
 
 img.borda {
 	border:1px solid #000;
+}
+
+.thumb {
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	float: left;	
+	margin-right: 5px;
 }
