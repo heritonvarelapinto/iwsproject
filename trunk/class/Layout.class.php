@@ -42,7 +42,6 @@ class Layout extends HTML {
 			echo "<li>&nbsp;</li>";
 			echo "<li class=\"titulo\">Compra</li>";
 			echo "<li class=\"titulo\">Venda</li>";
-			echo "<li class=\"titulo\">%</li>";
 			echo "</ul>";
 			echo "<ul>";
 			echo "<li>Comercial</li>";
