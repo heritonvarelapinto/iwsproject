@@ -507,59 +507,14 @@ function valida_produto(acao) {
 }
 
 //###################################################################################
-function valida_veiculo(acao) {
-    Form = document.veiculos;   
-    if (Form.tipo.value == "") {
-        alert("O Tipo \xE9 um campo obrigat\xF3rio !"); 
-        Form.tipo.focus();       
+function valida_anuncio() {
+    Form = document.anuncios;   
+    if (Form.iddepartamento.value == "") {
+        alert("Selecione um departamento !"); 
+        Form.iddepartamento.focus();       
         return false;
     }    
-    if (Form.modelo.value == "") {
-        alert("O Modelo \xE9 um campo obrigat\xF3rio !"); 
-        Form.modelo.focus();       
-        return false;
-    }
-    if (Form.cor.value == "") {
-        alert("A Cor \xE9 um campo obrigat\xF3rio !"); 
-        Form.cor.focus();       
-        return false;
-    }
-    if (Form.combustivel.value == "") {
-        alert("O Combustível \xE9 um campo obrigat\xF3rio !"); 
-        Form.combustivel.focus();       
-        return false;
-    }
-    if (Form.km.value == "") {
-        alert("A Kilometragem \xE9 um campo obrigat\xF3rio !"); 
-        Form.km.focus();       
-        return false;
-    }
-    if (Form.ano.value == "") {
-        alert("O Ano \xE9 um campo obrigat\xF3rio !"); 
-        Form.ano.focus();       
-        return false;
-    }
-    if (Form.valor.value == "") {
-        alert("O Valor \xE9 um campo obrigat\xF3rio !"); 
-        Form.valor.focus();       
-        return false;
-    }
-    if (Form.status.value == "") {
-        alert("O Estado \xE9 um campo obrigat\xF3rio !"); 
-        Form.status.focus();       
-        return false;
-    }
-    if (Form.publicado.value == "") {
-        alert("O Publicado \xE9 um campo obrigat\xF3rio !"); 
-        Form.publicado.focus();       
-        return false;
-    }
-    if (Form.destaque.value == "") {
-        alert("O Destaque \xE9 um campo obrigat\xF3rio !"); 
-        Form.destaque.focus();       
-        return false;
-    }
-   
+    return true;
 }
 //###################################################################################
 function valida_dropmenu(campo, valor) {
@@ -1082,7 +1037,6 @@ function cep(cep) {
 }
 
 function marcasDisponiveis(iddepartamento) {
-	if(iddepartamento != "") {
 	ajax = ajaxInit();
 	if(ajax) {
 		ajax.open("POST", "../class/Select.class.php", true );
@@ -1094,15 +1048,11 @@ function marcasDisponiveis(iddepartamento) {
 		ajax.onreadystatechange = function() {     
 		if(ajax.readyState == 4) {
 		     if(ajax.status == 200) {
-			         document.getElementById('idsubdepartamento').innerHTML = ajax.responseText;
+			         $("#idsubdepartamento").html(ajax.responseText);
 			       } else {
 			         alert(ajax.statusText);
 			       }
 		     }
 		}
-	}
-	} else {
-		alert('Favor selecionar um valor.');
-		return false;
-	}
+	}	
 }
