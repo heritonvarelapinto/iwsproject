@@ -69,71 +69,29 @@
     </script>
   </head>
   <body onload="load()" onunload="GUnload()">
-  	<div id="anunciante">
-     <? /*
-    	echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem1()."\">";
-    	echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem2()."\">";
-    	echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem3()."\">";
-    	echo "<img src=\"".$layout->image_path."images/album/".$anuncio->getImagem4()."\">";
-    	*/
-    ?>
-    
-    <table border="0">
+  	<div id="anunciante">   
+    <table border="0" width="100%">
     	<tr>
-    		<td height="100" valign="top"><? echo "<img src=\"".$layout->image_path."images/logos/".$anuncio->getLogo()."\">"; ?></td>
+    		<td height="100" width="40%" valign="top"><? echo "<img src=\"".$layout->image_path."images/logos/".$anuncio->getLogo()."\" alt=\"".utf8_encode($anuncio->getNome())."\" title=\"".utf8_encode($anuncio->getNome())."\">"; ?></td>
     		<td align="right" valign="top">
     			<div class="endereco">
-    				<p><?=utf8_encode($anuncio->getEndereco());?>, <?=utf8_encode($anuncio->getNumero());?><? if(utf8_encode($anuncio->getComplemento())) echo " - ".utf8_encode($anuncio->getComplemento());?></p>
+    				<p><b><?=utf8_encode("Endereço");?>:</b> <?=utf8_encode($anuncio->getEndereco());?>, <?=utf8_encode($anuncio->getNumero());?><? if(utf8_encode($anuncio->getComplemento())) echo " - ".utf8_encode($anuncio->getComplemento());?></p>
     				<p><?=utf8_encode($anuncio->getBairro());?> - <?=utf8_encode($anuncio->getCidade());?> - <?=utf8_encode($anuncio->getEstado());?></p>
     				<p><?=utf8_encode($anuncio->getTelefones());?></p>
     				<p><br></p>
-    				<p><a href="javascript:void(0)" onclick="contatoAnuncio()">Clique aqui para enviar um e-mail</a></p>
-    				<p><a href="javascript:void(0)" onclick="localizacao()"><?=utf8_encode("Clique aqui e veja nossa localização");?></a></p>
+    				<p><a title="Clique aqui entrar em contato" href="javascript:void(0)" onclick="contatoAnuncio('<?=$anuncio->getIdanuncio();?>')">Clique aqui entrar em contato</a></p>
+    				<p><a title="<?=utf8_encode("Clique aqui e veja nossa localização");?>" href="javascript:void(0)" onclick="localizacao()"><?=utf8_encode("Clique aqui e veja nossa localização");?></a></p>
     			</div>
     		</td>
     	</tr>
     	<tr>
     		<td colspan="2">
-    		<table border="0" cellpadding="0" cellspacing="0">
+    		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		    	<tr>
 		    		<td width="400" valign="top">
 		    			<div id="quadro">
 		    				<div id="map" style="width: 390px; height: 250px;"></div>
-		    				<div id="contato">
-		    				<form method="POST" action="email.php">
-		    				<table border="0" cellpadding="0" cellspacing="0" width="98%">
-		    					<tr>
-		    						<td colspan="2" class="label"><h2>Contato</h2></td>
-		    					</tr>
-		    					<tr>
-		    						<td class="label">Nome:</td>
-			            			<td><input type="text" name="nome"></td>
-		    					</tr>
-		    					<tr>
-		    						<td class="label">* E-mail:</td>
-			            			<td><input type="text" name="email"></td>
-		    					</tr>
-		    					<tr>
-		    						<td class="label">Telefone:</td>
-			            			<td><input type="text" name="telefone"></td>
-		    					</tr>
-		    					<tr>
-		    						<td class="label">* Assunto:</td>
-			            			<td><input type="text" name="assunto"></td>
-		    					</tr>
-		    					<tr>
-		    						<td class="label">* Mensagem:</td>
-			            			<td>
-			            				<textarea name="mensagem" cols="30" rows="4"></textarea>
-			            			</td>
-		    					</tr>
-		    					<tr>
-		    						<td class="label"></td>
-			            			<td><input type="submit" value="Enviar e-mail"></td>
-		    					</tr>
-		    				</table>
-		    				</form>
-		    				</div>
+		    				<div id="contato"></div>
 		    				<div id="foto"></div>
 	    				</div>
 		    		</td>
@@ -145,19 +103,38 @@
 		    		</td>
 		    	</tr>
 		    	<tr><td colspan="2">&nbsp;</td></tr>
-		    	<tr><td colspan="2"><h2>Fotos</h2></td></tr>
-		    	<tr>
-		    		<td colspan="2">
-		    			<? if($anuncio->getImagem1() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem1()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\"></div>"; ?>
-		    			<? if($anuncio->getImagem2() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem2()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\"></div>"; ?>
-		    			<? if($anuncio->getImagem3() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem3()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\"></div>"; ?>
-		    			<? if($anuncio->getImagem4() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem4()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\"></div>"; ?>
-		    		</td>
-		    	</tr>
+		    	<?
+		    	$ok = false;
+
+		    	for($i=1; $i <= 4;$i++) {
+					$imagem = "getImagem".$i;
+		    		if($anuncio->$imagem() != "") {
+			    		$ok = true;
+			    		break;	
+			    	}
+		    	}
+		    	
+		    	if($ok == true) {
+		    		?>
+			    	<tr><td colspan="2" height="20"><h2>Fotos</h2></td></tr>
+			    	<tr>
+			    		<td colspan="2" height="50">
+			    			<? if($anuncio->getImagem1() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem1()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem2() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem2()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem3() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem3()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem4() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem4()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\"></div>"; ?>
+			    		</td>
+			    	</tr>
+			    	<?
+		    	} else {
+		    		?><tr><td colspan="2" height="70">&nbsp;</td></tr><?
+		    	}
+		    	?>
 		    </table>
     		</td>
     	</tr>
     	<tr><td align="right" colspan="2"><a href="javascript:window.close();">Fechar Janela</a></td></tr>
+    	<tr><td align="right" colspan="2"><img src="<?=$layout->image_path;?>/images/logos/miniLogo.png" title="Criado por OiterBusca" alt="Mini Logo Oiter"></td></tr>
     </table>
     </div>
   </body>
