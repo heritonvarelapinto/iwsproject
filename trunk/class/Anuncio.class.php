@@ -24,7 +24,7 @@ class Anuncio {
     public $ate;
     public $destaque;
     
-    function thumbMaker($imagem, $aprox, $id, $mini)
+    function thumbMaker($imagem, $aprox, $id, $mini,$diretorio)
 	{
 	    if (!file_exists($imagem))
 	    {
@@ -55,7 +55,7 @@ class Anuncio {
 	    // no array, dessa forma podemos pegar somente o nome do arquivo, não importando em que
 	    // diretório está.
 	    $i= sizeof($dir_arq) - 1; // pega o nome do arquivo, sem os diretórios
-	    $arquivo_miniatura= "..".$barra."..".$barra."images".$barra."thumbs".$barra.$mini;
+	    $arquivo_miniatura= "..".$barra."..".$barra."images".$barra.$diretorio.$barra.$mini;
 	    
 	    // imagem de origem
 	    if ($ext == "png")
@@ -331,8 +331,10 @@ class Anuncio {
 		        // Faz o upload da imagem
 		        move_uploaded_file($tmp_name, $imagem_dir);
 		        
-		        $dir1 = "..\..\images\album\\".$imagem_nome;    		
-    			$this->thumbMaker($dir1,100,$id,$imagem_nome);
+		        $dir1 = "..\..\images\album\\".$imagem_nome; 
+		           		
+		        $this->thumbMaker($dir1,400,$id,$imagem_nome,"album");
+    			$this->thumbMaker($dir1,100,$id,$imagem_nome,"thumbs");    			
 		        
 		        $ok = true;
 		            		  
