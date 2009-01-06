@@ -68,7 +68,7 @@
     //]]>
     </script>
   </head>
-  <body onload="load()" onunload="GUnload()">
+  <body onload="load()">
   	<div id="anunciante">   
     <table border="0" width="100%">
     	<tr>
@@ -90,7 +90,7 @@
 		    	<tr>
 		    		<td width="400" valign="top">
 		    			<div id="quadro">
-		    				<div id="map" style="width: 390px; height: 250px;"></div>
+		    				<div id="map" style="width: 390px; height: 300px;"></div>
 		    				<div id="contato"></div>
 		    				<div id="foto"></div>
 	    				</div>
@@ -119,10 +119,10 @@
 			    	<tr><td colspan="2" height="20"><h2>Fotos</h2></td></tr>
 			    	<tr>
 			    		<td colspan="2" height="50">
-			    			<? if($anuncio->getImagem1() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem1()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\"></div>"; ?>
-			    			<? if($anuncio->getImagem2() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem2()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\"></div>"; ?>
-			    			<? if($anuncio->getImagem3() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem3()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\"></div>"; ?>
-			    			<? if($anuncio->getImagem4() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem4()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem1() != "") echo "<div class=\"thumb\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem1()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem2() != "") echo "<div class=\"thumb\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem2()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem3() != "") echo "<div class=\"thumb\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem3()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\"></div>"; ?>
+			    			<? if($anuncio->getImagem4() != "") echo "<div class=\"thumb\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem4()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\"></div>"; ?>
 			    		</td>
 			    	</tr>
 			    	<?
