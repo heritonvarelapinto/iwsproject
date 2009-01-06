@@ -86,6 +86,7 @@
     				<p><?=utf8_encode($anuncio->getEndereco());?>, <?=utf8_encode($anuncio->getNumero());?><? if(utf8_encode($anuncio->getComplemento())) echo " - ".utf8_encode($anuncio->getComplemento());?></p>
     				<p><?=utf8_encode($anuncio->getBairro());?> - <?=utf8_encode($anuncio->getCidade());?> - <?=utf8_encode($anuncio->getEstado());?></p>
     				<p><?=utf8_encode($anuncio->getTelefones());?></p>
+    				<p><br></p>
     				<p><a href="javascript:void(0)" onclick="contatoAnuncio()">Clique aqui para enviar um e-mail</a></p>
     				<p><a href="javascript:void(0)" onclick="localizacao()"><?=utf8_encode("Clique aqui e veja nossa localização");?></a></p>
     			</div>
@@ -147,12 +148,12 @@
 		    	<tr><td colspan="2"><h2>Fotos</h2></td></tr>
 		    	<tr>
 		    		<td colspan="2">
-		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem1()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\">"; ?>
-		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem2()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\">"; ?>
-		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem3()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\">"; ?>
-		    			<? echo "<img src=\"".$layout->image_path."images/thumb/".$anuncio->getImagem4()."\" width=\"50\" height=\"50\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\">"; ?>
+		    			<? if($anuncio->getImagem1() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem1()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem1()."')\"></div>"; ?>
+		    			<? if($anuncio->getImagem2() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem2()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem2()."')\"></div>"; ?>
+		    			<? if($anuncio->getImagem3() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem3()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem3()."')\"></div>"; ?>
+		    			<? if($anuncio->getImagem4() != "") echo "<div style=\"width: 50px; height: 50px; overflow: hidden; float: left;\"><img src=\"".$layout->image_path."images/thumbs/".$anuncio->getImagem4()."\" onclick=\"verFoto('".$layout->image_path."images/album/".$anuncio->getImagem4()."')\"></div>"; ?>
 		    		</td>
-		    	</tr>	    	
+		    	</tr>
 		    </table>
     		</td>
     	</tr>
