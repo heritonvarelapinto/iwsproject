@@ -644,14 +644,14 @@
 			echo "</select>";
 		}
 		
-		function selectDepartamentosAdminAlt($departamentos) {
+		function selectDepartamentosAdminAlt($departamentos,$dep) {
 			$totDepartamentos = count($departamentos);
 			
-			echo "<select name=\"iddepartamento\" id=\"iddepartamento\" class=\"FORMBox\">";
+			echo "<select name=\"iddepartamento\" id=\"iddepartamento\" class=\"FORMBox\" onchange=\"javascript: marcasDisponiveis(this.value);\">";
 			echo "<option value=\"\">--Selecione--</option>";
 			
 			for($i = 0; $i < $totDepartamentos; $i++) {
-				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>" <?if($_SESSION["iddepartamento"] == $departamentos[$i]->getIdDepartamento()) { echo "selected"; } ?>><?=$departamentos[$i]->getDepartamento(); ?></option><?
+				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>" <?if($dep == $departamentos[$i]->getIdDepartamento()) { echo "selected"; } ?>><?=$departamentos[$i]->getDepartamento(); ?></option><?
 			}
 			echo "</select>";
 		}

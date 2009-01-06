@@ -310,42 +310,29 @@
 		        	<tr class="Linha2Tabela">
 	                    <td align="right"><b> DEPARTAMENTO:</b></td>
 	                    <td>
-	                    	<?
-	                    		$departamento = new Departamento();
-	                    		$departamentoDAO = new DepartamentoDAO();
-	                    		$departamento = $departamentoDAO->Lista();
-	                    		
-	                    		$this->selectDepartamentosAdminAlt($departamento);
-	                    	?>
-	                    </td>
-	                </tr>
-	                <? if(isset($iddepartamento)) { ?>
-	                <tr class="Linha1Tabela">
-	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
-	                    <td>
-							<table border="0" cellpadding="0" cellspacing="0" width="100%">
-								<tr>
-								<?
-		                    		$subdepartamento = new Subdepartamento();
-		                    		$subdepartamentoDAO = new SubdepartamentoDAO();
-		                    		$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($iddepartamento);
-		                    		
-		                    		$this->selectSubdepartamentosAdminAnuncios($subdepartamento);
+	                    	<div id="departamento">
+		                    	<?
+		                    		$departamento = new Departamento();
+		                    		$departamentoDAO = new DepartamentoDAO();
+		                    		$departamento = $departamentoDAO->Lista();
+	                    			$this->selectDepartamentosAdminAlt($departamento,$anuncio->getIddepartamento());
 		                    	?>
-								</tr>
-							</table>
-	                    </td>                    
-	                </tr>
-	                <? }else{ ?>
+			                </div>
+	                    </td>
+	                </tr>	                
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> SUBDEPARTAMENTOS:</b></td>
-	                    <td>
-	                    	<select class="FORMbox" name="idsubdepartamento" id="idsubdepartamento" disabled>		                	
-	                    		<option value="">--Selecione o departamento--</option>                    		
-			                </select>
+	                    <td>	
+	                    	<?
+								$subdepartamento = new Subdepartamento();
+								$subdepartamentoDAO = new SubdepartamentoDAO();
+								$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($anuncio->getIddepartamento());
+	                		?>                    	
+		                	<select name="idsubdepartamento" id="idsubdepartamento" class="FORMbox">
+		                		<option value="<?=$subdepartamento[0]->getIdsubdepartamento;?>"><?=$subdepartamento[0]->getSubdepartamento();?></option>
+		                	</select>
 	                    </td>
-	                </tr>
-	                <? } ?>		        	                            	   	
+	                </tr>	        	                            	   	
 	                <tr class="Linha2Tabela">
 	                    <td align="right"><b> NOME DO ANÚNCIANTE</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getNome();?>" class="FORMbox" size="75" name="nome"/></td>
