@@ -202,7 +202,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	}	
 	
 	public function ListaAnunciosDestaqueHome() {
-		$sql = "SELECT * FROM anuncios WHERE destaque = '1' and status = '1' order by rand() limit 6";
+		$sql = "SELECT * FROM anuncios WHERE destaque = '1' order by rand() limit 6";
 		$stmt = $this->conexao->prepare($sql);
 		$stmt->execute();
 		
