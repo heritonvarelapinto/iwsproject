@@ -332,7 +332,7 @@ class Anuncio {
 		        move_uploaded_file($tmp_name, $imagem_dir);
 		        
 		        $dir1 = "..\..\images\album\\".$imagem_nome;    		
-    			$this->thumbMaker($dir1,300,$id,$imagem_nome);
+    			$this->thumbMaker($dir1,50,$id,$imagem_nome);
 		        
 		        $ok = true;
 		            		  
