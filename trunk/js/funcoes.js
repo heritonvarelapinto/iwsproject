@@ -30,22 +30,9 @@
 		ajax = ajaxInit();
 				
 		if(ajax) {
-			alert("acesso + 1" + id);
-			/*ajax.open("POST", "act/contaAcesso.php", true );
+			ajax.open("POST", "/oiter/act/contaAcesso.php", true );
 			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			ajax.send("id=" + id);
-			
-			$("#contato").html("");
-			
-			ajax.onreadystatechange = function() {     
-			if(ajax.readyState == 4) {
-			     if(ajax.status == 200) {
-				         $("#contato").html(ajax.responseText);
-				       } else {
-				         $("#contato").html(ajax.statusText);
-				       }
-			     }
-			}*/
 		}
 	}
 	
@@ -122,6 +109,7 @@
 	
 
 	function abrirDestaque(id, titulo, largura, altura) {
+		altura += 50;
 		topW  = (screen.availHeight / 2) - (altura / 2);
 		leftW = (screen.availWidth / 2) - (largura / 2);
 	
@@ -139,6 +127,7 @@
 		$("#map").show();
 		$("#contato").hide();
 		$("#foto").hide();
+		GUnload();
 	}
 
 	function contatoAnuncio(id) {
