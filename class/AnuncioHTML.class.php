@@ -165,7 +165,13 @@
 				    // valida o formulário
 				    $('#anuncios').validate({
 				        // define regras para os campos
-				        rules: {					        			          
+				        rules: {
+				        	departamento: {
+				                required: true
+				            },
+				            idsubdepartamento: {
+				                required: true
+				            },
 				            nome: {
 				                required: true,
 				                minlength: 2
@@ -216,6 +222,8 @@
 				        },
 				        // define messages para cada campo
 				        messages: {				            
+				            departamento: "<br><b><font color='red'>Selecione um departamento</font></b>",
+				            idsubdepartamento: "<br><b><font color='red'>Selecione um subdepartamento</font></b>",
 				            nome: "<br><b><font color='red'>Preencha o seu nome</font></b>",
 				            cep: "<br><b><font color='red'>Digite um número de Cep</font></b>",
 				            endereco: "<br><b><font color='red'>Se não sabe seu endereço , coloque o cep no campo CEP</font></b>",
@@ -242,14 +250,12 @@
 		        	<tr class="Linha2Tabela">
 	                    <td align="right"><b> DEPARTAMENTO:</b></td>
 	                    <td>
-	                    	<div id="departamento">
 		                    	<?
 		                    		$departamento = new Departamento();
 		                    		$departamentoDAO = new DepartamentoDAO();
 		                    		$departamento = $departamentoDAO->Lista();
 	                    			$this->selectDepartamentosAdminAnuncios($departamento);
 		                    	?>
-			                </div>
 	                    </td>
 	                </tr>	                
 	                <tr class="Linha1Tabela">
