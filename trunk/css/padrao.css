@@ -651,7 +651,7 @@ ul#listaDepartamento li ul li {
 
 .texto {
 	font-family: verdana;
-	font-size: 12px;
+	font-size: 10px;
 	color: #000;
 	text-align: justify;
 }
@@ -660,7 +660,7 @@ ul#listaDepartamento li ul li {
 	margin: 10px;
 	text-align: left;
 	font-family: verdana;
-	font-size: 12px;
+	font-size: 10px;
 	color: #000;
 	text-align: justify;
 }
@@ -696,7 +696,7 @@ ul#listaDepartamento li ul li {
 }
 
 #anunciante .endereco a {
-	color: #333;
+	color: #FF0000;
 	text-decoration: none;
 	font-weight: bold;
 }
