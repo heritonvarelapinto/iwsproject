@@ -634,14 +634,26 @@
 			echo "</select>";
 		}
 		
-		function selectDepartamentosAdminMostra($departamentos) {
+		function selectDepartamentosAdminMostra($departamentos,$iddepartamento) {
 			$totDepartamentos = count($departamentos);
 			
 			echo "<select name=\"iddepartamento\" id=\"iddepartamento\" class=\"FORMBox\">";
 			echo "<option value=\"\">--Selecione--</option>";
 			
 			for($i = 0; $i < $totDepartamentos; $i++) {
-				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>"><?=$departamentos[$i]->getDepartamento(); ?></option><?
+				?><option value="<?=$departamentos[$i]->getIdDepartamento(); ?>" <? if($iddepartamento == $departamentos[$i]->getIdDepartamento()) { echo "selected"; } ?>><?=$departamentos[$i]->getDepartamento(); ?></option><?
+			}
+			echo "</select>";
+		}
+		
+		function selectSubdepartamentosAdminMostra($subdepartamentos,$idsubdepartamento) {
+			$totSubdepartamentos = count($subdepartamentos);
+			
+			echo "<select name=\"idsubdepartamento\" id=\"idsubdepartamento\" class=\"FORMBox\">";
+			echo "<option value=\"\">--Selecione--</option>";
+			
+			for($i = 0; $i < $totSubdepartamentos; $i++) {
+				?><option value="<?=$subdepartamentos[$i]->getIdSubdepartamento(); ?>" <? if($idsubdepartamento == $subdepartamentos[$i]->getIdSubdepartamento()) { echo "selected"; } ?>><?=$subdepartamentos[$i]->getSubdepartamento(); ?></option><?
 			}
 			echo "</select>";
 		}

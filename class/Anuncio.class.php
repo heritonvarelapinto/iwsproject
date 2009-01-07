@@ -41,7 +41,7 @@ class Anuncio {
 	       $barra= "/";
 	
 	    // obtém a extensão pelo mime-type
-	    $ext= $this->getExt($imagem);
+	    $ext = $this->getExt($imagem);
 	    if (!$ext)
 	    {
 	       echo "<center><h3>Tipo inválido</h3></center>";
@@ -49,7 +49,6 @@ class Anuncio {
 	    }
 	    // separa o nome do arquivo do(s) diretório(s)
 	    $dir_arq= explode($barra, $imagem);
-	
 	      
 	    // monta o nome do arquivo a ser gerado (thumbnail). O sizeof abaixo obtém o número de itens
 	    // no array, dessa forma podemos pegar somente o nome do arquivo, não importando em que
@@ -111,7 +110,7 @@ class Anuncio {
 	    // cria a imagem do thumbnail
 	    $img_final = ImageCreateTrueColor($x, $y);
 	    ImageCopyResampled($img_final, $img_origem, 0, 0, 0, 0, $x+1, $y+1, $origem_x, $origem_y);
-	      
+
 	    // o arquivo é gravado
 	    if ($ext == "png")
 	        imagepng($img_final, $arquivo_miniatura);
@@ -320,7 +319,7 @@ class Anuncio {
 		        preg_match("/\.(gif|bmp|png|jpg|jpeg|swf){1}$/i", $name, $ext);
 		
 		        // Gera um nome único para a imagem
-		        $imagem_nome = date("Ymdhi")."_".$id.$ext[0];
+		        $imagem_nome = date("Ymdhis")."_".$id.$ext[0];
 		        //$imagem_nome = $name;
 		        //echo $imagem_nome;
 		        //AdmBanners::addBanners($lado,$idcat,$numero,$imagem_nome,$tamanhos[0],$tamanhos[1],$url,$target,$tempo);	  
@@ -331,8 +330,8 @@ class Anuncio {
 		        // Faz o upload da imagem
 		        move_uploaded_file($tmp_name, $imagem_dir);
 		        
-		        $dir1 = "..\..\images\album\\".$imagem_nome; 
-		           		
+		        $dir1 = "../../images/album/".$imagem_nome; 
+		        
 		        $this->thumbMaker($dir1,400,$id,$imagem_nome,"album");
     			$this->thumbMaker($dir1,100,$id,$imagem_nome,"thumbs");    			
 		        

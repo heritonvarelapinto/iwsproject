@@ -4,11 +4,13 @@
 			$anuncio = new Anuncio();
 			$anuncioDAO = new AnuncioDAO();
 			
-			
-			
 			if($_POST["iddepartamento"] != "") {
 				$_SESSION["iddepartamento"] = $_POST["iddepartamento"];
 				$iddepartamento = $_SESSION["iddepartamento"];
+			}
+			if($_POST["idsubdepartamento"] != "") {
+				$_SESSION["idsubdepartamento"] = $_POST["idsubdepartamento"];
+				$idsubdepartamento = $_SESSION["idsubdepartamento"];
 			}
 			
 			$pagina = $_GET["pag"];
@@ -19,7 +21,12 @@
 				$order = "WHERE iddepartamento = '$_SESSION[iddepartamento]' AND nome LIKE '$letra%' ORDER BY idanuncio";				
 			}else{
 				if(isset($iddepartamento)) {
-					$order = "WHERE iddepartamento = '$iddepartamento' ORDER BY idanuncio";					
+					if(isset($idsubdepartamento)) {
+						$order = "WHERE iddepartamento = '$iddepartamento' AND idsubdepartamento = '$idsubdepartamento' ORDER BY idanuncio";
+					}else{
+						$order = "WHERE iddepartamento = '$iddepartamento' ORDER BY idanuncio";
+					}
+										
 				}else{
 					$order = "ORDER BY idanuncio";
 				}
@@ -59,12 +66,32 @@
 										$departamentosDAO = new DepartamentoDAO();
 										$departamentos = $departamentosDAO->Lista();
 										
-										$this->selectDepartamentosAdminMostra($departamentos); 
+										$this->selectDepartamentosAdminMostra($departamentos,$iddepartamento); 
 									?>
 								</td>
 								<td><input type="submit" value="Enviar" class="bttn1"></td>							
 							</tr>
-							</form>						
+							</form>
+							<?
+								$subdepartamentos = new Subdepartamento();
+								$subdepartamentosDAO = new SubdepartamentoDAO();
+								$subdepartamentos = $subdepartamentosDAO->getSubdepartamentosPorIddepartamento($iddepartamento);
+								
+								if($subdepartamentos) { ?>
+									<form method="POST" action="principal.php?menu=7&act=mostra" onsubmit="return valida_dropmenu(idsubdepartamento,'opção');">
+									<input type="hidden" name="iddepartamento" value="<?=$iddepartamento;?>">
+									<tr>
+										<td width="12%"><b>Subdepartamento:</b></td>
+										<td>
+											<? 																				
+												$this->selectSubdepartamentosAdminMostra($subdepartamentos,$idsubdepartamento); 
+											?>
+										</td>
+										<td><input type="submit" value="Enviar" class="bttn1"></td>							
+									</tr>
+									</form>
+							<?	}
+							?>
 						</table>
 					
 					</td>				
