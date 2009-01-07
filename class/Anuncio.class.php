@@ -20,9 +20,12 @@ class Anuncio {
     public $imagem3;
     public $imagem4;
     public $texto;
+    public $keywords;
     public $de;
     public $ate;
     public $destaque;
+    public $acessos;
+    public $pesquisa;
     
     function thumbMaker($imagem, $aprox, $id, $mini,$diretorio)
 	{
@@ -446,6 +449,13 @@ class Anuncio {
     function setTexto($textoIn) {
           $this->texto = $textoIn;
     }
+    
+    function getKeywords() {
+          return $this->keywords;
+    }
+    function setKeywords($keywordsIn) {
+          $this->keywords = $keywordsIn;
+    }
 
     function getDe() {
           return $this->de;
@@ -502,6 +512,22 @@ class Anuncio {
     
     function setDestaque($destaqueIn) {
           $this->destaque = $destaqueIn;
+    }
+    
+     function getAcessos() {
+          return $this->acessos;
+    }
+    
+    function setAcessos($acessosIn) {
+          $this->acessos = $acessosIn;
+    }
+    
+     function getPesquisa() {
+          return $this->pesquisa;
+    }
+    
+    function setPesquisa($pesquisaIn) {
+          $this->pesquisa = $pesquisaIn;
     }
 }
 ?>

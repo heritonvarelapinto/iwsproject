@@ -18,7 +18,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	}
 	
 	public function InsereAnuncio( $anuncio ){
-		$sql = "INSERT INTO anuncios (iddepartamento,idsubdepartamento,nome,endereco,numero,complemento,bairro,cidade,estado,cep,telefones,site,email,logo,imagem1,imagem2,imagem3,imagem4,texto,de,ate,destaque) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$sql = "INSERT INTO anuncios (iddepartamento,idsubdepartamento,nome,endereco,numero,complemento,bairro,cidade,estado,cep,telefones,site,email,logo,imagem1,imagem2,imagem3,imagem4,texto,keywords,de,ate,destaque,pesquisa) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$stmt = $this->conexao->prepare($sql);
 		
 		// sequencia de índices que representa cada valor de minha query
@@ -41,9 +41,11 @@ class AnuncioDAO extends PDOConnectionFactory {
 		$stmt->bindValue(17, $anuncio->getImagem3()); 
 		$stmt->bindValue(18, $anuncio->getImagem4());
 		$stmt->bindValue(19, $anuncio->getTexto()); 
-		$stmt->bindValue(20, $anuncio->getDe()); 
-		$stmt->bindValue(21, $anuncio->getAte()); 
-		$stmt->bindValue(22, $anuncio->getDestaque()); 
+		$stmt->bindValue(20, $anuncio->getKeywords()); 
+		$stmt->bindValue(22, $anuncio->getDe()); 
+		$stmt->bindValue(23, $anuncio->getAte()); 
+		$stmt->bindValue(24, $anuncio->getDestaque()); 
+		$stmt->bindValue(25, $anuncio->getPesquisa()); 
 					
 		// executo a query preparada
 		$stmt->execute();
@@ -61,34 +63,35 @@ class AnuncioDAO extends PDOConnectionFactory {
 
 	public function AlteraAnuncio( $anuncio ){
 		
-		$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,de = ?,ate = ?,destaque = ? WHERE idanuncio = ?";
+		$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,keywords = ?,de = ?,ate = ?,destaque = ?,pesquisa = ? WHERE idanuncio = ?";
 		
 		$stmt = $this->conexao->prepare($sql);
 		
 		// sequencia de índices que representa cada valor de minha query
-		$stmt->bindValue(1, $anuncio->getIddepartamento());
-		$stmt->bindValue(2, $anuncio->getIdsubdepartamento());
-		$stmt->bindValue(3, $anuncio->getNome());
-		$stmt->bindValue(4, $anuncio->getEndereco());
-		$stmt->bindValue(5, $anuncio->getNumero());
-		$stmt->bindValue(6, $anuncio->getComplemento());
-		$stmt->bindValue(7, $anuncio->getBairro());
-		$stmt->bindValue(8, $anuncio->getCidade());
-		$stmt->bindValue(9, $anuncio->getEstado());
-		$stmt->bindValue(10, $anuncio->getCep());
-		$stmt->bindValue(11, $anuncio->getTelefones());
-		$stmt->bindValue(12, $anuncio->getSite());
-		$stmt->bindValue(13, $anuncio->getEmail());
-		$stmt->bindValue(14, $anuncio->getLogo());
-		$stmt->bindValue(15, $anuncio->getImagem1());
-		$stmt->bindValue(16, $anuncio->getImagem2());
-		$stmt->bindValue(17, $anuncio->getImagem3());
+		$stmt->bindValue(1, $anuncio->getIddepartamento()); 
+		$stmt->bindValue(2, $anuncio->getIdsubdepartamento()); 
+		$stmt->bindValue(3, $anuncio->getNome()); 
+		$stmt->bindValue(4, $anuncio->getEndereco()); 
+		$stmt->bindValue(5, $anuncio->getNumero()); 
+		$stmt->bindValue(6, $anuncio->getComplemento()); 
+		$stmt->bindValue(7, $anuncio->getBairro()); 
+		$stmt->bindValue(8, $anuncio->getCidade()); 
+		$stmt->bindValue(9, $anuncio->getEstado()); 
+		$stmt->bindValue(10, $anuncio->getCep()); 
+		$stmt->bindValue(11, $anuncio->getTelefones()); 
+		$stmt->bindValue(12, $anuncio->getSite()); 
+		$stmt->bindValue(13, $anuncio->getEmail()); 
+		$stmt->bindValue(14, $anuncio->getLogo()); 
+		$stmt->bindValue(15, $anuncio->getImagem1()); 
+		$stmt->bindValue(16, $anuncio->getImagem2()); 
+		$stmt->bindValue(17, $anuncio->getImagem3()); 
 		$stmt->bindValue(18, $anuncio->getImagem4());
-		$stmt->bindValue(19, $anuncio->getTexto());
-		$stmt->bindValue(20, $anuncio->getDe());
-		$stmt->bindValue(21, $anuncio->getAte());
-		$stmt->bindValue(22, $anuncio->getDestaque());
-		$stmt->bindValue(23, $anuncio->getIdanuncio());
+		$stmt->bindValue(19, $anuncio->getTexto()); 
+		$stmt->bindValue(20, $anuncio->getKeywords()); 
+		$stmt->bindValue(22, $anuncio->getDe()); 
+		$stmt->bindValue(23, $anuncio->getAte()); 
+		$stmt->bindValue(24, $anuncio->getDestaque()); 
+		$stmt->bindValue(25, $anuncio->getPesquisa()); 
 		
 		// executo a query preparada
 		$stmt->execute();
@@ -118,68 +121,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 			echo "ERRO".$error[2];
 			return false;
 		}
-	}
-	
-	/*public function AlteraAnuncio( $anuncio, $condicao ){
-		try{
-		//$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,de = ?,ate = ?,destaque = ? WHERE idanuncio = ?";
-		$sql = "UPDATE anuncios SET iddepartamento = '?',
-									idsubdepartamento = '?',
-									nome = '?',
-									endereco = '?',
-									numero = '?',
-									complemento = '?',
-									bairro = '?',
-									cidade = '?',
-									estado = '?',
-									cep = '?',
-									telefones = '?',
-									site = '?',
-									email = '?',
-									logo = '?',
-									imagem1 = '?',
-									imagem2 = '?',
-									imagem3 = '?',
-									imagem4 = '?',
-									texto = '?',
-									de = '?',
-									ate = '?',
-									destaque = '?' WHERE idanuncio = '?'";
-		
-		$stmt = $this->conexao->prepare($sql);
-		
-		// sequencia de índices que representa cada valor de minha query
-		$stmt->bindValue(1, $anuncio->getIddepartamento()); 
-		$stmt->bindValue(2, $anuncio->getIdsubdepartamento()); 
-		$stmt->bindValue(3, $anuncio->getNome()); 
-		$stmt->bindValue(4, $anuncio->getEndereco()); 
-		$stmt->bindValue(5, $anuncio->getNumero()); 
-		$stmt->bindValue(6, $anuncio->getComplemento()); 
-		$stmt->bindValue(7, $anuncio->getBairro()); 
-		$stmt->bindValue(8, $anuncio->getCidade()); 
-		$stmt->bindValue(9, $anuncio->getEstado()); 
-		$stmt->bindValue(10, $anuncio->getCep()); 
-		$stmt->bindValue(11, $anuncio->getTelefones()); 
-		$stmt->bindValue(12, $anuncio->getSite()); 
-		$stmt->bindValue(13, $anuncio->getEmail()); 
-		$stmt->bindValue(14, $anuncio->getLogo()); 
-		$stmt->bindValue(15, $anuncio->getImagem1()); 
-		$stmt->bindValue(16, $anuncio->getImagem2()); 
-		$stmt->bindValue(17, $anuncio->getImagem3()); 
-		$stmt->bindValue(18, $anuncio->getImagem4());
-		$stmt->bindValue(19, $anuncio->getTexto()); 
-		$stmt->bindValue(20, $anuncio->getDe()); 
-		$stmt->bindValue(21, $anuncio->getAte()); 
-		$stmt->bindValue(22, $anuncio->getDestaque()); 
-		$stmt->bindValue(23, $condicao); 
-					
-		$stmt->execute();
-		}catch ( PDOException $ex ){
-			echo "Erro: ".$ex->getMessage();
-		}
-
-		
-	}*/
+	}	
 	
 	public function getAnuncioPorId($id) {
 		$sql = "SELECT * FROM anuncios WHERE idanuncio = ".$id;
@@ -210,9 +152,11 @@ class AnuncioDAO extends PDOConnectionFactory {
 	   	$temp->setImagem3($rs->imagem3);
 	   	$temp->setImagem4($rs->imagem4);
 	    $temp->setTexto($rs->texto);
+	    $temp->setKeywords($rs->keywords);
 	    $temp->setDe($rs->de);
 	    $temp->setAte($rs->ate);
     	$temp->setDestaque($rs->destaque);
+    	$temp->setPesquisa($rs->pesquisa);
 		return $temp;
 	}	
 	
@@ -245,9 +189,11 @@ class AnuncioDAO extends PDOConnectionFactory {
 		   	$temp->setImagem3($rs->imagem3);
 		   	$temp->setImagem4($rs->imagem4);
 		    $temp->setTexto($rs->texto);
+		    $temp->setKeywords($rs->keywords);
 		    $temp->setDe($rs->de);
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
+	    	$temp->setPesquisa($rs->pesquisa);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -285,9 +231,11 @@ class AnuncioDAO extends PDOConnectionFactory {
 	   		$temp->setImagem3($rs->imagem3);
 	   		$temp->setImagem4($rs->imagem4);
 		    $temp->setTexto($rs->texto);
+		    $temp->setKeywords($rs->keywords);
 		    $temp->setDe($rs->de);
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
+	    	$temp->setPesquisa($rs->pesquisa);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -336,9 +284,11 @@ class AnuncioDAO extends PDOConnectionFactory {
 		   	$temp->setImagem3($rs->imagem3);
 		   	$temp->setImagem4($rs->imagem4);
 		    $temp->setTexto($rs->texto);
+		    $temp->setKeywords($rs->keywords);
 		    $temp->setDe($rs->de);
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
+	    	$temp->setPesquisa($rs->pesquisa);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -396,9 +346,11 @@ class AnuncioDAO extends PDOConnectionFactory {
 		   	$temp->setImagem3($rs->imagem3);
 		   	$temp->setImagem4($rs->imagem4);
 		    $temp->setTexto($rs->texto);
+		    $temp->setKeywords($rs->keywords);
 		    $temp->setDe($rs->de);
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
+	    	$temp->setPesquisa($rs->pesquisa);
 			
 			array_push($searchResults, $temp);
 		} 
