@@ -389,14 +389,14 @@
 	                    	</select>
 	                    </td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> PAGAMENTO</b></td>
 	                    <td>
 	                    	De:<input type="text" name="de" class="data FORMBox">
 	                    	até:<input type="text" name="ate" class="data FORMBox">
 	                    </td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr class="Linha2Tabela">
 	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
 	                    <td>                                    	
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
@@ -565,17 +565,23 @@
 	                    	</select>
 	                    </td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> PAGAMENTO</b></td>
 	                    <td>
 	                    	De:<input type="text" name="de" value="<?=$anuncio->MostraDataSemHora($anuncio->getDe());?>" class="data FORMBox">
 	                    	até:<input type="text" name="ate" value="<?=$anuncio->MostraDataSemHora($anuncio->getAte());?>" class="data FORMBox">
 	                    </td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr class="Linha2Tabela">
 	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
 	                    <td>                                    	
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"><?=$anuncio->getTexto();?></textarea>  		                                                                                                     
+	                    </td>
+	            	</tr>
+	            	<tr class="Linha1Tabela">
+	                    <td align="center"><b>PALAVRAS CHAVE</b></td>
+	                    <td>                                    	
+	                    	<textarea name="keywords" rows="10" cols="70" class="FORMBox"><?=$anuncio->getKeywords();?></textarea><br>Separe as palavras por , (vírgula). Ex.: palavras , chave , etc 		                                                                                                     
 	                    </td>
 	            	</tr>
 	                <tr class="Linha3Tabela">
