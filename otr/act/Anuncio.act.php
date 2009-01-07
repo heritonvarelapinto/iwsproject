@@ -66,7 +66,7 @@
     		
     		$setDe = $anuncio->FormataData($_POST["de"]);
     		$setAte = $anuncio->FormataData($_POST["ate"]);
-    		$setTexto = $_POST["texto"];
+    		$setTexto = stripslashes($_POST["texto"]);
     		$setDestaque = $_POST["destaque"];
     		
     		$anuncio->setIddepartamento($setIddepartamento);
@@ -173,9 +173,9 @@
 	    		
 	    		$setDe = $anuncio->FormataData($_POST["de"]);
 	    		$setAte = $anuncio->FormataData($_POST["ate"]);
-	    		$setTexto = $_POST["texto"];
+	    		$setTexto = stripslashes($_POST["texto"]);
 	    		$setDestaque = $_POST["destaque"];
-	    		
+	    			    		
 	    		$anuncio->setIdanuncio($setIdanuncio);
 	    		$anuncio->setIddepartamento($setIddepartamento);
 	    		$anuncio->setIdsubdepartamento($setIdsubdepartamento);
