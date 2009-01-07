@@ -123,6 +123,31 @@ class AnuncioDAO extends PDOConnectionFactory {
 		}
 	}	
 	
+	public function totalAnuncios($id, $tipo = "") {
+		if($tipo == "departamento") {
+			$sql = "SELECT count(*) as total FROM anuncios WHERE iddepartamento = ".$id;
+		} else {
+			$sql = "SELECT count(*) as total FROM anuncios WHERE idsubdepartamento = ".$id;
+		}
+		
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		
+		return $rs->total;
+	}
+	
+	public function total($order) {
+		$sql = "SELECT count(*) as total FROM anuncios $order";
+		
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		
+		return $rs->total;
+	}
+
+	
 	public function getAnuncioPorId($id) {
 		$sql = "SELECT * FROM anuncios WHERE idanuncio = ".$id;
 		$stmt = $this->conexao->prepare($sql);
