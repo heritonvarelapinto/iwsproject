@@ -160,6 +160,20 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 		return $searchResults;
 	}
 	
+	public function contaAnuncios($id, $tipo = "") {
+		if($tipo == "departamento") {
+			$sql = "SELECT count(*) as total FROM anuncios WHERE iddepartamento = ".$id;
+		} else {
+			$sql = "SELECT count(*) as total FROM anuncios WHERE idsubdepartamento = ".$id;
+		}		
+		
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+	
+		return $rs->total;
+	}
+	
 	//mostra os registros
 	public function Paginacao($order,$inicio,$fim,$id) {
 		$sql = "SELECT * FROM subdepartamentos WHERE iddepartamento = ? $order LIMIT $inicio,$fim";

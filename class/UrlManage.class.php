@@ -6,7 +6,7 @@ class UrlManage {
 		if( UrlManage::HabilitadoModRewrite() ){
 			return $layout->image_path."categoria/$idcategoria/".UrlManage::convertStringByUrlString($Titulo).".html";
 		}else{
-			return "categorias.php?id=$idcategoria&titulo=$Titulo";
+			return "categorias.php?id=".$idcategoria;
 		}
 	}
 	
@@ -28,6 +28,50 @@ class UrlManage {
 			return "categorias.php?id=$idcategoria&sub=$idsubcategoria";
 		}
 	}
+	
+	public static function getUrlPaginacao($id,$sub,$pagina,$total){
+				
+		$layout = new Layout();
+		$categoria = new Departamento();
+		$categoriaDAO = new DepartamentoDAO();
+		
+		$categoria = $categoriaDAO->getDepartamentosPorId($id);
+		$categoria = $categoria->getDepartamento();
+		
+		if($sub != "") {
+			$subcategoria = new Subdepartamento();
+			$subcategoriaDAO = new SubdepartamentoDAO();
+			$subcategoria = $subcategoriaDAO->getSubdepartamentosPorId($sub);
+			$subcategoria = $subcategoria->getSubdepartamento();
+		}
+		
+		if( UrlManage::HabilitadoModRewrite() ){
+
+			if($sub != "") {
+				$id == "" ? $id : $id = "categoria/$id/".UrlManage::convertStringByUrlString($categoria);
+				$sub == "" ? $sub : $sub = "/".$sub."/".UrlManage::convertStringByUrlString($subcategoria);
+				$pag = "/".$pagina;
+				$total == "" ? $total = "" : $total = "-".$total;
+				
+				return $layout->image_path.$id.$pag.$total.$sub.".html";
+			} else {
+				$pag = "/".$pagina;
+				$total == "" ? $total = "" : $total = "-".$total;
+				$id == "" ? $id : $id = "categoria/".$id.$pag.$total."/".UrlManage::convertStringByUrlString($categoria);
+				
+				return $layout->image_path.$id.".html";
+			}
+						
+		}else{
+			$id == "" ? $id : $id = "id=".$id;
+			$sub == "" ? $sub : $sub = "&sub=".$sub;
+			$pag = "&pag=".$pagina;
+			$total == "" ? $total = "" : $total = "&totalPP=".$total;
+			
+			return $layout->image_path."categorias.php?".$id.$sub.$pag.$total;
+		}
+	}
+	
 	
 	public static function getUrlCliente($idcategoria, $Categoria, $Titulo){
 		if( UrlManage::HabilitadoModRewrite() ){
@@ -69,7 +113,8 @@ class UrlManage {
 		$String = eregi_replace("(^($Separador)+)|(($Separador)+$)", "", $String); //Removendo o "$Separador" do inicio e fim da string
 
 		return $String;
-	}		
+	}
+	
 	private static function HabilitadoModRewrite(){
 		return true;
 	}
