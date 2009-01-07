@@ -272,7 +272,7 @@ li.direita a {
 }
 
 #corpo .miolo #anuncios {
-	margin: 0px;
+	margin-bottom: 15px;
 	padding: 0px;
 	width: 98%;
 	float: right;
@@ -350,6 +350,10 @@ li.direita a {
 	width: 35%;
 	float: left;
 	text-align: right;
+}
+
+#corpo .miolo #anuncios p.direita a{
+	color: #666;
 }
 
 #corpo .miolo #anuncios p.direita {
@@ -729,4 +733,48 @@ img.borda {
 	overflow: hidden;
 	float: left;	
 	margin-right: 5px;
+}
+
+#resultados {
+ 	width: 98%;
+ 	margin-top: 5px;
+}
+
+#resultados ul {
+	width: 98%;
+	margin: 0px 5px;
+	border: 0px solid #000;
+	list-style: none;
+	height: 20px;
+	clear: both;
+}
+
+#resultados ul li {
+	float: left;
+}
+
+#resultados ul li b {
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+#resultados ul li.totalpagina {
+ 	float: right;
+}
+
+#resultados ul li.listaresultados {
+ 	float: right;
+ 	font-size: 9px;
+}
+
+#resultados ul li.listaresultados a{
+ 	color: #000;
+}
+
+#resultados ul li.listaresultados a:hover{
+	color: #FF0000;
+}
+#resultados ul li.totalpagina select {
+	font-size: 9px;
+	height: 15px;
 }
