@@ -1,5 +1,6 @@
 <?php
 	Auth::verificaAcesso();
+	ob_start();
 	function __autoload($classe)
     {
         require_once "../../class/".$classe.".class.php";
@@ -7,6 +8,12 @@
 	
 	$anuncio = new Anuncio();
 	$anuncioDAO = new AnuncioDAO();
+	
+	$departamento = new Departamento();
+	$departamentoDAO = new DepartamentoDAO();
+	
+	$subdepartamento = new Subdepartamento();
+	$subdepartamentoDAO = new SubdepartamentoDAO();
 	
 	$acao = $_GET["acao"];
 	//$acao = "alt";
@@ -61,14 +68,27 @@
     		$setCidade = $_POST["cidade"];
     		$setEstado = $_POST["estado"];
     		$setTelefones = $_POST["telefones"];
-    		$setEmail =$_POST["email"];
+    		$setEmail = $_POST["email"];
     		$setSite = $_POST["site"];    		    		
     		
     		$setDe = $anuncio->FormataData($_POST["de"]);
     		$setAte = $anuncio->FormataData($_POST["ate"]);
     		$setTexto = stripslashes($_POST["texto"]);
+    		$setKeywords = $_POST["keywords"];
     		$setDestaque = $_POST["destaque"];
     		
+    		$departamento = $departamentoDAO->getDepartamentosPorId($setIddepartamento);
+    		$pesquisa_dep = $departamento->getDepartamento();
+    		
+    		if($setIdsubdepartamento != '0') {
+    			$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($setIdsubdepartamento);
+	    		$pesquisa_subdep = $subdepartamento->getSubdepartamento();
+	    		
+	    		$setPesquisa = $pesquisa_dep." , ".$pesquisa_subdep;
+    		}else{
+    			$setPesquisa = $pesquisa_dep;    			
+    		}
+    		    		
     		$anuncio->setIddepartamento($setIddepartamento);
     		$anuncio->setIdsubdepartamento($setIdsubdepartamento);
     		$anuncio->setNome($setNome);
@@ -89,10 +109,12 @@
     		$anuncio->setImagem3($setImagem3);
     		$anuncio->setImagem4($setImagem4);
     		
+    		$anuncio->setTexto($setTexto);
+    		$anuncio->setKeywords($setKeywords);
     		$anuncio->setDe($setDe);
     		$anuncio->setAte($setAte);
-    		$anuncio->setTexto($setTexto);
     		$anuncio->setDestaque($setDestaque);
+    		$anuncio->setPesquisa($setPesquisa);
     		
     		$anuncioDAO->InsereAnuncio($anuncio);
     			header("location: ../principal.php?menu=7&act=mostra&msg=1");
@@ -174,8 +196,21 @@
 	    		$setDe = $anuncio->FormataData($_POST["de"]);
 	    		$setAte = $anuncio->FormataData($_POST["ate"]);
 	    		$setTexto = stripslashes($_POST["texto"]);
+	    		$setKeywords = $_POST["keywords"];
 	    		$setDestaque = $_POST["destaque"];
 	    			    		
+	    		$departamento = $departamentoDAO->getDepartamentosPorId($setIddepartamento);
+	    		$pesquisa_dep = $departamento->getDepartamento();
+	    		
+	    		if($setIdsubdepartamento != '0') {
+	    			$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($setIdsubdepartamento);
+		    		$pesquisa_subdep = $subdepartamento->getSubdepartamento();
+		    		
+		    		$setPesquisa = $pesquisa_dep." , ".$pesquisa_subdep;
+	    		}else{
+	    			$setPesquisa = $pesquisa_dep;    			
+	    		}
+	    		
 	    		$anuncio->setIdanuncio($setIdanuncio);
 	    		$anuncio->setIddepartamento($setIddepartamento);
 	    		$anuncio->setIdsubdepartamento($setIdsubdepartamento);
@@ -197,10 +232,12 @@
 	    		$anuncio->setImagem3($setImagem3);
 	    		$anuncio->setImagem4($setImagem4);
 	    		
+	    		$anuncio->setTexto($setTexto);
+	    		$anuncio->setKeywords($setKeywords);
 	    		$anuncio->setDe($setDe);
 	    		$anuncio->setAte($setAte);
-	    		$anuncio->setTexto($setTexto);
 	    		$anuncio->setDestaque($setDestaque);
+	    		$anuncio->setPesquisa($setPesquisa);
 	    		
 	    		$anuncioDAO->AlteraAnuncio($anuncio);
 	    		
