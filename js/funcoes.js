@@ -122,6 +122,28 @@
 		}
 	}
 	
+	function reload(id,sub,pagina,total,url) {
+		ajax = ajaxInit();
+				
+		if(ajax) {
+			ajax.open("POST", url + "act/urlParse.php", true );
+			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded, charset=ISO-8859-1");
+			ajax.send("id=" + id + "&sub=" + sub + "&pag=" + pagina + "&totalPP=" + total);
+			
+			ajax.onreadystatechange = function() {     
+				if(ajax.readyState == 4) {
+				     if(ajax.status == 200) {
+				         if(ajax.responseText) {
+				         	location.href = ajax.responseText;
+				     	 }
+				     } else {
+				     	alert(ajax.statusText);
+				     }
+				}
+			}
+		}
+	}
+	
 	function localizacao() {
 		load();
 		$("#map").show();
@@ -149,4 +171,8 @@
 		$("#contato").hide();
 		$("#foto").html("<img src = " + imagem + ">");
 		$("#foto").show();
+	}
+
+	function reloadPesquisa(pagina) {
+		location.href = pagina;
 	}
