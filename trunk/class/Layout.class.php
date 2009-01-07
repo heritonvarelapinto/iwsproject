@@ -630,5 +630,110 @@ function bannersEsquerda($banners) {
 		}
 		echo "</ul>";
 	}
+	
+		function breadcrumbPesquisa($id, $idsubcategoria = "") {
+		
+		$departamento = new Departamento();
+		$subdepartamento = new Subdepartamento();
+		
+		$departamentoDAO = new DepartamentoDAO();
+		$subdepartamentoDAO = new SubdepartamentoDAO();
+		
+		$departamento = $departamentoDAO->getDepartamentosPorId($id);
+		$subdepartamento = $subdepartamentoDAO->getSubdepartamentosPorId($idsubcategoria);
+		
+		if($id != "") {
+			//if(count($subdepartamentoDAO->getSubdepartamentosPorIddepartamento($id)) > 0 && $idsubcategoria != "") {
+				$link = "<a href=\"".UrlManage::getUrlCategoria($id,"",$departamento->getDepartamento())."\">".$departamento->getDepartamento()."</a>";
+			//} else {
+			//	$link = $departamento->getDepartamento();
+			//}
+			echo "» ".$link;
+		}
+		if($idsubcategoria != 0) {
+/*			echo "<li> » ".$subdepartamento->getSubdepartamento()."</li>";*/
+			echo " » <a href=\"".UrlManage::getUrlSubCategoria($id,$departamento->getDepartamento(),$idsubcategoria,$subdepartamento->getSubdepartamento())."\">".$subdepartamento->getSubdepartamento()."</a>";
+		}
+		
+		echo "<br>";
+	}
+		
+	function head($nomeDepartamento = "", $nomeSubDepartamento = "") {
+		?>
+		<head>
+			<title>OiterBusca - <?=$nomeDepartamento->departamento;?> <? if($nomeSubDepartamento) { echo " / "; ?><?=$nomeSubDepartamento->subdepartamento;?><? } ?></title>
+			<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
+			<?=$this->getTheme("");?>
+			<link rel="shortcut icon" href="<?=$this->image_path;?>icones/favicon.ico" >
+			<script type="text/javascript" src="<?=$this->image_path;?>js/jquery.js"></script>
+			<script type="text/javascript" src="<?=$this->image_path;?>js/jquerycalendar.js"></script>
+			<script type="text/javascript" src="<?=$this->image_path;?>js/funcoes.js"></script>
+			<script>
+				varover = 0;
+				$(document).ready(function(){
+						var nav = $('#userAgent').html(navigator.userAgent);
+						
+						$("#departamentos").hide();
+						
+						if(varover == 0) {
+							$("a.showAll").mouseover ( function(event){
+								//Seta a posicao do departamentos pro tamanho do browser
+								var offset = $("a.showAll").offset();
+								offset.top = $("a.showAll").offset().top + 18;
+								
+								$("#departamentos").css(offset);
+								$("#departamentos").fadeIn(300);
+								varover = 1;
+							} );
+						}
+		
+						$("a.motors").mouseover ( function(event){
+							$("#departamentos").fadeOut(100);
+							varover = 0;
+						} );
+						
+						$("#departamentos").mouseout ( function(event){
+							$("#departamentos").hide();
+							varover = 0;
+						} );
+		
+						$("#departamentos").mouseover ( function(event){
+							$("#departamentos").show();
+						} );
+						
+						$(".menuPesquisa").mouseover ( function(event){
+							$("#departamentos").fadeOut(100);
+							varover = 0;
+						} );
+						
+				 });
+			</script>
+		</head>
+		<?
+	}
+	
+	function barraPesquisa($departamentos) {
+		?>
+		<!-- Barra Pesquisa -->
+		<div class="menuPesquisa">
+			<div class="menuPesquisaEsq">
+				<div class="menuPesquisaDir">
+					<form method="GET" action="<?=$this->image_path;?>pesquisa.php">
+					<table border="0" cellpadding="2" cellspacing="2" class="tablePesquisa">
+						<tr>
+							<td><?=$this->input("pesquisa","inputPesquisa");?></td>
+							<td><?=$this->selectDepartamentos($departamentos);?></td>
+							<td><?=$this->button("btEnviar","button","Buscar");?> </td>
+							<!--<td><?=$this->button("btEnviar","button","Pesquisa avançada");?> </td>-->
+						</tr>
+					</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Fim Barra Pesquisa -->
+		<?
+	}
+	
 }
 ?>
