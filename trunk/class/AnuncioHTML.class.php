@@ -4,21 +4,21 @@
 			$anuncio = new Anuncio();
 			$anuncioDAO = new AnuncioDAO();
 			
-			if($_POST["iddepartamento"] != "") {
-				$_SESSION["iddepartamento"] = $_POST["iddepartamento"];
-				$iddepartamento = $_SESSION["iddepartamento"];
-			}
-			if($_POST["idsubdepartamento"] != "") {
-				$_SESSION["idsubdepartamento"] = $_POST["idsubdepartamento"];
-				$idsubdepartamento = $_SESSION["idsubdepartamento"];
-			}
+			$iddepartamento = $_GET["iddepartamento"];
+			$idsubdepartamento = $_GET["idsubdepartamento"];
+			$letra = $_GET["letra"];
 			
 			$pagina = $_GET["pag"];
 			if(!isset($pagina)) { $pagina = 0;}
 			
-			$letra = $_GET["letra"];
 			if(isset($_GET["letra"])) {
-				$order = "WHERE iddepartamento = '$_SESSION[iddepartamento]' AND nome LIKE '$letra%' ORDER BY idanuncio";				
+				if(!isset($iddepartamento)) {
+					$order = "WHERE nome LIKE '$letra%' ORDER BY idanuncio";
+				}elseif(isset($idsubdepartamento)) {
+					$order = "WHERE iddepartamento = '$iddepartamento' AND idsubdepartamento = '$idsubdepartamento' AND nome LIKE '$letra%' ORDER BY idanuncio";
+				}else{
+					$order = "WHERE iddepartamento = '$iddepartamento' AND nome LIKE '$letra%' ORDER BY idanuncio";
+				}
 			}else{
 				if(isset($iddepartamento)) {
 					if(isset($idsubdepartamento)) {
@@ -26,11 +26,9 @@
 					}else{
 						$order = "WHERE iddepartamento = '$iddepartamento' ORDER BY idanuncio";
 					}
-										
 				}else{
 					$order = "ORDER BY idanuncio";
 				}
-				
 			}
 			
 			$totalPorPagina = $totRegistrosPorPagina;
@@ -57,7 +55,9 @@
 					<td colspan="2">
 					
 						<table border="0" width="100%" class="BordaTabela">
-						<form method="POST" action="principal.php?menu=7&act=mostra" onsubmit="return valida_dropmenu(iddepartamento,'opção');">
+						<form method="GET" action="principal.php?menu=7&act=mostra" onsubmit="return valida_dropmenu(iddepartamento,'opção');">
+							<input type="hidden" name="menu" value="7">
+							<input type="hidden" name="act" value="mostra">
 							<tr>
 								<td width="12%"><b>Departamento:</b></td>
 								<td>
@@ -78,7 +78,9 @@
 								$subdepartamentos = $subdepartamentosDAO->getSubdepartamentosPorIddepartamento($iddepartamento);
 								
 								if($subdepartamentos) { ?>
-									<form method="POST" action="principal.php?menu=7&act=mostra" onsubmit="return valida_dropmenu(idsubdepartamento,'opção');">
+									<form method="GET" action="principal.php?menu=7&act=mostra" onsubmit="return valida_dropmenu(idsubdepartamento,'opção');">
+									<input type="hidden" name="menu" value="7">
+									<input type="hidden" name="act" value="mostra">
 									<input type="hidden" name="iddepartamento" value="<?=$iddepartamento;?>">
 									<tr>
 										<td width="12%"><b>Subdepartamento:</b></td>
@@ -129,11 +131,29 @@
 		        <? } ?>
 		        <? 
 		        	if(isset($_GET["letra"])) {
-		        		$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra&letra=$letra");
+		        		if(!isset($iddepartamento)) {
+		        			$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra&letra=$letra");
+		        		}elseif(isset($idsubdepartamento)) {
+		        			$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra&iddepartamento=$iddepartamento&idsubdepartamento=$idsubdepartamento&letra=$letra");
+		        		}else{
+		        			$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra&iddepartamento=$iddepartamento&letra=$letra");
+		        		}
 		        	}else{
-		        		$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra");
+		        		if(!isset($iddepartamento)) {
+		        			$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra");
+		        		}elseif(isset($idsubdepartamento)) {
+		        			$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra&iddepartamento=$iddepartamento&idsubdepartamento=$idsubdepartamento");
+		        		}else{
+		        			$this->mostraPaginacao($paginas,$pagina,"menu=7&act=mostra&iddepartamento=$iddepartamento");
+		        		}
 		        	}
-		        	$this->mostraPaginacaoLetras("menu=7&act=mostra",$letra);
+		        	if(!isset($iddepartamento)) {
+		        		$this->mostraPaginacaoLetras("menu=7&act=mostra",$letra);
+		        	}elseif(isset($idsubdepartamento)) {
+		        		$this->mostraPaginacaoLetras("menu=7&act=mostra&iddepartamento=$iddepartamento&idsubdepartamento=$idsubdepartamento",$letra);
+		        	}else{
+		        		$this->mostraPaginacaoLetras("menu=7&act=mostra&iddepartamento=$iddepartamento",$letra);
+		        	}
 		        	
 		        ?>
 		    </table>
