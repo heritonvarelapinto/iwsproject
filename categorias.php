@@ -1,5 +1,5 @@
 <?php
-function __autoload($classe) {
+	function __autoload($classe) {
 		require_once "class/".$classe.".class.php";
 	}
 	$id = $_GET['id'];
@@ -44,56 +44,7 @@ function __autoload($classe) {
 	
 ?>
 <html>
-<head>
-	<title>OiterBusca - <?=$nomeDepartamento->departamento;?> <? if($nomeSubDepartamento) { echo " / "; ?><?=$nomeSubDepartamento->subdepartamento;?><? } ?></title>
-	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
-	<?=$layout->getTheme("");?>
-	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/funcoes.js"></script>
-	<script>
-		varover = 0;
-		$(document).ready(function(){
-				var nav = $('#userAgent').html(navigator.userAgent);
-				
-				$("#departamentos").hide();
-				
-				if(varover == 0) {
-					$("a.showAll").mouseover ( function(event){
-						//Seta a posicao do departamentos pro tamanho do browser
-						var offset = $("a.showAll").offset();
-						offset.top = $("a.showAll").offset().top + 18;
-						
-						$("#departamentos").css(offset);
-						$("#departamentos").fadeIn(300);
-						varover = 1;
-					} );
-				}
-
-				$("a.motors").mouseover ( function(event){
-					$("#departamentos").fadeOut(100);
-					varover = 0;
-				} );
-				
-				$("#departamentos").mouseout ( function(event){
-					$("#departamentos").hide();
-					varover = 0;
-				} );
-
-				$("#departamentos").mouseover ( function(event){
-					$("#departamentos").show();
-				} );
-				
-				$(".menuPesquisa").mouseover ( function(event){
-					$("#departamentos").fadeOut(100);
-					varover = 0;
-				} );
-				
-		 });
-	</script>
-</head>
-
+<?=$layout->head($nomeDepartamento,$nomeSubDepartamento);?>
 <body>
 <div>
 	<div id="main">
@@ -106,30 +57,11 @@ function __autoload($classe) {
 					<td align="right" width="186"><?=$layout->bannersTopo($topoPeq);?></td>
 				</tr>
 			</table>
-			
 		</div>
 		<div id="content">
 			<!-- Inicio Header -->
 			<div id="header">
-				<!-- Barra Pesquisa -->
-				<div class="menuPesquisa">
-					<div class="menuPesquisaEsq">
-						<div class="menuPesquisaDir">
-							<form method="POST" action="pesquisa.php">
-							<table border="0" cellpadding="2" cellspacing="2" class="tablePesquisa">
-								<tr>
-									<td><?=$layout->input("pesquisa","inputPesquisa");?></td>
-									<td><?=$layout->selectDepartamentos($departamentos);?></td>
-									<td><?=$layout->button("btEnviar","button","Buscar");?> </td>
-									<!--<td><?=$layout->button("btEnviar","button","Pesquisa avançada");?> </td>-->
-								</tr>
-							</table>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Fim Barra Pesquisa -->
-		
+				<? $layout->barraPesquisa($departamentos); ?>
 				<!-- Barra Itens Menu -->
 				<div class="menuItens">
 					<div class="menuItensEsq">
@@ -168,17 +100,55 @@ function __autoload($classe) {
 						echo $layout->bannersEsquerda($bannerDAO->ListaBannerPorDepartamentoPosicao($id,"lateralesq",3));?>
 				</div>
 				<div class="miolo">
-					<?=$layout->breadcrumb($id,$sub);?>
-					
 					<? 
+						$layout->breadcrumb($id,$sub);
+					
+						if($_GET['totalPP']) {
+							$totalPorPagina = $_GET['totalPP'];
+						} else {
+							$totalPorPagina = 10;
+						}
+												
 						$anuncio = new Anuncio();
 						$anuncioDAO = new AnuncioDAO();
 						if($sub == "") {
 							$anuncio = $anuncioDAO->ListaAnunciosPorDepartamento($id);
+							$regra = "where iddepartamento = ".$id." ";
 						} else {
 							$anuncio = $anuncioDAO->ListaAnunciosPorSubDepartamento($sub);
+							$regra = "where idsubdepartamento = ".$sub." ";
 						}
+						
 						$totAnuncios = count($anuncio);
+						$paginas = ceil($totAnuncios / $totalPorPagina);				
+											
+						if($_GET['pag']) {
+							$pagina = $_GET['pag'];
+						} else {
+							$pagina = 0;
+						}
+						
+						echo "<div id=\"resultados\"><ul>
+							<li>Encontrados ".$totAnuncios." anúncios</li>
+							<li class=\"totalpagina\">Resultados por página
+							<select name=\"totalPP\" onchange=\"reload('".$id."','".$sub."','".$pagina."',this.value,'".$layout->image_path."')\">";
+							?>
+									<option value="10" <? if($totalPorPagina == 10) { echo "selected"; } ?> >10</option>
+									<option value="15" <? if($totalPorPagina == 15) { echo "selected"; } ?> >15</option>
+									<option value="30" <? if($totalPorPagina == 30) { echo "selected"; } ?> >30</option>
+									<option value="50" <? if($totalPorPagina == 50) { echo "selected"; } ?> >50</option>
+							<?
+							echo "</select>
+							</li>
+						</ul></div>";
+						
+						$inicio = $pagina * $totalPorPagina;
+					
+						$regra .= "Order by acessos DESC, nome ASC";
+						
+						$anuncio = $anuncioDAO->Paginacao($regra, $inicio, $totalPorPagina);
+						$totAnuncios = count($anuncio);
+											
 						for($i = 0 ; $i < $totAnuncios;$i++) {
 							if($i % 2) {
 								$cor = "#DDDDDD";
@@ -207,6 +177,9 @@ function __autoload($classe) {
 							echo "</p>";
 							echo "</div>";
 						}
+						
+						$pagina = $pagina + 1;
+						$layout->paginacaoAnuncio($pagina,$paginas,$id,$sub,$totalPorPagina);
 					?>
 					
 				</div>

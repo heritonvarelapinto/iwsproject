@@ -2,7 +2,8 @@
 #RewriteRule ^categoria\/([0-9]+)(\/[a-z0-9_-]+)?(\/[a-z0-9_-]+\.html)?$ categoria.php?id=$1&titulo=$3
 Options +FollowSymLinks
 RewriteEngine on
-RewriteRule categoria/(.*)/(.*)/(.*)/(.*)/(.*)/(.*)\.html$ categorias.php?id=$1&titulo=$2&sub=$3&subtitulo=$4&cid=$5&cliente=$6 [NC]
+RewriteRule categoria/(.*)/(.*)/(.*)-(.*)/(.*)/(.*)\.html$ categorias.php?id=$1&titulo=$2&pag=$3&totalPP=$4&sub=$5&subtitulo=$6 [NC]
 RewriteRule categoria/(.*)/(.*)/(.*)/(.*)\.html$ categorias.php?id=$1&titulo=$2&sub=$3&subtitulo=$4 [NC]
+RewriteRule categoria/(.*)/(.*)-(.*)/(.*)\.html$ categorias.php?id=$1&pag=$2&totalPP=$3&titulo=$4 [NC]
 RewriteRule categoria/(.*)/(.*)\.html$ categorias.php?id=$1&titulo=$2 [NC]
 RewriteRule pagina/(.*)/(.*)\.html$ paginas.php?id=$1 [NC]

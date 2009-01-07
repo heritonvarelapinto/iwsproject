@@ -13,55 +13,7 @@
 	$banners = $bannerDAO->ListaBannerPorDepartamentoPosicao("inicial","lateral",10);
 ?>
 <html>
-<head>
-	<title>OiterBusca</title>
-	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
-	<?=$layout->getTheme("");?>
-	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/funcoes.js"></script>
-	<script>
-		varover = 0;
-		$(document).ready(function(){
-				var nav = $('#userAgent').html(navigator.userAgent);
-				
-				$("#departamentos").hide();
-				
-				if(varover == 0) {
-					$("a.showAll").mouseover ( function(event){
-						//Seta a posicao do departamentos pro tamanho do browser
-						var offset = $("a.showAll").offset();
-						offset.top = $("a.showAll").offset().top + 18;
-						
-						$("#departamentos").css(offset);
-						$("#departamentos").fadeIn(300);
-						varover = 1;
-					} );
-				}
-
-				$("a.motors").mouseover ( function(event){
-					$("#departamentos").fadeOut(100);
-					varover = 0;
-				} );
-				
-				$("#departamentos").mouseout ( function(event){
-					$("#departamentos").hide();
-					varover = 0;
-				} );
-
-				$("#departamentos").mouseover ( function(event){
-					$("#departamentos").show();
-				} );
-				
-				$(".menuPesquisa").mouseover ( function(event){
-					$("#departamentos").fadeOut(100);
-					varover = 0;
-				} );
-				
-		 });
-	</script>
-</head>
-
+<?=$layout->head();?>
 <body>
 <div>
 	<div id="main">
@@ -79,24 +31,7 @@
 		<div id="content">
 			<!-- Inicio Header -->
 			<div id="header">
-				<!-- Barra Pesquisa -->
-				<div class="menuPesquisa">
-					<div class="menuPesquisaEsq">
-						<div class="menuPesquisaDir">
-							<form method="POST" action="pesquisa.php">
-							<table border="0" cellpadding="2" cellspacing="2" class="tablePesquisa">
-								<tr>
-									<td><?=$layout->input("pesquisa","inputPesquisa");?></td>
-									<td><?=$layout->selectDepartamentos($departamentos);?></td>
-									<td><?=$layout->button("btEnviar","button","Buscar");?> </td>
-									<!--<td><?=$layout->button("btEnviar","button","Pesquisa avançada");?> </td>-->
-								</tr>
-							</table>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Fim Barra Pesquisa -->
+				<? $layout->barraPesquisa($departamentos); ?>
 		
 				<!-- Barra Itens Menu -->
 				<div class="menuItens">
@@ -152,8 +87,8 @@
 						
 					</div>
 					<div id="servicos">
-						<?=$layout->montaClimaTempo(); ?>
-						<?=$layout->montaCotacaoDolar(); ?>
+						<?//=$layout->montaClimaTempo(); ?>
+						<?//=$layout->montaCotacaoDolar();?>
 					</div>
 				</div>
 			</div>

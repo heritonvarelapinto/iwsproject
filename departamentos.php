@@ -26,53 +26,7 @@ function __autoload($classe) {
 ?>
 <html>
 <head>
-	<title>OiterBusca - Todos os departamentos</title>
-	<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
-	<?=$layout->getTheme("");?>
-	<link rel="shortcut icon" href="<?=$layout->image_path;?>icones/favicon.ico" >
-	<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
-	<script>
-		varover = 0;
-		$(document).ready(function(){
-				var nav = $('#userAgent').html(navigator.userAgent);
-				
-				$("#departamentos").hide();
-				
-				if(varover == 0) {
-					$("a.showAll").mouseover ( function(event){
-						//Seta a posicao do departamentos pro tamanho do browser
-						var offset = $("a.showAll").offset();
-						offset.top = $("a.showAll").offset().top + 18;
-						
-						$("#departamentos").css(offset);
-						$("#departamentos").fadeIn(300);
-						varover = 1;
-					} );
-				}
-
-				$("a.motors").mouseover ( function(event){
-					$("#departamentos").fadeOut(100);
-					varover = 0;
-				} );
-				
-				$("#departamentos").mouseout ( function(event){
-					$("#departamentos").hide();
-					varover = 0;
-				} );
-
-				$("#departamentos").mouseover ( function(event){
-					$("#departamentos").show();
-				} );
-				
-				$(".menuPesquisa").mouseover ( function(event){
-					$("#departamentos").fadeOut(100);
-					varover = 0;
-				} );
-				
-		 });
-	</script>
-</head>
-
+<?=$layout->head($nomeDepartamento);?>
 <body>
 <div>
 	<div id="main">
@@ -135,17 +89,16 @@ function __autoload($classe) {
 				<?
 					$subdepartamentoDAO = new SubdepartamentoDAO();
 					$totDepartamentos = count($departamentos);
-					
 					for($i = 0; $i < $totDepartamentos ; $i++) {
 						echo "<ul id=\"listaDepartamento\">";
 						$subdepartamentos = $subdepartamentoDAO->getSubdepartamentosPorIddepartamento($departamentos[$i]->getIddepartamento());
 						$totSubdepartamento = count($subdepartamentos);
-						echo "<li class=\"categoria\"><a href=\"".UrlManage::getUrlCategoria($departamentos[$i]->getIddepartamento(),"",$departamentos[$i]->getDepartamento())."\" title=\"".$departamentos[$i]->getDepartamento()."\">".$departamentos[$i]->getDepartamento()."</a>";
+						echo "<li class=\"categoria\"><a href=\"".UrlManage::getUrlCategoria($departamentos[$i]->getIddepartamento(),"",$departamentos[$i]->getDepartamento())."\" title=\"".$departamentos[$i]->getDepartamento()."\">".$departamentos[$i]->getDepartamento()." (".$subdepartamentoDAO->contaAnuncios($departamentos[$i]->getIddepartamento(),"departamento").")</a>";
 						if($totSubdepartamento > 0) {
-							echo "(".$totSubdepartamento.")";
+							/*echo "(".$totSubdepartamento.")";*/
 							echo "<ul>";
 							for($y = 0; $y < $totSubdepartamento; $y++) {
-								echo "<li class=\"subcategoria\"><a href=\"".UrlManage::getUrlSubCategoria($departamentos[$i]->getIddepartamento(),$departamentos[$i]->getDepartamento(),$subdepartamentos[$y]->getIdSubdepartamento(),$subdepartamentos[$y]->getSubdepartamento())."\" title=\"".$subdepartamentos[$y]->getSubdepartamento()."\">".$subdepartamentos[$y]->getSubdepartamento()."</a></li>";
+								echo "<li class=\"subcategoria\"><a href=\"".UrlManage::getUrlSubCategoria($departamentos[$i]->getIddepartamento(),$departamentos[$i]->getDepartamento(),$subdepartamentos[$y]->getIdSubdepartamento(),$subdepartamentos[$y]->getSubdepartamento())."\" title=\"".$subdepartamentos[$y]->getSubdepartamento()."\">".$subdepartamentos[$y]->getSubdepartamento()." (".$subdepartamentoDAO->contaAnuncios($subdepartamentos[$y]->getIdsubdepartamento()).")</a></li>";
 							}
 							echo "</ul></li>";
 							
