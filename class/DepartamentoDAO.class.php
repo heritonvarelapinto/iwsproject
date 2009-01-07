@@ -125,7 +125,7 @@ class DepartamentoDAO extends PDOConnectionFactory {
 	
 	//mostra os registros
 	public function Lista() {
-		$sql = "SELECT * FROM departamentos";
+		$sql = "SELECT * FROM departamentos Order by departamento asc";
 		$stmt = $this->conexao->prepare($sql);	
 		$stmt->execute();
 		
