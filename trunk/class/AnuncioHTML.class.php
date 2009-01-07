@@ -402,6 +402,12 @@
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
 	                    </td>
 	            	</tr>
+	            	<tr class="Linha1Tabela">
+	                    <td align="center"><b>PALAVRAS CHAVE</b></td>
+	                    <td>                                    	
+	                    	<textarea name="keywords" rows="10" cols="70" class="FORMBox"></textarea><br>Separe as palavras por , (vírgula). Ex.: palavras , chave , etc 		                                                                                                     
+	                    </td>
+	            	</tr>
 	                <tr class="Linha3Tabela">
 		                <td align="right" colspan="2"><input type="submit" class="bttn2" value="Inserir Anuncio" name="alterar"/></td>
 		            </tr>
