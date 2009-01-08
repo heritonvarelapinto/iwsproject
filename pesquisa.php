@@ -102,7 +102,7 @@
 						
 						if($departamento != "") {
 							//$anuncio = $anuncioDAO->ListaAnunciosPorDepartamento($departamento);
-							$regra = "where iddepartamento = ".$departamento." ";
+							$regra = "where iddepartamento = ".$departamento." and (nome LIKE '%%".$pesquisa."%%' OR endereco LIKE '%%".$pesquisa."%%' OR bairro LIKE '%%".$pesquisa."%%' OR cidade LIKE '%%".$pesquisa."%%' OR estado LIKE '%%".$pesquisa."%%' OR cep LIKE '%%".$pesquisa."%%' OR telefones LIKE '%%".$pesquisa."%%' OR site LIKE '%%".$pesquisa."%%' OR email LIKE '%%".$pesquisa."%%' OR texto LIKE '%%".$pesquisa."%%' OR keywords LIKE '%%".$pesquisa."%%' OR pesquisa LIKE '%%".$pesquisa."%%')";
 						} else {
 							//$anuncio = $anuncioDAO->ListaAnunciosPorSubDepartamento($sub);
 							$regra = "
