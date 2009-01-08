@@ -5,6 +5,54 @@
 	 *
 	 */
 	class HTML {
+				function paginacaoPesquisa($pagina, $paginas, $get) {
+			
+			$layout = new Layout();
+			
+			$a = 0;
+			foreach ($get as $chave => $valor) {
+				$a != 0 ? $virgula = "&" : $virgula = "";
+				if($chave != "btEnviar" || $chave != "pag")
+				$dados .= $virgula.$chave."=".$valor;
+				$a++;
+			}
+					
+			echo "<div id=\"resultados\"><ul><li>Mostrando página <b>".$pagina."</b> de <b>".$paginas."</b></li>
+			<li class=\"listaresultados\">";
+			if($paginas > 1) {
+			//Monta as paginas em baixo
+				for($i=0; $i < $paginas; $i++) {
+					$i == 0 ? $virgula = "" : $virgula = ",";
+		  			if($i == $pagina - 1) {
+		  			?>
+						<?=$virgula;?><?=$i+1;?>
+			 	 	<? } else {	?>
+			 			<?=$virgula;?><a style="cursor: pointer; cursor: hand" onclick="reloadPesquisa('<?=$layout->image_path;?>pesquisa.php?<?=$dados."&pag=".$i?>')"><b><?=$i+1;?></b></a>
+					<?
+					}
+				}
+			}
+			echo "</li></ul></div>";
+		}
+		
+		function paginacaoAnuncio($pagina, $paginas , $id, $sub, $total) {
+			echo "<div id=\"resultados\"><ul><li>Mostrando página <b>".$pagina."</b> de <b>".$paginas."</b></li>
+			<li class=\"listaresultados\">";
+			if($paginas > 1) {
+			//Monta as paginas em baixo
+				for($i=0; $i < $paginas; $i++) {
+					$i == 0 ? $virgula = "" : $virgula = ",";
+		  			if($i == $pagina - 1) {
+		  			?>
+						<?=$virgula;?><?=$i+1;?>
+			 	 	<? } else {	?>
+			 			<?=$virgula;?><a href="<?=UrlManage::getUrlPaginacao($id,$sub,$i,$total);?>"><b><?=$i+1;?></b></a>
+					<?
+					}
+				}
+			}
+			echo "</li></ul></div>";
+		}
 		
 		function mostraPaginacao($paginas,$pagina,$menu) {
 			if($paginas > 1) { ?>
