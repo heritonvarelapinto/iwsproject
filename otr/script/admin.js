@@ -1024,10 +1024,65 @@ function tipoplano(plano) {
 
 function dest(opcao) {
 	if(opcao == 1){
- 		document.getElementById("pagina").style.display = "";
+ 		document.getElementById("logoDestaque").style.display = "";
+ 		document.getElementById("logoDestaque_img").style.display = "";
 	}
-	if(opcao == 2){
- 		document.getElementById("pagina").style.display = "none";
+	if(opcao == 0){
+ 		document.getElementById("logoDestaque").style.display = "none";
+ 		document.getElementById("logoDestaque_img").style.display = "none";
+	}	
+}
+
+function detalhes(opcao) {
+	if(opcao == 1){
+ 		document.getElementById("site").style.display = "";
+ 		document.getElementById("email").style.display = "";
+ 		document.getElementById("imagem1").style.display = "";
+ 		document.getElementById("imagem2").style.display = "";
+ 		document.getElementById("imagem3").style.display = "";
+ 		document.getElementById("imagem4").style.display = "";
+ 		document.getElementById("destaque").style.display = "";
+	}
+	if(opcao == 0){
+ 		document.getElementById("site").style.display = "none";
+ 		document.getElementById("email").style.display = "none";
+ 		document.getElementById("imagem1").style.display = "none";
+ 		document.getElementById("imagem2").style.display = "none";
+ 		document.getElementById("imagem3").style.display = "none";
+ 		document.getElementById("imagem4").style.display = "none";
+ 		document.getElementById("destaque").style.display = "none";
+ 		document.getElementById("logoDestaque").style.display = "none";
+	}	
+}
+
+function detalhes_alt(opcao) {
+	if(opcao == 1){
+ 		document.getElementById("site").style.display = "";
+ 		document.getElementById("email").style.display = "";
+ 		document.getElementById("imagem1").style.display = "";
+ 		document.getElementById("imagem1_img").style.display = "";
+ 		document.getElementById("imagem2").style.display = "";
+ 		document.getElementById("imagem2_img").style.display = "";
+ 		document.getElementById("imagem3").style.display = "";
+ 		document.getElementById("imagem3_img").style.display = "";
+ 		document.getElementById("imagem4").style.display = "";
+ 		document.getElementById("imagem4_img").style.display = "";
+ 		document.getElementById("destaque").style.display = "";
+	}
+	if(opcao == 0){
+ 		document.getElementById("site").style.display = "none";
+ 		document.getElementById("email").style.display = "none";
+ 		document.getElementById("imagem1").style.display = "none";
+ 		document.getElementById("imagem1_img").style.display = "none";
+ 		document.getElementById("imagem2").style.display = "none";
+ 		document.getElementById("imagem2_img").style.display = "none";
+ 		document.getElementById("imagem3").style.display = "none";
+ 		document.getElementById("imagem3_img").style.display = "none";
+ 		document.getElementById("imagem4").style.display = "none";
+ 		document.getElementById("imagem4_img").style.display = "none";
+ 		document.getElementById("destaque").style.display = "none";
+ 		document.getElementById("logoDestaque").style.display = "none";
+ 		document.getElementById("logoDestaque_img").style.display = "none";
 	}	
 }
 

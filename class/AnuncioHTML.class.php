@@ -52,8 +52,7 @@
 					}
 				?>
 				<tr>
-					<td colspan="2">
-					
+					<td colspan="5">
 						<table border="0" width="100%" class="BordaTabela">
 						<form method="GET" action="principal.php?menu=7&act=mostra" onsubmit="return valida_dropmenu(iddepartamento,'opção');">
 							<input type="hidden" name="menu" value="7">
@@ -99,10 +98,11 @@
 					</td>				
 				</tr>
 	            <tr class="TituloTabela">
-	                <td width="10%" align="center">COD</td>
-	                <td>NOME</td>                                              
+	                <td width="5%" align="center">COD</td>
+	                <td width="60%">NOME</td>                                              
 	                <td>BAIRRO</td>                                              
 	                <td>VALIDADE</td>                                              
+	                <td>VISUALIZAÇÕES</td>                                              
 	            </tr>
 	            <?
 	            	
@@ -120,6 +120,7 @@
 		            <td><?=$anuncio[$i]->getNome();?></td>					            					           
 		            <td><?=$anuncio[$i]->getBairro();?></td>					            					           
 			        <td><?=$anuncio[$i]->MostraDataSemHora($anuncio[$i]->getAte());?></td>    
+			        <td><?=$anuncio[$i]->getAcessos();?></td>    
 		        </tr>
 		        <?
 					}
@@ -207,7 +208,7 @@
 			}
 			
 		?>
-		<script>
+			<script>
 				$(function() {
 				    // valida o formulário
 				    $('#anuncios').validate({
@@ -251,7 +252,7 @@
 				                required: true,
 				                minlength: 2
 				            },				            
-				            destaque: {
+				            detalhe: {
 				                required: true
 				            },
 				            de: {
@@ -279,7 +280,7 @@
 				            cidade: "<br><b><font color='red'>Se não sabe sua cidade , coloque o cep no campo CEP</font></b>",
 				            estado: "<br><b><font color='red'>Se não sabe seu estado , coloque o cep no campo CEP</font></b>",
 				            telefones: "<br><b><font color='red'>Nescessário no mínimo um número de telefone</font></b>",
-				            destaque: "<br><b><font color='red'>Selecione uma opção</font></b>",
+				            detalhe: "<br><b><font color='red'>Selecione uma opção</font></b>",
 				            de: "<b><font color='red'>Coloque uma data</font></b>",
 				            ate: "<b><font color='red'>Coloque uma data</font></b>",
 				            texto: "<br><b><font color='red'>Escreva uma descrição</font></b>",
@@ -294,7 +295,7 @@
 	        <form action="act/Anuncio.act.php?acao=add" name="anuncios" id="anuncios" method="post" enctype="multipart/form-data">                       
 	        <input type="hidden" name="iddepartamento" value="<?=$iddepartamento;?>">
 		        <tbody>
-		        	<tr class="Linha2Tabela">
+		        	<tr class="Linha1Tabela">
 	                    <td align="right"><b> DEPARTAMENTO:</b></td>
 	                    <td>
 		                    	<?
@@ -313,7 +314,7 @@
 		                	</select>
 	                    </td>
 	                </tr>	                		        	                            	   
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> NOME DO ANÚNCIANTE</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" name="nome"/></td>
 	                </tr>
@@ -322,7 +323,7 @@
 	                    <td><input type="text" tipo="numerico" mascara="#####-###" onfocus="this.value = ''" onblur="javascript:buscaCep(this.value)" id="cep" name="cep" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" tabindex="4" class="FORMBox"/></td>
 	                </tr>
 	                <div id="resultado">
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> ENDEREÇO</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
 	                </tr>
@@ -330,7 +331,7 @@
 	                    <td align="right"><b> NÚMERO</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="15" name="numero"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> COMPLEMENTO</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="15" name="complemento"/></td>
 	                </tr>  
@@ -338,7 +339,7 @@
 	                    <td align="right"><b> BAIRRO</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="15" id="bairro" name="bairro"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> CIDADE</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="15" id="cidade" name="cidade"/></td>
 	                </tr>
@@ -347,15 +348,25 @@
 	                    <td><input type="text" value="" class="FORMbox" size="15" id="estado" name="estado"/></td>
 	                </tr>
 	                </div>               
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> TELEFONES</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" name="telefones"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> DETALHES</b></td>
+	                    <td>
+	                    	<select name="detalhe" id="detalhe" class="FORMBox" onchange="detalhes(this.value)">
+	                    		<option value="">--Selecione--</option>
+	                    		<option value="1">Sim</option>
+	                    		<option value="0">Não</option>
+	                    	</select>
+	                    </td>
+	                </tr>
+	                <tr class="Linha1Tabela" id="email" style="display:none">
 	                    <td align="right"><b> E-MAIL</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" name="email"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela" id="site" style="display:none">
 	                    <td align="right"><b> SITE</b></td>
 	                    <td><input type="text" value="" class="FORMbox" size="75" name="site"/></td>
 	                </tr>
@@ -363,31 +374,35 @@
 	                    <td align="right"><b> LOGO</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="logo"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela" id="imagem1" style="display:none">
 	                    <td align="right"><b> IMAGEM 1</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem1"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr class="Linha1Tabela" id="imagem2" style="display:none">
 	                    <td align="right"><b> IMAGEM 2</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem2"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela" id="imagem3" style="display:none">
 	                    <td align="right"><b> IMAGEM 3</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem3"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr class="Linha1Tabela" id="imagem4" style="display:none">
 	                    <td align="right"><b> IMAGEM 4</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem4"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela" id="destaque" style="display:none">
 	                    <td align="right"><b> DESTAQUE</b></td>
 	                    <td>
-	                    	<select name="destaque" id="destaque" class="FORMBox">
+	                    	<select name="destaque" class="FORMBox" onchange="dest(this.value)">
 	                    		<option value="">--Selecione--</option>
 	                    		<option value="1">Sim</option>
 	                    		<option value="0">Não</option>
 	                    	</select>
 	                    </td>
+	                </tr>
+	                <tr class="Linha1Tabela" id="logoDestaque" style="display:none">
+	                	<td align="right"><b> LOGO DESTAQUE</b></td>
+	                	<td><input type="file" value="" class="FORMbox" size="45" name="logoDestaque"/><br>Imagem com 175x80 pixels</td>
 	                </tr>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> PAGAMENTO</b></td>
@@ -396,7 +411,7 @@
 	                    	até:<input type="text" name="ate" class="data FORMBox">
 	                    </td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
 	                    <td>                                    	
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
@@ -474,7 +489,7 @@
 								</select>
 	                    </td>
 	                </tr>	        	                            	   	
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> NOME DO ANÚNCIANTE</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getNome();?>" class="FORMbox" size="75" name="nome"/></td>
 	                </tr>
@@ -483,7 +498,7 @@
 	                    <td><input type="text" tipo="numerico" mascara="#####-###" value="<?=$anuncio->getCep();?>" onfocus="this.value = ''" onblur="javascript:buscaCep(this.value)" id="cep" name="cep" maxlength="9" snegativo="n" title="Cep" style="width: 80px;" class="FORMBox"/></td>
 	                </tr>
 	                <div id="resultado">
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> ENDEREÇO</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getEndereco();?>" class="FORMbox" size="75" id="endereco" name="endereco"/></td>
 	                </tr>
@@ -491,7 +506,7 @@
 	                    <td align="right"><b> NÚMERO</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getNumero();?>" class="FORMbox" size="15" name="numero"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> COMPLEMENTO</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getComplemento();?>" class="FORMbox" size="15" name="complemento"/></td>
 	                </tr>  
@@ -499,7 +514,7 @@
 	                    <td align="right"><b> BAIRRO</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getBairro();?>" class="FORMbox" size="15" id="bairro" name="bairro"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> CIDADE</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getCidade();?>" class="FORMbox" size="15" id="cidade" name="cidade"/></td>
 	                </tr>
@@ -508,15 +523,25 @@
 	                    <td><input type="text" value="<?=$anuncio->getEstado();?>" class="FORMbox" size="15" id="estado" name="estado"/></td>
 	                </tr>
 	                </div>               
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> TELEFONES</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getTelefones();?>" class="FORMbox" size="75" name="telefones"/></td>
 	                </tr>
 	                <tr class="Linha1Tabela">
+	                    <td align="right"><b> DETALHES</b></td>
+	                    <td>
+	                    	<select name="detalhe" id="detalhe" class="FORMBox" onchange="detalhes_alt(this.value)">
+	                    		<option value="">--Selecione--</option>
+	                    		<option value="1" <? if($anuncio->getDetalhe() == 1) { echo "selected"; } ?>>Sim</option>
+	                    		<option value="0" <? if($anuncio->getDetalhe() == 0) { echo "selected"; } ?>>Não</option>
+	                    	</select>
+	                    </td>
+	                </tr>	                
+	                <tr id="email" class="Linha1Tabela" style='display:none'>
 	                    <td align="right"><b> E-MAIL</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getEmail();?>" class="FORMbox" size="75" name="email"/></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr id="site" class="Linha1Tabela" style='display:none'>
 	                    <td align="right"><b> SITE</b></td>
 	                    <td><input type="text" value="<?=$anuncio->getSite();?>" class="FORMbox" size="75" name="site"/></td>
 	                </tr>
@@ -527,44 +552,57 @@
 	                <tr class="Linha1Tabela">
 	                	<td align="center" colspan="2"><img src="../images/logos/<?=$anuncio->getLogo();?>" border="0"><input type="hidden" name="logo" value="<?=$anuncio->getLogo();?>"></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr id="imagem1" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                    <td align="right"><b> IMAGEM 1</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem1"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr id="imagem1_img" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem1();?>" border="0"><input type="hidden" name="imagem1" value="<?=$anuncio->getImagem1();?>"></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr id="imagem2" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                    <td align="right"><b> IMAGEM 2</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem2"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr id="imagem2_img" class="Linha1Tabela" <? if($anuncio->getDestaque() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem2();?>" border="0"><input type="hidden" name="imagem2" value="<?=$anuncio->getImagem2();?>"></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr id="imagem3" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                    <td align="right"><b> IMAGEM 3</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem3"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr id="imagem3_img" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem3();?>" border="0"><input type="hidden" name="imagem3" value="<?=$anuncio->getImagem3();?>"></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr id="imagem4" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                    <td align="right"><b> IMAGEM 4</b></td>
 	                    <td><input type="file" value="" class="FORMbox" size="45" name="imagem4"/></td>
 	                </tr>
-	                <tr class="Linha1Tabela">
+	                <tr id="imagem4_img" class="Linha1Tabela" <? if($anuncio->getDetalhe() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
 	                	<td align="center" colspan="2"><img src="../images/thumbs/<?=$anuncio->getImagem4();?>" border="0"><input type="hidden" name="imagem4" value="<?=$anuncio->getImagem4();?>"></td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr id="destaque" class="Linha1Tabela" style='display:none'>
 	                    <td align="right"><b> DESTAQUE</b></td>
 	                    <td>
-	                    	<select name="destaque" id="destaque" class="FORMBox">
+	                    	<select name="destaque" id="destaque" class="FORMBox" onchange="dest(this.value)">
 	                    		<option value="">--Selecione--</option>
 	                    		<option value="1" <? if($anuncio->getDestaque() == 1) { echo "selected"; } ?>>Sim</option>
 	                    		<option value="0" <? if($anuncio->getDestaque() == 0) { echo "selected"; } ?>>Não</option>
 	                    	</select>
 	                    </td>
 	                </tr>
+	                <?
+	                	if($anuncio->getDestaque() == 1) {
+	                ?>
+	                <tr class="Linha1Tabela" id="logoDestaque" <? if($anuncio->getDestaque() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
+	                	<td align="right"><b> LOGO DESTAQUE</b></td>
+	                	<td><input type="file" value="" class="FORMbox" size="45" name="logoDestaque"/><br>Imagem com 175x80 pixels</td>
+	                </tr>
+	                <tr class="Linha1Tabela" id="logoDestaque_img" <? if($anuncio->getDestaque() == 0) { echo "style='display:none'"; }else{ echo "style='display:'"; } ?>>
+	                	<td align="center" colspan="2"><img src="../images/destaques/<?=$anuncio->getLogoDestaque();?>" border="0"><input type="hidden" name="logoDestaque" value="<?=$anuncio->getLogoDestaque();?>"></td>
+	                </tr>
+	                <?
+	                	}
+	                ?>
 	                <tr class="Linha1Tabela">
 	                    <td align="right"><b> PAGAMENTO</b></td>
 	                    <td>
@@ -572,7 +610,7 @@
 	                    	até:<input type="text" name="ate" value="<?=$anuncio->MostraDataSemHora($anuncio->getAte());?>" class="data FORMBox">
 	                    </td>
 	                </tr>
-	                <tr class="Linha2Tabela">
+	                <tr class="Linha1Tabela">
 	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
 	                    <td>                                    	
 	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"><?=$anuncio->getTexto();?></textarea>  		                                                                                                     

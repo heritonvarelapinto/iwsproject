@@ -19,7 +19,7 @@
 	//$acao = "alt";
 	
 	$menuDAO = new MenuAdminDAO();
-	$menu = $menuDAO->getMenuPorTitulo("anúncios");
+	$menu = $menuDAO->getMenuPorTitulo("anuncios");
 	
 	$idmenu = $menu->getIdmenu();
 	
@@ -32,6 +32,12 @@
     		$logo_tmp_name = $_FILES["logo"]["tmp_name"];
     		$logo_size = $_FILES["logo"]["size"];
     		$setLogo = $anuncio->upload_imagem($logo,$logo_type,$logo_tmp_name,$logo_size,1000000,220,500,"logos");
+    		
+    		$logoDestaque = $_FILES["logoDestaque"]["name"];
+    		$logoDestaque_type = $_FILES["logoDestaque"]["type"];
+    		$logoDestaque_tmp_name = $_FILES["logoDestaque"]["tmp_name"];
+    		$logoDestaque_size = $_FILES["logoDestaque"]["size"];
+    		$setLogoDestaque = $anuncio->upload_imagem($logoDestaque,$logoDestaque_type,$logoDestaque_tmp_name,$logoDestaque_size,1000000,200,150,"destaques");
     		
     		$imagem1 = $_FILES["imagem1"]["name"];
     		$imagem1_type = $_FILES["imagem1"]["type"];
@@ -68,6 +74,7 @@
     		$setCidade = $_POST["cidade"];
     		$setEstado = $_POST["estado"];
     		$setTelefones = $_POST["telefones"];
+    		$setDetalhe = $_POST["detalhe"];
     		$setEmail = $_POST["email"];
     		$setSite = $_POST["site"];    		    		
     		
@@ -75,7 +82,12 @@
     		$setAte = $anuncio->FormataData($_POST["ate"]);
     		$setTexto = stripslashes($_POST["texto"]);
     		$setKeywords = $_POST["keywords"];
-    		$setDestaque = $_POST["destaque"];
+
+    		if($setDetalhe == '0') {
+    			$setDestaque = '0';
+    		}else{
+    			$setDestaque = $_POST["destaque"];
+    		}
     		
     		$departamento = $departamentoDAO->getDepartamentosPorId($setIddepartamento);
     		$pesquisa_dep = $departamento->getDepartamento();
@@ -100,10 +112,12 @@
     		$anuncio->setCidade($setCidade);
     		$anuncio->setEstado($setEstado);
     		$anuncio->setTelefones($setTelefones);
+    		$anuncio->setDetalhe($setDetalhe);
     		$anuncio->setEmail($setEmail);
     		$anuncio->setSite($setSite);
     		
     		$anuncio->setLogo($setLogo);
+    		$anuncio->setLogoDestaque($setLogoDestaque);
     		$anuncio->setImagem1($setImagem1);
     		$anuncio->setImagem2($setImagem2);
     		$anuncio->setImagem3($setImagem3);
@@ -136,6 +150,16 @@
 		    		$logo_tmp_name = $_FILES["logo"]["tmp_name"];
 		    		$logo_size = $_FILES["logo"]["size"];
 		    		$setLogo = $anuncio->upload_imagem($logo,$logo_type,$logo_tmp_name,$logo_size,1000000,500,500,"logos");
+    			}
+    			
+    			if($_FILES["logoDestaque"]["name"] == "") {
+    				$setLogoDestaque = $_POST["logoDestaque"];
+    			}else{
+    				$logoDestaque = $_FILES["logoDestaque"]["name"];
+		    		$logoDestaque_type = $_FILES["logoDestaque"]["type"];
+		    		$logoDestaque_tmp_name = $_FILES["logoDestaque"]["tmp_name"];
+		    		$logoDestaque_size = $_FILES["logoDestaque"]["size"];
+		    		$setLogoDestaque = $anuncio->upload_imagem($logoDestaque,$logoDestaque_type,$logoDestaque_tmp_name,$logoDestaque_size,1000000,500,500,"destaques");
     			}
 	    		
     			if($_FILES["imagem1"]["name"] == "") {
@@ -190,6 +214,7 @@
 	    		$setCidade = $_POST["cidade"];
 	    		$setEstado = $_POST["estado"];
 	    		$setTelefones = $_POST["telefones"];
+	    		$setDetalhe = $_POST["detalhe"];
 	    		$setEmail =$_POST["email"];
 	    		$setSite = $_POST["site"];	    		
 	    		
@@ -197,7 +222,12 @@
 	    		$setAte = $anuncio->FormataData($_POST["ate"]);
 	    		$setTexto = stripslashes($_POST["texto"]);
 	    		$setKeywords = $_POST["keywords"];
-	    		$setDestaque = $_POST["destaque"];
+	    		
+	    		if($setDetalhe == '0') {
+	    			$setDestaque = '0';
+	    		}else{
+	    			$setDestaque = $_POST["destaque"];
+	    		}
 	    			    		
 	    		$departamento = $departamentoDAO->getDepartamentosPorId($setIddepartamento);
 	    		$pesquisa_dep = $departamento->getDepartamento();
@@ -223,10 +253,12 @@
 	    		$anuncio->setCidade($setCidade);
 	    		$anuncio->setEstado($setEstado);
 	    		$anuncio->setTelefones($setTelefones);
+	    		$anuncio->setDetalhe($setDetalhe);
 	    		$anuncio->setEmail($setEmail);
 	    		$anuncio->setSite($setSite);
 	    		
 	    		$anuncio->setLogo($setLogo);
+	    		$anuncio->setLogoDestaque($setLogoDestaque);
 	    		$anuncio->setImagem1($setImagem1);
 	    		$anuncio->setImagem2($setImagem2);
 	    		$anuncio->setImagem3($setImagem3);
