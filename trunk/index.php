@@ -85,8 +85,8 @@
 						
 					</div>
 					<div id="servicos">
-						<?//=$layout->montaClimaTempo(); ?>
-						<?//=$layout->montaCotacaoDolar();?>
+						<?=$layout->montaClimaTempo(); ?>
+						<?=$layout->montaCotacaoDolar();?>
 					</div>
 				</div>
 			</div>
