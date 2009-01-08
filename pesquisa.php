@@ -63,26 +63,7 @@
 			<!-- Inicio Header -->
 			<div id="header">
 				<? $layout->barraPesquisa($departamentos); ?>
-		
-				<!-- Barra Itens Menu -->
-				<div class="menuItens">
-					<div class="menuItensEsq">
-						<div class="menuItensDir">
-							<ul>
-								<li>
-									<a href="#" class="showAll">Departamentos <img border="0" src="<?=$layout->image_path;?>images/seta.gif"></a>
-									<div id="departamentos" style="display: none;">
-										<ul>
-											<?=$layout->menuSuperiorDepartamentos($departamentos);?>
-										</ul>
-									</div>
-								</li>
-								<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- Fim Barra Itens Menu -->
+				<? $layout->barraItensMenu($departamentos);?>				
 			</div>
 			<!-- Fim do Header -->
 			<div id="corpo">
@@ -110,7 +91,7 @@
 							";
 						}
 								
-						$regra .= " Order by acessos DESC, nome ASC";
+						$regra .= " Order by detalhe DESC, acessos DESC, nome ASC";
 						
 						if($_GET['pag']) {
 							$pagina = $_GET['pag'];
@@ -151,35 +132,8 @@
 						</div>
 						
 						<?
-						for($i = 0 ; $i < $totAnuncios;$i++) {
-							if($i % 2) {
-								$cor = "#DDDDDD";
-							} else {
-								$cor = "#EEEEEE";
-							}
-							echo "<div id=\"anuncios\" style=\"border-bottom: 1px dashed ".$cor."\">";
-							echo "<h3 onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">".$anuncio[$i]->getNome()."</h3>";
-							echo "<p class=\"direita\">";
-							$layout->breadcrumbPesquisa($anuncio[$i]->getIddepartamento(),$anuncio[$i]->getIdsubdepartamento());
-							echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento();
-							echo "<br>";
-							echo $anuncio[$i]->getBairro()." - ".$anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado();
-							echo "<br>";
-							if($anuncio[$i]->getEmail() != "") echo "<b>E-mail: </b>".$anuncio[$i]->getEmail();
-							echo "<br>";
-							if($anuncio[$i]->getSite() != "") echo "<b>Site: </b><a class=\"site\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirSite('".$anuncio[$i]->getSite()."')\">".$anuncio[$i]->getSite()."</a>";
-							echo "<br>";
-							echo "<br>";
-							echo "<a onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
-							echo "<br>";
-							//echo "<a onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" id=\"mais_info\" title=\"Mais informações\">Saiba um pouco mais sobré nós</a>";
-							//echo "<img src=\"\".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
-							echo "</p>";
-							echo "<p onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" class=\"esquerda\">";
-							echo "<img src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" class=\"borda\">";
-							echo "</p>";
-							echo "</div>";
-						}
+						
+						$layout->mostraAnuncios($anuncio);
 						
 						$pagina = $pagina + 1;
 						$layout->paginacaoPesquisa($pagina,$paginas,$_GET);
@@ -188,9 +142,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="lateralDireita">
-			<?=$layout->bannersLaterais($banners);?>
-		</div>
+		<?=$layout->lateralDireita($banners);?>
 		<?=$layout->rodape();?>
 	</div>
 </div>

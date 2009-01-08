@@ -44,44 +44,8 @@ function __autoload($classe) {
 		<div id="content">
 			<!-- Inicio Header -->
 			<div id="header">
-				<!-- Barra Pesquisa -->
-				<div class="menuPesquisa">
-					<div class="menuPesquisaEsq">
-						<div class="menuPesquisaDir">
-							<form method="POST" action="pesquisa.php">
-							<table border="0" cellpadding="2" cellspacing="2" class="tablePesquisa">
-								<tr>
-									<td><?=$layout->input("pesquisa","inputPesquisa");?></td>
-									<td><?=$layout->selectDepartamentos($departamentos);?></td>
-									<td><?=$layout->button("btEnviar","button","Buscar");?> </td>
-									<!--<td><?=$layout->button("btEnviar","button","Pesquisa avançada");?> </td>-->
-								</tr>
-							</table>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Fim Barra Pesquisa -->
-		
-				<!-- Barra Itens Menu -->
-				<div class="menuItens">
-					<div class="menuItensEsq">
-						<div class="menuItensDir">
-							<ul>
-								<li>
-									<a href="#" class="showAll">Departamentos <img border="0" src="<?=$layout->image_path;?>images/seta.gif"></a>
-									<div id="departamentos" style="display: none;">
-										<ul>
-											<?=$layout->menuSuperiorDepartamentos($departamentos);?>
-										</ul>
-									</div>
-								</li>
-								<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- Fim Barra Itens Menu -->
+				<? $layout->barraPesquisa($departamentos);?>
+				<? $layout->barraItensMenu($departamentos);?>
 			</div>
 			<!-- Fim do Header -->
 			<div id="corpo">
@@ -111,9 +75,7 @@ function __autoload($classe) {
 				</div>
 			</div>
 		</div>
-		<div id="lateralDireita">
-			<?=$layout->bannersLaterais($banners);?>
-		</div>
+		<?=$layout->lateralDireita($banners);?>
 		<?=$layout->rodape();?>
 	</div>
 </div>

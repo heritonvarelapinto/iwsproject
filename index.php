@@ -30,26 +30,7 @@
 			<!-- Inicio Header -->
 			<div id="header">
 				<? $layout->barraPesquisa($departamentos); ?>
-		
-				<!-- Barra Itens Menu -->
-				<div class="menuItens">
-					<div class="menuItensEsq">
-						<div class="menuItensDir">
-							<ul>
-								<li>
-									<a href="#" class="showAll">Departamentos <img border="0" src="images/seta.gif"></a>
-									<div id="departamentos" style="display: none;">
-										<ul>
-											<?=$layout->menuSuperiorDepartamentos($departamentos);?>
-										</ul>
-									</div>
-								</li>
-								<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- Fim Barra Itens Menu -->
+				<? $layout->barraItensMenu($departamentos);?>
 			</div>
 			<!-- Fim do Header -->
 			<div id="corpo">
@@ -74,7 +55,7 @@
 								$departamento = $departamentoDAO->getDepartamentosPorId($anuncio[$i]->getIddepartamento());
 								echo "
 								<li>
-									<img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/logos/".$anuncio[$i]->getLogo()."\" onclick=\"contaAcesso('".$anuncio[$i]->getIdAnuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">
+									<img width=\"175\" height=\"80\" alt=\"".$anuncio[$i]->getNome()."\" src=\"".$layout->image_path."images/destaques/".$anuncio[$i]->getLogoDestaque()."\" onclick=\"contaAcesso('".$anuncio[$i]->getIdAnuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."','".$anuncio[$i]->getNome()."',700,500)\">
 									<p><a href=\"".UrlManage::getUrlCategoria($anuncio[$i]->getIddepartamento(),"",$departamento->getDepartamento())."\">".$departamento->getDepartamento()."</a></p>
 								</li>";
 							}							
@@ -85,21 +66,13 @@
 						
 					</div>
 					<div id="servicos">
-						<?=$layout->montaClimaTempo(); ?>
-						<?=$layout->montaCotacaoDolar();?>
+						<?//=$layout->montaClimaTempo(); ?>
+						<?//=$layout->montaCotacaoDolar();?>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div id="lateralDireita">
-			<?=$layout->bannersLaterais($banners);?>
-		</div>		
-		<div id="lateralDireita">
-			<?=$layout->boletim();?>
-		</div>		
-		<div id="lateralDireita">
-			<?=$layout->enquete();?>
-		</div>
+		<?=$layout->lateralDireita($banners, true);?>
 		<?=$layout->rodape();?>
 	</div>
 </div>
