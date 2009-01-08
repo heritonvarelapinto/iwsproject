@@ -5,7 +5,7 @@
 	 *
 	 */
 	class HTML {
-				function paginacaoPesquisa($pagina, $paginas, $get) {
+		function paginacaoPesquisa($pagina, $paginas, $get) {
 			
 			$layout = new Layout();
 			
@@ -773,31 +773,41 @@
 		 * @param $classe
 		 */
 		function button($nome,$classe,$texto) {
-			echo "<button type=\"submit\" name=\"".$nome."\" class=\"".$classe."\"><a>";
+			/*echo "<button type=\"submit\" name=\"".$nome."\" class=\"".$classe."\"><a>";
 			echo "<div class=\"botao\"><div><div>".$texto."</div></div></div>";
-			echo "</a></button>";
-			/*echo "<input type=\"submit\" value=\"".$texto."\" id=\"".$nome."\" name=\"".$nome."\" class=\"".$classe."\">";*/
+			echo "</a></button>";*/
+			echo "<input type=\"submit\" value=\"".$texto."\" id=\"".$nome."\" name=\"".$nome."\" class=\"".$classe."\">";
 		}
 		
 		function formContato() {
 			?>
-			<div id="form">
+			<div id="formContato">
+				<form method="POST">
 				<ul>
-					<li>Nome:</li>
+					<li class="label">Nome:</li>
 					<li><input type="text" name="formNome" id="formNome"></li>
 				</ul>
 				<ul>
-					<li>E-mail:</li>
+					<li class="label">E-mail:</li>
 					<li><input type="text" name="formNome" id="formNome"></li>
 				</ul>
 				<ul>
-					<li>Assunto:</li>
+					<li class="label">Telefone</li>
+					<li><input style="width: 100px" type="text" name="formNome" id="formNome"></li>
+				</ul>				
+				<ul>
+					<li class="label">Assunto:</li>
 					<li><input type="text" name="formNome" id="formNome"></li>
 				</ul>
 				<ul>
-					<li>Mensagem:</li>
-					<li><input type="text" name="formNome" id="formNome"></li>
+					<li class="label">Mensagem:</li>
+					<li><textarea name="formNome" id="formNome"></textarea></li>
 				</ul>
+				<ul>
+					<li class="label"></li>
+					<li><input class="botao" type="submit" value="Enviar contato"><input type="reset" class="botao" value="Limpar"></li>
+				</ul>
+				</form>
     		</div>
 			<?
 		}
