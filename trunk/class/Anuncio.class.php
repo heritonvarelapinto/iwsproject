@@ -15,6 +15,7 @@ class Anuncio {
     public $site;
     public $email;
     public $logo;
+    public $logodestaque;
     public $imagem1;
     public $imagem2;
     public $imagem3;
@@ -26,6 +27,7 @@ class Anuncio {
     public $destaque;
     public $acessos;
     public $pesquisa;
+    public $detalhe;
     
     function thumbMaker($imagem, $aprox, $id, $mini,$diretorio)
 	{
@@ -245,7 +247,7 @@ class Anuncio {
 		        //AdmBanners::addBanners($lado,$idcat,$numero,$imagem_nome,$tamanhos[0],$tamanhos[1],$url,$target,$tempo);	  
 		       		       	     
 		        // Caminho de onde a imagem ficará
-		        $imagem_dir = "..\..\images\\$pasta\\".$imagem_nome;
+		        $imagem_dir = "../../images/$pasta/".$imagem_nome;
 		
 		        // Faz o upload da imagem
 		        move_uploaded_file($tmp_name, $imagem_dir);
@@ -328,12 +330,12 @@ class Anuncio {
 		        //AdmBanners::addBanners($lado,$idcat,$numero,$imagem_nome,$tamanhos[0],$tamanhos[1],$url,$target,$tempo);	  
 		       		       	     
 		        // Caminho de onde a imagem ficará
-		        $imagem_dir = "..\..\images\\$pasta\\".$imagem_nome;
+		        $imagem_dir = "../../images/$pasta/".$imagem_nome;
 		
 		        // Faz o upload da imagem
 		        move_uploaded_file($tmp_name, $imagem_dir);
 		        
-		        $dir1 = "..\..\images\album\\".$imagem_nome; 
+		        $dir1 = "../../images/album/".$imagem_nome; 
 		        
 		        $this->thumbMaker($dir1,400,$id,$imagem_nome,"album");
     			$this->thumbMaker($dir1,100,$id,$imagem_nome,"thumbs");    			
@@ -442,6 +444,13 @@ class Anuncio {
     function setLogo($logoIn) {
           $this->logo = $logoIn;
     }
+    
+    function getLogoDestaque() {
+          return $this->logodestaque;
+    }
+    function setLogoDestaque($logodestaqueIn) {
+          $this->logodestaque = $logodestaqueIn;
+    }
 
     function getTexto() {
           return $this->texto;
@@ -528,6 +537,14 @@ class Anuncio {
     
     function setPesquisa($pesquisaIn) {
           $this->pesquisa = $pesquisaIn;
+    }
+    
+     function getDetalhe() {
+          return $this->detalhe;
+    }
+    
+    function setDetalhe($detalheIn) {
+          $this->detalhe = $detalheIn;
     }
 }
 ?>

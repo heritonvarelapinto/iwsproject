@@ -18,7 +18,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	}
 	
 	public function InsereAnuncio( $anuncio ){
-		$sql = "INSERT INTO anuncios (iddepartamento,idsubdepartamento,nome,endereco,numero,complemento,bairro,cidade,estado,cep,telefones,site,email,logo,imagem1,imagem2,imagem3,imagem4,texto,keywords,de,ate,destaque,pesquisa) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$sql = "INSERT INTO anuncios (iddepartamento,idsubdepartamento,nome,endereco,numero,complemento,bairro,cidade,estado,cep,telefones,site,email,logo,logodestaque,imagem1,imagem2,imagem3,imagem4,texto,keywords,de,ate,destaque,pesquisa,detalhe) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$stmt = $this->conexao->prepare($sql);
 		
 		// sequencia de índices que representa cada valor de minha query
@@ -36,16 +36,18 @@ class AnuncioDAO extends PDOConnectionFactory {
 		$stmt->bindValue(12, $anuncio->getSite()); 
 		$stmt->bindValue(13, $anuncio->getEmail()); 
 		$stmt->bindValue(14, $anuncio->getLogo()); 
-		$stmt->bindValue(15, $anuncio->getImagem1()); 
-		$stmt->bindValue(16, $anuncio->getImagem2()); 
-		$stmt->bindValue(17, $anuncio->getImagem3()); 
-		$stmt->bindValue(18, $anuncio->getImagem4());
-		$stmt->bindValue(19, $anuncio->getTexto()); 
-		$stmt->bindValue(20, $anuncio->getKeywords()); 
-		$stmt->bindValue(21, $anuncio->getDe()); 
-		$stmt->bindValue(22, $anuncio->getAte()); 
-		$stmt->bindValue(23, $anuncio->getDestaque()); 
-		$stmt->bindValue(24, $anuncio->getPesquisa()); 
+		$stmt->bindValue(15, $anuncio->getLogoDestaque()); 
+		$stmt->bindValue(16, $anuncio->getImagem1()); 
+		$stmt->bindValue(17, $anuncio->getImagem2()); 
+		$stmt->bindValue(18, $anuncio->getImagem3()); 
+		$stmt->bindValue(19, $anuncio->getImagem4());
+		$stmt->bindValue(20, $anuncio->getTexto()); 
+		$stmt->bindValue(21, $anuncio->getKeywords()); 
+		$stmt->bindValue(22, $anuncio->getDe()); 
+		$stmt->bindValue(23, $anuncio->getAte()); 
+		$stmt->bindValue(24, $anuncio->getDestaque()); 
+		$stmt->bindValue(25, $anuncio->getPesquisa()); 
+		$stmt->bindValue(26, $anuncio->getDetalhe()); 
 					
 		// executo a query preparada
 		$stmt->execute();
@@ -62,7 +64,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	}
 
 	public function AlteraAnuncio( $anuncio ){
-		$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,keywords = ?,de = ?,ate = ?,destaque = ?,pesquisa = ? WHERE idanuncio = ?";
+		$sql = "UPDATE anuncios SET iddepartamento = ?,idsubdepartamento = ?,nome = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?,cep = ?,telefones = ?,site = ?,email = ?,logo = ?,logodestaque = ?,imagem1 = ?,imagem2 = ?,imagem3 = ?,imagem4 = ?,texto = ?,keywords = ?,de = ?,ate = ?,destaque = ?,pesquisa = ?,detalhe = ? WHERE idanuncio = ?";
 
 		$stmt = $this->conexao->prepare($sql);
 		
@@ -81,17 +83,19 @@ class AnuncioDAO extends PDOConnectionFactory {
 		$stmt->bindValue(12, $anuncio->getSite()); 
 		$stmt->bindValue(13, $anuncio->getEmail()); 
 		$stmt->bindValue(14, $anuncio->getLogo()); 
-		$stmt->bindValue(15, $anuncio->getImagem1()); 
-		$stmt->bindValue(16, $anuncio->getImagem2()); 
-		$stmt->bindValue(17, $anuncio->getImagem3()); 
-		$stmt->bindValue(18, $anuncio->getImagem4());
-		$stmt->bindValue(19, $anuncio->getTexto()); 
-		$stmt->bindValue(20, $anuncio->getKeywords()); 
-		$stmt->bindValue(21, $anuncio->getDe()); 
-		$stmt->bindValue(22, $anuncio->getAte()); 
-		$stmt->bindValue(23, $anuncio->getDestaque()); 
-		$stmt->bindValue(24, $anuncio->getPesquisa()); 
-		$stmt->bindValue(25, $anuncio->getIdanuncio()); 
+		$stmt->bindValue(15, $anuncio->getLogoDestaque()); 
+		$stmt->bindValue(16, $anuncio->getImagem1()); 
+		$stmt->bindValue(17, $anuncio->getImagem2()); 
+		$stmt->bindValue(18, $anuncio->getImagem3()); 
+		$stmt->bindValue(19, $anuncio->getImagem4());
+		$stmt->bindValue(20, $anuncio->getTexto()); 
+		$stmt->bindValue(21, $anuncio->getKeywords()); 
+		$stmt->bindValue(22, $anuncio->getDe()); 
+		$stmt->bindValue(23, $anuncio->getAte()); 
+		$stmt->bindValue(24, $anuncio->getDestaque()); 
+		$stmt->bindValue(25, $anuncio->getPesquisa());
+		$stmt->bindValue(26, $anuncio->getDetalhe());
+		$stmt->bindValue(27, $anuncio->getIdanuncio());
 		
 		// executo a query preparada
 		$stmt->execute();
@@ -172,6 +176,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	    $temp->setSite($rs->site);
 	    $temp->setEmail($rs->email);
 	    $temp->setLogo($rs->logo);
+	    $temp->setLogoDestaque($rs->logodestaque);
 	    $temp->setImagem1($rs->imagem1);
 	    $temp->setImagem2($rs->imagem2);
 	   	$temp->setImagem3($rs->imagem3);
@@ -182,6 +187,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	    $temp->setAte($rs->ate);
     	$temp->setDestaque($rs->destaque);
     	$temp->setPesquisa($rs->pesquisa);
+    	$temp->setDetalhe($rs->detalhe);
 		return $temp;
 	}	
 	
@@ -209,6 +215,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setSite($rs->site);
 		    $temp->setEmail($rs->email);
 		    $temp->setLogo($rs->logo);
+		    $temp->setLogoDestaque($rs->logodestaque);
 		    $temp->setImagem1($rs->imagem1);
 		    $temp->setImagem2($rs->imagem2);
 		   	$temp->setImagem3($rs->imagem3);
@@ -219,6 +226,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
 	    	$temp->setPesquisa($rs->pesquisa);
+	    	$temp->setDetalhe($rs->detalhe);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -251,6 +259,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setSite($rs->site);
 		    $temp->setEmail($rs->email);
 		    $temp->setLogo($rs->logo);
+		    $temp->setLogoDestaque($rs->logodestaque);
 		    $temp->setImagem1($rs->imagem1);
 	    	$temp->setImagem2($rs->imagem2);
 	   		$temp->setImagem3($rs->imagem3);
@@ -261,6 +270,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
 	    	$temp->setPesquisa($rs->pesquisa);
+	    	$temp->setDetalhe($rs->detalhe);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -304,6 +314,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setSite($rs->site);
 		    $temp->setEmail($rs->email);
 		    $temp->setLogo($rs->logo);
+		    $temp->setLogoDestaque($rs->logodestaque);
 		    $temp->setImagem1($rs->imagem1);
 		    $temp->setImagem2($rs->imagem2);
 		   	$temp->setImagem3($rs->imagem3);
@@ -314,6 +325,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
 	    	$temp->setPesquisa($rs->pesquisa);
+	    	$temp->setDetalhe($rs->detalhe);
 			
 			array_push($searchResults, $temp);
 		} 
@@ -366,6 +378,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setSite($rs->site);
 		    $temp->setEmail($rs->email);
 		    $temp->setLogo($rs->logo);
+		    $temp->setLogoDestaque($rs->logodestaque);
 		    $temp->setImagem1($rs->imagem1);
 		    $temp->setImagem2($rs->imagem2);
 		   	$temp->setImagem3($rs->imagem3);
@@ -375,7 +388,9 @@ class AnuncioDAO extends PDOConnectionFactory {
 		    $temp->setDe($rs->de);
 		    $temp->setAte($rs->ate);
 	    	$temp->setDestaque($rs->destaque);
+	    	$temp->setAcessos($rs->acessos);
 	    	$temp->setPesquisa($rs->pesquisa);
+	    	$temp->setDetalhe($rs->detalhe);
 			
 			array_push($searchResults, $temp);
 		} 

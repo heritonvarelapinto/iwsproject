@@ -658,7 +658,7 @@
 		function mostraMSG($msg) {
 			print '
 				<tr class="Linha3Tabela">
-                    <td colspan="4">
+                    <td colspan="5">
                         <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#fbeded">
                             <tbody><tr> 
                                 <td height="30" align="center"><font color="#ff0000"><b>'.$msg.'</b></font></td>
