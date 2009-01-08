@@ -631,7 +631,7 @@ function bannersEsquerda($banners) {
 		echo "</ul>";
 	}
 	
-		function breadcrumbPesquisa($id, $idsubcategoria = "") {
+	function breadcrumbPesquisa($id, $idsubcategoria = "") {
 		
 		$departamento = new Departamento();
 		$subdepartamento = new Subdepartamento();
@@ -734,6 +734,55 @@ function bannersEsquerda($banners) {
 		<!-- Fim Barra Pesquisa -->
 		<?
 	}
+	
+	function paginacaoPesquisa($pagina,$paginas,$get) {
+				$a = 0;
+				foreach ($get as $chave => $valor) {
+					$a != 0 ? $virgula = "&" : $virgula = "";
+					if($chave != "btEnviar" || $chave != "pag")
+					$dados .= $virgula.$chave."=".htmlentities($valor,ENT_QUOTES,'UTF-8');
+					$a++;
+				}
+				?>
+				<div id="resultados">
+				<ul>
+				<li class="listaresultados">
+				<?
+					if($paginas > 1) {
+						for($i=0; $i < $paginas; $i++) {
+				  			if($i == $pagina - 1) {	?>
+								<b><?=$i+1;?></b>&nbsp;<b>.</b>
+					 	 	<? } else {	?>
+					 			<a onclick="reloadPesquisa('<?=$this->image_path;?>/pesquisa.php?<?=$dados;?>&pag=<?=$i?>')"><b><?=$i+1;?></b></a>&nbsp;<b>.</b> 
+							<?
+							}
+						}
+					}
+				?>
+				</li>
+				</ul>
+			</div><?
+		}
+		
+			function paginacaoAnuncio($pagina,$paginas,$id,$sub,$total) {
+				?>
+				<div id="resultados">
+				<ul>
+				<li class="listaresultados">
+				<?
+			if($paginas > 1) {
+				for($i=0; $i < $paginas; $i++) {
+		  			if($i == $pagina - 1) {	?>
+						<b><?=$i+1;?></b>&nbsp;<b>.</b>
+			 	 	<? } else {	?>
+			 			<a href="<?=UrlManage::getUrlPaginacao($id,$sub,$i,$total)?>"><b><?=$i+1;?></b></a>&nbsp;<b>.</b> 
+					<?
+					}
+				}
+			}
+			?></li></ul>
+			</div><?
+		}
 	
 }
 ?>
