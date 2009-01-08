@@ -181,15 +181,20 @@ class Layout extends HTML {
 				$fecha = "";
 			}
 			echo $fecha;
-			$link = UrlManage::getUrlCategoria($departamentos[$i]->getIdDepartamento(),"",$departamentos[$i]->getDepartamento());
-			?>
-				<li>
-					<a href="<?=$link;?>" title="<?=$departamentos[$i]->getDepartamento();?>">
-						<?=$departamentos[$i]->getDepartamento();?>
-					</a>
-				</li>
-			<?
-			$j++;								
+			$anuncioDAO = new AnuncioDAO;
+			$total = $anuncioDAO->totalAnuncios($departamentos[$i]->getIdDepartamento(),"departamento");
+			 
+			if($total > 0) {
+				$link = UrlManage::getUrlCategoria($departamentos[$i]->getIdDepartamento(),"",$departamentos[$i]->getDepartamento());
+				?>
+					<li>
+						<a href="<?=$link;?>" title="<?=$departamentos[$i]->getDepartamento();?>">
+							<?=$departamentos[$i]->getDepartamento();?>
+						</a>
+					</li>
+				<?
+				$j++;
+			}					
 		}
 	}
 
@@ -202,6 +207,11 @@ class Layout extends HTML {
 		echo "<ul>";
 		for($i = 0; $i < $totDepartamentos; $i++) {
 			$link = UrlManage::getUrlCategoria($departamentos[$i]->getIdDepartamento(),"",$departamentos[$i]->getDepartamento());
+			
+			$anuncioDAO = new AnuncioDAO;
+			$total = $anuncioDAO->totalAnuncios($departamentos[$i]->getIdDepartamento(),"departamento");
+			 
+			if($total > 0) {
 		?>
 			<li>
 				<a href="<?=$link;?>">
@@ -216,6 +226,7 @@ class Layout extends HTML {
 				</a>
 			</li>
 		<?
+			}
 		}
 		?>
 		<li class="direita">
@@ -240,6 +251,10 @@ class Layout extends HTML {
 		
 		for($i = 0; $i < $totDepartamentos; $i++) {
 			$link = UrlManage::getUrlSubCategoria($departamentos[$i]->iddepartamento,$_GET['titulo'],$departamentos[$i]->idsubdepartamento,$departamentos[$i]->subdepartamento);
+			$anuncioDAO = new AnuncioDAO;
+			$total = $anuncioDAO->totalAnuncios($departamentos[$i]->getIdsubdepartamento(),"subdepartamento");
+			 
+			if($total > 0) {
 		?>
 			<li>
 				<a href="<?=$link;?>">
@@ -253,6 +268,7 @@ class Layout extends HTML {
 				</a>
 			</li>
 		<?
+			}
 		}
 		?>
 		<li class="direita">
@@ -391,36 +407,45 @@ function bannersEsquerda($banners) {
 	}
 	
 		function enquete() {
-		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-		echo "<tr><td>";
-		echo "<img src=\"".$this->image_path."images/enquete.gif\">";
-		echo "</td></tr>";
-		echo "</table>";
-		echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
-		echo "<tr><td>";
-/*		echo "<ul>";
-		if($totBanners > 1) {
-			for($i = 0; $i < $totBanners; $i++) {
-			?>
-				<li>
-					<a href="<?=$banners[$i]->getUrl();?>" target="<?=$banners[$i]->getTarget();?>">
-						<img src="images/banners/<?=$banners[$i]->getBanner();?>" alt="<?=$banners[$i]->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
+			$enquete = new Enquete();
+			$enqueteDAO = new EnqueteDAO();
+			
+			$enquete = $enqueteDAO->enqueteAtiva();
+			
+			//$ok = "ok";
+			//setcookie("voto", $ok, time()+60*60*24);
+			
+			if(count($enquete) > 0) {
+				echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
+				echo "<tr><td>";
+				echo "<img src=\"".$this->image_path."images/enquete.gif\">";
+				echo "</td></tr>";
+				echo "</table>";
+				echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"bordaDestaque\">";
+				echo "<tr><td>";					
+				echo "<ul id=\"enquetePergunta\">";
+				echo "<li class=\"textoDestaque\">".$enquete[0]->pergunta."</li>";
+					if(!isset($_COOKIE["voto"])) {
+						for($i=0; $i < count($enquete);$i++) {
+							echo "<li>".$enquete[$i]->resposta."<br>
+							".$enquete[$i]->voto."</li>";
+						}
+					} else {
+						for($i=0; $i < count($enquete);$i++) {
+							echo "<li><span><input type=\"radio\" name=\"opcao\" value=\"".$enquete[$i]->idresposta."\">".$enquete[$i]->resposta."</span></li>";
+						}
+						echo "<li>
+							<center>
+								<input type=\"button\" onclick=\"votaEnquete();\" value=\"Votar\" class=\"botao_boletim\"/>
+								<input type=\"button\" onclick=\"parcialEnquete();\" value=\"Parcial\" class=\"botao_boletim\"/>
+							</center>
+						</li>";
+					}
+					echo "</ul>";
+				
+				echo "</td></tr>";
+				echo "</table>";
 			}
-		} else {
-			?>
-				<li>
-					<a href="<?=$banners->getUrl();?>" target="<?=$banners->getTarget();?>">
-						<img src="images/banners/<?=$banners->getBanner();?>" alt="<?=$banners->getDescricao();?>" border="0">
-					</a>
-				</li>
-			<?
-		}
-		echo "</ul>";*/
-		echo "</td></tr>";
-		echo "</table>";
 	}
 	
 	function boletim() {
@@ -663,6 +688,14 @@ function bannersEsquerda($banners) {
 		<head>
 			<title>OiterBusca - <?=$nomeDepartamento->departamento;?> <? if($nomeSubDepartamento) { echo " / "; ?><?=$nomeSubDepartamento->subdepartamento;?><? } ?></title>
 			<meta http-equiv="Content-Type" content="text/html;iso-8859-1">
+			<meta name="revisit-after" content="1" />
+			<meta name="distribution" content="Global" />
+			<meta name="classification" content="Internet" />
+			<meta name="robots" content="all" />
+			<meta name="language" content="pt-br" />
+			<meta name="author" content="www.oiterbusca.com.br" />							
+			<meta name="description" content="" />
+			<meta name="keywords" content="" />
 			<?=$this->getTheme("");?>
 			<link rel="shortcut icon" href="<?=$this->image_path;?>icones/favicon.ico" >
 			<script type="text/javascript" src="<?=$this->image_path;?>js/jquery.js"></script>
@@ -734,5 +767,81 @@ function bannersEsquerda($banners) {
 		<!-- Fim Barra Pesquisa -->
 		<?
 	}	
+	
+	function barraItensMenu($departamentos) {
+		?>
+		<!-- Barra Itens Menu -->
+		<div class="menuItens">
+			<div class="menuItensEsq">
+				<div class="menuItensDir">
+					<ul>
+						<li>
+							<a href="#" class="showAll">Departamentos <img border="0" src="<?=$this->image_path;?>images/seta.gif"></a>
+							<div id="departamentos" style="display: none;">
+								<ul>
+									<?=$this->menuSuperiorDepartamentos($departamentos);?>
+								</ul>
+							</div>
+						</li>
+						<!--<li class="novo"><a href="#" class="motors">Motors</a></li>-->
+						<li><a href="<?=$this->image_path;?>">Página Inicial</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Fim Barra Itens Menu -->
+		<?
+	}
+	
+	function mostraAnuncios($anuncio) {
+		
+		$totAnuncios = count($anuncio);
+							
+		for($i = 0 ; $i < $totAnuncios;$i++) {
+			if($i % 2) {
+				$cor = "#DDDDDD";
+			} else {
+				$cor = "#EEEEEE";
+			}
+			echo "<div id=\"anuncios\" style=\"border-bottom: 1px dashed ".$cor."\">";
+			echo "<h3>";
+			if($anuncio[$i]->getDetalhe() == 1) { 
+				echo "<a href=\"javascript:void(0);\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
+				echo $anuncio[$i]->getNome();
+				echo "</a>";
+			} else {
+				echo $anuncio[$i]->getNome();
+			}
+			echo "</h3>";
+			echo "<p class=\"direita\">";
+			echo $anuncio[$i]->getEndereco().", ".$anuncio[$i]->getNumero()." ".$anuncio[$i]->getComplemento()."<br>";
+			echo $anuncio[$i]->getBairro()." - ".$anuncio[$i]->getCidade()." - ".$anuncio[$i]->getEstado()."<br>";
+			echo "CEP: ".$anuncio[$i]->getCep()."<br>";
+			if($anuncio[$i]->getEmail() != "") echo "<b>E-mail: </b>".$anuncio[$i]->getEmail()."<br>";
+			if($anuncio[$i]->getSite() != "") echo "<b>Site: </b><a class=\"site\" href=\"javascript:void(0)\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirSite('".$anuncio[$i]->getSite()."')\">".$anuncio[$i]->getSite()."</a><br><br>";
+			echo "<a href=\"javascript:void(0)\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');this.innerHTML = '".$anuncio[$i]->getTelefones()."'\" id=\"telefone\">Clique aqui para ver o telefone</a>";
+			//echo "<a onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" id=\"mais_info\" title=\"Mais informações\">Saiba um pouco mais sobré nós</a>";
+			//echo "<img src=\"\".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
+			echo "</p>";
+			echo "<p onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" class=\"esquerda\">";
+			if($anuncio[$i]->getLogo() != "") echo "<img src=\"".$this->image_path."images/logos/".$anuncio[$i]->getLogo()."\" class=\"borda\">";
+			echo "</p>";
+			echo "</div>";
+		}
+	}
+	
+	function lateralDireita($banners, $index = false) {
+		?>
+		<div id="lateralDireita">
+			<?=$this->bannersLaterais($banners);?>
+			<? if($index) { ?>
+			<br>
+			<?=$this->boletim();?>
+			<br>
+			<?=$this->enquete();?>
+			<? } ?>
+		</div>
+		<?
+	}
 }
 ?>
