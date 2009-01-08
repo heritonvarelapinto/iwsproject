@@ -281,7 +281,7 @@ class AnuncioDAO extends PDOConnectionFactory {
 	}
 	
 	public function ListaAnunciosPorSubDepartamento($id) {
-		$sql = "SELECT * FROM anuncios WHERE idsubdepartamento = ".$id." and status = '1'";
+		$sql = "SELECT * FROM anuncios WHERE idsubdepartamento = ".$id;
 		$stmt = $this->conexao->prepare($sql);
 		$stmt->execute();
 		
