@@ -45,6 +45,7 @@ li.direita a {
 	float: right;
 	width: 185px;
 	margin-bottom: 10px;
+	clear: right;
 }
 
 .bordaDestaque {
@@ -328,13 +329,16 @@ li.direita a {
 	text-decoration: underline;
 }
 
-#corpo .miolo #anuncios h3{
+#corpo .miolo #anuncios h3,
+#corpo .miolo #anuncios h3 a{
 	font-size: 13px;
 	margin: 5px;
 	text-decoration: underline;
 	color: #000;
-	cursor: hand;
-	cursor: pointer;
+}
+
+#corpo .miolo #anuncios h3 a:hover{
+	color: #FF0000;
 }
 
 #corpo .miolo #anuncios img {
@@ -600,6 +604,7 @@ ul#listaDepartamento li ul li {
 	padding: 5px;
 	font-family: verdana;
 	font-size: 12px;
+	float: left;
 }
 
 #main #lateralDireita ul#enquetePergunta li table {
@@ -620,13 +625,16 @@ ul#listaDepartamento li ul li {
 	float: left;
 	clear: right;
 }
-
 #main #lateralDireita ul#enquetePergunta li,
 #main #lateralDireita ul#boletim li {
 	text-align: left;
 	border: 0px;	
 	float: left;
 	width: 95%;
+}
+
+#main #lateralDireita ul#enquetePergunta li {
+	margin: 5px 0px;
 }
 
 #main #lateralDireita ul#enquetePergunta li center,
@@ -642,7 +650,11 @@ ul#listaDepartamento li ul li {
 	margin: 0px;
 }
 
-#main #lateralDireita ul#enquetePergunta li.pergunta,
+#main #lateralDireita ul#boletim li span{
+	margin: 5px;
+}
+
+#main #lateralDireita ul#enquetePergunta li.textoDestaque,
 #main #lateralDireita ul#boletim li.textoDestaque {
 	text-align: left;
 	float: left;
@@ -718,9 +730,13 @@ ul#listaDepartamento li ul li {
 }
 
 a.site {
-	color: #ff0000;
+	color: #ff0000 !important;
 	font-size: 9px;
 	font-weight: normal !important;
+}
+
+a.site:hover {
+	text-decoration: underline !important;
 }
 
 img.borda {
@@ -777,4 +793,36 @@ img.borda {
 #resultados ul li.totalpagina select {
 	font-size: 9px;
 	height: 15px;
+}
+
+#formContato ul {
+	list-style: none;
+	width: 100%;
+	float: left;
+}
+
+#formContato ul li {
+	float: left;
+	width: 60%;
+	text-align: left;
+	margin: 5px;
+}
+
+#formContato ul li input {
+	width: 250px; 
+}
+
+#formContato ul li input.botao {
+	width: 100px;
+	font-size: 9px;
+}
+#formContato ul li textarea {
+	width: 250px;
+	height: 100px;
+}
+
+#formContato ul li.label {
+	float: left;
+	width: 30%;
+	text-align: right;
 }
