@@ -95,7 +95,7 @@
 						}
 						
 						$departamento =$_GET['selDepartamentos'];
-						$pesquisa = stripcslashes(htmlentities($_GET['pesquisa'],ENT_QUOTES,'UTF-8'));
+						$pesquisa = stripcslashes($_GET['pesquisa']);
 																	
 						$anuncio = new Anuncio();
 						$anuncioDAO = new AnuncioDAO();
