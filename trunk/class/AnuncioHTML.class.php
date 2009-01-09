@@ -198,7 +198,12 @@
 		     return $retorno;  
 		 }
 	
-		function AnuncioADD() { ?>
+		function AnuncioADD() {
+			require_once '../otr/lib/anuncios.php';
+			$dsrte = new dsRTE( 'descricao' );
+			
+			echo $dsrte->getScripts();	
+		?>
 		<?
 		
 			$cep = $_GET["cep"];
@@ -414,7 +419,8 @@
 	                <tr class="Linha1Tabela">
 	                    <td align="center"><b>DESCRIÇÃO DO ANÚNCIO</b></td>
 	                    <td>                                    	
-	                    	<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>  		                                                                                                     
+	                    	<?=$dsrte->getHTML();?>
+	                    	<!--<textarea name="texto" rows="10" cols="70" class="FORMBox"></textarea>-->  		                                                                                                     
 	                    </td>
 	            	</tr>
 	            	<tr class="Linha1Tabela">

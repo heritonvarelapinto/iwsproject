@@ -186,33 +186,18 @@
 			</table>
 	<?	}
 	
-		function InformativoModeloCriar() { ?>
-			<script language="javascript" type="text/javascript" src="../js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
-			<script language="javascript" type="text/javascript">
-			 tinyMCE.init({
-		               mode : "textareas",
-		               language : "pt_br",
-		               theme : "advanced",
-		               editor_deselector : "mceNoEditor",
-		               plugins : "table,advhr,advimage,advlink,iespell,insertdatetime,searchreplace,contextmenu,xhtmlxtras,paste,fullscreen",
-		               theme_advanced_buttons1 : "bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,pastetext,pasteword,separator,undo,redo,separator,cleanup,code",
-		               theme_advanced_buttons2 :"removeformat,separator,formatselect,separator,fontselect,separator,fontsizeselect",
-		   			   theme_advanced_buttons3 : "bullist,numlist,outdent,indent,separator,link,unlink,anchor,image,separator,forecolor,backcolor,separator,sub,sup,charmap,separator,search,replace,",
-		   			   theme_advanced_buttons4 : "tablecontrols,separator,hr,visualaid,separator,advhr,separator,fullscreen",
-		               theme_advanced_toolbar_location : "top",
-		               theme_advanced_toolbar_align : "center",
-		               theme_advanced_path_location : "bottom",
-		               plugin_insertdate_dateFormat : "%Y-%m-%d",
-		               plugin_insertdate_timeFormat : "%H:%M:%S",
-		               extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",               
-		            }); 
-			</script>
+		function InformativoModeloCriar() {
+			require_once '../otr/lib/modelos.php';
+			$dsrte = new dsRTE( 'otr' );
+			
+			echo $dsrte->getScripts();
+			?>
 			<span class="TituloPage">&#8226; Criar Informativo</span>
 	        <br>
 	        <br>
 	        <form method="post" action="act/Informativo.act.php?acao=criar">
 	        <table width="558" border="0" cellpadding="4" cellspacing="1" class="BordaTabela">        	
-	            <!--<tr class="Linha2Tabela">
+	            <tr class="Linha2Tabela">
 	                <td colspan="2">
 	                    <table width="558" border="0" cellpadding="4" cellspacing="1" class="BordaTabela">                        
 	                        <tr class="Linha1Tabela">
@@ -226,8 +211,8 @@
 	                                        <td align="center"><b>TEXTO DO INFORMATIVO</b></td>
 	                                    </tr>
 	                                    <tr>
-	                                        <td>    
-	                                        	<textarea name="texto" cols="65" rows="40"></textarea>
+	                                        <td align="center">    
+	                                        	<?=$dsrte->getHTML();?>	                                        	
 	                                        </td>
 	                                    <tr> 
 	                                </table>
@@ -235,24 +220,7 @@
 	                        </tr>
 	                    </table>
 	                </td>
-	            </tr>-->
-	            <form>
-				<p>
-				    <textarea name="description" id="id_description" 
-				    class="rte-zone">jQuery RTE</textarea>
-				</p>
-				<p>
-				    <textarea name="description2" id="id_description2" 
-				    class="rte-zone">jQuery RTE 2</textarea>
-				</p>
-				<input type="submit" />
-				</form>
-				<script type="text/javascript" src="../otr/script/jquery.js"></script>
-				<script type="text/javascript" src="../otr/script/jquery.rte.js"></script>
-				<script type="text/javascript">
-				    $('.rte-zone').rte("css url");
-				</script>
-				</form>
+	            </tr>
 	            <tr class="Linha1Tabela">
 	                <td valign="middle">
 	                    <table border="0" width="100%" cellpadding="0" cellspacing="0">
