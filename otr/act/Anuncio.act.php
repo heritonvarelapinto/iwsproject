@@ -27,6 +27,8 @@
 	
     switch ($acao) {
     	case "add":
+    		print_r($_POST);
+    		exit;
     		$logo = $_FILES["logo"]["name"];
     		$logo_type = $_FILES["logo"]["type"];
     		$logo_tmp_name = $_FILES["logo"]["tmp_name"];
@@ -80,7 +82,7 @@
     		
     		$setDe = $anuncio->FormataData($_POST["de"]);
     		$setAte = $anuncio->FormataData($_POST["ate"]);
-    		$setTexto = stripslashes($_POST["texto"]);
+    		$setTexto = stripslashes($_POST["descricao_text"]);
     		$setKeywords = $_POST["keywords"];
 
     		if($setDetalhe == '0') {
@@ -220,7 +222,7 @@
 	    		
 	    		$setDe = $anuncio->FormataData($_POST["de"]);
 	    		$setAte = $anuncio->FormataData($_POST["ate"]);
-	    		$setTexto = stripslashes($_POST["texto"]);
+	    		$setTexto = stripslashes($_POST["descricao_text"]);
 	    		$setKeywords = $_POST["keywords"];
 	    		
 	    		if($setDetalhe == '0') {

@@ -92,9 +92,9 @@
 				}
     		}
     	break;    
-    	case "criar":
+    	case "criar":     	   		
     		$setAssunto = $_POST["assunto"];
-    		$setTexto = htmlspecialchars($_POST["texto"],ENT_QUOTES);
+    		$setTexto = $_POST["otr_text"];
     		
     		$informativo->setAssunto($setAssunto);
     		$informativo->setTexto($setTexto);

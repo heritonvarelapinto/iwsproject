@@ -419,6 +419,7 @@
 			<TITLE> Administração - <?=$cliente->getNome();?></TITLE>
 			<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 			<link rel="stylesheet" href="css/admin.css" type="text/css">
+			<link rel="stylesheet" href="lib/dsrte.css" type="text/css"/>
 			<script src="script/admin.js" language="JavaScript"/></script>
 			<script type="text/javascript" src="<?=$layout->image_path;?>js/jquery.js"></script>
 			<script type="text/javascript" src="<?=$layout->image_path;?>js/jquerycalendar.js"></script>
@@ -429,8 +430,12 @@
 			
 					$(".data").calendar();
 				});
-			</script>
-					
+				
+				<!--
+		        // keyboard shortcut keys for current language
+		        var ctrlb='b',ctrli='i',ctrlu='u';
+		        //-->
+			</script>					    	
 			</HEAD>
 			<body bgcolor="#EFEFEF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="Mascaras.carregar();">
 			<table width="778" height="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">			
