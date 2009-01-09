@@ -12,14 +12,21 @@ function buscaCep(cep_dst) {
 			       if(ajax.readyState == 4) {
 			       	
 					     if(ajax.status == 200) {
-					     		 var resposta = ajax.responseText;     		 
+					     		 var resposta = ajax.responseText;   
+					     		 
               					 var aDados=resposta.split(';');
               					 
-              					 if(aDados[0] == 1) {
-	              					document.getElementById("endereco").value = aDados[5] +" "+ aDados[6];
-              						document.getElementById("bairro").value = aDados[4];
-              						document.getElementById("cidade").value = aDados[3];
-              						document.getElementById("estado").value = aDados[2];
+              					 for(i = 0; i < aDados.lenght; i++) {
+              					 	alert(i);
+              					 }
+              					 
+              					 //alert(aDados[1]);
+              					 
+              					 if(aDados[1] != "false") {
+	              					document.getElementById("endereco").value = aDados[4] + aDados[5];
+              						document.getElementById("bairro").value = aDados[3];
+              						document.getElementById("cidade").value = aDados[2];
+              						document.getElementById("estado").value = aDados[1];
               					 } else {
               					 	document.getElementById("endereco").value = "";
               						document.getElementById("bairro").value = "";
