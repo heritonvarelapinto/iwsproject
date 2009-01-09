@@ -109,6 +109,29 @@ class EnqueteDAO extends PDOConnectionFactory {
 		return $regs;
 	}
 	
+	function enqueteAtiva() {
+		$sql = "SELECT perguntas.idpergunta,pergunta,idresposta, resposta, voto FROM perguntas INNER JOIN respostas ON perguntas.idpergunta = respostas.idpergunta WHERE STATUS =1";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->execute();
+		
+		$searchResults = array();
+		
+		while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+			$temp = new Enquete();
+
+			$temp->setIdpergunta($rs->idpergunta);
+			$temp->setPergunta($rs->pergunta);
+			$temp->setStatus($rs->status);
+			$temp->setIdresposta($rs->idresposta);
+			$temp->setResposta($rs->resposta);
+			$temp->setVoto($rs->voto);
+						
+			array_push($searchResults, $temp);
+		} 
+		return $searchResults;
+	}
+	
 	/**
 	 * Lista perguntas das enquete
 	 *
