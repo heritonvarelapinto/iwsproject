@@ -109,6 +109,17 @@ class EnqueteDAO extends PDOConnectionFactory {
 		return $regs;
 	}
 	
+	function totalVotosEnqueteAtiva() {
+		$sql = "SELECT sum( voto ) AS total FROM respostas, perguntas WHERE perguntas.STATUS =1";
+		$stmt = $this->conexao->prepare($sql);
+		
+		$stmt->execute();
+		$rs = $stmt->fetch(PDO::FETCH_OBJ);
+		
+		return $rs->total;
+		
+	}
+	
 	function enqueteAtiva() {
 		$sql = "SELECT perguntas.idpergunta,pergunta,idresposta, resposta, voto FROM perguntas INNER JOIN respostas ON perguntas.idpergunta = respostas.idpergunta WHERE STATUS =1";
 		$stmt = $this->conexao->prepare($sql);
