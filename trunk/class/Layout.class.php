@@ -411,10 +411,8 @@ function bannersEsquerda($banners) {
 			$enqueteDAO = new EnqueteDAO();
 			
 			$enquete = $enqueteDAO->enqueteAtiva();
-			
-			//$ok = "ok";
-			//setcookie("voto", $ok, time()+60*60*24);
-			
+			$total = $enqueteDAO->totalVotosEnqueteAtiva();
+					
 			if(count($enquete) > 0) {
 				echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 				echo "<tr><td>";
@@ -425,10 +423,11 @@ function bannersEsquerda($banners) {
 				echo "<tr><td>";					
 				echo "<ul id=\"enquetePergunta\">";
 				echo "<li class=\"textoDestaque\">".$enquete[0]->pergunta."</li>";
-					if(!isset($_COOKIE["voto"])) {
+					if(isset($_COOKIE['voto'])) {
 						for($i=0; $i < count($enquete);$i++) {
+							$geral = round($enquete[$i]->voto * 100 / $total);
 							echo "<li>".$enquete[$i]->resposta."<br>
-							".$enquete[$i]->voto."</li>";
+							<img src=\"http://www.clicknobairro.com.br/xybr/img/orange.gif\" style=\"width: ".($geral+5)."; height: 8px \"> ".$geral."%</li>";
 						}
 					} else {
 						for($i=0; $i < count($enquete);$i++) {
