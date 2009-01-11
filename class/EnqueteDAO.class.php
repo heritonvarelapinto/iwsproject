@@ -346,5 +346,20 @@ class EnqueteDAO extends PDOConnectionFactory {
 		
 		return $registros;
 	}
+	
+	function computaVoto($resposta) {
+		$sql = "UPDATE respostas SET voto=voto+1  where idresposta=".$resposta;
+		$stmt = $this->conexao->prepare($sql);
+		$stmt->execute();
+		$error = $stmt->errorInfo();
+		
+		if($error[0] == 00000) {
+			return true;
+		} else {
+			//Implementar classe de LOG
+			echo "ERRO".$error[2];
+			return false;
+		}
+	}
 }
 ?>
