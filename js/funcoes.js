@@ -36,6 +36,57 @@
 		}
 	}
 	
+function parcialEnquete() {
+		ajax = ajaxInit();
+
+		if(ajax) {
+			ajax.open("POST", "/oiter/act/enquete.php", true );
+			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			ajax.send("");
+			
+			ajax.onreadystatechange = function() {     
+				if(ajax.readyState == 4) {
+				     if(ajax.status == 200) {
+				         if(ajax.responseText) {
+				         	$("#enquetePergunta").html(ajax.responseText);
+				     	 }
+				     } else {
+				     	alert(ajax.statusText);
+				     }
+				}
+			}
+		}
+	}
+	
+	function votaEnquete() {
+		ajax = ajaxInit();
+
+		my_question = $("input[@type=radio][@name=opcao][@checked]").val();
+				
+		if(!my_question) {
+			alert('Selecione uma opção!');
+			return false;
+		}
+		
+		if(ajax) {
+			ajax.open("POST", "/oiter/act/enquete.php", true );
+			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			ajax.send("id=" + my_question);
+			
+			ajax.onreadystatechange = function() {     
+				if(ajax.readyState == 4) {
+				     if(ajax.status == 200) {
+				         if(ajax.responseText) {
+				         	$("#enquetePergunta").html(ajax.responseText);
+				     	 }
+				     } else {
+				     	alert(ajax.statusText);
+				     }
+				}
+			}
+		}
+	}
+	
 	function carregaForm(id) {
 		ajax = ajaxInit();
 				
