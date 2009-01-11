@@ -14,7 +14,7 @@
 	$idmenu = $menu->getIdmenu();
 	
 	$acao = $_GET["acao"];
-	//$acao = "alt";
+	//$acao = "contato";
 	
 
 	
@@ -43,8 +43,6 @@
     	//cria um departamento
     	case "alt":
     		if($_POST["remover"]) {
-    			print_r($_POST);
-    			
     			$act = "add";
     			
     			$idrodape = $_POST["idrodape"];
@@ -87,6 +85,24 @@
 		 
 			$rodapeDAO->UpdateRodapeUsoEPrivacidade($rodape,$act);
 				header("location: ../principal.php?menu=$idmenu&act=privacidade&msg=1");
-    	break;     	
+    	break;  
+    	case "contato":
+    		$contato = new Contato();
+    		$contatoDAO = new ContatoDAO();    		
+    		
+    		$act = $_POST["idrodape"];
+		
+    		$setTitulo = $_POST["titulo"];
+    		$setTexto = $_POST["texto"];
+    		$setEmail = $_POST["email"];
+    		
+    		$rodape->setTitulo($setTitulo);
+    		$rodape->setTexto($setTexto);
+    		$contato->setEmail($setEmail);
+		 
+			$rodapeDAO->UpdateRodape($rodape,$act);
+			$contatoDAO->Update($contato);
+				header("location: ../principal.php?menu=$idmenu&act=contato&msg=1");
+    	break;    	
     }
 ?>
