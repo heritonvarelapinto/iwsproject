@@ -9,6 +9,9 @@
 					case "privacidade":
 						$this->RodapePoliticaDePrivacidade();
 					break;
+					case "contato":
+						$this->RodapeContato();
+					break;
 					case "add":
 						$this->RodapeADD();
 					break;

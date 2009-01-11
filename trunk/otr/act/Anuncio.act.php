@@ -28,7 +28,7 @@
     switch ($acao) {
     	case "add":
     		print_r($_POST);
-    		exit;
+    		exit;    		
     		$logo = $_FILES["logo"]["name"];
     		$logo_type = $_FILES["logo"]["type"];
     		$logo_tmp_name = $_FILES["logo"]["tmp_name"];
