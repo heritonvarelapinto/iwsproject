@@ -805,7 +805,7 @@ function bannersEsquerda($banners) {
 			echo "<div id=\"anuncios\" style=\"border-bottom: 1px dashed ".$cor."\">";
 			echo "<h3>";
 			if($anuncio[$i]->getDetalhe() == 1) { 
-				echo "<a href=\"javascript:void(0);\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
+				echo "<a href=\"javascript:void(0);\" onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$this->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
 				echo $anuncio[$i]->getNome();
 				echo "</a>";
 			} else {
@@ -822,7 +822,7 @@ function bannersEsquerda($banners) {
 			//echo "<a onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" id=\"mais_info\" title=\"Mais informações\">Saiba um pouco mais sobré nós</a>";
 			//echo "<img src=\"\".$layout->image_path."images/info.png\" alt=\"Mais informações\" onclick=\"abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\">";
 			echo "</p>";
-			echo "<p onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$layout->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" class=\"esquerda\">";
+			echo "<p onclick=\"contaAcesso('".$anuncio[$i]->getIdanuncio()."');abrirDestaque('".$this->image_path."anunciante.php?id=".$anuncio[$i]->getIdAnuncio()."&p=info','".$anuncio[$i]->getNome()."',700,500)\" class=\"esquerda\">";
 			if($anuncio[$i]->getLogo() != "") echo "<img src=\"".$this->image_path."images/logos/".$anuncio[$i]->getLogo()."\" class=\"borda\">";
 			echo "</p>";
 			echo "</div>";

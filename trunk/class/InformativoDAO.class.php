@@ -87,5 +87,17 @@ class InformativoDAO extends PDOConnectionFactory {
 		
 		return $registros;
 	}
+	
+	public function verificaEmail($email) {
+		$sql = "SELECT * FROM informativo WHERE email like '%%".$email."%%'";
+		$stmt = $this->conexao->prepare($sql);	
+		
+		$stmt->execute();
+		$searchResults = array();
+		
+		$registros = $stmt->rowCount(PDO::FETCH_OBJ);
+		
+		return $registros;
+	}
 }
 ?>
