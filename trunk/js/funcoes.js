@@ -36,7 +36,47 @@
 		}
 	}
 	
-function parcialEnquete() {
+	function insereBoletim(){
+		ajax = ajaxInit();
+		var erro = "";
+		nome  = $("input[@type=text][@name=nome]").val();
+		email = $("input[@type=text][@name=email]").val();
+		
+		if (email.indexOf("@")== -1 || email.indexOf(".")==-1){
+			erro += 'Digite um Email válido.\n';
+		}
+		
+		if(nome == "") {
+			erro += 'Insira seu nome !';
+		}
+		
+		if(erro != ""){
+			alert(erro);
+			return false;
+		}else{  
+			if(ajax) {
+				ajax.open("POST", "/oiter/act/boletim.php", true );
+				ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				ajax.send("email="+email+"&nome="+nome);
+				
+				ajax.onreadystatechange = function() {     
+					if(ajax.readyState == 4) {
+					     if(ajax.status == 200) {
+					         if(ajax.responseText) {
+					         	alert(ajax.responseText);
+					         	$("input[@type=text][@name=email]").val("");
+					         	$("input[@type=text][@name=nome]").val("");
+					     	 }
+					     } else {
+					     	alert(ajax.statusText);
+					     }
+					}
+				}
+			}
+		}
+	}
+
+	function parcialEnquete() {
 		ajax = ajaxInit();
 
 		if(ajax) {
