@@ -189,12 +189,31 @@
 	
 		function busca_cep($cep){  
 			 
-			 $url = 'http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string';
+			 /*$url = 'http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string';
 		     $resultado = @file_get_contents($url);  
 		     if(!$resultado){  
 		         $resultado = "&resultado=0&resultado_txt=erro+ao+buscar+cep";  
 		     } 
-		     parse_str($resultado, $retorno);   
+		     parse_str($resultado, $retorno);   */
+			 
+			 $url = 'http://www.i-stream.com.br/webservices/cep.asmx/ConsultaCEP?CEP='.$cep;
+/*		
+			$ch = curl_init(); 
+		    curl_setopt($ch, CURLOPT_URL, $url);
+		    curl_setopt($ch, CURLOPT_POST, 1);
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	  		curl_setopt($ch, CURLOPT_HEADER, false);
+	  		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+		 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		    $content = curl_exec($ch);*/
+
+		    $xml = @simplexml_load_file($url);
+
+			 foreach ($xml as $chave => $valor) {
+			 	$retorno .= $valor.";";
+			 	/*$retorno.= strtoupper(substr($valor,0,1)).strtolower(substr($valor,1,strlen($valor))).";";*/
+			 }
+			 
 		     return $retorno;  
 		 }
 	
