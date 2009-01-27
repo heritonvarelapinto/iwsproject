@@ -19,25 +19,30 @@
 					
 			echo "<div id=\"resultados\"><ul><li>Mostrando página <b>".$pagina."</b> de <b>".$paginas."</b></li>
 			<li class=\"listaresultados\">";
+			echo "<img src=\"".$layout->image_path."/images/mini_oi.png\">";
 			if($paginas > 1) {
 			//Monta as paginas em baixo
 				for($i=0; $i < $paginas; $i++) {
 					$i == 0 ? $virgula = "" : $virgula = ",";
 		  			if($i == $pagina - 1) {
 		  			?>
-						<?=$virgula;?><?=$i+1;?>
+		  				<img src="<?=$layout->image_path;?>/images/mini_i.png" style="clear: both;" alt="<?=$virgula;?><?=$i+1;?>">
+
 			 	 	<? } else {	?>
-			 			<?=$virgula;?><a style="cursor: pointer; cursor: hand" onclick="reloadPesquisa('<?=$layout->image_path;?>pesquisa.php?<?=$dados."&pag=".$i?>')"><b><?=$i+1;?></b></a>
+			 	 		<a style="cursor: pointer; cursor: hand" onclick="reloadPesquisa('<?=$layout->image_path;?>pesquisa.php?<?=$dados."&pag=".$i?>')"><img src="<?=$layout->image_path;?>/images/mini_i.png" style="clear: both;" alt="<?=$i+1;?>"></a>
+			 	 		<!--<?=$virgula;?><a style="cursor: pointer; cursor: hand" onclick="reloadPesquisa('<?=$layout->image_path;?>pesquisa.php?<?=$dados."&pag=".$i?>')"><b><?=$i+1;?></b></a>-->
 					<?
 					}
 				}
 			}
-			echo "</li></ul></div>";
+			echo "<img src=\"".$layout->image_path."/images/mini_ter.png\"></li></ul></div>";
 		}
 		
 		function paginacaoAnuncio($pagina, $paginas , $id, $sub, $total) {
+			$layout = new Layout();
 			echo "<div id=\"resultados\"><ul><li>Mostrando página <b>".$pagina."</b> de <b>".$paginas."</b></li>
-			<li class=\"listaresultados\">";
+			<li class=\"listaresultados\">
+			<img src=\"".$layout->image_path."/images/mini_oi.png\">";
 			if($paginas > 1) {
 			//Monta as paginas em baixo
 				for($i=0; $i < $paginas; $i++) {
@@ -51,7 +56,8 @@
 					}
 				}
 			}
-			echo "</li></ul></div>";
+			echo "<img src=\"".$layout->image_path."/images/mini_ter.png\"></li>";
+			echo "</ul></div>";
 		}
 		
 		function mostraPaginacao($paginas,$pagina,$menu) {

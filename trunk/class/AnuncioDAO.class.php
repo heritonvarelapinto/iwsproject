@@ -129,9 +129,9 @@ class AnuncioDAO extends PDOConnectionFactory {
 	
 	public function totalAnuncios($id, $tipo = "") {
 		if($tipo == "departamento") {
-			$sql = "SELECT count(*) as total FROM anuncios WHERE iddepartamento = ".$id;
+			$sql = "SELECT count(*) as total FROM anuncios WHERE iddepartamento = '".$id."'";
 		} else {
-			$sql = "SELECT count(*) as total FROM anuncios WHERE idsubdepartamento = ".$id;
+			$sql = "SELECT count(*) as total FROM anuncios WHERE idsubdepartamento = '".$id."'";
 		}
 		
 		$stmt = $this->conexao->prepare($sql);

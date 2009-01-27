@@ -117,7 +117,7 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 	}	
 	
 	public function getSubdepartamentosPorId($id) {
-		$sql = "SELECT * FROM subdepartamentos WHERE idsubdepartamento = ".$id;
+		$sql = "SELECT * FROM subdepartamentos WHERE idsubdepartamento = '".$id."'";
 		$stmt = $this->conexao->prepare($sql);
 		//$stmt->bindValues(1,$id);
 		
@@ -139,7 +139,7 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 	}
 	
 	public function getSubdepartamentosPorIddepartamento($id) {
-		$sql = "SELECT * FROM subdepartamentos WHERE iddepartamento = ".$id;
+		$sql = "SELECT * FROM subdepartamentos WHERE iddepartamento = '".$id."'";
 		$stmt = $this->conexao->prepare($sql);
 		//$stmt->bindValues(1,$id);
 		
@@ -162,9 +162,9 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 	
 	public function contaAnuncios($id, $tipo = "") {
 		if($tipo == "departamento") {
-			$sql = "SELECT count(*) as total FROM anuncios WHERE iddepartamento = ".$id;
+			$sql = "SELECT count(*) as total FROM anuncios WHERE iddepartamento = '".$id."'";
 		} else {
-			$sql = "SELECT count(*) as total FROM anuncios WHERE idsubdepartamento = ".$id;
+			$sql = "SELECT count(*) as total FROM anuncios WHERE idsubdepartamento = '".$id."'";
 		}		
 		
 		$stmt = $this->conexao->prepare($sql);
@@ -202,7 +202,7 @@ class SubdepartamentoDAO extends PDOConnectionFactory {
 		$sql = "SELECT * FROM subdepartamentos WHERE iddepartamento = ? $order";
 		$stmt = $this->conexao->prepare($sql);
 		
-		$stmt->bindValue(1,$id);	
+		$stmt->bindValue(1,$id);
 		
 		$stmt->execute();
 		$searchResults = array();

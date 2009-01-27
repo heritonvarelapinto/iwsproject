@@ -1,7 +1,7 @@
 <?php
 class Layout extends HTML {
 	
-	var $image_path = "http://localhost/oiter/";
+	var $image_path = "http://189.126.104.250/oiterbusca/oiter/";
 	
 	function mes($mes) {
 		switch ($mes) {
@@ -246,10 +246,10 @@ class Layout extends HTML {
 		echo "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td>";
 		$totDepartamentos = count($departamentos);
 		$departamentoDAO = new DepartamentoDAO();
-		$nomeDepartamento = $departamentoDAO->getDepartamentosPorId($departamentos[$i]->iddepartamento);
 		echo "<ul>";
 		
 		for($i = 0; $i < $totDepartamentos; $i++) {
+			$nomeDepartamento = $departamentoDAO->getDepartamentosPorId($departamentos[$i]->getIddepartamento());
 			$link = UrlManage::getUrlSubCategoria($departamentos[$i]->iddepartamento,$_GET['titulo'],$departamentos[$i]->idsubdepartamento,$departamentos[$i]->subdepartamento);
 			$anuncioDAO = new AnuncioDAO;
 			$total = $anuncioDAO->totalAnuncios($departamentos[$i]->getIdsubdepartamento(),"subdepartamento");
@@ -754,7 +754,7 @@ function bannersEsquerda($banners) {
 					<table border="0" cellpadding="2" cellspacing="2" class="tablePesquisa">
 						<tr>
 							<td><?=$this->input("pesquisa","inputPesquisa");?></td>
-							<td><?=$this->selectDepartamentos($departamentos);?></td>
+							<!--<td><?=$this->selectDepartamentos($departamentos);?></td>-->
 							<td><?=$this->button("btEnviar","button","Buscar");?> </td>
 							<!--<td><?=$this->button("btEnviar","button","Pesquisa avançada");?> </td>-->
 						</tr>
