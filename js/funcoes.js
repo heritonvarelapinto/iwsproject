@@ -1,3 +1,5 @@
+	path = "/oiterbusca/oiter/";
+
 	function ajaxInit() {
 		var req;
 		try {
@@ -30,7 +32,7 @@
 		ajax = ajaxInit();
 				
 		if(ajax) {
-			ajax.open("POST", "/oiter/act/contaAcesso.php", true );
+			ajax.open("POST", path + "act/contaAcesso.php", true );
 			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			ajax.send("id=" + id);
 		}
@@ -55,7 +57,7 @@
 			return false;
 		}else{  
 			if(ajax) {
-				ajax.open("POST", "/oiter/act/boletim.php", true );
+				ajax.open("POST", path + "act/boletim.php", true );
 				ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				ajax.send("email="+email+"&nome="+nome);
 				
@@ -80,7 +82,7 @@
 		ajax = ajaxInit();
 
 		if(ajax) {
-			ajax.open("POST", "/oiter/act/enquete.php", true );
+			ajax.open("POST", path + "act/enquete.php", true );
 			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			ajax.send("");
 			
@@ -109,7 +111,7 @@
 		}
 		
 		if(ajax) {
-			ajax.open("POST", "/oiter/act/enquete.php", true );
+			ajax.open("POST", path + "act/enquete.php", true );
 			ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			ajax.send("id=" + my_question);
 			
