@@ -76,7 +76,7 @@ class DepartamentoDAO extends PDOConnectionFactory {
 	}
 	
 	public function getDepartamentosPorId($id) {
-		$sql = "SELECT * FROM departamentos WHERE iddepartamento = ".$id;
+		$sql = "SELECT * FROM departamentos WHERE iddepartamento = '".$id."'";
 		$stmt = $this->conexao->prepare($sql);
 		//$stmt->bindValues(1,$id);
 		
@@ -101,7 +101,7 @@ class DepartamentoDAO extends PDOConnectionFactory {
 
 		//mostra os registros
 	public function ListaSubdepartamentos($id) {
-		$sql = "SELECT * FROM subdepartamentos where iddepartamento = ".$id;
+		$sql = "SELECT * FROM subdepartamentos where iddepartamento = '".$id."'";
 		$stmt = $this->conexao->prepare($sql);	
 		$stmt->execute();
 		
